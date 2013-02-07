@@ -1,0 +1,27 @@
+- Mysql Connector que está na pasta lib/mysql-connector-java-5.1.23 do NetunoModelo deve ir para a pasta default/lib do JBoss
+- Netuno-ds.xml que está na pasta raiz do NetunoModelo deve ir para a pasta server/default/deploy do JBoss (Ele é quem configura as conexões com o mysql server)
+- Se criar um projeto novo: Alterar o build.xml e application.xml do NetunoWeb
+- Variável JBOSS_HOME (deve estar setada com a raiz da pasta do JBoss) no enviroment do Eclipse, configurar através do run as ... do ant (build.xml do NetunoWeb)
+  - Para configurar seguir esses passos:
+    - Localizar o arquivo build.xml no NetunoWeb
+    - Botão direito -> Run As -> External Tool Configurations
+    - Clicar duas vezes em Ant Build caso não aparece um sub-menu chamado "NetunoWeb build.xml"
+    - Selecionar "NetunoWeb build.xml"
+    - Ir na aba "Enviroment"
+    - New -> Name: JBOSS_HOME.
+    - Antes de confirmar abrir o Variables...
+    - Clicar em Edit Variables...
+    - Na tela nova: New -> {Name: JBOSS_HOME, Value: /caminho/para/a/pasta/do/jboss}
+    - Confirmar tudo até voltar a janela de New Enviroment Variable.
+    - Abrir Variables... denovo e procurar JBOSS_HOME definido anteriormente.
+    - Agora é só rodar o build.
+- Ao criar projetos novo alterar o build.xml do NetunoWeb (Olhar os comentários para os locais)
+- Para fazer o build e deploy da applicação:
+  - Ir em Window -> Show View -> Others
+  - Selecionar Ant
+  - Levar o build.xml (Arrastar) até a aba do Ant que aparece no inferior do eclipse
+  - Clicar duas vezes
+  - Se tudo der certo um arquivo chamado netuno.ear aparecerá na pasta server/default/deploy na pasta do JBoss
+  - É preciso ter definido a variável de ambiente eclipse JBOSS_HOME
+- Para rodar o JBoss tem o executável dentro da pasta bin na raiz.
+- Para acessar a app: Subir o JBoss com o ear do netuno no lugar certo (server/defaut/deploy). url: localhost:8080/netuno/

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="NetunoWeb" basedir="." default="deploy">
+
+	<!-- definindo as propriedades de nome-->
+	<property name="name.project" value="netuno" />
+	<property name="name.war" value="${name.project}.war" />
+	<property name="name.ear" value="${name.project}.ear" />
+
+	<!-- definicao das propriedades dos arquivos -->
+	<property name="dir" value="." />
+	<property name="dir.src" value="${dir}/src" />
+	<property name="dir.build" value="${dir}/build" />
+	<property name="dir.webcontent" value="${dir}/WebContent" />
+	<property name="dir.web-inf" value="${dir.webcontent}/WEB-INF" />
+	<property name="dir.bin" value="${dir.build}/classes" />
+	<property name="dir.lib" value="${dir.web-inf}/lib" />
+	<property name="dir.web-inf.classes" value="${dir.web-inf}/classes" />
+	<property name="dir.war" value="${dir}/war" />
+	<property name="dir.ear" value="${dir}/ear" />
+	<property name="dir.ear.lib" value="${dir.ear}/lib" />
+
+	<!-- definindo as propriedades de deploy-->
+        <property environment="env"/>
+	<property name="jboss.home" value="${env.JBOSS_HOME}" />
+	<property name="jboss.default" value="${jboss.home}/server/default" />
+	<property name="jboss.deploy" value="${jboss.default}/deploy" />
+	<property name="jboss.client" value="${jboss.home}/client" />
+	<property name="jboss.common.lib" value="${jboss.home}/common/lib" />
+	<property name="deploy.home" value="${jboss.deploy}" />
+
+	<!-- definindo as propriedades do modulo web-->
+	<property name="webxml.file" value="${dir.webcontent}/WEB-INF/web.xml" />
+
+	<!-- definindo as propriedades do ear-->
+	<property name="dir.metainf" value="${dir.webcontent}/META-INF" />
+	<property name="session.jar.file" value="${dir}/${name.jar}" />
+	<property name="application.ear.file" value="${dir}/${name.ear}" />
+	
+	<!-- A cada projeto novo criar um target desse -->
+	<target name="importLogistica">
+		<delete file="${dir.lib}/NetunoLogistica.jar" />
+		<jar destfile="${dir.lib}/NetunoLogistica.jar" update="true">
+			<fileset dir="${basedir}/../NetunoLogistica/build/classes">
+			</fileset>
+		</jar>
+	</target>
+	
+	<target name="importModelo">
+			<delete file="${dir.lib}/NetunoModelo.jar" />
+			<jar destfile="${dir.lib}/NetunoModelo.jar" update="true">
+				<fileset dir="${basedir}/../NetunoModelo/build/classes">
+				</fileset>
+			</jar>
+		</target>
+
+	<target name="importSistema">
+		<delete file="${dir.lib}/NetunoSistema.jar" />
+		<jar destfile="${dir.lib}/NetunoSistema.jar" update="true">
+			<fileset dir="${basedir}/../NetunoSistema/build/classes">
+			</fileset>
+		</jar>
+	</target>
+	
+	<!-- A cada projeto incluir um importXYZ aqui -->
+	<target name="importAll" depends="importLogistica, importSistema, importModelo" />
+
+	<target name="ear" depends="importAll">
+
+		<!-- Limpa a pasta do EAR -->
+		<delete dir="${dir.ear}" />
+		<mkdir dir="${dir.ear}" />
+		
+		<!-- A cada projeto criado alterar aqui -->
+		<copy todir="${dir.ear}">
+			<fileset dir="${dir.lib}" includes="NetunoModelo.jar" />
+			<fileset dir="${dir.lib}" includes="NetunoLogistica.jar" />
+			<fileset dir="${dir.lib}" includes="NetunoSistema.jar" />
+		</copy>
+		
+		<delete file="${dir.lib}" />
+		
+		<war destfile="${dir.ear}/${name.war}" webxml="${dir.web-inf}/web.xml">
+			<fileset dir="${dir.webcontent}">
+				<exclude name="**/*.jar" />
+			</fileset>
+			<lib dir="${dir.lib}">
+				<!-- A cada projeto criado alterar aqui -->
+				<exclude name="NetunoModelo.jar" />
+				<exclude name="NetunoLogistica.jar" />
+				<exclude name="NetunoSistema.jar" />
+			</lib>
+			<classes dir="${dir.bin}">
+				<exclude name="*.xml" />
+			</classes>
+		</war>
+
+		<ear destfile="${basedir}/${name.ear}" appxml="${dir.src}/application.xml">
+			<metainf dir="${dir.metainf}" />
+			<fileset dir="${dir.ear}" />
+		</ear>
+
+	</target>
+	
+	<target name="deploy" depends="ear">
+		<copy todir="${jboss.deploy}">
+			<fileset dir="${basedir}" includes="${name.ear}" />
+		</copy>
+	</target>
+	
+	<target name="undeploy">
+		<delete file="${jboss.deploy}/${name.ear}" />
+	</target>
+
+</project>
