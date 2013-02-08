@@ -3,14 +3,23 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-	<h:head>
-
-	</h:head>
+	<h:head></h:head>
 	
 	<h:body>
-	
-		<p:panel header="Bem-Vindo ao Netuno !!!" footer="Bem-Vindo">
-			<h:outputText value="Seja bem-vindo ao Netuno Marujo !!!" />
-		</p:panel>
+		<h:form id="lF">
+			<p:messages id="lM" showDetail="true" autoUpdate="true" closable="true" />
+		
+			<p:panel header="Bem-Vindo ao Netuno !!!" footer="Netuno Sistemas - UFRJ" style="width: 50%;">
+				<h:panelGrid columns="2">
+					<p:outputLabel id="oL" value="Login: "/>
+					<p:inputText id="iL" value="#{Login.login}" />
+					
+					<p:outputLabel id="oS" value="Senha: " />
+					<p:password id="pS" value="#{Login.senha}" />
+					
+					<p:commandButton id="bA" value="Autenticar" action="#{Login.autenticar}" />
+				</h:panelGrid>
+			</p:panel>
+		</h:form>
 	</h:body>
 </html>

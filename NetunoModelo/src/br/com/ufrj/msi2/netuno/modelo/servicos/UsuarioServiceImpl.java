@@ -1,12 +1,12 @@
 package br.com.ufrj.msi2.netuno.modelo.servicos;
 
-import javax.ejb.Local;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import br.com.ufrj.msi2.netuno.modelo.entidades.Usuario;
 
-@Local
+@Stateless
 public class UsuarioServiceImpl implements UsuarioService {
 	private static final long serialVersionUID = -7087952795393582189L;
 

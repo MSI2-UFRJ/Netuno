@@ -12,6 +12,10 @@
 	<module>
 		<ejb>NetunoLogistica.jar</ejb>
 	</module>
+	
+	<module>
+		<ejb>NetunoModelo.jar</ejb>
+	</module>
 
 	<module>
 		<web>

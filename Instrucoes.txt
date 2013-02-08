@@ -1,5 +1,6 @@
 - Mysql Connector que está na pasta lib/mysql-connector-java-5.1.23 do NetunoModelo deve ir para a pasta default/lib do JBoss
 - Netuno-ds.xml que está na pasta raiz do NetunoModelo deve ir para a pasta server/default/deploy do JBoss (Ele é quem configura as conexões com o mysql server)
+- Dentro do DataSource (Netuno-ds.xml) é preciso configurar o login e senha do mysql que roda na máquina local.
 - Se criar um projeto novo: Alterar o build.xml e application.xml do NetunoWeb
 - Variável JBOSS_HOME (deve estar setada com a raiz da pasta do JBoss) no enviroment do Eclipse, configurar através do run as ... do ant (build.xml do NetunoWeb)
   - Para configurar seguir esses passos:
@@ -15,7 +16,7 @@
     - Confirmar tudo até voltar a janela de New Enviroment Variable.
     - Abrir Variables... denovo e procurar JBOSS_HOME definido anteriormente.
     - Agora é só rodar o build.
-- Ao criar projetos novo alterar o build.xml do NetunoWeb (Olhar os comentários para os locais)
+- Ao criar projetos novo alterar o build.xml do NetunoWeb (Olhar os comentários para os locais) e o application.xml no src do NetunoWeb
 - Para fazer o build e deploy da applicação:
   - Ir em Window -> Show View -> Others
   - Selecionar Ant
@@ -25,3 +26,12 @@
   - É preciso ter definido a variável de ambiente eclipse JBOSS_HOME
 - Para rodar o JBoss tem o executável dentro da pasta bin na raiz.
 - Para acessar a app: Subir o JBoss com o ear do netuno no lugar certo (server/defaut/deploy). url: localhost:8080/netuno/
+
+- A biblioteca de componentes JSF utilizada é o PrimeFaces (http://www.primefaces.org/)
+- Documentação sobre as tags (Atributos e comportamento)
+  - Tags do PrimeFaces: http://www.primefaces.org/docs/vdl/3.5/primefaces-p/tld-summary.html
+  - Showcase do PrimeFaces com exemplos de uso: http://www.primefaces.org/showcase/ui/
+  - Tags JSF Core: http://www.jsftoolbox.com/documentation/help/12-TagReference/core/index.jsf
+  - Tags Html: http://www.jsftoolbox.com/documentation/help/12-TagReference/html/index.jsf
+- A navegação entre telas é feita de forma implícita ou explícita através de Navigation Rules
+- A navegação é configurada no faces-config.xml dentro de WEB-INF
