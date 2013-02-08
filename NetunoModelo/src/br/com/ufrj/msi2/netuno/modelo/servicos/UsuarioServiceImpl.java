@@ -3,6 +3,7 @@ package br.com.ufrj.msi2.netuno.modelo.servicos;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import br.com.ufrj.msi2.netuno.modelo.entidades.Usuario;
 
@@ -15,8 +16,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 	
 	@Override
 	public Usuario recuperarUsuario(String login, String senha) {
-		// TODO Auto-generated method stub
-		return null;
+		Query query = em.createNamedQuery("Usuario.recuperarPorLoginESenha");
+		
+		query.setParameter("login", login);
+		query.setParameter("senha", senha);
+		
+		return (Usuario) query.getSingleResult();
 	}
 
 	@Override

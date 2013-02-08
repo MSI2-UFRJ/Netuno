@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 @Entity
 // O SQL Abaixo não é SQL :P É JPQL (Linguagem SQL do JPA)
@@ -16,6 +17,7 @@ import javax.persistence.NamedQuery;
 		)
 	}
 )
+@Table(name="usuario")
 public class Usuario {
 	
 	@Id
@@ -23,7 +25,11 @@ public class Usuario {
 	private Integer id;
 	
 	private String login, senha;
-
+	
+	public Integer getId() {
+		return id;
+	}
+	
 	public String getLogin() {
 		return login;
 	}

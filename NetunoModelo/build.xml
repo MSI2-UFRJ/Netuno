@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="NetunoNegocio" basedir="." default="hbm2ddl">
+<project name="NetunoModelo" basedir="." default="hbm2ddl">
 
 	<!-- definicao das propriedades dos arquivos -->
 	<property name="dir" value="." />
 	<property name="dir.src" value="${dir}/src" />
-	<property name="dir.build" value="${dir}/build" />
+	<property name="dir.build" value="${dir}/build/classes" />
 	<property name="dir.lib" value="${dir}/lib" />
+	<property name="dir.bin" value="${dir}/bin" />
+	<property name="dir.metainf" value="${dir.src}/META-INF" />
 	
 	<path id="jpatoolslib">
 		<pathelement location="${build}" />
@@ -16,15 +18,17 @@
 
 	<target name="hbm2ddl">
 		<taskdef name="hibernatetool" classname="org.hibernate.tool.ant.HibernateToolTask" classpathref="jpatoolslib" />
-	
+		
+		<property name="hibernate.default_schema" value="netuno" />
+		
 		<hibernatetool destdir="${dir.src}">
+			
+			<jpaconfiguration persistenceunit="netuno" />
 			
 			<classpath>
 				<!-- it is in this classpath you put your classes dir, and/or jpa persistence compliant jar -->
 				<path location="${dir.build}" />
 			</classpath>
-	
-			<jpaconfiguration persistenceunit="netuno" />
 	
 			<!-- list exporters here -->
 			<hbm2ddl export="false" outputfilename="db_schema.sql" />

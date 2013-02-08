@@ -5,7 +5,11 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
+import br.com.ufrj.msi2.netuno.attributes.Attributes;
+import br.com.ufrj.msi2.netuno.modelo.entidades.Usuario;
 import br.com.ufrj.msi2.netuno.sistema.servicos.LoginService;
 import br.com.ufrj.msi2.netuno.sistema.servicos.exception.NaoAutenticadoException;
 
@@ -31,8 +35,10 @@ public class LoginMBean extends MBean {
 		}
 		
 		try {
-			loginService.autenticaUsuario(login, senha);
-			// TODO Guardar o usuário na sessão.
+			Usuario usuario = loginService.autenticaUsuario(login, senha);
+			// TODO Guardar o id do usuário na sessão.
+			HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+			session.setAttribute(Attributes.SessionAttributes.LOGIN.toString(), usuario.getId());
 		} catch (NaoAutenticadoException e) {
 			sendMessage("lM", FacesMessage.SEVERITY_ERROR, "Erro no login", "Usuario e/ou Senha invalido(s) !");
 			return "";

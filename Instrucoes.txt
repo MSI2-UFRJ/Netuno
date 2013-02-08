@@ -1,4 +1,5 @@
 - Mysql Connector que está na pasta lib/mysql-connector-java-5.1.23 do NetunoModelo deve ir para a pasta default/lib do JBoss
+- O schema do banco é gerado pelo hbm2ddl no build.xml do NetunoModelo, para gerar rodar o ant.
 - Netuno-ds.xml que está na pasta raiz do NetunoModelo deve ir para a pasta server/default/deploy do JBoss (Ele é quem configura as conexões com o mysql server)
 - Dentro do DataSource (Netuno-ds.xml) é preciso configurar o login e senha do mysql que roda na máquina local.
 - Se criar um projeto novo: Alterar o build.xml e application.xml do NetunoWeb
