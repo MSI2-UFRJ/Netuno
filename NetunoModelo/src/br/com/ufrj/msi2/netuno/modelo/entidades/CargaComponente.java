@@ -7,34 +7,35 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
 @Entity
-@Table(name="navio")
-public class Navio implements Serializable {
-	private static final long serialVersionUID = 5809941224721488777L;
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class CargaComponente implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column
-	private String nome;
+	@Column(name = "peso")
+	private Double peso;
 
 	public Integer getId() {
 		return id;
 	}
 
-	public String getNome() {
-		return nome;
+	public Double getPeso() {
+		return peso;
 	}
 
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setPeso(Double peso) {
+		this.peso = peso;
 	}
 
 }
