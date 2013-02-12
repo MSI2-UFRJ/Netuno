@@ -1,14 +1,18 @@
 package br.com.ufrj.msi2.netuno.modelo.entidades;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-@Entity
 // O SQL Abaixo não é SQL :P É JPQL (Linguagem SQL do JPA)
 @NamedQueries(
 	{
@@ -17,14 +21,23 @@ import javax.persistence.Table;
 		)
 	}
 )
+
 @Table(name="usuario")
-public class Usuario {
+@Entity
+@Inheritance(strategy=InheritanceType.JOINED)
+public abstract class Usuario implements Serializable {
 	
+	private static final long serialVersionUID = -7388109837156922864L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	private String login, senha;
+	@Column(name="login")
+	private String login;
+	
+	@Column(name="senha")
+	private String senha;
 	
 	public Integer getId() {
 		return id;

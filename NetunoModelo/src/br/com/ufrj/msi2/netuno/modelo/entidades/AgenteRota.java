@@ -4,24 +4,21 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="agenteRota")
-public class AgenteRota implements Serializable {
+@PrimaryKeyJoinColumn(name="id")
+public class AgenteRota extends Usuario implements Serializable {
 	private static final long serialVersionUID = 3949146978649270591L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
 	@OneToMany
-	@JoinColumn(name="agenteRota_id")  
+	@JoinColumn(name="agenteRota_id")
 	private List<Requisicao> requisicoes;
 
 	public Integer getId() {
@@ -39,5 +36,4 @@ public class AgenteRota implements Serializable {
 	public void setRequisicoes(List<Requisicao> requisicoes) {
 		this.requisicoes = requisicoes;
 	}
-
 }

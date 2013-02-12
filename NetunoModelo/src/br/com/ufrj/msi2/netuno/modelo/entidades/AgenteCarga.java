@@ -4,28 +4,25 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="agenteCarga")
-public class AgenteCarga implements Serializable {
+@PrimaryKeyJoinColumn(name="id")
+public class AgenteCarga extends Usuario implements Serializable {
 	private static final long serialVersionUID = -4587241605092091433L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
 	@OneToMany
-	@JoinColumn(name="agenteEmbarque_id")  
+	@JoinColumn(name="agenteEmbarque_id")
 	private List<CargaComponente> cargasComponenteAEmbarcar;
 	
 	@OneToMany
-	@JoinColumn(name="agenteDesembarque_id")  
+	@JoinColumn(name="agenteDesembarque_id")
 	private List<CargaComponente> cargasComponenteADesembarcar;
 
 	public Integer getId() {
