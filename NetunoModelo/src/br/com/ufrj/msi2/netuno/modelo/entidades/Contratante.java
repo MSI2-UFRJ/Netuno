@@ -4,17 +4,20 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="contratante")
-@PrimaryKeyJoinColumn(name="id")
-public class Contratante extends Usuario implements Serializable {
+public class Contratante implements Serializable {
 	private static final long serialVersionUID = -837838116953606430L;
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
 	@OneToMany
@@ -25,7 +28,16 @@ public class Contratante extends Usuario implements Serializable {
 		return id;
 	}
 
+	public List<Contrato> getContrato() {
+		return contrato;
+	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
+	public void setContrato(List<Contrato> contrato) {
+		this.contrato = contrato;
+	}
+
 }
