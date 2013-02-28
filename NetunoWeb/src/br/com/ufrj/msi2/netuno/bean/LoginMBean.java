@@ -29,7 +29,7 @@ public class LoginMBean extends MBean {
 	}
 	
 	public String autenticar() {
-		if(! validarDados()) {
+		if(!validarDados()) {
 			// Nao faz a navegacao, fica na mesma página.
 			return "";
 		}
@@ -39,13 +39,12 @@ public class LoginMBean extends MBean {
 			// TODO Guardar o id do usuário na sessão.
 			HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 			session.setAttribute(Attributes.SessionAttributes.LOGIN.toString(), usuario.getId());
+			
+			return usuario.getTipo();
 		} catch (NaoAutenticadoException e) {
 			sendMessage("lM", FacesMessage.SEVERITY_ERROR, "Erro no login", "Usuario e/ou Senha invalido(s) !");
 			return "";
 		}
-		
-		// token para navegar entre as páginas (Configurado no faces-config.xml)
-		return "logado";
 	}
 	
 	public boolean validarDados() {
