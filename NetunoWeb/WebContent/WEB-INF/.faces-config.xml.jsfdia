@@ -17,12 +17,20 @@
     NAME="output2" PATH="/contratacao/home.xhtml"
     TARGET="rules:#contratacao#home.xhtml"
     TITLE="#{Login.autenticar}:contratante" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="agentelogistica:#{Login.autenticar}:#logistica#home.xhtml"
+    NAME="output3" PATH="/logistica/home.xhtml"
+    TARGET="rules:#logistica#home.xhtml"
+    TITLE="#{Login.autenticar}:agentelogistica" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#dashboard.xhtml" PATH="/dashboard.xhtml"
-  SHAPE="240,33,0,0" model-entity="JSFProcessGroup"/>
+  SHAPE="272,40,50,25" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#contratacao#home.xhtml"
   PATH="/contratacao/home.xhtml" SHAPE="272,209,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#cargas#home.xhtml" PATH="/cargas/home.xhtml"
-  SHAPE="272,321,0,0" model-entity="JSFProcessGroup"/>
+  SHAPE="272,152,50,25" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#logistica#home.xhtml"
+  PATH="/logistica/home.xhtml" SHAPE="272,264,50,25"
+  model-entity="JSFProcessGroup" persistent="true"/>
 </PROCESS>

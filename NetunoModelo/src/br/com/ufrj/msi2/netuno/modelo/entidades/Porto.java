@@ -1,11 +1,13 @@
 package br.com.ufrj.msi2.netuno.modelo.entidades;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -16,6 +18,9 @@ public class Porto implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	
+	@OneToMany(mappedBy="pertence")
+	private List<AgentePorto> agentes;
 
 	public Integer getId() {
 		return id;
@@ -25,4 +30,12 @@ public class Porto implements Serializable {
 		this.id = id;
 	}
 
+	public List<AgentePorto> getAgentes() {
+		return agentes;
+	}
+
+	public void setAgentes(List<AgentePorto> agentes) {
+		this.agentes = agentes;
+	}
+	
 }

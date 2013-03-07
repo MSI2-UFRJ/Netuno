@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -41,8 +40,7 @@ public class EmpresaTransporte implements Serializable{
 		this.nome = nome;
 	}
 	
-	@OneToMany
-	@JoinColumn(name="empresatransporte_id")
+	@OneToMany(mappedBy="representa")
 	private List<RepresEmpTrans> representantes;
 
 	public List<RepresEmpTrans> getRepresentantes() {

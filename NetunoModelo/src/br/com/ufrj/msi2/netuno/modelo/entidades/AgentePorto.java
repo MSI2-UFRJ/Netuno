@@ -12,6 +12,14 @@ public class AgentePorto extends Usuario{
 	@ManyToOne
 	private Porto pertence;
 	
+	public Porto getPertence() {
+		return pertence;
+	}
+
+	public void setPertence(Porto pertence) {
+		this.pertence = pertence;
+	}
+
 	@Override
 	public String getTipo() {
 		return "agentePorto";
