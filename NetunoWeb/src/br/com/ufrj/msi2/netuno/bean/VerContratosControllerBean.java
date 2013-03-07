@@ -8,6 +8,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import br.com.ufrj.msi2.netuno.attributes.Attributes;
+import br.com.ufrj.msi2.netuno.modelo.entidades.Contrato;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Usuario;
 
 @ManagedBean(name="verContratosController")
@@ -20,7 +21,13 @@ public class VerContratosControllerBean extends MBean {
 	@PostConstruct
 	public void construct() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-		verContratosModelBean.setUsuario((Usuario) session.getAttribute(Attributes.SessionAttributes.LOGIN.toString()));
+		
+		Usuario usuario = (Usuario) session.getAttribute(Attributes.SessionAttributes.LOGIN.toString());
+		verContratosModelBean.setUsuario(usuario);
+	}
+	
+	public String verDetalhes(Contrato contrato) {
+		return "";
 	}
 
 	public VerContratosModelBean getVerContratosModelBean() {

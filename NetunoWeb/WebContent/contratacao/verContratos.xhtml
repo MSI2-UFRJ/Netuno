@@ -9,6 +9,24 @@
 <h:head />
 
 <h:body>
-	<h:outputText value="#{verContratosModel.usuario.nome}" rendered="#{not empty verContratosController}" />
+	<h:outputLabel value="Olá, " /><h:outputText value="#{verContratosModel.usuario.nome}" rendered="#{not empty verContratosController}" /><br />
+	<h:dataTable 	id="tabelaContratos"
+					value="#{verContratosModel.listaContratos}"
+					var="contrato"
+					rendered="#{not empty verContratosModel.listaContratos}">
+			<h:column>
+				<f:facet name="header">Identificador</f:facet>
+				<h:outputLabel value="#{contrato.id}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Data</f:facet>
+				<h:outputLabel value="#{contrato.dataCriacao}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header" />
+				<h:commandButton 	action="#{verAlunosController.verDetalhes(contrato)}"
+									value="Ver Detalhes" />
+			</h:column>
+		</h:dataTable>
 </h:body>
 </html>
