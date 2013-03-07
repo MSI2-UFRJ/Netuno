@@ -14,13 +14,11 @@
 			<from-action>#{Login.autenticar}</from-action>
 			<from-outcome>agenteCarga</from-outcome>
 			<to-view-id>/cargas/home.xhtml</to-view-id>
-			<redirect />
 		</navigation-case>
 		<navigation-case>
 			<from-action>#{Login.autenticar}</from-action>
 			<from-outcome>contratante</from-outcome>
 			<to-view-id>/contratacao/home.xhtml</to-view-id>
-			<redirect />
 		</navigation-case>
 	</navigation-rule>
 </faces-config>
