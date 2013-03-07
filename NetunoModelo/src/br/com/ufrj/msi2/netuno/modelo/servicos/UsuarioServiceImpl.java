@@ -30,4 +30,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 		return em.find(Usuario.class, idUsuario);
 	}
 
+	public EntityManager getEm() {
+		return em;
+	}
+
 }
