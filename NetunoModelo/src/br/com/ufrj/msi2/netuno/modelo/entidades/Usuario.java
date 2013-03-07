@@ -35,26 +35,41 @@ public abstract class Usuario implements Serializable {
 	@Column(name="senha")
 	private String senha;
 	
+	@Column(name="nome")
+	private String nome;
+	
 	public Integer getId() {
 		return id;
 	}
-	
+
 	public String getLogin() {
 		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
 	}
 
 	public String getSenha() {
 		return senha;
 	}
 
+	public String getNome() {
+		return nome;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
 	public abstract String getTipo();
 
 }

@@ -3,6 +3,7 @@ package br.com.ufrj.msi2.netuno.modelo.entidades;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,6 +22,9 @@ public class Porto implements Serializable {
 	
 	@OneToMany(mappedBy="pertence")
 	private List<AgentePorto> agentes;
+	
+	@Column(name="nome")
+	private String nome;
 
 	public Integer getId() {
 		return id;

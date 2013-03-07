@@ -13,9 +13,9 @@
     TARGET="rules:#cargas#home.xhtml"
     TITLE="#{Login.autenticar}:agenteCarga" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT
-    ID="contratante:#{Login.autenticar}:#contratacao#home.xhtml"
-    NAME="output2" PATH="/contratacao/home.xhtml"
-    TARGET="rules:#contratacao#home.xhtml"
+    ID="contratante:#{Login.autenticar}:#contratacao#verContratos.xhtml"
+    NAME="output2" PATH="/contratacao/verContratos.xhtml"
+    TARGET="rules:#contratacao#verContratos.xhtml"
     TITLE="#{Login.autenticar}:contratante" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT
     ID="agentelogistica:#{Login.autenticar}:#logistica#home.xhtml"
@@ -26,8 +26,8 @@
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#dashboard.xhtml" PATH="/dashboard.xhtml"
   SHAPE="272,40,50,25" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#contratacao#home.xhtml"
-  PATH="/contratacao/home.xhtml" SHAPE="272,209,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#contratacao#verContratos.xhtml"
+  PATH="/contratacao/verContratos.xhtml" SHAPE="272,209,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#cargas#home.xhtml" PATH="/cargas/home.xhtml"
   SHAPE="272,152,50,25" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#logistica#home.xhtml"

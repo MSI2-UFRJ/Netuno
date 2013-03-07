@@ -1,8 +1,10 @@
 package br.com.ufrj.msi2.netuno.modelo.entidades;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,6 +32,12 @@ public class Contrato implements Serializable {
 	
 	@ManyToOne
     private Porto portoDestino;
+	
+	@Column(name="data_criacao")
+	private Date dataCriacao;
+	
+	@Column(name="finalizado")
+	private boolean finalizado;
 
 	public Integer getId() {
 		return id;
@@ -47,6 +55,14 @@ public class Contrato implements Serializable {
 		return portoDestino;
 	}
 
+	public Date getDataCriacao() {
+		return dataCriacao;
+	}
+
+	public boolean isFinalizado() {
+		return finalizado;
+	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -61,6 +77,14 @@ public class Contrato implements Serializable {
 
 	public void setPortoDestino(Porto portoDestino) {
 		this.portoDestino = portoDestino;
+	}
+
+	public void setDataCriacao(Date dataCriacao) {
+		this.dataCriacao = dataCriacao;
+	}
+
+	public void setFinalizado(boolean finalizado) {
+		this.finalizado = finalizado;
 	}
 
 }

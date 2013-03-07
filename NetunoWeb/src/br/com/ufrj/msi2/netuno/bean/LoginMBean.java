@@ -36,9 +36,9 @@ public class LoginMBean extends MBean {
 		
 		try {
 			Usuario usuario = loginService.autenticaUsuario(login, senha);
-			// TODO Guardar o id do usuário na sessão.
+			
 			HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-			session.setAttribute(Attributes.SessionAttributes.LOGIN.toString(), usuario.getId());
+			session.setAttribute(Attributes.SessionAttributes.LOGIN.toString(), usuario);
 			
 			return usuario.getTipo();
 		} catch (NaoAutenticadoException e) {

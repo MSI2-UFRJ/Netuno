@@ -9,6 +9,6 @@
 <h:head />
 
 <h:body>
-	<h:outputLabel value="Contratação" />
+	<h:outputText value="#{verContratosModel.usuario.nome}" rendered="#{not empty verContratosController}" />
 </h:body>
 </html>
