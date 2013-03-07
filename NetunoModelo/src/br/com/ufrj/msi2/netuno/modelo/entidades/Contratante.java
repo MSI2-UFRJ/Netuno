@@ -14,14 +14,14 @@ public class Contratante extends Usuario {
 	
 	@OneToMany
 	@JoinColumn(name="contratante_id")
-	private List<Contrato> contrato;
+	private List<Contrato> contratos;
 
-	public List<Contrato> getContrato() {
-		return contrato;
+	public List<Contrato> getContratos() {
+		return contratos;
 	}
 
-	public void setContrato(List<Contrato> contrato) {
-		this.contrato = contrato;
+	public void setContratos(List<Contrato> contratos) {
+		this.contratos = contratos;
 	}
 	
 	public String getTipo() {

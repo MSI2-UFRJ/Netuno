@@ -11,9 +11,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+@NamedQueries(
+	{
+		@NamedQuery(name="Contrato.recuperaPorContratante",
+					query="select contrato from Contratante contratante inner join contratante.contratos contrato where contratante = :contratante"
+		)
+	}
+)
 @Entity
 @Table(name="contrato")
 public class Contrato implements Serializable {
