@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,13 +18,12 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import br.com.ufrj.msi2.netuno.modelo.enums.SituacaoContratoEnum;
+
 @NamedQueries(
 	{
-		@NamedQuery(name="Contrato.recuperaAbertosPorContratante",
-					query="select contrato from Contratante contratante inner join contratante.contratos contrato where contratante = :contratante"
-		),
-		@NamedQuery(name="Contrato.recuperaFechadosPorContratante",
-				query="select contrato from Contratante contratante inner join contratante.contratos contrato where contratante = :contratante"
+		@NamedQuery(name="Contrato.recuperaPorContratante",
+					query="select contrato from Contratante contratante inner join contratante.contratos contrato where (contratante = :contratante and contrato.situacao = :situacao)"
 		),
 		@NamedQuery(name="Contrato.recuperaPorId",
 					query="select contrato from Contrato contrato where contrato.id = :id"
@@ -51,8 +52,9 @@ public class Contrato implements Serializable {
 	@Column(name="data_criacao")
 	private Date dataCriacao;
 	
-	@Column(name="finalizado")
-	private boolean finalizado;
+	@Column(name="situacao")
+	@Enumerated(EnumType.STRING)  
+	private SituacaoContratoEnum situacao;
 
 	public Integer getId() {
 		return id;
@@ -74,8 +76,8 @@ public class Contrato implements Serializable {
 		return dataCriacao;
 	}
 
-	public boolean isFinalizado() {
-		return finalizado;
+	public SituacaoContratoEnum getSituacao() {
+		return situacao;
 	}
 
 	public void setId(Integer id) {
@@ -98,8 +100,8 @@ public class Contrato implements Serializable {
 		this.dataCriacao = dataCriacao;
 	}
 
-	public void setFinalizado(boolean finalizado) {
-		this.finalizado = finalizado;
+	public void setSituacao(SituacaoContratoEnum situacao) {
+		this.situacao = situacao;
 	}
 
 }

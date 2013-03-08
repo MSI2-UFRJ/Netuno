@@ -8,12 +8,12 @@ create table carga (id integer not null auto_increment, peso double, conteiner_i
 create table cargalog (id integer not null auto_increment, data datetime, descricao varchar(255), carga_id integer, primary key (id));
 create table conteiner (id integer not null auto_increment, primary key (id));
 create table contratante (id integer not null auto_increment, login varchar(255), nome varchar(255), senha varchar(255), primary key (id));
-create table contrato (id integer not null auto_increment, data_criacao datetime, finalizado bit, portoDestino_id integer, portoOrigem_id integer, contratante_id integer, primary key (id));
+create table contrato (id integer not null auto_increment, data_criacao datetime, situacao varchar(255), portoDestino_id integer, portoOrigem_id integer, contratante_id integer, primary key (id));
 create table empresatransporte (id integer not null auto_increment, nome varchar(255), primary key (id));
 create table navio (id integer not null auto_increment, nome varchar(255), primary key (id));
 create table partecarga (id integer not null auto_increment, peso double, conteiner_id integer, agenteEmbarque_id integer, agenteDesembarque_id integer, patio_id integer, carga_id integer, primary key (id));
 create table patio (id integer not null auto_increment, primary key (id));
-create table porto (id integer not null auto_increment, primary key (id));
+create table porto (id integer not null auto_increment, nome varchar(255), primary key (id));
 create table pregao (id integer not null auto_increment, abertoPor_id integer, anuncia_id integer, primary key (id));
 create table represemptrans (id integer not null auto_increment, login varchar(255), nome varchar(255), senha varchar(255), representa_id integer, primary key (id));
 create table requisicao (id integer not null auto_increment, data datetime, agenteCarga_id integer, conteiner_id integer, navio_id integer, agenteRota_id integer, primary key (id));

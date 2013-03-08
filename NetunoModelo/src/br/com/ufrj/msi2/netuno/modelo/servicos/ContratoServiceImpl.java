@@ -1,6 +1,5 @@
 package br.com.ufrj.msi2.netuno.modelo.servicos;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -10,6 +9,7 @@ import javax.persistence.Query;
 
 import br.com.ufrj.msi2.netuno.modelo.entidades.Contratante;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Contrato;
+import br.com.ufrj.msi2.netuno.modelo.enums.SituacaoContratoEnum;
 
 @Stateless
 public class ContratoServiceImpl implements ContratoService {
@@ -17,27 +17,31 @@ public class ContratoServiceImpl implements ContratoService {
 
 	@PersistenceContext
 	EntityManager em;
-	
+
 	public void salvarContrato(Contrato contrato) {
 		em.persist(contrato);
 	}
-	
+
 	public Contrato recuperaContratoPorId(Integer id) {
 		Query query = em.createNamedQuery("Contrato.recuperaPorId");
 		query.setParameter("id", id);
 		return (Contrato) query.getSingleResult();
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public List<Contrato> recuperaContratosAbertosPorContratante(Contratante contratante) {
-		Query query = em.createNamedQuery("Contrato.recuperaAbertosPorContratante");
+	private List<Contrato> recuperaContratosPorContratante(Contratante contratante, SituacaoContratoEnum situacao) {
+		Query query = em.createNamedQuery("Contrato.recuperaPorContratante");
 		query.setParameter("contratante", contratante);
+		query.setParameter("situacao", situacao.name());
 		return (List<Contrato>) query.getResultList();
 	}
-	
-	//@SuppressWarnings("unchecked")
+
+	public List<Contrato> recuperaContratosAbertosPorContratante(Contratante contratante) {
+		return this.recuperaContratosPorContratante(contratante, SituacaoContratoEnum.aberto);
+	}
+
 	public List<Contrato> recuperaContratosFechadosPorContratante(Contratante contratante) {
-		return new ArrayList<Contrato>();
+		return this.recuperaContratosPorContratante(contratante, SituacaoContratoEnum.finalizado);
 	}
 
 	public EntityManager getEm() {

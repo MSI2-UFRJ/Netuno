@@ -46,7 +46,6 @@ public class VerContratosControllerBean extends MBean {
 	}
 
 	public String verDetalhes(Contrato contrato) {
-		
 		return "";
 	}
 
