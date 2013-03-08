@@ -30,7 +30,11 @@ public class PortoBean extends MBean{
 		this.portos = this.servicosPorto.obterTodos();
 		if (this.porto == null){
 			this.porto = new Porto();
-		}	
+		}
+	}
+	
+	public void recuperarPorto(){
+		this.porto = servicosPorto.obterPorId(this.idPorto);
 	}
 	
 	public String salvar(){

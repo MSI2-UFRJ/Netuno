@@ -20,7 +20,7 @@
 						</p:column>
 						
 						<p:column>
-							<p:button title="Alterar dados básicos do porto." outcome="/logistica/portos/alterar" icon="ui-icon-pencil">
+							<p:button title="Alterar dados básicos do porto." outcome="/portos/alterar" icon="ui-icon-pencil">
 								<f:param name="idPorto" value="#{porto.id}"/>
 							</p:button>
 							<p:commandButton title="Excluir o porto." icon="ui-icon-closethick" onclick="confirmacao.show()">
@@ -29,7 +29,7 @@
 						</p:column>
 						
 						<f:facet name="footer">
-								<p:button outcome="/logistica/portos/criar" value="Criar" icon="ui-icon-plus"/>
+								<p:button outcome="/portos/criar" value="Criar" icon="ui-icon-plus"/>
 						</f:facet>
 					</p:dataTable>
 					<p:confirmDialog id="confirmDialog" message="Tem certeza de que quer excluir este porto?" header="Processo de exclusão de porto" severity="alert" widgetVar="confirmacao">  
