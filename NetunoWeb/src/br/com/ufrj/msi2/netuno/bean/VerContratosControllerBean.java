@@ -9,30 +9,29 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import br.com.ufrj.msi2.netuno.attributes.Attributes;
+import br.com.ufrj.msi2.netuno.contratacao.servicos.ContratacaoService;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Contratante;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Contrato;
-import br.com.ufrj.msi2.netuno.modelo.entidades.Usuario;
-import br.com.ufrj.msi2.netuno.modelo.servicos.ContratoService;
 
 @ManagedBean(name="verContratosController")
 @ViewScoped
 public class VerContratosControllerBean extends MBean {
-	
+
 	@EJB
-	ContratoService contratoService;
-	
+	ContratacaoService contratacaoService;
+
 	@ManagedProperty(value="#{verContratosModel}")
 	private VerContratosModelBean verContratosModelBean;
-	
+
 	@PostConstruct
 	public void construct() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		
-		Usuario usuario = (Usuario) session.getAttribute(Attributes.SessionAttributes.LOGIN.toString());
-		verContratosModelBean.setUsuario(usuario);
-		verContratosModelBean.setListaContratos(this.contratoService.getContratosPorContratante((Contratante) usuario));
+		Contratante contratante = (Contratante) session.getAttribute(Attributes.SessionAttributes.LOGIN.toString());
+		verContratosModelBean.setContratante(contratante);
+		verContratosModelBean.setListaContratos(this.contratacaoService.recuperaContratosPorContratante(contratante));
 	}
-	
+
 	public String verDetalhes(Contrato contrato) {
 		return "";
 	}
@@ -45,12 +44,12 @@ public class VerContratosControllerBean extends MBean {
 		this.verContratosModelBean = verContratosModelBean;
 	}
 
-	public ContratoService getContratoService() {
-		return contratoService;
+	public ContratacaoService getContratacaoService() {
+		return contratacaoService;
 	}
 
-	public void setContratoService(ContratoService contratoService) {
-		this.contratoService = contratoService;
+	public void setContratacaoService(ContratacaoService contratacaoService) {
+		this.contratacaoService = contratacaoService;
 	}
 	
 }

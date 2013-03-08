@@ -18,7 +18,7 @@ public class ContratoServiceImpl implements ContratoService {
 	EntityManager em;
 	
 	@SuppressWarnings("unchecked")
-	public List<Contrato> getContratosPorContratante(Contratante contratante) {
+	public List<Contrato> recuperaContratosPorContratante(Contratante contratante) {
 		Query query = em.createNamedQuery("Contrato.recuperaPorContratante");
 		
 		query.setParameter("contratante", contratante);

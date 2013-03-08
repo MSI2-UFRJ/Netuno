@@ -6,14 +6,14 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import br.com.ufrj.msi2.netuno.modelo.entidades.Contratante;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Contrato;
-import br.com.ufrj.msi2.netuno.modelo.entidades.Usuario;
 
 @ManagedBean(name="verContratosModel")
 @ViewScoped
 public class VerContratosModelBean extends MBean {
 	
-	private Usuario usuario;
+	private Contratante contratante;
 	
 	private List<Contrato> listaContratos;
 	
@@ -22,12 +22,12 @@ public class VerContratosModelBean extends MBean {
 		
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+	public Contratante getContratante() {
+		return contratante;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setContratante(Contratante contratante) {
+		this.contratante = contratante;
 	}
 
 	public List<Contrato> getListaContratos() {

@@ -9,7 +9,7 @@
 <h:head />
 
 <h:body>
-	<h:outputLabel value="Olá, " /><h:outputText value="#{verContratosModel.usuario.nome}" rendered="#{not empty verContratosController}" /><br />
+	<h:outputLabel value="Olá, " /><h:outputText value="#{verContratosModel.contratante.nome}" rendered="#{not empty verContratosController}" /><br />
 	<h:dataTable 	id="tabelaContratos"
 					value="#{verContratosModel.listaContratos}"
 					var="contrato"
