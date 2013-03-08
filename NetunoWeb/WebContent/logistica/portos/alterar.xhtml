@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<ui:composition template="/templates/template.xhtml">
+	<f:metadata>
+		<f:viewParam name="idPorto" value="#{portoBean.porto}" converter="#{portoConverter}"/>
+	</f:metadata>
+	<ui:define name="content">
+		<h2>Alterar Porto</h2>
+		<div class="grid_12">
+			<div class="box-5">
+				<h:form id="formAlteracaoPorto">
+				<p:messages id="mensagens" globalOnly="true" />
+						<h:inputHidden value="#{portoBean.porto}" converter="#{portoConverter}"/>
+						<p:panelGrid columns="3" cellspacing="10" cellpadding="10" id="grid">
+							<f:facet name="header">
+								Porto
+							</f:facet>
+							<h:outputLabel for="localizacao" value="Localização*: "/>
+							<p:inputText id="localizacao" value="#{portoBean.porto.localizacao}" required="true" requiredMessage="Por favor, informe a localização do porto."/>
+							<p:message for="localizacao" autoUpdate="true"/>
+														
+							<f:facet name="footer">
+								<p:commandButton type="submit" value="Confirmar" icon="ui-icon-check" action="#{portoBean.alterar}" update="formAlteracaoPorto:mensagens"/>
+							</f:facet>
+							<f:facet name="footer">
+								<p:button outcome="/logistica/portos/listar" value="Cancelar" icon="ui-icon-arrowreturnthick-1-w"/>
+							</f:facet>
+						</p:panelGrid>
+				</h:form>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>
