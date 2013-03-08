@@ -22,7 +22,7 @@ public class LoginMBean extends MBean {
 	@EJB
 	LoginService loginService;
 	
-	private String login = "cliente", senha = "cliente";
+	private String login, senha;
 	
 	@PostConstruct
 	public void construct() {

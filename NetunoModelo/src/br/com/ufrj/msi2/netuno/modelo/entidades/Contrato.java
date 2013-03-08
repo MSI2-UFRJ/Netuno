@@ -57,9 +57,16 @@ public class Contrato implements Serializable {
 	@Column(name="data_criacao")
 	private Date dataCriacao;
 	
+	@Column(name="data_estimada")
+	private Date dataEstimada;
+	
 	@Column(name="situacao")
 	@Enumerated(EnumType.STRING)  
 	private SituacaoContratoEnum situacao;
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
 	public Integer getId() {
 		return id;
@@ -79,6 +86,10 @@ public class Contrato implements Serializable {
 
 	public Date getDataCriacao() {
 		return dataCriacao;
+	}
+
+	public Date getDataEstimada() {
+		return dataEstimada;
 	}
 
 	public SituacaoContratoEnum getSituacao() {
@@ -103,6 +114,10 @@ public class Contrato implements Serializable {
 
 	public void setDataCriacao(Date dataCriacao) {
 		this.dataCriacao = dataCriacao;
+	}
+
+	public void setDataEstimada(Date dataEstimada) {
+		this.dataEstimada = dataEstimada;
 	}
 
 	public void setSituacao(SituacaoContratoEnum situacao) {
