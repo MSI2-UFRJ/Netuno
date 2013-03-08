@@ -26,6 +26,9 @@ public class Porto implements Serializable {
 	@Column(name="nome")
 	private String nome;
 
+	@Column(name = "LOCALIZACAO", nullable = false, unique = true)
+	private String localizacao;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -33,6 +36,15 @@ public class Porto implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
+	public String getLocalizacao(){
+		return localizacao;
+	}
+	
+	public void setLocalizacao(String localizacao){
+		this.localizacao = localizacao;
+	}
+	
 
 	public List<AgentePorto> getAgentes() {
 		return agentes;

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<ui:composition template="/templates/template.xhtml">
+	<ui:define name="content">
+		<h2>Inclusão de Porto</h2>
+		<div class="grid_12">
+			<div class="box-5">
+				<h:form id="formInclusaoPorto">
+				<p:messages id="mensagens" globalOnly="true" />
+						<p:panelGrid columns="3" cellspacing="10" cellpadding="10" id="grid">
+							<f:facet name="header">
+								Porto
+							</f:facet>
+							<h:outputLabel for="localizacao" value="Localização*: "/>
+							<p:inputText id="localizacao" value="#{portoBean.porto.localizacao}" required="true" requiredMessage="Por favor, informe a localização do porto."/>
+							<p:message for="localizacao" autoUpdate="true"/>
+														
+							<f:facet name="footer">
+								<p:commandButton type="submit" value="Confirmar" icon="ui-icon-check" action="#{portoBean.salvar}" update="formInclusaoPorto:mensagens"/>
+							</f:facet>
+							<f:facet name="footer">
+								<p:button outcome="/logistica/portos/listar" value="Cancelar" icon="ui-icon-arrowreturnthick-1-w"/>
+							</f:facet>
+						</p:panelGrid>
+				</h:form>
+			</div>
+		</div>		
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/template.xhtml">
+	<ui:define name="content">
+		<div class="grid_12">
+			<h2>Portos do Netuno</h2>
+			
+			<div class="box-5">
+				<h:form id="formListaPortos">
+					<p:messages id="mensagens" globalOnly="true" />
+					<p:dataTable var="porto" value="#{portoBean.portos}" emptyMessage="Nenhum porto foi encontrado.">
+						<p:column headerText="Localização" sortBy="#{porto.localizacao}">
+							<h:outputText value="#{porto.localizacao}"/>
+						</p:column>
+						
+						<p:column>
+							<p:button title="Alterar dados básicos do porto." outcome="/logistica/portos/alterar" icon="ui-icon-pencil">
+								<f:param name="idPorto" value="#{porto.id}"/>
+							</p:button>
+							<p:commandButton title="Excluir o porto." icon="ui-icon-closethick" onclick="confirmacao.show()">
+								<f:setPropertyActionListener target="#{portoBean.idPorto}" value="#{porto.id}" />
+							</p:commandButton>
+						</p:column>
+						
+						<f:facet name="footer">
+								<p:button outcome="/logistica/portos/criar" value="Criar" icon="ui-icon-plus"/>
+						</f:facet>
+					</p:dataTable>
+					<p:confirmDialog id="confirmDialog" message="Tem certeza de que quer excluir este porto?" header="Processo de exclusão de porto" severity="alert" widgetVar="confirmacao">  
+						<p:commandButton id="confirma" value="Sim" oncomplete="confirmacao.hide()" action="#{portoBean.excluir}" update="formListaPortos"/>  
+       					<p:commandButton id="cancela" value="Não" onclick="confirmacao.hide()"/>   
+  					</p:confirmDialog> 
+				</h:form>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>
