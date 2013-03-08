@@ -17,25 +17,35 @@ public class VerContratosModelBean extends MBean {
 	
 	private List<Contrato> listaContratos;
 	
+	private int tipoContratoExibido;
+	
 	@PostConstruct
 	public void construct() {
-		
+		this.tipoContratoExibido = 1;
 	}
 
 	public Contratante getContratante() {
 		return contratante;
 	}
 
-	public void setContratante(Contratante contratante) {
-		this.contratante = contratante;
-	}
-
 	public List<Contrato> getListaContratos() {
 		return listaContratos;
 	}
 
+	public int getTipoContratoExibido() {
+		return tipoContratoExibido;
+	}
+
+	public void setContratante(Contratante contratante) {
+		this.contratante = contratante;
+	}
+
 	public void setListaContratos(List<Contrato> listaContratos) {
 		this.listaContratos = listaContratos;
+	}
+
+	public void setTipoContratoExibido(int tipoContratoExibido) {
+		this.tipoContratoExibido = tipoContratoExibido;
 	}
 	
 }

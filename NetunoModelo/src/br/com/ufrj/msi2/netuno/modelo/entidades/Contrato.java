@@ -18,9 +18,15 @@ import javax.persistence.Table;
 
 @NamedQueries(
 	{
-		@NamedQuery(name="Contrato.recuperaPorContratante",
+		@NamedQuery(name="Contrato.recuperaAbertosPorContratante",
 					query="select contrato from Contratante contratante inner join contratante.contratos contrato where contratante = :contratante"
-		)
+		),
+		@NamedQuery(name="Contrato.recuperaFechadosPorContratante",
+				query="select contrato from Contratante contratante inner join contratante.contratos contrato where contratante = :contratante"
+		),
+		@NamedQuery(name="Contrato.recuperaPorId",
+					query="select contrato from Contrato contrato where contrato.id = :id"
+)
 	}
 )
 @Entity

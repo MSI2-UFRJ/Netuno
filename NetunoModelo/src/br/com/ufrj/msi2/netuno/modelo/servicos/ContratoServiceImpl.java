@@ -1,5 +1,6 @@
 package br.com.ufrj.msi2.netuno.modelo.servicos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -17,13 +18,26 @@ public class ContratoServiceImpl implements ContratoService {
 	@PersistenceContext
 	EntityManager em;
 	
+	public void salvarContrato(Contrato contrato) {
+		em.persist(contrato);
+	}
+	
+	public Contrato recuperaContratoPorId(Integer id) {
+		Query query = em.createNamedQuery("Contrato.recuperaPorId");
+		query.setParameter("id", id);
+		return (Contrato) query.getSingleResult();
+	}
+	
 	@SuppressWarnings("unchecked")
-	public List<Contrato> recuperaContratosPorContratante(Contratante contratante) {
-		Query query = em.createNamedQuery("Contrato.recuperaPorContratante");
-		
+	public List<Contrato> recuperaContratosAbertosPorContratante(Contratante contratante) {
+		Query query = em.createNamedQuery("Contrato.recuperaAbertosPorContratante");
 		query.setParameter("contratante", contratante);
-		
 		return (List<Contrato>) query.getResultList();
+	}
+	
+	//@SuppressWarnings("unchecked")
+	public List<Contrato> recuperaContratosFechadosPorContratante(Contratante contratante) {
+		return new ArrayList<Contrato>();
 	}
 
 	public EntityManager getEm() {

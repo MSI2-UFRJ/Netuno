@@ -29,10 +29,24 @@ public class VerContratosControllerBean extends MBean {
 		
 		Contratante contratante = (Contratante) session.getAttribute(Attributes.SessionAttributes.LOGIN.toString());
 		verContratosModelBean.setContratante(contratante);
-		verContratosModelBean.setListaContratos(this.contratacaoService.recuperaContratosPorContratante(contratante));
+		verContratosModelBean.setListaContratos(this.contratacaoService.recuperaContratosAbertosPorContratante(contratante));
+	}
+	
+	public void trocarTabela() {
+		switch (this.verContratosModelBean.getTipoContratoExibido()) {
+		case 1:
+			verContratosModelBean.setListaContratos(this.contratacaoService.recuperaContratosAbertosPorContratante(verContratosModelBean.getContratante()));
+			break;
+		case 2:
+			verContratosModelBean.setListaContratos(this.contratacaoService.recuperaContratosFechadosPorContratante(verContratosModelBean.getContratante()));
+			break;
+		default:
+			break;
+		}
 	}
 
 	public String verDetalhes(Contrato contrato) {
+		
 		return "";
 	}
 

@@ -16,8 +16,12 @@ public class ContratacaoServiceImpl implements ContratacaoService {
 	@EJB
 	ContratoService contratoService;
 
-	public List<Contrato> recuperaContratosPorContratante(Contratante contratante) {
-		return contratoService.recuperaContratosPorContratante(contratante);
+	public List<Contrato> recuperaContratosAbertosPorContratante(Contratante contratante) {
+		return contratoService.recuperaContratosAbertosPorContratante(contratante);
+	}
+	
+	public List<Contrato> recuperaContratosFechadosPorContratante(Contratante contratante) {
+		return contratoService.recuperaContratosFechadosPorContratante(contratante);
 	}
 
 	public ContratoService getContratoService() {

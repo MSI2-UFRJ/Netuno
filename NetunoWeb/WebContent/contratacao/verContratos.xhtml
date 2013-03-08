@@ -10,6 +10,13 @@
 
 <h:body>
 	<h:outputLabel value="Olá, " /><h:outputText value="#{verContratosModel.contratante.nome}" rendered="#{not empty verContratosController}" /><br />
+	<h:outputLabel value="Ver contratos " />
+	<h:form>
+	<h:selectOneRadio id="options" value="#{verContratosModel.tipoContratoExibido}" >  
+        <f:selectItem itemLabel="Abertos" itemValue="1" />  
+        <f:selectItem itemLabel="Fechados" itemValue="2" />
+        <f:ajax event="change" listener="#{verContratosController.trocarTabela()}" render="@form"/>
+    </h:selectOneRadio><br />
 	<h:dataTable 	id="tabelaContratos"
 					value="#{verContratosModel.listaContratos}"
 					var="contrato"
@@ -23,10 +30,11 @@
 				<h:outputLabel value="#{contrato.dataCriacao}" />
 			</h:column>
 			<h:column>
-				<f:facet name="header" >Operações</f:facet>
-				<h:commandButton 	action="#{verAlunosController.verDetalhes(contrato)}"
+				<f:facet name="header">Operações</f:facet>
+				<h:commandButton 	action="#{verContratosController.verDetalhes(contrato)}"
 									value="Ver Detalhes" />
 			</h:column>
 		</h:dataTable>
+		</h:form>
 </h:body>
 </html>
