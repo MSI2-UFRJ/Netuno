@@ -23,7 +23,7 @@
   <navigation-case>
    <from-action>#{Login.autenticar}</from-action>
    <from-outcome>agentelogistica</from-outcome>
-   <to-view-id>/logistica/home.xhtml</to-view-id>
+   <to-view-id>/logistica/pregoes/listar.xhtml</to-view-id>
   </navigation-case>
  </navigation-rule>
 </faces-config>

@@ -26,7 +26,7 @@ public class Porto implements Serializable {
 	@Column(name="nome")
 	private String nome;
 
-	@Column(name = "LOCALIZACAO", nullable = false, unique = true)
+	@Column(name = "localizacao", nullable = false)
 	private String localizacao;
 	
 	public Integer getId() {

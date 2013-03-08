@@ -4,11 +4,11 @@ insert into agentecarga(login, nome, senha) values ('beto','Beto','beto');
 insert into agentelogistica(login, nome, senha) values ('carla','Carla','carla');
 insert into agentelogistica(login, nome, senha) values ('daniel','Daniel','daniel');
 
-insert into porto(nome) values ('RJ');
-insert into porto(nome) values ('SP');
-insert into porto(nome) values ('BA');
-insert into porto(nome) values ('SV');
-insert into porto(nome) values ('ES');
+insert into porto(localizacao, nome) values ('RJ', 'Rio');
+insert into porto(localizacao, nome) values ('SP', 'Sao Paulo');
+insert into porto(localizacao, nome) values ('BA', 'Bahia');
+insert into porto(localizacao, nome) values ('SV', 'Salvador');
+insert into porto(localizacao, nome) values ('ES', 'Espirito Santo');
 
 insert into agenteporto(login, nome, senha, pertence_id) values ('eduardo','Eduardo','eduardo', 1);
 insert into agenteporto(login, nome, senha, pertence_id) values ('felipe','Felipe','felipe', 2);
@@ -35,7 +35,7 @@ insert into navio(nome) values ('Australis');
 insert into navio(nome) values ('Borealis');
 
 insert into contrato(data_criacao, data_estimada, situacao, portoDestino_id, portoOrigem_id, contratante_id) values ('2013-03-05 10:00:00', '2013-03-20 16:00:00', 'aberto', 2, 1, 1);
-insert into contrato(data_criacao, data_estimada, situacao, portoDestino_id, portoOrigem_id, contratante_id) values ('2013-03-06 11:00:00', '2013-03-22 17:00:00', 'fechado', 2, 1, 1);
+insert into contrato(data_criacao, data_estimada, situacao, portoDestino_id, portoOrigem_id, contratante_id) values ('2013-03-06 11:00:00', '2013-03-22 17:00:00', 'finalizado', 2, 1, 1);
 insert into contrato(data_criacao, data_estimada, situacao, portoDestino_id, portoOrigem_id, contratante_id) values ('2013-03-06 15:00:00', '2013-03-20 16:00:00', 'aberto', 2, 1, 2);
 
 insert into carga(peso, patio_id, conteiner_id, agenteEmbarque_id, agenteDesembarque_id, contrato_id) values (100, 1, NULL, 1, 2, 1);

@@ -18,9 +18,9 @@
     TARGET="rules:#contratacao#verContratos.xhtml"
     TITLE="#{Login.autenticar}:contratante" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT
-    ID="agentelogistica:#{Login.autenticar}:#logistica#home.xhtml"
-    NAME="output3" PATH="/logistica/home.xhtml"
-    TARGET="rules:#logistica#home.xhtml"
+    ID="agentelogistica:#{Login.autenticar}:#logistica#pregoes#listar.xhtml"
+    NAME="output4" PATH="/logistica/pregoes/listar.xhtml"
+    TARGET="rules:#logistica#pregoes#listar.xhtml"
     TITLE="#{Login.autenticar}:agentelogistica" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
@@ -32,5 +32,8 @@
   SHAPE="272,152,50,25" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#logistica#home.xhtml"
   PATH="/logistica/home.xhtml" SHAPE="272,264,50,25"
+  model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#logistica#pregoes#listar.xhtml"
+  PATH="/logistica/pregoes/listar.xhtml" SHAPE="416,320,50,25"
   model-entity="JSFProcessGroup" persistent="true"/>
 </PROCESS>
