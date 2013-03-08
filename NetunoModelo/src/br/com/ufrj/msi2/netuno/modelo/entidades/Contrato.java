@@ -39,7 +39,7 @@ public class Contrato implements Serializable {
 	@ManyToOne
     private Porto portoOrigem;
 	
-	@ManyToOne
+	@ManyToOne(targetEntity = Porto.class)
     private Porto portoDestino;
 	
 	@Column(name="data_criacao")
