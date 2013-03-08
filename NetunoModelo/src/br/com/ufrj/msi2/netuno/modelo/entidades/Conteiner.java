@@ -11,6 +11,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * A unidade mínima para o transporte de cargas na empresa.
+ * Todas as cargas devem ser transportadas em conteiners.
+ * Conteiners podem ser embarcados ou desembarcados de navios.
+ * @author Thiago, Paula
+ *
+ */
 @Entity
 @Table(name="conteiner")
 public class Conteiner implements Serializable {

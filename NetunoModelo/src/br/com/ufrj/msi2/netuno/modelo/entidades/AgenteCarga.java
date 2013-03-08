@@ -7,6 +7,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * Funcionário do porto responsável pela alocação e retirada de cargas de conteiners, além do embarque e desembarque de conteiners de navios.
+ * @author Thiago, Paula
+ *
+ */
 @Entity
 @Table(name="agenteCarga")
 public class AgenteCarga extends Usuario {

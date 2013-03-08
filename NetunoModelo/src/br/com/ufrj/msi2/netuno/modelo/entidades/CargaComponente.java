@@ -10,6 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
+/**
+ * Unidade que é alocada ou retirada de conteiners.
+ * @author Thiago, Paula
+ *
+ */
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class CargaComponente implements Serializable {

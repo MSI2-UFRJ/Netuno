@@ -17,6 +17,8 @@
         <f:selectItem itemLabel="Fechados" itemValue="2" />
         <f:ajax event="change" listener="#{verContratosController.trocarTabela()}" render="@form"/>
     </h:selectOneRadio><br />
+    <h:commandButton value="Novo contrato" action="#{verContratosController.novoContrato()}" />
+    <h:outputLabel value="Sem contratos" rendered="#{empty verContratosModel.listaContratos}"/>
 	<h:dataTable 	id="tabelaContratos"
 					value="#{verContratosModel.listaContratos}"
 					var="contrato"

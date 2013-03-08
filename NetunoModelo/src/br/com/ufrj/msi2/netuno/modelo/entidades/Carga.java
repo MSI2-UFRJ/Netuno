@@ -6,6 +6,12 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * Objeto que o Contratante quer enviar.
+ * Uma Carga pode ser dividida em partes, caso um conteiner não tenha espaço ou peso restante suficiente para comportá-la. 
+ * @author Thiago, Paula
+ *
+ */
 @Entity
 @Table(name="carga")
 public class Carga extends CargaComponente {

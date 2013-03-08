@@ -44,9 +44,13 @@ public class VerContratosControllerBean extends MBean {
 			break;
 		}
 	}
+	
+	public String novoContrato() {
+		return "novoContrato";
+	}
 
 	public String verDetalhes(Contrato contrato) {
-		return "";
+		return "verContrato";
 	}
 
 	public VerContratosModelBean getVerContratosModelBean() {

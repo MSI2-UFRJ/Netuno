@@ -7,6 +7,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * É a pessoa física ou jurídica que contrata os serviços da empresa.
+ * @author Thiago, Paula
+ *
+ */
 @Entity
 @Table(name="contratante")
 public class Contratante extends Usuario {

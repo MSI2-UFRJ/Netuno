@@ -11,6 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ * Representa informações sobre o status de entrega da carga. Usado no tracking. 
+ * @author Thiago, Paula
+ *
+ */
 @Entity
 @Table(name="cargalog")
 public class CargaLog implements Serializable {

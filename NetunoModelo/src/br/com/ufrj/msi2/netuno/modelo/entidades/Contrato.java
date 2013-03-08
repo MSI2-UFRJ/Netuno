@@ -20,6 +20,11 @@ import javax.persistence.Table;
 
 import br.com.ufrj.msi2.netuno.modelo.enums.SituacaoContratoEnum;
 
+/**
+ * É feito por um Contratante que quer enviar cargas de um porto origem para um porto destino.
+ * @author Thiago, Paula
+ *
+ */
 @NamedQueries(
 	{
 		@NamedQuery(name="Contrato.recuperaPorContratante",
