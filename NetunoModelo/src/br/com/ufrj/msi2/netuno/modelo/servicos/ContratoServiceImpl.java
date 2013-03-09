@@ -19,7 +19,11 @@ public class ContratoServiceImpl implements ContratoService {
 	EntityManager em;
 	
 	public Contrato criarContrato() {
-		return new Contrato();
+		Contrato contrato = new Contrato();
+		
+		contrato.setSituacao(SituacaoContratoEnum.aberto);
+		
+		return contrato;
 	}
 
 	public void salvarContrato(Contrato contrato) {

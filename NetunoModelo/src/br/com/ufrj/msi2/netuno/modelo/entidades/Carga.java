@@ -1,5 +1,6 @@
 package br.com.ufrj.msi2.netuno.modelo.entidades;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -34,6 +35,18 @@ public class Carga extends CargaComponente {
 	@ManyToOne
 	@JoinColumn(name="contrato_id")
 	private Contrato contrato;
+	
+	public boolean isCargaPerecivel() {
+		return false;
+	}
+	
+	public Date getDataValidade() {
+		return null;
+	}
+
+	public void setDataValidade(Date dataValidade) {
+		
+	}
 
 	public String getDescricao() {
 		return descricao;

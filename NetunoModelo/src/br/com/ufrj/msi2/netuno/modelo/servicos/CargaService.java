@@ -10,7 +10,11 @@ import br.com.ufrj.msi2.netuno.modelo.entidades.*;
 
 @Local
 public interface CargaService extends Serializable {
+
 	public abstract List<Carga> filtrar(CriteriaQuery<Carga> consulta);
+
 	public CriteriaBuilder getCriteriaBuilder();
+
+	public void salvarCarga(Carga carga);
 
 }

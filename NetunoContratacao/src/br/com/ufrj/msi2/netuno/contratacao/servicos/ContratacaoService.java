@@ -12,6 +12,7 @@ import br.com.ufrj.msi2.netuno.modelo.entidades.Contrato;
 public interface ContratacaoService extends Serializable {
 
 	public Contrato criarContrato();
+	public void salvarContrato(Contratante contratante, Contrato contrato);
 	public List<Contrato> recuperaContratosAbertosPorContratante(Contratante contratante);
 	public List<Contrato> recuperaContratosFechadosPorContratante(Contratante contratante);
 	public void estimarDataEntrega(Contrato contrato, boolean temColeta, boolean temEntrega);

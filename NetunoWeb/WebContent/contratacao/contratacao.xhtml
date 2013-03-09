@@ -50,8 +50,37 @@
 	   		<h:outputLabel value="Data estimada" />
 	   		<h:outputText value="#{contratacaoModel.contrato.dataEstimada}">
 				<f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
-			</h:outputText><br />
-	   		
+			</h:outputText><br /><br />
+			
+			<p:commandButton value="Nova Carga" update="@form"
+				action="#{contratacaoController.adicionarCarga(false)}" />
+				<p:commandButton value="Nova Carga Perecível " update="@form"
+				action="#{contratacaoController.adicionarCarga(true)}" />
+
+			<h:dataTable 	value="#{contratacaoModel.contrato.cargas}"
+							var="carga">
+				<h:column>
+					<f:facet name="header">Descrição</f:facet>
+					<h:inputText value="#{carga.descricao}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Peso</f:facet>
+					<h:inputText value="#{carga.peso}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Data de Validade</f:facet>
+					<h:outputLabel value="-" rendered="#{not carga.cargaPerecivel}"/>
+					<h:outputLabel value="#{carga.dataValidade}" rendered="#{carga.cargaPerecivel}"/>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Operação</f:facet>
+					<p:commandButton 	value="Apagar"
+										update="@form"
+										action="#{contratacaoController.removerCarga(carga)}"/>
+				</h:column>
+			</h:dataTable>
+
+			<br /><br />	   		
 	   		<h:commandButton action="#{contratacaoController.salvar()}" value="Salvar" />
 	   		<h:commandButton action="#{contratacaoController.cancelar()}" value="Cancelar" />
 		</h:form>

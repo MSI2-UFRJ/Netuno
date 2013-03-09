@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -13,6 +15,12 @@ import javax.persistence.Table;
  * @author Thiago, Paula
  *
  */
+@NamedQueries(
+		{
+			@NamedQuery(name="Contratante.recuperaPorIdComFetch",
+					query="select contratante from Contratante contratante left join fetch contratante.contratos c where contratante.id = :id")
+		}
+	)
 @Entity
 @Table(name="contratante")
 @PrimaryKeyJoinColumn(name="id")

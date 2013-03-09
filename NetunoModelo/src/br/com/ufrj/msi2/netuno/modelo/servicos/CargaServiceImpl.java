@@ -32,4 +32,9 @@ public class CargaServiceImpl implements CargaService {
 		List<Carga> list = em.createQuery(consulta).getResultList();
 		return list;
 	}
+	
+	public void salvarCarga(Carga carga) {
+		em.persist(carga);
+	}
+
 }

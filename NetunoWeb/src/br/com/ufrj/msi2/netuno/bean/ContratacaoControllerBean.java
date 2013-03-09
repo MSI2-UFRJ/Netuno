@@ -1,5 +1,7 @@
 package br.com.ufrj.msi2.netuno.bean;
 
+import java.util.ArrayList;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -10,6 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import br.com.ufrj.msi2.netuno.attributes.Attributes;
 import br.com.ufrj.msi2.netuno.contratacao.servicos.ContratacaoService;
+import br.com.ufrj.msi2.netuno.modelo.entidades.Carga;
+import br.com.ufrj.msi2.netuno.modelo.entidades.CargaPerecivel;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Contratante;
 import br.com.ufrj.msi2.netuno.modelo.servicos.PortoService;
 
@@ -40,7 +44,39 @@ public class ContratacaoControllerBean extends MBean {
 		this.contratacaoService.estimarDataEntrega(contratacaoModelBean.getContrato(), contratacaoModelBean.isEnderecoColeta(), contratacaoModelBean.isEnderecoEntrega());
 	}
 	
+	public void adicionarCarga(boolean isCargaPerecivel) {
+		Carga carga;
+		
+		if(isCargaPerecivel) {
+			carga = new CargaPerecivel();
+		} else {
+			carga = new Carga();
+		}
+		
+		if(contratacaoModelBean.getContrato().getCargas() == null) {
+			contratacaoModelBean.getContrato().setCargas(new ArrayList<Carga>());
+		}
+
+		contratacaoModelBean.getContrato().getCargas().add(carga);
+		carga.setContrato(contratacaoModelBean.getContrato());
+	}
+	
+	public void removerCarga(Carga carga) {
+		contratacaoModelBean.getContrato().getCargas().remove(carga);
+	}
+	
 	public String salvar() {
+		if(!contratacaoModelBean.isEnderecoColeta()) {
+			contratacaoModelBean.getContrato().setEnderecoColeta(null);
+		}
+		
+		if(!contratacaoModelBean.isEnderecoEntrega()) {
+			contratacaoModelBean.getContrato().setEnderecoEntrega(null);
+		}
+		
+		contratacaoService.salvarContrato(contratacaoModelBean.getContratante(), contratacaoModelBean.getContrato());
+		
+		
 		return "verContratos";
 	}
 	

@@ -7,19 +7,43 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import br.com.ufrj.msi2.netuno.modelo.entidades.Carga;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Contratante;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Contrato;
+import br.com.ufrj.msi2.netuno.modelo.servicos.CargaService;
+import br.com.ufrj.msi2.netuno.modelo.servicos.ContratanteService;
 import br.com.ufrj.msi2.netuno.modelo.servicos.ContratoService;
 
 @Stateless
 public class ContratacaoServiceImpl implements ContratacaoService {
 	private static final long serialVersionUID = -7087952795393582189L;
+	
+	@EJB
+	CargaService cargaService;
+	
+	@EJB
+	ContratanteService contratanteService;
 
 	@EJB
 	ContratoService contratoService;
 	
 	public Contrato criarContrato() {
 		return this.contratoService.criarContrato();
+	}
+	
+	public void salvarContrato(Contratante contratante, Contrato contrato) {
+		Contratante contratanteComContratosCarregados = contratanteService.recuperaPorId(contratante.getId());
+		contratanteComContratosCarregados.getContratos().add(contrato);
+
+		contrato.setDataCriacao(new Date());
+		
+		contratanteService.salvarContratante(contratanteComContratosCarregados);
+		
+		contratoService.salvarContrato(contrato);
+
+		for(Carga c : contrato.getCargas()) {
+			cargaService.salvarCarga(c);
+		}
 	}
 
 	public List<Contrato> recuperaContratosAbertosPorContratante(Contratante contratante) {
@@ -56,8 +80,24 @@ public class ContratacaoServiceImpl implements ContratacaoService {
 		}
 	}
 
+	public CargaService getCargaService() {
+		return cargaService;
+	}
+
+	public ContratanteService getContratanteService() {
+		return contratanteService;
+	}
+
 	public ContratoService getContratoService() {
 		return contratoService;
+	}
+
+	public void setCargaService(CargaService cargaService) {
+		this.cargaService = cargaService;
+	}
+
+	public void setContratanteService(ContratanteService contratanteService) {
+		this.contratanteService = contratanteService;
 	}
 
 	public void setContratoService(ContratoService contratoService) {

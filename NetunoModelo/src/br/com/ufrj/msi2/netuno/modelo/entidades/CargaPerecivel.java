@@ -18,11 +18,18 @@ public class CargaPerecivel extends Carga {
 
 	@Column(name="data_validade")
 	private Date dataValidade;
+	
+	@Override
+	public boolean isCargaPerecivel() {
+		return true;
+	}
 
+	@Override
 	public Date getDataValidade() {
 		return dataValidade;
 	}
 
+	@Override
 	public void setDataValidade(Date dataValidade) {
 		this.dataValidade = dataValidade;
 	}
