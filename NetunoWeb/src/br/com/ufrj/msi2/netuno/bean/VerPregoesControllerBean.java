@@ -19,6 +19,22 @@ public class VerPregoesControllerBean extends MBean{
 	@EJB
 	LogisticaService logisticaService;
 	
+	public LogisticaService getLogisticaService() {
+		return logisticaService;
+	}
+
+	public void setLogisticaService(LogisticaService logisticaService) {
+		this.logisticaService = logisticaService;
+	}
+
+	public VerPregoesModelBean getVerPregoesModelBean() {
+		return verPregoesModelBean;
+	}
+
+	public void setVerPregoesModelBean(VerPregoesModelBean verPregoesModelBean) {
+		this.verPregoesModelBean = verPregoesModelBean;
+	}
+
 	@ManagedProperty(value="#{verPregoesModel}")
 	private VerPregoesModelBean verPregoesModelBean;
 	

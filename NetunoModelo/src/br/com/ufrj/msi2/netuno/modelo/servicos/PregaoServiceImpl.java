@@ -19,8 +19,7 @@ public class PregaoServiceImpl implements PregaoService{
 
 	@SuppressWarnings("unchecked")
 	public List<Pregao> recuperaPregoesAbertos() {
-		Query query = em.createQuery("SELECT * FROM pregao");
-		//query.setParameter(?);
+		Query query = em.createNamedQuery("Pregao.recuperaPregoesAtivos");
 		return (List<Pregao>) query.getResultList();
 	}
 	

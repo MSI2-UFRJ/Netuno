@@ -9,7 +9,7 @@
 <h:head />
 
 <h:body>
-
+	<h:outputLabel value="Olá, " /><h:outputText value="#{verPregoesModel.agentelogistica.nome}" rendered="#{not empty verPregoesController}" /><br />
 	<h:outputLabel value="Ver pregões" />
 	<h:form>
 	<h:dataTable 	id="tabelaPregoes"
