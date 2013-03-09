@@ -10,7 +10,7 @@ create table carga_perecivel (data_validade datetime, id integer not null, prima
 create table cargalog (id integer not null auto_increment, data datetime, descricao varchar(255), carga_id integer, primary key (id));
 create table conteiner (id integer not null auto_increment, primary key (id));
 create table contratante (id integer not null, primary key (id));
-create table contrato (id integer not null auto_increment, data_criacao datetime, data_estimada datetime, situacao varchar(255), portoDestino_id integer, portoOrigem_id integer, contratante_id integer, primary key (id));
+create table contrato (id integer not null auto_increment, data_criacao datetime, data_estimada datetime, endereco_coleta varchar(255), endereco_entrega varchar(255), situacao varchar(255), portoDestino_id integer, portoOrigem_id integer, contratante_id integer, primary key (id));
 create table empresatransporte (id integer not null auto_increment, nome varchar(255), primary key (id));
 create table navio (id integer not null auto_increment, nome varchar(255), primary key (id));
 create table parte_carga (id integer not null, carga_id integer, primary key (id));

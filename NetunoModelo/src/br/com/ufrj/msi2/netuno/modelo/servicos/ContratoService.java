@@ -11,6 +11,7 @@ import br.com.ufrj.msi2.netuno.modelo.entidades.Contrato;
 @Local
 public interface ContratoService extends Serializable {
 	
+	public Contrato criarContrato();
 	public void salvarContrato(Contrato contrato);
 	public Contrato recuperaContratoPorId(Integer id);
 	public List<Contrato> recuperaContratosAbertosPorContratante(Contratante contratante);

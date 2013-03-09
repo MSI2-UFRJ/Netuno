@@ -28,6 +28,11 @@ public class ContratacaoControllerBean extends MBean {
 		
 		Contratante contratante = (Contratante) session.getAttribute(Attributes.SessionAttributes.CONTRATANTE.toString());
 		contratacaoModelBean.setContratante(contratante);
+		contratacaoModelBean.setContrato(this.contratacaoService.criarContrato());
+	}
+	
+	public String cancelar() {
+		return "verContratos";
 	}
 
 	public ContratacaoService getContratacaoService() {

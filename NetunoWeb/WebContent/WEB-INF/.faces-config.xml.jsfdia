@@ -67,5 +67,13 @@
   PATH="/portos/listar.xhtml" SHAPE="416,376,50,25"
   model-entity="JSFProcessGroup" persistent="true"/>
  <PROCESS-ITEM NAME="rules:#contratacao#contratacao.xhtml"
-  PATH="/contratacao/contratacao.xhtml" SHAPE="512,257,0,0" model-entity="JSFProcessGroup"/>
+  PATH="/contratacao/contratacao.xhtml" SHAPE="512,257,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#contratacao#contratacao.xhtml:0" NAME="item"
+   PATH="/contratacao/contratacao.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="verContratos::#contratacao#verContratos.xhtml" NAME="output"
+    PATH="/contratacao/verContratos.xhtml"
+    TARGET="rules:#contratacao#verContratos.xhtml" TITLE="verContratos" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
 </PROCESS>

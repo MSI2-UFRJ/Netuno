@@ -22,15 +22,13 @@ import br.com.ufrj.msi2.netuno.modelo.entidades.Requisicao;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Slot;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Usuario;
 import br.com.ufrj.msi2.netuno.modelo.servicos.CargaServiceImpl;
-import br.com.ufrj.msi2.netuno.modelo.servicos.UsuarioServiceImpl;
 
 import com.bm.testsuite.BaseSessionBeanFixture;
 
 public class CargaServiceImplTest  extends BaseSessionBeanFixture<CargaServiceImpl> {
+
 	private static final Class<?>[] usedBeans = { AgenteCarga.class, AgenteLogistica.class, AgentePorto.class, AgenteRota.class, Atraque.class, Carga.class, CargaComponente.class, CargaLog.class, Conteiner.class, Contratante.class, Contrato.class, EmpresaTransporte.class, Navio.class, ParteCarga.class, Patio.class, Porto.class, Pregao.class, RepresEmpTrans.class, Requisicao.class, Slot.class, Usuario.class };
-	
-	
-	
+
 	public CargaServiceImplTest() {
 		super(CargaServiceImpl.class, usedBeans);
 	}

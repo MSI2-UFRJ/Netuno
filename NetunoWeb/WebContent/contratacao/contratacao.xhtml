@@ -12,6 +12,24 @@
 <ui:composition template="/templates/template.xhtml">
 	<ui:define name="content">
 		<h:outputLabel value="Olá, " /><h:outputText value="#{contratacaoModel.contratante.nome}" rendered="#{not empty contratacaoController}" /><br />
+		<h:outputLabel value="Novo Contrato" /><br />
+		
+		<h:form>
+			<h:outputLabel value="Endereço de coleta" />
+			<h:selectBooleanCheckbox value="#{contratacaoModel.enderecoColeta}">
+                <f:ajax event="click" render="@form" />
+            </h:selectBooleanCheckbox><br />
+            <h:inputText value="#{contratacaoModel.contrato.enderecoColeta}"  disabled="#{not contratacaoModel.enderecoColeta}"/><br />
+            
+            <h:outputLabel value="Endereço de entrega" />
+			<h:selectBooleanCheckbox value="#{contratacaoModel.enderecoEntrega}">
+                <f:ajax event="click" render="@form" />
+            </h:selectBooleanCheckbox><br />
+            <h:inputText value="#{contratacaoModel.contrato.enderecoEntrega}"  disabled="#{not contratacaoModel.enderecoEntrega}"/><br />
+            
+            <h:commandButton action="#{contratacaoController.cancelar()}" value="Cancelar" />
+		</h:form>
+		
 		</ui:define>
 	</ui:composition>
 </h:body>

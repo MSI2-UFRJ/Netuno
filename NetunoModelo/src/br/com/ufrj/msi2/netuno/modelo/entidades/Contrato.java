@@ -63,10 +63,12 @@ public class Contrato implements Serializable {
 	@Column(name="situacao")
 	@Enumerated(EnumType.STRING)  
 	private SituacaoContratoEnum situacao;
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+	
+	@Column(name="endereco_coleta")
+	private String enderecoColeta;
+	
+	@Column(name="endereco_entrega")
+	private String enderecoEntrega;
 
 	public Integer getId() {
 		return id;
@@ -96,6 +98,14 @@ public class Contrato implements Serializable {
 		return situacao;
 	}
 
+	public String getEnderecoColeta() {
+		return enderecoColeta;
+	}
+
+	public String getEnderecoEntrega() {
+		return enderecoEntrega;
+	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -122,6 +132,14 @@ public class Contrato implements Serializable {
 
 	public void setSituacao(SituacaoContratoEnum situacao) {
 		this.situacao = situacao;
+	}
+
+	public void setEnderecoColeta(String enderecoColeta) {
+		this.enderecoColeta = enderecoColeta;
+	}
+
+	public void setEnderecoEntrega(String enderecoEntrega) {
+		this.enderecoEntrega = enderecoEntrega;
 	}
 
 }

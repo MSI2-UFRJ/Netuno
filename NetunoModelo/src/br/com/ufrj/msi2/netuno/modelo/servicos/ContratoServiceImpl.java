@@ -17,6 +17,10 @@ public class ContratoServiceImpl implements ContratoService {
 
 	@PersistenceContext
 	EntityManager em;
+	
+	public Contrato criarContrato() {
+		return new Contrato();
+	}
 
 	public void salvarContrato(Contrato contrato) {
 		em.persist(contrato);
