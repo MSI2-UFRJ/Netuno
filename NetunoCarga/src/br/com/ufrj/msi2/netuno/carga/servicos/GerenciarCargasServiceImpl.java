@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
-import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -15,12 +14,19 @@ import br.com.ufrj.msi2.netuno.modelo.entidades.Carga;
 import br.com.ufrj.msi2.netuno.modelo.servicos.CargaService;
 
 @Stateless
-@LocalBean
 public class GerenciarCargasServiceImpl implements GerenciarCargasService {
-	private static final long serialVersionUID = -787952795393582189L;
-
+	private static final long serialVersionUID = -7877957927931528709L;
+	
 	@EJB
 	CargaService cargaService;
+
+	public CargaService getCargaService() {
+		return cargaService;
+	}
+
+	public void setCargaService(CargaService cargaService) {
+		this.cargaService = cargaService;
+	}
 
 	@Override
 	public List<Carga> listaCargasAgente(AgenteCarga agente) {
@@ -31,8 +37,8 @@ public class GerenciarCargasServiceImpl implements GerenciarCargasService {
 			CriteriaBuilder builder = cargaService.getCriteriaBuilder();
 			CriteriaQuery<Carga> criteria = builder.createQuery(Carga.class);
 			Root<Carga> cargaRoot = criteria.from(Carga.class);
-			criteria.select(cargaRoot);
-			criteria.where(builder.equal(cargaRoot.get("agenteEmbarque_id"), agente.getId()));	
+			Root<AgenteCarga> agenteEmbRoot = criteria.from(AgenteCarga.class);
+			criteria.where(builder.equal(agenteEmbRoot, cargaRoot.get("agenteEmbarque")));
 			
 			resultList = cargaService.filtrar(criteria);
 		} catch (Exception e) {

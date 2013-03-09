@@ -12,8 +12,9 @@ import br.com.ufrj.msi2.netuno.modelo.entidades.Carga;
 
 @Stateless
 public class CargaServiceImpl implements CargaService {
-	private static final long serialVersionUID = -787952795393582189L;
 
+	private static final long serialVersionUID = -5102370475324194502L;
+	
 	@PersistenceContext
 	EntityManager em;
 	
@@ -28,6 +29,7 @@ public class CargaServiceImpl implements CargaService {
 
 	@Override
 	public List<Carga> filtrar(CriteriaQuery<Carga> consulta) {
-		return em.createQuery(consulta).getResultList();
+		List<Carga> list = em.createQuery(consulta).getResultList();
+		return list;
 	}
 }

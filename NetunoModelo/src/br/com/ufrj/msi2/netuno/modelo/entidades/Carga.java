@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -24,6 +26,18 @@ public class Carga extends CargaComponente {
 	
 	@OneToMany(mappedBy="carga")
     private List<ParteCarga> partes;
+	
+	@ManyToOne
+	@JoinColumn(name="contrato_id")
+	private Contrato contrato;
+
+	public Contrato getContrato() {
+		return contrato;
+	}
+
+	public void setContrato(Contrato contrato) {
+		this.contrato = contrato;
+	}
 
 	public List<ParteCarga> getPartes() {
 		return partes;
