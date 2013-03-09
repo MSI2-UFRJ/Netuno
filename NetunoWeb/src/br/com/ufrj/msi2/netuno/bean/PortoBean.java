@@ -1,5 +1,6 @@
 package br.com.ufrj.msi2.netuno.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -9,6 +10,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import br.com.ufrj.msi2.netuno.modelo.entidades.Porto;
@@ -37,6 +40,10 @@ public class PortoBean extends MBean{
 		this.porto = servicosPorto.obterPorId(this.idPorto);
 	}
 	
+	/**
+	 * Inclui um novo registro de porto com os atributos do parâmetro porto.
+	 * @return próxima página para a qual o usuário será mandado na navegação.
+	 */
 	public String salvar(){
 		try{
 			this.servicosPorto.salvar(porto);
@@ -49,7 +56,7 @@ public class PortoBean extends MBean{
 		return "listar";
 	}
 
-	public String excluir(){
+	public void excluir(){
 		try{
 			if(idPorto!=null){
 				this.servicosPorto.excluir(idPorto);
@@ -60,9 +67,14 @@ public class PortoBean extends MBean{
 			super.sendMessage(null, FacesMessage.SEVERITY_ERROR, e.getCause().getMessage() , e.getCause().getMessage());
 		}
 		portos = servicosPorto.obterTodos();
-		return "listar";
 	}
 	
+	/**
+	 * Atualiza uma instância de porto já cadastrada com os atributos do parâmetro porto .
+	 * <br>-Não é possível salvar um porto com uma localização que já esteja cadastrada para outro
+	 * 		porto.
+	 * @return próxima página para a qual o usuário será mandado na navegação.
+	 */
 	public String alterar(){
 		try{
 			this.servicosPorto.alterar(porto);
@@ -70,21 +82,33 @@ public class PortoBean extends MBean{
 		
 		} catch (Exception e) {
 			super.sendMessage(null, FacesMessage.SEVERITY_ERROR, e.getCause().getMessage() , e.getCause().getMessage());
+			return null;
 		}
 		portos = servicosPorto.obterTodos();
 		return "listar";
 	}
 	
-	public String consultar(String localizacao){
-		if(localizacao!=null && !localizacao.equals("")){
-			CriteriaBuilder cb = servicosPorto.getCriteriaBuilder();
-			CriteriaQuery<Porto> consulta = cb.createQuery(Porto.class);
-			Root<Porto> porto = consulta.from(Porto.class);
-			consulta.where(cb.equal(porto.get("localizacao"),localizacao));
-			portos = servicosPorto.filtrar(consulta);
-		} else {
-			portos = servicosPorto.obterTodos();
-		} return "listar";
+	/**
+	 * Retorna os resultados de uma consulta feita utilizando os parâmetros do atributo porto.
+	 * Envia uma criteria para ser processada pelo serviço de Porto.
+	 * <br>-Para o parâmetro 'localização' são retornados portos cuja localização começe com o
+	 * 		valor passado.
+	 */
+	public void consultar(){
+		CriteriaBuilder cb = servicosPorto.getCriteriaBuilder();
+		CriteriaQuery<Porto> consulta = cb.createQuery(Porto.class);
+		Root<Porto> porto = consulta.from(Porto.class);
+		ArrayList<Predicate> predicados = new ArrayList<Predicate>();
+		if(this.porto.getLocalizacao()!=null && !this.porto.getLocalizacao().equals("")){
+			Expression<String> localizacao = porto.get("localizacao");
+			predicados.add(cb.like(cb.lower(localizacao) ,this.porto.getLocalizacao().toLowerCase()+"%"));
+		} 
+		if(this.porto.getNome()!=null && !this.getPorto().equals("")){
+			Expression<String> nome = porto.get("nome");
+			predicados.add(cb.like(cb.lower(nome) ,this.porto.getNome().toLowerCase()+"%"));
+		}
+		consulta.select(porto).where(predicados.toArray(new Predicate[]{}));
+		this.portos = servicosPorto.filtrar(consulta);
 	}
 	
 	public Porto getPorto() {

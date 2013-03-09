@@ -10,9 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="porto")
+@Table(name="porto",
+	   uniqueConstraints=@UniqueConstraint(columnNames={"localizacao","nome"}))
 public class Porto implements Serializable {
 	private static final long serialVersionUID = -4513783540480470840L;
 
@@ -23,10 +25,10 @@ public class Porto implements Serializable {
 	@OneToMany(mappedBy="pertence")
 	private List<AgentePorto> agentes;
 	
-	@Column(name="nome")
+	@Column(name="nome", nullable = false)
 	private String nome;
 
-	@Column(name = "LOCALIZACAO", nullable = false, unique = true)
+	@Column(name = "localizacao", nullable = false)
 	private String localizacao;
 	
 	public Integer getId() {
@@ -45,6 +47,13 @@ public class Porto implements Serializable {
 		this.localizacao = localizacao;
 	}
 	
+	public String getNome(){
+		return this.nome;
+	}
+	
+	public void setNome(String nome){
+		this.nome = nome;
+	}
 
 	public List<AgentePorto> getAgentes() {
 		return agentes;

@@ -10,19 +10,32 @@
 	<ui:define name="content">
 		<div class="grid_12">
 			<h2>Portos do Netuno</h2>
-			
 			<div class="box-5">
 				<h:form id="formListaPortos">
+				
+				<p:outputLabel id="localizacaoLabel" value="Localização: " />
+				<p:inputText id="localizacaoInput" value="#{portoBean.porto.localizacao}" />
+				
+				<p:outputLabel id="nomeLabel" value="Nome: " />
+				<p:inputText id="nomeInput" value="#{portoBean.porto.nome}" />
+				
+				<p:commandButton title="Filtrar portos." icon="ui-icon-search" action="#{portoBean.consultar}" update="formListaPortos"/>
 					<p:messages id="mensagens" globalOnly="true" />
 					<p:dataTable var="porto" value="#{portoBean.portos}" emptyMessage="Nenhum porto foi encontrado.">
+						
 						<p:column headerText="Localização" sortBy="#{porto.localizacao}">
 							<h:outputText value="#{porto.localizacao}"/>
+						</p:column>
+						
+						<p:column headerText="Nome" sortBy="#{porto.nome}">
+							<h:outputText value="#{porto.nome}"/>
 						</p:column>
 						
 						<p:column>
 							<p:button title="Alterar dados básicos do porto." outcome="/portos/alterar" icon="ui-icon-pencil">
 								<f:param name="idPorto" value="#{porto.id}"/>
 							</p:button>
+							
 							<p:commandButton title="Excluir o porto." icon="ui-icon-closethick" onclick="confirmacao.show()">
 								<f:setPropertyActionListener target="#{portoBean.idPorto}" value="#{porto.id}" />
 							</p:commandButton>

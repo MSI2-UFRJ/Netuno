@@ -26,9 +26,13 @@
 							<h:outputLabel for="localizacao" value="Localização*: "/>
 							<p:inputText id="localizacao" value="#{portoBean.porto.localizacao}" required="true" requiredMessage="Por favor, informe a localização do porto."/>
 							<p:message for="localizacao" autoUpdate="true"/>
+							
+							<h:outputLabel for="nome" value="Nome*: "/>
+							<p:inputText id="nome" value="#{portoBean.porto.nome}" required="true" requiredMessage="Por favor, informe o nome do porto."/>
+							<p:message for="nome" autoUpdate="true"/>
 														
 							<f:facet name="footer">
-								<p:commandButton type="submit" value="Confirmar" icon="ui-icon-check" action="#{portoBean.alterar}" update="formAlteracaoPorto:mensagens"/>
+								<p:commandButton type="submit" value="Confirmar" icon="ui-icon-check" action="#{portoBean.alterar}" update="formAlteracaoPorto"/>
 							</f:facet>
 							<f:facet name="footer">
 								<p:button outcome="/portos/listar" value="Cancelar" icon="ui-icon-arrowreturnthick-1-w"/>
