@@ -2,11 +2,13 @@ package br.com.ufrj.msi2.netuno.modelo.entidades;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="agentePorto")
-public class AgentePorto extends Usuario{
+@PrimaryKeyJoinColumn(name="id")
+public class AgentePorto extends Usuario {
 	private static final long serialVersionUID = 137254428171726031L;
 
 	@ManyToOne

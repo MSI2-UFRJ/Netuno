@@ -4,11 +4,13 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="agenteLogistica")
-public class AgenteLogistica extends Usuario{
+@PrimaryKeyJoinColumn(name="id")
+public class AgenteLogistica extends Usuario {
 
 	private static final long serialVersionUID = -145546040090486072L;
 

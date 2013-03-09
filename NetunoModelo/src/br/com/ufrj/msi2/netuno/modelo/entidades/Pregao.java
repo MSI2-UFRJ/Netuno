@@ -22,7 +22,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="pregao")
-public class Pregao implements Serializable{
+public class Pregao implements Serializable {
 
 	private static final long serialVersionUID = -8454333668773556668L;
 	

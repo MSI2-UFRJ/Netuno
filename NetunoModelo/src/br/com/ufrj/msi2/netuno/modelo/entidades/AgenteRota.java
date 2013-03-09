@@ -5,10 +5,12 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="agenteRota")
+@PrimaryKeyJoinColumn(name="id")
 public class AgenteRota extends Usuario {
 	private static final long serialVersionUID = 3949146978649270591L;
 	

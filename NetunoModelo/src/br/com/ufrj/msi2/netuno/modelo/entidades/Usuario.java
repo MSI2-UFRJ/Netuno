@@ -11,6 +11,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 // O SQL Abaixo não é SQL :P É JPQL (Linguagem SQL do JPA)
 @NamedQueries(
@@ -21,12 +22,13 @@ import javax.persistence.NamedQuery;
 	}
 )
 @Entity
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+@Table(name="usuario")
+@Inheritance(strategy=InheritanceType.JOINED)
 public abstract class Usuario implements Serializable {
 	private static final long serialVersionUID = -7388109837156922864L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.TABLE)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
 	@Column(name="login")

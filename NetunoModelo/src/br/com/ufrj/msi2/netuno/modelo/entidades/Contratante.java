@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 /**
@@ -14,6 +15,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="contratante")
+@PrimaryKeyJoinColumn(name="id")
 public class Contratante extends Usuario {
 	private static final long serialVersionUID = -837838116953606430L;
 	
