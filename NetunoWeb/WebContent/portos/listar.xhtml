@@ -12,14 +12,15 @@
 			<h2>Portos do Netuno</h2>
 			<div class="box-5">
 				<h:form id="formListaPortos">
-				
-				<p:outputLabel id="localizacaoLabel" value="Localização: " />
-				<p:inputText id="localizacaoInput" value="#{portoBean.porto.localizacao}" />
-				
-				<p:outputLabel id="nomeLabel" value="Nome: " />
-				<p:inputText id="nomeInput" value="#{portoBean.porto.nome}" />
-				
-				<p:commandButton title="Filtrar portos." icon="ui-icon-search" action="#{portoBean.consultar}" update="formListaPortos"/>
+				<p:panelGrid id="painelConsulta" columns="8">
+					<p:outputLabel id="localizacaoLabel" value="Localização: " />
+					<p:inputText id="localizacaoInput" value="#{portoBean.porto.localizacao}" />
+					
+					<p:outputLabel id="nomeLabel" value="Nome: " />
+					<p:inputText id="nomeInput" value="#{portoBean.porto.nome}" />
+					
+					<p:commandButton title="Filtrar portos." value="Consultar" icon="ui-icon-search" action="#{portoBean.consultar}" update="formListaPortos"/>
+				</p:panelGrid>
 					<p:messages id="mensagens" globalOnly="true" />
 					<p:dataTable var="porto" value="#{portoBean.portos}" emptyMessage="Nenhum porto foi encontrado.">
 						
