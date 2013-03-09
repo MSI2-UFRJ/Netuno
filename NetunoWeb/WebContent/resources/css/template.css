@@ -1,6 +1,29 @@
 @CHARSET "ISO-8859-1";
 
-body
-{
-    background-image: url("#{resource['images/background.png']}");
+html {
+	height: 100%;
+	}
+	
+body {
+	height: 100%;
+	background-image: url("#{resource['images/background.png']}");
+	}
+
+#wrap {min-height: 100%;}
+
+#main {overflow:auto;
+	padding-bottom: 150px;}  /* must be same height as the footer */
+
+#footer {position: relative;
+	margin-top: -150px; /* negative value of footer height */
+	height: 150px;
+	clear:both;} 
+
+/*Opera Fix*/
+body:before {
+	content:"";
+	height:100%;
+	float:left;
+	width:0;
+	margin-top:-32767px;
 }
