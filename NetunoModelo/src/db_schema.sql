@@ -1,9 +1,11 @@
+use netuno;
+
 create table agenteCarga (id integer not null, primary key (id));
 create table agenteLogistica (id integer not null, primary key (id));
 create table agentePorto (id integer not null, pertence_id integer, primary key (id));
 create table agenteRota (id integer not null, primary key (id));
-create table carga (id integer not null, contrato_id integer, primary key (id));
-create table carga_componente (id integer not null auto_increment, peso double precision, agenteDesembarque_id integer, agenteEmbarque_id integer, conteiner_id integer, patio_id integer, primary key (id));
+create table carga (descricao varchar(255), id integer not null, contrato_id integer, primary key (id));
+create table carga_componente (id integer not null auto_increment, peso double, agenteDesembarque_id integer, agenteEmbarque_id integer, conteiner_id integer, patio_id integer, primary key (id));
 create table carga_perecivel (data_validade datetime, id integer not null, primary key (id));
 create table cargalog (id integer not null auto_increment, data datetime, descricao varchar(255), carga_id integer, primary key (id));
 create table conteiner (id integer not null auto_increment, primary key (id));

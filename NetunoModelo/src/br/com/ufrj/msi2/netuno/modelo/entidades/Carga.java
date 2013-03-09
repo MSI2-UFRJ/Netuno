@@ -2,6 +2,7 @@ package br.com.ufrj.msi2.netuno.modelo.entidades;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -24,6 +25,9 @@ import javax.persistence.Table;
 public class Carga extends CargaComponente {
 	private static final long serialVersionUID = 3412494703857073751L;
 	
+	@Column(name = "descricao")
+	private String descricao;
+	
 	@OneToMany(mappedBy="carga")
     private List<ParteCarga> partes;
 	
@@ -31,20 +35,28 @@ public class Carga extends CargaComponente {
 	@JoinColumn(name="contrato_id")
 	private Contrato contrato;
 
-	public Contrato getContrato() {
-		return contrato;
-	}
-
-	public void setContrato(Contrato contrato) {
-		this.contrato = contrato;
+	public String getDescricao() {
+		return descricao;
 	}
 
 	public List<ParteCarga> getPartes() {
 		return partes;
 	}
 
+	public Contrato getContrato() {
+		return contrato;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
 	public void setPartes(List<ParteCarga> partes) {
 		this.partes = partes;
+	}
+
+	public void setContrato(Contrato contrato) {
+		this.contrato = contrato;
 	}
 
 }
