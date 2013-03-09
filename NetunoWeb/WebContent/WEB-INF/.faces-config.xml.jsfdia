@@ -22,6 +22,11 @@
     NAME="output4" PATH="/logistica/home.xhtml"
     TARGET="rules:#logistica#home.xhtml"
     TITLE="#{Login.autenticar}:agentelogistica" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="agentePorto:#{Login.autenticar}:#portos#home.xhtml"
+    NAME="output3" PATH="/portos/home.xhtml"
+    TARGET="rules:#portos#home.xhtml"
+    TITLE="#{Login.autenticar}:agentePorto" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#dashboard.xhtml" PATH="/dashboard.xhtml"
@@ -41,5 +46,17 @@
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#logistica#pregoes#listar.xhtml"
   PATH="/logistica/pregoes/listar.xhtml" SHAPE="416,320,50,25"
+  model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#portos#home.xhtml" PATH="/portos/home.xhtml"
+  SHAPE="272,336,50,25" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#portos#home.xhtml:0" NAME="item"
+   PATH="/portos/home.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="verPortos::#portos#listar.xhtml"
+    NAME="output" PATH="/portos/listar.xhtml"
+    TARGET="rules:#portos#listar.xhtml" TITLE="verPortos" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#portos#listar.xhtml"
+  PATH="/portos/listar.xhtml" SHAPE="416,376,50,25"
   model-entity="JSFProcessGroup" persistent="true"/>
 </PROCESS>
