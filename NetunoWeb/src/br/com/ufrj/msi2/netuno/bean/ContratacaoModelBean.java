@@ -1,11 +1,14 @@
 package br.com.ufrj.msi2.netuno.bean;
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import br.com.ufrj.msi2.netuno.modelo.entidades.Contratante;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Contrato;
+import br.com.ufrj.msi2.netuno.modelo.entidades.Porto;
 
 @ManagedBean(name="contratacaoModel")
 @ViewScoped
@@ -18,6 +21,8 @@ public class ContratacaoModelBean extends MBean {
 	private Boolean enderecoColeta;
 	
 	private Boolean enderecoEntrega;
+	
+	private List<Porto> portos;
 	
 	@PostConstruct
 	public void construct() {
@@ -54,6 +59,14 @@ public class ContratacaoModelBean extends MBean {
 
 	public void setEnderecoEntrega(Boolean enderecoEntrega) {
 		this.enderecoEntrega = enderecoEntrega;
+	}
+
+	public List<Porto> getPortos() {
+		return portos;
+	}
+
+	public void setPortos(List<Porto> portos) {
+		this.portos = portos;
 	}
 
 }
