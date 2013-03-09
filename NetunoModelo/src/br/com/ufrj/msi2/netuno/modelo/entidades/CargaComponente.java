@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.Table;
 
 /**
  * Unidade que é alocada ou retirada de conteiners.
@@ -16,12 +17,13 @@ import javax.persistence.InheritanceType;
  *
  */
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Table(name="carga_componente")
+@Inheritance(strategy=InheritanceType.JOINED)
 public abstract class CargaComponente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.TABLE)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
 	@Column(name = "peso")

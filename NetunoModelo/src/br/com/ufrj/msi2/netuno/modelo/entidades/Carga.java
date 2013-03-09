@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 /**
@@ -15,8 +16,9 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name="carga")
+@PrimaryKeyJoinColumn(name="id")
+@Inheritance(strategy=InheritanceType.JOINED)
 public class Carga extends CargaComponente {
 	private static final long serialVersionUID = 3412494703857073751L;
 	

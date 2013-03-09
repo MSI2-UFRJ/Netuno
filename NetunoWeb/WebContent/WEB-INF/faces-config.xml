@@ -26,4 +26,11 @@
    <to-view-id>/logistica/home.xhtml</to-view-id>
   </navigation-case>
  </navigation-rule>
+ <navigation-rule>
+  <from-view-id>/logistica/home.xhtml</from-view-id>
+  <navigation-case>
+   <from-outcome>verPregoes</from-outcome>
+   <to-view-id>/logistica/pregoes/listar.xhtml</to-view-id>
+  </navigation-case>
+ </navigation-rule>
 </faces-config>
