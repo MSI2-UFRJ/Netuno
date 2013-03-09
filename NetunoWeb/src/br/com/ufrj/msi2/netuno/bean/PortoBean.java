@@ -24,7 +24,7 @@ public class PortoBean extends MBean{
 	@EJB
 	private PortoService servicosPorto;
 	
-	private Porto porto = new Porto();
+	private Porto porto;
 	private List<Porto> portos;
 	private Integer idPorto;
 	
@@ -36,6 +36,14 @@ public class PortoBean extends MBean{
 		}
 	}
 	
+	public PortoService getServicosPorto() {
+		return servicosPorto;
+	}
+
+	public void setServicosPorto(PortoService servicosPorto) {
+		this.servicosPorto = servicosPorto;
+	}
+
 	public void recuperarPorto(){
 		this.porto = servicosPorto.obterPorId(this.idPorto);
 	}

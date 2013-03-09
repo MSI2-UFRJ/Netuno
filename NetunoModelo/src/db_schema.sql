@@ -1,11 +1,9 @@
-use netuno;
-
 create table agenteCarga (id integer not null, primary key (id));
 create table agenteLogistica (id integer not null, primary key (id));
 create table agentePorto (id integer not null, pertence_id integer, primary key (id));
 create table agenteRota (id integer not null, primary key (id));
 create table carga (id integer not null, contrato_id integer, primary key (id));
-create table carga_componente (id integer not null auto_increment, peso double, patio_id integer, conteiner_id integer, agenteEmbarque_id integer, agenteDesembarque_id integer, primary key (id));
+create table carga_componente (id integer not null auto_increment, peso double precision, agenteDesembarque_id integer, agenteEmbarque_id integer, conteiner_id integer, patio_id integer, primary key (id));
 create table carga_perecivel (data_validade datetime, id integer not null, primary key (id));
 create table cargalog (id integer not null auto_increment, data datetime, descricao varchar(255), carga_id integer, primary key (id));
 create table conteiner (id integer not null auto_increment, primary key (id));
@@ -15,7 +13,7 @@ create table empresatransporte (id integer not null auto_increment, nome varchar
 create table navio (id integer not null auto_increment, nome varchar(255), primary key (id));
 create table parte_carga (id integer not null, carga_id integer, primary key (id));
 create table patio (id integer not null auto_increment, primary key (id));
-create table porto (id integer not null auto_increment, localizacao varchar(255) not null, nome varchar(255), primary key (id));
+create table porto (id integer not null auto_increment, localizacao varchar(255) not null, nome varchar(255) not null, primary key (id), unique (localizacao, nome));
 create table pregao (id integer not null auto_increment, abertoPor_id integer, anuncia_id integer, primary key (id));
 create table represemptrans (id integer not null, representa_id integer, primary key (id));
 create table requisicao (id integer not null auto_increment, data datetime, agenteCarga_id integer, conteiner_id integer, navio_id integer, agenteRota_id integer, primary key (id));

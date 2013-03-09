@@ -20,6 +20,10 @@
 	<module>
 		<ejb>NetunoModelo.jar</ejb>
 	</module>
+	
+	<module>
+		<ejb>NetunoCarga.jar</ejb>
+	</module>
 
 	<module>
 		<web>
