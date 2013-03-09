@@ -4,3 +4,8 @@
 *.jar
 *.war
 *.ear
+/NetunoWeb/WebContent/WEB-INF/lib/NetunoContratacao.jar
+/NetunoWeb/WebContent/WEB-INF/lib/NetunoLogistica.jar
+/NetunoWeb/WebContent/WEB-INF/lib/NetunoModelo.jar
+/NetunoWeb/WebContent/WEB-INF/lib/NetunoSistema.jar
+/NetunoModelo/src/db_schema.sql

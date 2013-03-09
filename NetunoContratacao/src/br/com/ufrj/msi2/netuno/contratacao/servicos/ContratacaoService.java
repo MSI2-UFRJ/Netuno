@@ -14,5 +14,6 @@ public interface ContratacaoService extends Serializable {
 	public Contrato criarContrato();
 	public List<Contrato> recuperaContratosAbertosPorContratante(Contratante contratante);
 	public List<Contrato> recuperaContratosFechadosPorContratante(Contratante contratante);
+	public void estimarDataEntrega(Contrato contrato, boolean temColeta, boolean temEntrega);
 
 }

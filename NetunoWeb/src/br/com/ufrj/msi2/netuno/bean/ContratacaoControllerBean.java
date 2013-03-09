@@ -37,8 +37,7 @@ public class ContratacaoControllerBean extends MBean {
 	}
 	
 	public void atualizarPrazo() {
-		System.out.println("##########################################################################");
-		
+		this.contratacaoService.estimarDataEntrega(contratacaoModelBean.getContrato(), contratacaoModelBean.isEnderecoColeta(), contratacaoModelBean.isEnderecoEntrega());
 	}
 	
 	public String salvar() {

@@ -1,5 +1,7 @@
 package br.com.ufrj.msi2.netuno.contratacao.servicos;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -26,6 +28,32 @@ public class ContratacaoServiceImpl implements ContratacaoService {
 	
 	public List<Contrato> recuperaContratosFechadosPorContratante(Contratante contratante) {
 		return contratoService.recuperaContratosFechadosPorContratante(contratante);
+	}
+	
+	public void estimarDataEntrega(Contrato contrato, boolean temColeta, boolean temEntrega) {
+		if(contrato.getPortoOrigem() == null || contrato.getPortoDestino() == null) {
+			contrato.setDataEstimada(null);
+		} else {
+			Date date = new Date();
+
+			Calendar cal = Calendar.getInstance();
+	        cal.setTime(date);
+	        cal.set(Calendar.HOUR, 0);
+	        cal.set(Calendar.MINUTE, 0);
+	        cal.set(Calendar.SECOND, 0);
+	        
+	        if(temColeta) {
+	        	cal.add(Calendar.DATE, 1);
+	        }
+	        
+	        if(temEntrega) {
+	        	cal.add(Calendar.DATE, 1);
+	        }
+	        
+	        cal.add(Calendar.DATE, 6);
+
+	        contrato.setDataEstimada(cal.getTime());
+		}
 	}
 
 	public ContratoService getContratoService() {

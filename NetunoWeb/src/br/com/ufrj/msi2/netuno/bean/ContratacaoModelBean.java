@@ -18,12 +18,12 @@ public class ContratacaoModelBean extends MBean {
 	
 	private Contrato contrato;
 	
-	private Boolean enderecoColeta;
+	private boolean enderecoColeta;
 	
-	private Boolean enderecoEntrega;
+	private boolean enderecoEntrega;
 	
 	private List<Porto> portos;
-	
+
 	@PostConstruct
 	public void construct() {
 		
@@ -37,12 +37,16 @@ public class ContratacaoModelBean extends MBean {
 		return contrato;
 	}
 
-	public Boolean getEnderecoColeta() {
+	public boolean isEnderecoColeta() {
 		return enderecoColeta;
 	}
 
-	public Boolean getEnderecoEntrega() {
+	public boolean isEnderecoEntrega() {
 		return enderecoEntrega;
+	}
+
+	public List<Porto> getPortos() {
+		return portos;
 	}
 
 	public void setContratante(Contratante contratante) {
@@ -53,16 +57,12 @@ public class ContratacaoModelBean extends MBean {
 		this.contrato = contrato;
 	}
 
-	public void setEnderecoColeta(Boolean enderecoColeta) {
+	public void setEnderecoColeta(boolean enderecoColeta) {
 		this.enderecoColeta = enderecoColeta;
 	}
 
-	public void setEnderecoEntrega(Boolean enderecoEntrega) {
+	public void setEnderecoEntrega(boolean enderecoEntrega) {
 		this.enderecoEntrega = enderecoEntrega;
-	}
-
-	public List<Porto> getPortos() {
-		return portos;
 	}
 
 	public void setPortos(List<Porto> portos) {
