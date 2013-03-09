@@ -45,6 +45,14 @@
 		</jar>
 	</target>
 	
+	<target name="importCarga">
+			<delete file="${dir.lib}/NetunoCarga.jar" />
+			<jar destfile="${dir.lib}/NetunoCarga.jar" update="true">
+				<fileset dir="${basedir}/../NetunoCarga/build/classes">
+				</fileset>
+			</jar>
+		</target>
+	
 	<target name="importContratacao">
 		<delete file="${dir.lib}/NetunoContratacao.jar" />
 		<jar destfile="${dir.lib}/NetunoContratacao.jar" update="true">
@@ -70,7 +78,7 @@
 	</target>
 	
 	<!-- A cada projeto incluir um importXYZ aqui -->
-	<target name="importAll" depends="importLogistica, importContratacao, importSistema, importModelo" />
+	<target name="importAll" depends="importLogistica, importContratacao, importSistema, importModelo, importCarga" />
 
 	<target name="ear" depends="importAll">
 
@@ -82,7 +90,8 @@
 		<copy todir="${dir.ear}">
 			<fileset dir="${dir.lib}" includes="NetunoModelo.jar" />
 			<fileset dir="${dir.lib}" includes="NetunoLogistica.jar" />
-			<fileset dir="${dir.lib}" includes="NetunoContratacao.jar" />
+			<fileset dir="${dir.lib}" includes="NetunoContratacao.jar"/>
+			<fileset dir="${dir.lib}" includes="NetunoCarga.jar"/>
 			<fileset dir="${dir.lib}" includes="NetunoSistema.jar" />
 		</copy>
 		
@@ -98,6 +107,7 @@
 				<exclude name="NetunoLogistica.jar" />
 				<exclude name="NetunoContratacao.jar" />
 				<exclude name="NetunoSistema.jar" />
+				<exclude name="NetunoCarga.jar" />
 			</lib>
 			<classes dir="${dir.bin}">
 				<exclude name="*.xml" />
