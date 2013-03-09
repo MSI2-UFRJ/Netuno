@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<ui:composition template="/templates/template.xhtml">
+	<ui:define name="content">
+		<h2>Cadastro de empresa de transporte</h2>
+		<div class="grid_13">
+			<div class="box-5">
+				<h:form id="formCadEmpTrans">
+				<p:messages id="mensagens" globalOnly="true" />
+						<p:panelGrid columns="3" cellspacing="10" cellpadding="10" id="grid">
+							<f:facet name="header">
+								Empresa de transporte
+							</f:facet>
+							<h:outputLabel for="nome" value="Nome: "/>
+							<p:inputText id="nome" value="#{empTransModel.empTrans.nome}" required="true" requiredMessage="Por favor, informe o nome da empresa."/>
+							<p:message for="nome" autoUpdate="true"/>
+							
+							<h:outputLabel for="representantes" value="Representantes: "/>
+							<p:dataTable id="representantes" var="representante" value="#{empTransController.listRepToInsert}" emptyMessage="Nenhum representante adicionado.">
+								<p:column headerText="Nome">
+									<h:inputText value="#{representante.nome}" required="true" requiredMessage="Por favor, informe o nome do representante." />
+								</p:column>
+								<p:column headerText="Login">
+									<h:inputText value="#{representante.login}" required="true" requiredMessage="Por favor, informe o login do representante."/>
+								</p:column>
+								<p:column headerText="Senha">
+									<h:inputText value="#{representante.senha}" required="true" requiredMessage="Por favor, informe a senha do representante."/>
+								</p:column>
+							</p:dataTable>
+							<f:facet name="footer">
+								<p:commandButton value="Adicionar Representante" icon="ui-icon-squaresmall-plus" action="#{empTransController.preparaInserirRep()}" update="formCadEmpTrans"/>
+							</f:facet>													
+							<f:facet name="footer">
+								<p:commandButton type="submit" value="Confirmar" icon="ui-icon-check" action="#{empTransController.salvar}" update="formCadEmpTrans"/>
+							</f:facet>
+							<f:facet name="footer">
+								<p:button outcome="/logistica/home" value="Cancelar" icon="ui-icon-arrowreturnthick-1-w"/>
+							</f:facet>
+						</p:panelGrid>
+				</h:form>
+			</div>
+		</div>		
+	</ui:define>
+</ui:composition>
+</html>

@@ -18,19 +18,40 @@
     TARGET="rules:#contratacao#verContratos.xhtml"
     TITLE="#{Login.autenticar}:contratante" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT
-    ID="agentelogistica:#{Login.autenticar}:#logistica#home.xhtml"
-    NAME="output4" PATH="/logistica/home.xhtml"
+    ID="agenteLogistica:#{Login.autenticar}:#logistica#home.xhtml"
+    NAME="output3" PATH="/logistica/home.xhtml"
     TARGET="rules:#logistica#home.xhtml"
-    TITLE="#{Login.autenticar}:agentelogistica" model-entity="JSFProcessItemOutput"/>
+    TITLE="#{Login.autenticar}:agenteLogistica" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT
     ID="agentePorto:#{Login.autenticar}:#portos#home.xhtml"
-    NAME="output3" PATH="/portos/home.xhtml"
+    NAME="output4" PATH="/portos/home.xhtml"
     TARGET="rules:#portos#home.xhtml"
     TITLE="#{Login.autenticar}:agentePorto" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#dashboard.xhtml" PATH="/dashboard.xhtml"
-  SHAPE="272,40,50,25" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#logistica#home.xhtml"
+  PATH="/logistica/home.xhtml" SHAPE="312,304,50,41" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#logistica#home.xhtml:0" NAME="item"
+   PATH="/logistica/home.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="verPregoes::#logistica#pregoes#listar.xhtml"
+    NAME="output" PATH="/logistica/pregoes/listar.xhtml"
+    TARGET="rules:#logistica#pregoes#listar.xhtml" TITLE="verPregoes" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="cadEmpTrans::#logistica#transporte#cadEmpTrans.xhtml"
+    NAME="output1" PATH="/logistica/transporte/cadEmpTrans.xhtml"
+    TARGET="rules:#logistica#transporte#cadEmpTrans.xhtml"
+    TITLE="cadEmpTrans" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#portos#home.xhtml" PATH="/portos/home.xhtml"
+  SHAPE="64,336,50,41" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#portos#home.xhtml:0" NAME="item"
+   PATH="/portos/home.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="verPortos::#portos#listar.xhtml"
+    NAME="output" PATH="/portos/listar.xhtml"
+    TARGET="rules:#portos#listar.xhtml" TITLE="verPortos" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#contratacao#verContratos.xhtml"
   PATH="/contratacao/verContratos.xhtml" SHAPE="272,209,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#contratacao#verContratos.xhtml:0" NAME="item"
@@ -40,40 +61,34 @@
     TARGET="rules:#contratacao#contratacao.xhtml" TITLE="contratacao" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#cargas#home.xhtml" PATH="/cargas/home.xhtml"
-  SHAPE="272,152,50,25" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#logistica#home.xhtml"
-  PATH="/logistica/home.xhtml" SHAPE="272,264,50,25" model-entity="JSFProcessGroup">
-  <PROCESS-ITEM ID="rules:#logistica#home.xhtml:0" NAME="item"
-   PATH="/logistica/home.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="verPregoes::#logistica#pregoes#listar.xhtml"
-    NAME="output" PATH="/logistica/pregoes/listar.xhtml"
-    TARGET="rules:#logistica#pregoes#listar.xhtml" TITLE="verPregoes" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
- </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#logistica#pregoes#listar.xhtml"
-  PATH="/logistica/pregoes/listar.xhtml" SHAPE="416,320,50,25"
-  model-entity="JSFProcessGroup" persistent="true"/>
- <PROCESS-ITEM NAME="rules:#portos#home.xhtml" PATH="/portos/home.xhtml"
-  SHAPE="272,336,50,25" model-entity="JSFProcessGroup">
-  <PROCESS-ITEM ID="rules:#portos#home.xhtml:0" NAME="item"
-   PATH="/portos/home.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="verPortos::#portos#listar.xhtml"
-    NAME="output" PATH="/portos/listar.xhtml"
-    TARGET="rules:#portos#listar.xhtml" TITLE="verPortos" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
- </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#portos#listar.xhtml"
-  PATH="/portos/listar.xhtml" SHAPE="416,376,50,25"
-  model-entity="JSFProcessGroup" persistent="true"/>
  <PROCESS-ITEM NAME="rules:#contratacao#contratacao.xhtml"
-  PATH="/contratacao/contratacao.xhtml" SHAPE="512,257,0,0" model-entity="JSFProcessGroup">
+  PATH="/contratacao/contratacao.xhtml" SHAPE="544,232,50,41" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#contratacao#contratacao.xhtml:0" NAME="item"
    PATH="/contratacao/contratacao.xhtml" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
     ID="verContratos::#contratacao#verContratos.xhtml" NAME="output"
     PATH="/contratacao/verContratos.xhtml"
     TARGET="rules:#contratacao#verContratos.xhtml" TITLE="verContratos" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#logistica#pregoes#listar.xhtml"
+  PATH="/logistica/pregoes/listar.xhtml" SHAPE="632,304,50,25"
+  model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#cargas#home.xhtml" PATH="/cargas/home.xhtml"
+  SHAPE="272,152,50,25" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#dashboard.xhtml" PATH="/dashboard.xhtml"
+  SHAPE="272,40,50,25" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#portos#listar.xhtml"
+  PATH="/portos/listar.xhtml" SHAPE="88,392,50,25"
+  model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#logistica#transporte#cadEmpTrans.xhtml"
+  PATH="/logistica/transporte/cadEmpTrans.xhtml" SHAPE="488,384,50,41" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#logistica#transporte#cadEmpTrans.xhtml:0"
+   NAME="item" PATH="/logistica/transporte/cadEmpTrans.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="voltarLogistica::#logistica#home.xhtml"
+    NAME="output" PATH="/logistica/home.xhtml"
+    SHAPE="537,416,542,416,542,440,296,440,296,312,311,312"
+    TARGET="rules:#logistica#home.xhtml" TITLE="voltarLogistica" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
 </PROCESS>
