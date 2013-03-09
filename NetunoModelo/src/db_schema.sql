@@ -5,7 +5,7 @@ create table agenteLogistica (id integer not null, primary key (id));
 create table agentePorto (id integer not null, pertence_id integer, primary key (id));
 create table agenteRota (id integer not null, primary key (id));
 create table carga (id integer not null, contrato_id integer, primary key (id));
-create table carga_componente (id integer not null, peso double, patio_id integer, conteiner_id integer, agenteEmbarque_id integer, agenteDesembarque_id integer, primary key (id));
+create table carga_componente (id integer not null auto_increment, peso double, patio_id integer, conteiner_id integer, agenteEmbarque_id integer, agenteDesembarque_id integer, primary key (id));
 create table carga_perecivel (data_validade datetime, id integer not null, primary key (id));
 create table cargalog (id integer not null auto_increment, data datetime, descricao varchar(255), carga_id integer, primary key (id));
 create table conteiner (id integer not null auto_increment, primary key (id));
@@ -47,4 +47,3 @@ alter table requisicao add index FK904B149EB29344B (agenteCarga_id), add constra
 alter table requisicao add index FK904B1497E6B894B (conteiner_id), add constraint FK904B1497E6B894B foreign key (conteiner_id) references conteiner (id);
 alter table requisicao add index FK904B1499D657B4B (navio_id), add constraint FK904B1499D657B4B foreign key (navio_id) references navio (id);
 alter table requisicao add index FK904B149DE410A09 (agenteRota_id), add constraint FK904B149DE410A09 foreign key (agenteRota_id) references agenteRota (id);
-create table hibernate_sequences ( sequence_name varchar(255),  sequence_next_hi_value integer ) ;
