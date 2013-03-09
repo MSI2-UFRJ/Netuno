@@ -9,26 +9,30 @@
 <h:head />
 
 <h:body>
-	<h:outputLabel value="Olá, " /><h:outputText value="#{verPregoesModel.agentelogistica.nome}" rendered="#{not empty verPregoesController}" /><br />
-	<h:outputLabel value="Ver pregões" />
-	<h:form>
-	<h:dataTable 	id="tabelaPregoes"
-					value="#{verPregoesModel.pregoes}"
-					var="pregao"
-					rendered="#{not empty verPregoesModel.pregoes}">
-			<h:column>
-				<f:facet name="header">Identificador</f:facet>
-				<h:outputLabel value="#{pregao.id}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">Aberto por</f:facet>
-				<h:outputLabel value="#{pregao.abertoPor.nome}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">Carga</f:facet>
-				<h:outputLabel value="#{pregao.anuncia.id}" />
-			</h:column>
-		</h:dataTable>
-		</h:form>
+<ui:composition template="/templates/template.xhtml">
+	<ui:define name="content">
+		<h:outputLabel value="Olá, " /><h:outputText value="#{verPregoesModel.agentelogistica.nome}" rendered="#{not empty verPregoesController}" /><br />
+		<h:outputLabel value="Ver pregões" />
+		<h:form>
+		<h:dataTable 	id="tabelaPregoes"
+						value="#{verPregoesModel.pregoes}"
+						var="pregao"
+						rendered="#{not empty verPregoesModel.pregoes}">
+				<h:column>
+					<f:facet name="header">Identificador</f:facet>
+					<h:outputLabel value="#{pregao.id}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Aberto por</f:facet>
+					<h:outputLabel value="#{pregao.abertoPor.nome}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Carga</f:facet>
+					<h:outputLabel value="#{pregao.anuncia.id}" />
+				</h:column>
+			</h:dataTable>
+			</h:form>
+			</ui:define>
+		</ui:composition>
 </h:body>
 </html>

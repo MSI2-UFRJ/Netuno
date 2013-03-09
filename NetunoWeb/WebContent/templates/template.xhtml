@@ -7,18 +7,26 @@
 	xmlns:p="http://primefaces.org/ui">
  
 	<h:head>
+		<h:outputStylesheet name="css/template.css" />
 	</h:head>
  
 	<h:body>
+	 
 		<div id="page">
 			<div id="header">
-				<ui:insert>
+				<ui:insert name="header">
+					<ui:include src="header.xhtml" />
+				</ui:insert>
+			</div>
+			<div id="menu">
+				<ui:insert name="menu">
 					<ui:include src="menu.xhtml" />
 				</ui:insert>
 			</div>
-			
 			<div id="content">
-				<ui:insert name="content" />
+				<ui:insert name="content">
+				Default Content
+				</ui:insert>
 			</div>
 			
 			<div id="footer">

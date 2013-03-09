@@ -9,7 +9,11 @@
 <h:head />
 
 <h:body>
-	<h:button 	outcome="verPregoes"
-				value="Ver Pregões" />
+	<ui:composition template="/templates/template.xhtml">
+		<ui:define name="content">
+			<h:button 	outcome="verPregoes"
+						value="Ver Pregões" />
+		</ui:define>
+	</ui:composition>
 </h:body>
 </html>

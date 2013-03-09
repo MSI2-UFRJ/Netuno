@@ -8,23 +8,27 @@
 <h:head />
 
 <h:body>
-	<f:metadata>
-        <f:event type="preRenderView" listener="#{listaCargasAgenteController.onPageLoad}"/>
-	</f:metadata>
-	<h:form>
-	<h:dataTable 	id="tabelaCargas"
-					value="#{listaCargasAgenteModel.listaCargas}"
-					var="carga"
-					rendered="#{not empty listaCargasAgenteModel.listaCargas}">
-			<h:column>
-				<f:facet name="header">Identificador</f:facet>
-				<h:outputLabel value="#{carga.id}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">Peso</f:facet>
-				<h:outputLabel value="#{carga.peso}" />
-			</h:column>
-		</h:dataTable>
-		</h:form>
+	<ui:composition template="/templates/template.xhtml">
+		<ui:define name="content">
+			<f:metadata>
+		        <f:event type="preRenderView" listener="#{listaCargasAgenteController.onPageLoad}"/>
+			</f:metadata>
+			<h:form>
+			<h:dataTable 	id="tabelaCargas"
+							value="#{listaCargasAgenteModel.listaCargas}"
+							var="carga"
+							rendered="#{not empty listaCargasAgenteModel.listaCargas}">
+					<h:column>
+						<f:facet name="header">Identificador</f:facet>
+						<h:outputLabel value="#{carga.id}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Peso</f:facet>
+						<h:outputLabel value="#{carga.peso}" />
+					</h:column>
+				</h:dataTable>
+			</h:form>
+		</ui:define>
+	</ui:composition>
 </h:body>
 </html>
