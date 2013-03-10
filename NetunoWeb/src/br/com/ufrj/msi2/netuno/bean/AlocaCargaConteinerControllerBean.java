@@ -18,6 +18,7 @@ import br.com.ufrj.msi2.netuno.modelo.entidades.AgenteCarga;
 public class AlocaCargaConteinerControllerBean extends MBean {
 	@EJB
 	public GerenciarCargasService gCargaService;
+	
 	@EJB
 	public GerenciarConteinersService gConteinerService;
 	
@@ -60,6 +61,11 @@ public class AlocaCargaConteinerControllerBean extends MBean {
 	public void setAlocaCargaConteinerModelBean(
 			AlocaCargaConteinerModelBean alocaCargaConteinerModelBean) {
 		this.alocaCargaConteinerModelBean = alocaCargaConteinerModelBean;
+	}
+	
+	public void alocar()
+	{
+		
 	}
 
 }

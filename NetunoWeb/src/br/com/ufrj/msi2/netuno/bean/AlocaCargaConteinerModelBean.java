@@ -17,6 +17,8 @@ public class AlocaCargaConteinerModelBean extends MBean {
 	private Carga carga;
 	private List<Conteiner> listDisponiveis;
 	
+	private int conteinerSelecionado;
+	
 	@PostConstruct
 	public void construct() {
 	}
@@ -36,4 +38,14 @@ public class AlocaCargaConteinerModelBean extends MBean {
 	public void setListDisponiveis(List<Conteiner> listDisponiveis) {
 		this.listDisponiveis = listDisponiveis;
 	}
+	
+
+	public int getConteinerSelecionado() {
+		return conteinerSelecionado;
+	}
+
+	public void setConteinerSelecionado(int conteinerSelecionado) {
+		this.conteinerSelecionado = conteinerSelecionado;
+	}
+
 }

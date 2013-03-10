@@ -14,7 +14,7 @@ import br.com.ufrj.msi2.netuno.modelo.entidades.ParteCarga;
 
 
 @Stateless
-public class CargaServiceImpl implements CargaService {
+public class ParteCargaServiceImpl implements ParteCargaService {
 
 	private static final long serialVersionUID = -5102370475324194502L;
 	
@@ -31,17 +31,17 @@ public class CargaServiceImpl implements CargaService {
 	}
 
 	@Override
-	public List<Carga> filtrar(CriteriaQuery<Carga> consulta) {
-		List<Carga> list = em.createQuery(consulta).getResultList();
+	public List<ParteCarga> filtrar(CriteriaQuery<ParteCarga> consulta) {
+		List<ParteCarga> list = em.createQuery(consulta).getResultList();
 		return list;
 	}
 	
-	public void salvar(Carga carga) {
-		em.persist(carga);
+	public void salvar(ParteCarga pCarga) {
+		em.persist(pCarga);
 	}
 	
 	@Override
-	public Carga obterPorId(Integer idCarga){
-		return this.em.find(Carga.class, idCarga);
+	public ParteCarga obterPorId(Integer id){
+		return this.em.find(ParteCarga.class, id);
 	}
 }

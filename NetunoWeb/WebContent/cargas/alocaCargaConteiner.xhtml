@@ -8,21 +8,53 @@
 <h:head />
 
 <h:body>
-	<f:metadata>
-		<f:viewParam name="cargaId"
-			value="#{alocaCargaConteinerController.cargaId}"></f:viewParam>
-		<f:event type="preRenderView"
-			listener="#{alocaCargaConteinerController.onPageLoad}" />
-	</f:metadata>
-	<ui:define name="content">
-		<div>
-			<h2><p:outputLabel value="Carga: #{alocaCargaConteinerModel.carga.id}" /></h2>
-			<div class="box-5">
-				<h:form>
+	<ui:composition template="/templates/template.xhtml">
+		<ui:define name="content">
+			<f:metadata>
+				<f:viewParam name="cargaId"
+					value="#{alocaCargaConteinerController.cargaId}"></f:viewParam>
+				<f:event type="preRenderView"
+					listener="#{alocaCargaConteinerController.onPageLoad}" />
+			</f:metadata>
+			<h:form id="formAlocaCarga">
+				<div>
+					<h2>Alocar Carga</h2>
+					<div style="width: 300px;margin-left: 20%;">
+						<p:dataTable id="tabelaInfoCarga"
+							value="#{alocaCargaConteinerModel.carga}" var="carga">
+							<p:column>
+								<f:facet name="header">Identificador</f:facet>
+								<p:outputLabel value="#{carga.id}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">Descricao</f:facet>
+								<p:outputLabel value="#{carga.descricao}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">Peso Total</f:facet>
+								<p:outputLabel value="#{carga.peso}" />
+							</p:column>
+						</p:dataTable>
+					</div>
+					<div class="box-5">
+						<h:outputText value="Alocar em: " />
+						<p:selectOneMenu value="#{alocaCargaConteinerModel.conteinerSelecionado}">
+							<f:selectItem itemLabel="Selecione" itemValue="" />
+							<f:selectItems
+								value="#{alocaCargaConteinerModel.listDisponiveis}"
+								var="conteiner" itemLabel="Conteiner - #{conteiner.id} - Disponivel - #{conteiner.pesoDisponivel}"
+								itemValue="#{conteiner.id}" />
+						</p:selectOneMenu>
+						<p:commandButton title="Alocar Carga"
+							action="#{alocaCargaConteinerController.alocar}"
+							update="formAlocaCarga">
+						</p:commandButton>
+					</div>
+
 					
-				</h:form>
-			</div>
-		</div>
-	</ui:define>
+				</div>
+			</h:form>
+		</ui:define>
+	</ui:composition>
 </h:body>
 </html>

@@ -42,7 +42,7 @@ public class ContratacaoServiceImpl implements ContratacaoService {
 		contratoService.salvarContrato(contrato);
 
 		for(Carga c : contrato.getCargas()) {
-			cargaService.salvarCarga(c);
+			cargaService.salvar(c);
 		}
 	}
 

@@ -8,9 +8,9 @@
     NAME="output" PATH="/dashboard.xhtml"
     TARGET="rules:#dashboard.xhtml" TITLE="#{Login.autenticar}:logado" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT
-    ID="agenteCarga:#{Login.autenticar}:#cargas#home.xhtml"
-    NAME="output1" PATH="/cargas/home.xhtml"
-    TARGET="rules:#cargas#home.xhtml"
+    ID="agenteCarga:#{Login.autenticar}:#cargas#listaCargasAgente.xhtml"
+    NAME="output1" PATH="/cargas/listaCargasAgente.xhtml"
+    TARGET="rules:#cargas#listaCargasAgente.xhtml"
     TITLE="#{Login.autenticar}:agenteCarga" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT
     ID="contratante:#{Login.autenticar}:#contratacao#verContratos.xhtml"
@@ -40,8 +40,6 @@
     TARGET="rules:#contratacao#contratacao.xhtml" TITLE="contratacao" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#cargas#home.xhtml" PATH="/cargas/home.xhtml"
-  SHAPE="272,152,50,25" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#logistica#home.xhtml"
   PATH="/logistica/home.xhtml" SHAPE="312,304,50,41" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#logistica#home.xhtml:0" NAME="item"
@@ -97,4 +95,6 @@
  <PROCESS-ITEM NAME="rules:#logistica#pregoes#abrir.xhtml"
   PATH="/logistica/pregoes/abrir.xhtml" SHAPE="392,392,50,25"
   model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#cargas#listaCargasAgente.xhtml"
+  PATH="/cargas/listaCargasAgente.xhtml" SHAPE="304,673,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>

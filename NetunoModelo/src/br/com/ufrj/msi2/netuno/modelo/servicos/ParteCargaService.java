@@ -9,13 +9,14 @@ import javax.persistence.criteria.CriteriaQuery;
 import br.com.ufrj.msi2.netuno.modelo.entidades.*;
 
 @Local
-public interface CargaService extends Serializable {
+public interface ParteCargaService extends Serializable {
 
-	public abstract List<Carga> filtrar(CriteriaQuery<Carga> consulta);
+	public abstract List<ParteCarga> filtrar(CriteriaQuery<ParteCarga> consulta);
 	
 	public CriteriaBuilder getCriteriaBuilder();
-
-	public void salvar(Carga carga);
 	
-	public Carga obterPorId(Integer idCarga);
+	public void salvar(ParteCarga carga);
+	
+	public ParteCarga obterPorId(Integer idCarga);
+
 }
