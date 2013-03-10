@@ -38,6 +38,7 @@ public class ContratacaoControllerBean extends MBean {
 		Contratante contratante = (Contratante) session.getAttribute(Attributes.SessionAttributes.CONTRATANTE.toString());
 		contratacaoModelBean.setContratante(contratante);
 		contratacaoModelBean.setContrato(this.contratacaoService.criarContrato());
+		contratacaoModelBean.getContrato().setCargas(new ArrayList<Carga>());
 		contratacaoModelBean.setPortos(this.portoService.obterTodos());
 	}
 	
@@ -52,10 +53,6 @@ public class ContratacaoControllerBean extends MBean {
 			carga = new CargaPerecivel();
 		} else {
 			carga = new Carga();
-		}
-		
-		if(contratacaoModelBean.getContrato().getCargas() == null) {
-			contratacaoModelBean.getContrato().setCargas(new ArrayList<Carga>());
 		}
 
 		contratacaoModelBean.getContrato().getCargas().add(carga);
@@ -86,20 +83,21 @@ public class ContratacaoControllerBean extends MBean {
 		} else {
 			contratacaoModelBean.getContrato().setEnderecoEntrega(null);
 		}
-		
-		System.out.println(contratacaoModelBean.getContrato().getPortoOrigem());
-		System.out.println(contratacaoModelBean.getContrato().getPortoDestino());
+
 		if(contratacaoModelBean.getContrato().getPortoOrigem().equals(contratacaoModelBean.getContrato().getPortoDestino())) {
 			super.sendMessage(null, FacesMessage.SEVERITY_ERROR, "O porto origem deve ser diferente do porto destino.", null);
 			valida = false;
 		}
 		
-		
+		if(contratacaoModelBean.getContrato().getCargas().size() == 0) {
+			super.sendMessage(null, FacesMessage.SEVERITY_ERROR, "Cargas devem ser adicionadas ao contrato.", null);
+			valida = false;
+		}
 		
 		if(valida) {
-			//contratacaoService.salvarContrato(contratacaoModelBean.getContratante(), contratacaoModelBean.getContrato());
+			contratacaoService.salvarContrato(contratacaoModelBean.getContratante(), contratacaoModelBean.getContrato());
 			
-			//super.sendMessage(null, FacesMessage.SEVERITY_INFO, "Contrato criado com sucesso", null);
+			super.sendMessage(null, FacesMessage.SEVERITY_INFO, "Contrato criado com sucesso", null);
 
 			return "verContratos";
 		}

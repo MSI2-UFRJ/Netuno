@@ -15,98 +15,124 @@
 		<h:outputLabel value="Novo Contrato" /><br />
 		
 		<h:form id="formContrato">
-			<p:messages id="mensagens" globalOnly="true" autoUpdate="true"/>
-			<h:outputLabel value="Endereço de coleta" />
-			<p:selectBooleanCheckbox value="#{contratacaoModel.enderecoColeta}">
-                <p:ajax update="enderecoColetaInputText dataEstimada" listener="#{contratacaoController.atualizarPrazo()}" />
-            </p:selectBooleanCheckbox><br />
-            <p:inputText 	id="enderecoColetaInputText"
-            				value="#{contratacaoModel.contrato.enderecoColeta}"
-            				disabled="#{not contratacaoModel.enderecoColeta}"
-            				required="true"
-            				requiredMessage="Esse campo deve ser preenchido."/>
-            <p:message for="enderecoColetaInputText" autoUpdate="true"/><br />
-            
-            <h:outputLabel value="Endereço de entrega" />
-			<p:selectBooleanCheckbox value="#{contratacaoModel.enderecoEntrega}">
-                <p:ajax update="enderecoEntregaInputText dataEstimada" listener="#{contratacaoController.atualizarPrazo()}" />
-            </p:selectBooleanCheckbox><br />
-            <p:inputText 	id="enderecoEntregaInputText"
-            				value="#{contratacaoModel.contrato.enderecoEntrega}"
-            				disabled="#{not contratacaoModel.enderecoEntrega}"
-            				required="true"
-            				requiredMessage="Esse campo deve ser preenchido."/>
-            <p:message for="enderecoEntregaInputText" autoUpdate="true"/><br />
-            
-            <h:outputLabel value="Porto Origem" />
-            <p:selectOneMenu 	id="portoOrigemMenu"
-            					value="#{contratacaoModel.contrato.portoOrigem}"
-            					converter="portoConverter"
-            					required="true"
-            					requiredMessage="Selecione um porto.">
-            	<f:selectItem itemLabel="-" itemValue=""/>
-	   			<f:selectItems 	value="#{contratacaoModel.portos}"
-	   							var="portoOrigem"
-	   							itemLabel="#{portoOrigem.nome}"
-	   							itemValue="#{portoOrigem}" />
-	   			<f:ajax listener="#{contratacaoController.atualizarPrazo()}" update="dataEstimada"/>
-	   		</p:selectOneMenu>
-	   		<p:message for="portoOrigemMenu" autoUpdate="true"/><br />
-	   		
-	   		<h:outputLabel value="Porto Destino" />
-            <p:selectOneMenu 	id="portoDestinoMenu"
-            					value="#{contratacaoModel.contrato.portoDestino}"
-            					converter="portoConverter"
-            					required="true"
-            					requiredMessage="Selecione um porto.">
-            	<f:selectItem itemLabel="-" itemValue=""/>
-	   			<f:selectItems 	value="#{contratacaoModel.portos}"
-	   							var="portoDestino"
-	   							itemLabel="#{portoDestino.nome}"
-	   							itemValue="#{portoDestino}" />
-	   			<p:ajax listener="#{contratacaoController.atualizarPrazo()}" update="dataEstimada"/>
-	   		</p:selectOneMenu>
-			<p:message for="portoDestinoMenu" autoUpdate="true"/><br /><br />
-	   		
-	   		<h:outputLabel value="Data estimada:  " />
-	   		<h:outputText 	id="dataEstimada"
-	   						value="#{contratacaoModel.contrato.dataEstimada}">
-				<f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
-			</h:outputText><br /><br />
-			
-			<p:commandButton value="Nova Carga" update="@form"
-				action="#{contratacaoController.adicionarCarga(false)}" />
-			<p:commandButton value="Nova Carga Perecível " update="@form"
-				action="#{contratacaoController.adicionarCarga(true)}" />
+			<f:validateBean disabled="#{not empty param['disableValidation']}">
+				<p:messages id="mensagens" globalOnly="true" autoUpdate="true"/>
 
-			<p:dataTable 	value="#{contratacaoModel.contrato.cargas}"
-							var="carga">
-				<p:column>
-					<f:facet name="header">Descrição</f:facet>
-					<p:inputText value="#{carga.descricao}" />
-				</p:column>
-				<p:column>
-					<f:facet name="header">Peso</f:facet>
-					<p:inputText value="#{carga.peso}" />
-				</p:column>
-				<p:column>
-					<f:facet name="header">Data de Validade</f:facet>
-					<h:outputLabel value="-" rendered="#{not carga.cargaPerecivel}"/>
-					<p:calendar value="carga.dataValidade" rendered="#{carga.cargaPerecivel}"/> 
-				</p:column>
-				<p:column>
-					<f:facet name="header">Operação</f:facet>
-					<p:commandButton 	value="Apagar"
-										update="@form"
-										action="#{contratacaoController.removerCarga(carga)}"/>
-				</p:column>
-			</p:dataTable>
-
-			<br /><br />	   		
-	   		<p:commandButton action="#{contratacaoController.salvar()}" value="Salvar" type="submit" update="formContrato"/>
-	   		<p:commandButton action="#{contratacaoController.cancelar()}" value="Cancelar" ajax="false"/>
+				<p:selectBooleanCheckbox value="#{contratacaoModel.enderecoColeta}">
+	                <p:ajax update="enderecoColetaInputText dataEstimada" listener="#{contratacaoController.atualizarPrazo()}" />
+	            </p:selectBooleanCheckbox>
+				<h:outputLabel value="Endereço de coleta" />			
+	            <p:inputText 	id="enderecoColetaInputText"
+	            				value="#{contratacaoModel.contrato.enderecoColeta}"
+	            				disabled="#{not contratacaoModel.enderecoColeta}"
+	            				required="#{empty param['disableValidation']}"
+	            				requiredMessage="Esse campo deve ser preenchido."/>
+	            <p:message for="enderecoColetaInputText" autoUpdate="true"/><br />
+	            
+	            <p:selectBooleanCheckbox value="#{contratacaoModel.enderecoEntrega}">
+	                <p:ajax update="enderecoEntregaInputText dataEstimada" listener="#{contratacaoController.atualizarPrazo()}" />
+	            </p:selectBooleanCheckbox>
+	            <h:outputLabel value="Endereço de entrega" />			
+	            <p:inputText 	id="enderecoEntregaInputText"
+	            				value="#{contratacaoModel.contrato.enderecoEntrega}"
+	            				disabled="#{not contratacaoModel.enderecoEntrega}"
+	            				required="#{empty param['disableValidation']}"
+	            				requiredMessage="Esse campo deve ser preenchido."/>
+	            <p:message for="enderecoEntregaInputText" autoUpdate="true"/><br />
+	            
+	            <h:outputLabel value="Porto Origem" />
+	            <p:selectOneMenu 	id="portoOrigemMenu"
+	            					value="#{contratacaoModel.contrato.portoOrigem}"
+	            					converter="portoConverter"
+	            					required="#{empty param['disableValidation']}"
+	            					requiredMessage="Selecione um porto.">
+	            	<f:selectItem itemLabel="-" itemValue=""/>
+		   			<f:selectItems 	value="#{contratacaoModel.portos}"
+		   							var="portoOrigem"
+		   							itemLabel="#{portoOrigem.nome}"
+		   							itemValue="#{portoOrigem}" />
+		   			<f:ajax listener="#{contratacaoController.atualizarPrazo()}" update="dataEstimada"/>
+		   		</p:selectOneMenu>
+		   		<p:message for="portoOrigemMenu" autoUpdate="true"/><br />
+		   		
+		   		<h:outputLabel value="Porto Destino" />
+	            <p:selectOneMenu 	id="portoDestinoMenu"
+	            					value="#{contratacaoModel.contrato.portoDestino}"
+	            					converter="portoConverter"
+	            					required="#{empty param['disableValidation']}"
+	            					requiredMessage="Selecione um porto.">
+	            	<f:selectItem itemLabel="-" itemValue=""/>
+		   			<f:selectItems 	value="#{contratacaoModel.portos}"
+		   							var="portoDestino"
+		   							itemLabel="#{portoDestino.nome}"
+		   							itemValue="#{portoDestino}" />
+		   			<p:ajax listener="#{contratacaoController.atualizarPrazo()}" update="dataEstimada"/>
+		   		</p:selectOneMenu>
+				<p:message for="portoDestinoMenu" autoUpdate="true"/><br /><br />
+		   		
+		   		<h:outputLabel value="Data estimada:  " />
+		   		<h:outputText 	id="dataEstimada"
+		   						value="#{contratacaoModel.contrato.dataEstimada}">
+					<f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+				</h:outputText><br /><br />
+				
+				<p:commandButton 	value="Nova Carga"
+									update="@form"
+									action="#{contratacaoController.adicionarCarga(false)}">
+					<f:param name="disableValidation" value="true" />
+				</p:commandButton>
+				<p:commandButton 	value="Nova Carga Perecível "
+									update="@form"
+									action="#{contratacaoController.adicionarCarga(true)}">
+					<f:param name="disableValidation" value="true" />
+				</p:commandButton><br />
+	
+				<p:dataTable 	id="tabela"
+								value="#{contratacaoModel.contrato.cargas}"
+								var="carga">
+					<p:column>
+						<f:facet name="header">Descrição</f:facet>
+						<p:inputText 	id="descricao"
+										value="#{carga.descricao}"
+										required="#{empty param['disableValidation']}"
+										requiredMessage="Descrição deve ser preenchida."/>
+						<p:message for="descricao" auto-update="true"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header">Peso</f:facet>
+						<h:inputText 	id="peso"
+										value="#{carga.peso}"
+										required="#{empty param['disableValidation']}"
+										requiredMessage="Peso deve ser preenchido."/>
+						<p:outputLabel value=" Kg"/>
+						<p:message for="peso" auto-update="true"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header">Data de Validade</f:facet>
+						<h:outputLabel value="-" rendered="#{not carga.cargaPerecivel}"/>
+						<p:calendar 	id="data"
+										value="carga.dataValidade"
+										rendered="#{carga.cargaPerecivel}"
+										required="#{empty param['disableValidation']}"
+										requiredMessage="Data de validade deve ser escolhida"
+										readonlyInput="true"/>
+						<p:message for="data" auto-update="true"/> 
+					</p:column>
+					<p:column>
+						<f:facet name="header"></f:facet>
+						<p:commandButton 	value="Remover"
+											update="tabela"
+											action="#{contratacaoController.removerCarga(carga)}">
+							<f:param name="disableValidation" value="true" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+	
+				<br /><br />
+		   		<p:commandButton action="#{contratacaoController.salvar()}" value="Salvar" type="submit" update="formContrato"/>
+		   		<p:commandButton action="#{contratacaoController.cancelar()}" value="Cancelar" ajax="false" immediate="true"/>
+			</f:validateBean>
 		</h:form>
-		
 		</ui:define>
 	</ui:composition>
 </h:body>

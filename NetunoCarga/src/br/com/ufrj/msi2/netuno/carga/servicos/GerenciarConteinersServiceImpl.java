@@ -19,13 +19,10 @@ import br.com.ufrj.msi2.netuno.modelo.servicos.ConteinerService;
 
 @Stateless
 public class GerenciarConteinersServiceImpl implements GerenciarConteinersService {
-
 	private static final long serialVersionUID = -1640096335992798113L;
+
 	@EJB
-	ConteinerService service;
-	@EJB
-	
-	
+	ConteinerService service;	
 	
 	public ConteinerService getConteinerService() {
 		return service;
