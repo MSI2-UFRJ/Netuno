@@ -12,23 +12,32 @@
 		<ui:composition template="/templates/template.xhtml">
 			<ui:define name="content">
 				<p:outputLabel value="Olá, " /><b><h:outputText value="#{verPregoesModel.agentelogistica.nome}" rendered="#{not empty verPregoesController}" /></b><br /><br />
-				<h:form>
-					<h2>Pregões abertos</h2>
-					<p:dataTable 	id="tabelaPregoes"
-							value="#{verPregoesModel.pregoes}"
-							var="pregao"
-							rendered="#{not empty verPregoesModel.pregoes}">
-						<p:column headerText="Identificador" sortBy="#{pregao.id}">
-							<p:outputLabel value="#{pregao.id}" />
-						</p:column>
-						<p:column headerText="Aberto por" sortBy="#{pregao.abertoPor.nome}">
-							<p:outputLabel value="#{pregao.abertoPor.nome}" />
-						</p:column>
-						<p:column headerText="Carga (ID)" sortBy="#{pregao.anuncia.id}">
-							<p:outputLabel value="#{pregao.anuncia.id}" />
-						</p:column>
-					</p:dataTable>
-				</h:form>
+				<div class="grid_12">
+					<div class="box-5">
+						<h:form>
+							<h2>Pregões abertos</h2>
+							<p:panelGrid columns="1" cellspacing="10" cellpadding="10" id="grid">
+								<p:dataTable 	id="tabelaPregoes"
+										value="#{verPregoesModel.pregoes}"
+										var="pregao"
+										rendered="#{not empty verPregoesModel.pregoes}">
+									<p:column headerText="Identificador" sortBy="#{pregao.id}">
+										<p:outputLabel value="#{pregao.id}" />
+									</p:column>
+									<p:column headerText="Aberto por" sortBy="#{pregao.abertoPor.nome}">
+										<p:outputLabel value="#{pregao.abertoPor.nome}" />
+									</p:column>
+									<p:column headerText="Carga (ID)" sortBy="#{pregao.anuncia.id}">
+										<p:outputLabel value="#{pregao.anuncia.id}" />
+									</p:column>
+								</p:dataTable>
+								<f:facet name="footer">
+									<p:button outcome="/logistica/home" value="Voltar" icon="ui-icon-arrowreturnthick-1-w"/>
+								</f:facet>
+							</p:panelGrid>
+						</h:form>
+					</div>
+				</div>
 			</ui:define>
 		</ui:composition>
 	</h:body>

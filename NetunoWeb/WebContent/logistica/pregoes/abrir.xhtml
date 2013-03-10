@@ -12,27 +12,33 @@
 		<ui:composition template="/templates/template.xhtml">
 			<ui:define name="content">
 				<p:outputLabel value="Olá, " /><b><h:outputText value="#{abrirPregoesModel.agentelogistica.nome}" rendered="#{not empty abrirPregoesController}" /></b><br /><br />
-				<h:form id="formAbrirPregao">
-					<h2>Abrir pregões</h2>
-					<p:dataTable 	id="tabelaCargas"
-									value="#{abrirPregoesModel.cargasSemPregao}"
-									var="carga"
-									rendered="#{not empty abrirPregoesModel.cargasSemPregao}"
-									emptyMessage="Nenhuma carga sem pregão.">
-						<p:column headerText="Identificador" sortBy="#{carga.id}">
-							<p:outputLabel value="#{carga.id}" />
-						</p:column>
-						<p:column headerText="Descrição" sortBy="#{carga.descricao}">
-							<p:outputLabel value="#{carga.descricao}" />
-						</p:column>
-						<p:column headerText="Pregão">
-							<p:commandButton value="Abrir pregão" icon="ui-icon-squaresmall-plus" action="#{abrirPregoesController.inserirPregao(carga)}" update="@form"/>
-						</p:column>
-					</p:dataTable>													
-					<f:facet name="footer">
-						<p:button outcome="/logistica/home" value="Sair" icon="ui-icon-arrowreturnthick-1-w"/>
-					</f:facet>
-				</h:form>  
+				<div class="grid_12">
+					<div class="box-5">
+						<h:form id="formAbrirPregao">
+							<h2>Abrir pregões</h2>
+							<p:panelGrid columns="1" cellspacing="10" cellpadding="10" id="grid">
+								<p:dataTable 	id="tabelaCargas"
+												value="#{abrirPregoesModel.cargasSemPregao}"
+												var="carga"
+												rendered="#{not empty abrirPregoesModel.cargasSemPregao}"
+												emptyMessage="Nenhuma carga sem pregão.">
+									<p:column headerText="Identificador" sortBy="#{carga.id}">
+										<p:outputLabel value="#{carga.id}" />
+									</p:column>
+									<p:column headerText="Descrição" sortBy="#{carga.descricao}">
+										<p:outputLabel value="#{carga.descricao}" />
+									</p:column>
+									<p:column headerText="Pregão">
+										<p:commandButton value="Abrir pregão" icon="ui-icon-squaresmall-plus" action="#{abrirPregoesController.inserirPregao(carga)}" update="@form"/>
+									</p:column>
+								</p:dataTable>													
+								<f:facet name="footer">
+									<p:button outcome="/logistica/home" value="Voltar" icon="ui-icon-arrowreturnthick-1-w"/>
+								</f:facet>
+							</p:panelGrid>
+						</h:form>
+					</div>
+				</div>
 			</ui:define>
 		</ui:composition>
 	</h:body>
