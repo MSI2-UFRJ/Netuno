@@ -11,10 +11,12 @@
 <h:body>
 	<ui:composition template="/templates/template.xhtml">
 		<ui:define name="content">
-			<h:button 	outcome="verPregoes"
+			<p:button 	outcome="verPregoes"
 						value="Ver Pregões" /><br /><br />
-			<h:button 	outcome="cadEmpTrans"
-						value="Cadastrar empresa de transporte" />
+			<p:button 	outcome="cadEmpTrans"
+						value="Cadastrar empresa de transporte" /><br /><br />
+			<p:button 	outcome="abrirPregao"
+						value="Abrir pregão para uma carga" />
 		</ui:define>
 	</ui:composition>
 </h:body>

@@ -6,30 +6,30 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head />
+	<h:head />
 
-<h:body>
-<ui:composition template="/templates/template.xhtml">
-	<ui:define name="content">
-		<h:outputLabel value="Olá, " /><b><h:outputText value="#{verPregoesModel.agentelogistica.nome}" rendered="#{not empty verPregoesController}" /></b><br /><br />
-		<h:form>
-		<h2>Pregões abertos</h2>
-		<p:dataTable 	id="tabelaPregoes"
-						value="#{verPregoesModel.pregoes}"
-						var="pregao"
-						rendered="#{not empty verPregoesModel.pregoes}">
-				<p:column headerText="Identificador" sortBy="#{pregao.id}">
-					<h:outputLabel value="#{pregao.id}" />
-				</p:column>
-				<p:column headerText="Aberto por" sortBy="#{pregao.abertoPor.nome}">
-					<h:outputLabel value="#{pregao.abertoPor.nome}" />
-				</p:column>
-				<p:column headerText="Carga (ID)" sortBy="#{pregao.anuncia.id}">
-					<h:outputLabel value="#{pregao.anuncia.id}" />
-				</p:column>
-			</p:dataTable>
-			</h:form>
+	<h:body>
+		<ui:composition template="/templates/template.xhtml">
+			<ui:define name="content">
+				<p:outputLabel value="Olá, " /><b><h:outputText value="#{verPregoesModel.agentelogistica.nome}" rendered="#{not empty verPregoesController}" /></b><br /><br />
+				<h:form>
+					<h2>Pregões abertos</h2>
+					<p:dataTable 	id="tabelaPregoes"
+							value="#{verPregoesModel.pregoes}"
+							var="pregao"
+							rendered="#{not empty verPregoesModel.pregoes}">
+						<p:column headerText="Identificador" sortBy="#{pregao.id}">
+							<p:outputLabel value="#{pregao.id}" />
+						</p:column>
+						<p:column headerText="Aberto por" sortBy="#{pregao.abertoPor.nome}">
+							<p:outputLabel value="#{pregao.abertoPor.nome}" />
+						</p:column>
+						<p:column headerText="Carga (ID)" sortBy="#{pregao.anuncia.id}">
+							<p:outputLabel value="#{pregao.anuncia.id}" />
+						</p:column>
+					</p:dataTable>
+				</h:form>
 			</ui:define>
 		</ui:composition>
-</h:body>
+	</h:body>
 </html>

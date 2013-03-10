@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import br.com.ufrj.msi2.netuno.modelo.entidades.Carga;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Pregao;
 
 @Stateless
@@ -25,6 +26,18 @@ public class PregaoServiceImpl implements PregaoService{
 	
 	public EntityManager getEm() {
 		return em;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Carga> recuperaCargasSemPregao() {
+		Query query = em.createNamedQuery("Carga.recuperaCargasSemPregao");
+		return (List<Carga>) query.getResultList();
+	}
+
+	@Override
+	public void salvarPregao(Pregao p) {
+		em.persist(p);
+		
 	}
 
 }

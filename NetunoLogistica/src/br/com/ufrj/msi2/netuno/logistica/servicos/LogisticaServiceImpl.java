@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import br.com.ufrj.msi2.netuno.modelo.entidades.Carga;
 import br.com.ufrj.msi2.netuno.modelo.entidades.EmpresaTransporte;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Pregao;
 import br.com.ufrj.msi2.netuno.modelo.entidades.RepresEmpTrans;
@@ -52,6 +53,16 @@ public class LogisticaServiceImpl implements LogisticaService{
 
 	public void salvarRepresEmpTrans(RepresEmpTrans repEmpTrans) {
 		represEmpTransService.salvar(repEmpTrans);
+	}
+
+	@Override
+	public List<Carga> getCargasSemPregao() {
+		return pregaoService.recuperaCargasSemPregao();
+	}
+
+	@Override
+	public void salvarPregao(Pregao pregao) {
+		pregaoService.salvarPregao(pregao);
 	}
 
 }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:head />
+
+	<h:body>
+		<ui:composition template="/templates/template.xhtml">
+			<ui:define name="content">
+				<p:outputLabel value="Olá, " /><b><h:outputText value="#{abrirPregoesModel.agentelogistica.nome}" rendered="#{not empty abrirPregoesController}" /></b><br /><br />
+				<h:form id="formAbrirPregao">
+					<h2>Abrir pregões</h2>
+					<p:dataTable 	id="tabelaCargas"
+									value="#{abrirPregoesModel.cargasSemPregao}"
+									var="carga"
+									rendered="#{not empty abrirPregoesModel.cargasSemPregao}"
+									emptyMessage="Nenhuma carga sem pregão.">
+						<p:column headerText="Identificador" sortBy="#{carga.id}">
+							<p:outputLabel value="#{carga.id}" />
+						</p:column>
+						<p:column headerText="Descrição" sortBy="#{carga.descricao}">
+							<p:outputLabel value="#{carga.descricao}" />
+						</p:column>
+						<p:column headerText="Pregão">
+							<p:commandButton value="Abrir pregão" icon="ui-icon-squaresmall-plus" action="#{abrirPregoesController.inserirPregao(carga)}" update="@form"/>
+						</p:column>
+					</p:dataTable>													
+					<f:facet name="footer">
+						<p:button outcome="/logistica/home" value="Sair" icon="ui-icon-arrowreturnthick-1-w"/>
+					</f:facet>
+				</h:form>  
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</html>

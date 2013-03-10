@@ -54,6 +54,9 @@
     NAME="output1" PATH="/logistica/transporte/cadEmpTrans.xhtml"
     TARGET="rules:#logistica#transporte#cadEmpTrans.xhtml"
     TITLE="cadEmpTrans" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="abrirPregao::#logistica#pregoes#abrir.xhtml"
+    NAME="output2" PATH="/logistica/pregoes/abrir.xhtml"
+    TARGET="rules:#logistica#pregoes#abrir.xhtml" TITLE="abrirPregao" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#logistica#pregoes#listar.xhtml"
@@ -82,13 +85,16 @@
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#logistica#transporte#cadEmpTrans.xhtml"
-  PATH="/logistica/transporte/cadEmpTrans.xhtml" SHAPE="488,384,50,41" model-entity="JSFProcessGroup">
+  PATH="/logistica/transporte/cadEmpTrans.xhtml" SHAPE="624,360,50,41" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#logistica#transporte#cadEmpTrans.xhtml:0"
    NAME="item" PATH="/logistica/transporte/cadEmpTrans.xhtml" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT ID="voltarLogistica::#logistica#home.xhtml"
     NAME="output" PATH="/logistica/home.xhtml"
-    SHAPE="537,416,542,416,542,440,296,440,296,312,311,312"
+    SHAPE="673,392,680,392,680,424,296,424,296,312,311,312"
     TARGET="rules:#logistica#home.xhtml" TITLE="voltarLogistica" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#logistica#pregoes#abrir.xhtml"
+  PATH="/logistica/pregoes/abrir.xhtml" SHAPE="392,392,50,25"
+  model-entity="JSFProcessGroup" persistent="true"/>
 </PROCESS>

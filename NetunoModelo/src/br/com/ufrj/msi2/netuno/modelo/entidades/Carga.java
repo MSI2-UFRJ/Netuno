@@ -9,6 +9,8 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -19,6 +21,15 @@ import javax.persistence.Table;
  * @author Thiago, Paula
  *
  */
+
+@NamedQueries(
+		{
+			@NamedQuery(name="Carga.recuperaCargasSemPregao",
+						query="from Carga as carga where carga not in (select carga from Pregao as pregao inner join pregao.anuncia as carga)"
+			)
+		}
+)
+
 @Entity
 @Table(name="carga")
 @PrimaryKeyJoinColumn(name="id")

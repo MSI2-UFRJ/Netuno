@@ -45,6 +45,10 @@
    <from-outcome>cadEmpTrans</from-outcome>
    <to-view-id>/logistica/transporte/cadEmpTrans.xhtml</to-view-id>
   </navigation-case>
+  <navigation-case>
+   <from-outcome>abrirPregao</from-outcome>
+   <to-view-id>/logistica/pregoes/abrir.xhtml</to-view-id>
+  </navigation-case>
  </navigation-rule>
  <navigation-rule>
   <from-view-id>/portos/home.xhtml</from-view-id>

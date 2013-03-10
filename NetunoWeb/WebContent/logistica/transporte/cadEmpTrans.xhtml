@@ -18,19 +18,19 @@
 							<f:facet name="header">
 								Empresa de transporte
 							</f:facet>
-							<h:outputLabel for="nome" value="Nome: "/>
+							<p:outputLabel for="nome" value="Nome:"/>
 							<p:inputText id="nome" value="#{empTransModel.empTrans.nome}" required="true" requiredMessage="Por favor, informe o nome da empresa."/>
 							
-							<h:outputLabel for="representantes" value="Representantes: "/>
+							<p:outputLabel for="representantes" value="Representantes:"/>
 							<p:dataTable id="representantes" var="representante" value="#{empTransController.listRepToInsert}" emptyMessage="Nenhum representante adicionado.">
 								<p:column headerText="Nome">
-									<h:inputText value="#{representante.nome}" required="true" requiredMessage="Por favor, informe o nome do representante." />
+									<p:inputText value="#{representante.nome}" required="true" requiredMessage="Por favor, informe o nome do representante." />
 								</p:column>
 								<p:column headerText="Login">
-									<h:inputText value="#{representante.login}" required="true" requiredMessage="Por favor, informe o login do representante."/>
+									<p:inputText value="#{representante.login}" required="true" requiredMessage="Por favor, informe o login do representante."/>
 								</p:column>
 								<p:column headerText="Senha">
-									<h:inputText value="#{representante.senha}" required="true" requiredMessage="Por favor, informe a senha do representante."/>
+									<p:inputText value="#{representante.senha}" required="true" requiredMessage="Por favor, informe a senha do representante."/>
 								</p:column>
 							</p:dataTable>
 							
