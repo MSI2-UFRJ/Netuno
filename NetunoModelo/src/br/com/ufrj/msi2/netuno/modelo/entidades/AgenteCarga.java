@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -27,6 +28,17 @@ public class AgenteCarga extends Usuario {
 	@JoinColumn(name="agenteDesembarque_id")
 	private List<CargaComponente> cargasComponenteADesembarcar;
 
+	@ManyToOne
+	private Porto pertence;
+	
+	public Porto getPertence() {
+		return pertence;
+	}
+	
+	public void setPertence(Porto pertence) {
+		this.pertence = pertence;
+	}
+	
 	public List<CargaComponente> getCargasComponenteAEmbarcar() {
 		return cargasComponenteAEmbarcar;
 	}

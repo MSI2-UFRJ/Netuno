@@ -36,7 +36,7 @@ public class AlocaCargaConteinerControllerBean extends MBean {
 		{
 			alocaCargaConteinerModelBean.setCarga(gCargaService.obterPorId(cargaId));
 			
-			//alocaCargaConteinerModelBean.setListDisponiveis(gCargaService.listaConteinersDisponiveis());
+			//alocaCargaConteinerModelBean.setListDisponiveis(gCargaService.listaConteinersDisponiveis(agente.));
 		}
 	}
 	
