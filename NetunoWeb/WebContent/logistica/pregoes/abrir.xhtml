@@ -20,7 +20,6 @@
 								<p:dataTable 	id="tabelaCargas"
 												value="#{abrirPregoesModel.cargasSemPregao}"
 												var="carga"
-												rendered="#{not empty abrirPregoesModel.cargasSemPregao}"
 												emptyMessage="Nenhuma carga sem pregão.">
 									<p:column headerText="Identificador" sortBy="#{carga.id}">
 										<p:outputLabel value="#{carga.id}" />
