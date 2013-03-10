@@ -67,19 +67,44 @@ public class ContratacaoControllerBean extends MBean {
 	}
 	
 	public String salvar() {
-//		if(!contratacaoModelBean.isEnderecoColeta()) {
-//			contratacaoModelBean.getContrato().setEnderecoColeta(null);
-//		}
-//		
-//		if(!contratacaoModelBean.isEnderecoEntrega()) {
-//			contratacaoModelBean.getContrato().setEnderecoEntrega(null);
-//		}
-//		
-//		contratacaoService.salvarContrato(contratacaoModelBean.getContratante(), contratacaoModelBean.getContrato());
-//		
-//		super.sendMessage(null, FacesMessage.SEVERITY_INFO, "Contrato criado com sucesso", null);
+		boolean valida = true;
+		
+		if(contratacaoModelBean.isEnderecoColeta()) {
+			if(contratacaoModelBean.getContrato().getEnderecoColeta().trim().equals("")) {
+				super.sendMessage(null, FacesMessage.SEVERITY_ERROR, "Endereço de coleta inválido.", null);
+				valida = false;
+			}
+		} else {
+			contratacaoModelBean.getContrato().setEnderecoColeta(null);
+		}
+		
+		if(contratacaoModelBean.isEnderecoEntrega()) {
+			if(contratacaoModelBean.getContrato().getEnderecoEntrega().trim().equals("")) {
+				super.sendMessage(null, FacesMessage.SEVERITY_ERROR, "Endereço de entrega inválido.", null);
+				valida = false;
+			}
+		} else {
+			contratacaoModelBean.getContrato().setEnderecoEntrega(null);
+		}
+		
+		System.out.println(contratacaoModelBean.getContrato().getPortoOrigem());
+		System.out.println(contratacaoModelBean.getContrato().getPortoDestino());
+		if(contratacaoModelBean.getContrato().getPortoOrigem().equals(contratacaoModelBean.getContrato().getPortoDestino())) {
+			super.sendMessage(null, FacesMessage.SEVERITY_ERROR, "O porto origem deve ser diferente do porto destino.", null);
+			valida = false;
+		}
+		
+		
+		
+		if(valida) {
+			//contratacaoService.salvarContrato(contratacaoModelBean.getContratante(), contratacaoModelBean.getContrato());
+			
+			//super.sendMessage(null, FacesMessage.SEVERITY_INFO, "Contrato criado com sucesso", null);
 
-		return "verContratos";
+			return "verContratos";
+		}
+		
+		return null;
 	}
 	
 	public String cancelar() {

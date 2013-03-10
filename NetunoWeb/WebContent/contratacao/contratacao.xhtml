@@ -11,11 +11,11 @@
 <h:body>
 <ui:composition template="/templates/template.xhtml">
 	<ui:define name="content">
-		<p:messages id="mensagens" globalOnly="true" />
 		<h:outputLabel value="Ola, " /><h:outputText value="#{contratacaoModel.contratante.nome}" rendered="#{not empty contratacaoController}" /><br />
 		<h:outputLabel value="Novo Contrato" /><br />
 		
 		<h:form id="formContrato">
+			<p:messages id="mensagens" globalOnly="true" autoUpdate="true"/>
 			<h:outputLabel value="Endereço de coleta" />
 			<p:selectBooleanCheckbox value="#{contratacaoModel.enderecoColeta}">
                 <p:ajax update="enderecoColetaInputText dataEstimada" listener="#{contratacaoController.atualizarPrazo()}" />
@@ -39,26 +39,36 @@
             <p:message for="enderecoEntregaInputText" autoUpdate="true"/><br />
             
             <h:outputLabel value="Porto Origem" />
-            <p:selectOneMenu value="#{contratacaoModel.contrato.portoOrigem}" converter="portoConverter">
+            <p:selectOneMenu 	id="portoOrigemMenu"
+            					value="#{contratacaoModel.contrato.portoOrigem}"
+            					converter="portoConverter"
+            					required="true"
+            					requiredMessage="Selecione um porto.">
             	<f:selectItem itemLabel="-" itemValue=""/>
 	   			<f:selectItems 	value="#{contratacaoModel.portos}"
 	   							var="portoOrigem"
 	   							itemLabel="#{portoOrigem.nome}"
 	   							itemValue="#{portoOrigem}" />
 	   			<f:ajax listener="#{contratacaoController.atualizarPrazo()}" update="dataEstimada"/>
-	   		</p:selectOneMenu><br />
+	   		</p:selectOneMenu>
+	   		<p:message for="portoOrigemMenu" autoUpdate="true"/><br />
 	   		
 	   		<h:outputLabel value="Porto Destino" />
-            <p:selectOneMenu value="#{contratacaoModel.contrato.portoDestino}" converter="portoConverter">
+            <p:selectOneMenu 	id="portoDestinoMenu"
+            					value="#{contratacaoModel.contrato.portoDestino}"
+            					converter="portoConverter"
+            					required="true"
+            					requiredMessage="Selecione um porto.">
             	<f:selectItem itemLabel="-" itemValue=""/>
 	   			<f:selectItems 	value="#{contratacaoModel.portos}"
 	   							var="portoDestino"
 	   							itemLabel="#{portoDestino.nome}"
 	   							itemValue="#{portoDestino}" />
 	   			<p:ajax listener="#{contratacaoController.atualizarPrazo()}" update="dataEstimada"/>
-	   		</p:selectOneMenu><br />
+	   		</p:selectOneMenu>
+			<p:message for="portoDestinoMenu" autoUpdate="true"/><br /><br />
 	   		
-	   		<h:outputLabel value="Data estimada" />
+	   		<h:outputLabel value="Data estimada:  " />
 	   		<h:outputText 	id="dataEstimada"
 	   						value="#{contratacaoModel.contrato.dataEstimada}">
 				<f:convertDateTime type="date" pattern="dd/MM/yyyy"/>

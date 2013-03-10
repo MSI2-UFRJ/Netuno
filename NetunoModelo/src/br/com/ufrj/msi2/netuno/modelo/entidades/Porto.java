@@ -63,4 +63,15 @@ public class Porto implements Serializable {
 		this.agentes = agentes;
 	}
 	
+	@Override
+	public boolean equals(Object arg0) {
+		Porto porto = (Porto) arg0;
+		
+		if(porto == null) {
+			return false;
+		}
+		
+		return this.id == porto.getId();
+	}
+	
 }
