@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import br.com.ufrj.msi2.netuno.attributes.Attributes;
 import br.com.ufrj.msi2.netuno.carga.servicos.GerenciarCargasService;
+import br.com.ufrj.msi2.netuno.carga.servicos.GerenciarConteinersService;
 import br.com.ufrj.msi2.netuno.modelo.entidades.AgenteCarga;
 
 @ManagedBean(name="alocaCargaConteinerController")
@@ -17,6 +18,9 @@ import br.com.ufrj.msi2.netuno.modelo.entidades.AgenteCarga;
 public class AlocaCargaConteinerControllerBean extends MBean {
 	@EJB
 	public GerenciarCargasService gCargaService;
+	@EJB
+	public GerenciarConteinersService gConteinerService;
+	
 	private AgenteCarga agente;
 	private int cargaId = 0;
 
@@ -36,7 +40,7 @@ public class AlocaCargaConteinerControllerBean extends MBean {
 		{
 			alocaCargaConteinerModelBean.setCarga(gCargaService.obterPorId(cargaId));
 			
-			//alocaCargaConteinerModelBean.setListDisponiveis(gCargaService.listaConteinersDisponiveis(agente.));
+			alocaCargaConteinerModelBean.setListDisponiveis(gConteinerService.listaConteinersDisponiveis(alocaCargaConteinerModelBean.getCarga(),agente.getPertence()));
 		}
 	}
 	

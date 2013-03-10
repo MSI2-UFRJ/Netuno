@@ -41,9 +41,6 @@ public class Conteiner implements Serializable {
 	@ManyToOne(targetEntity = Porto.class)
     private Porto portoOrigem;
 
-	@ManyToOne(targetEntity = Porto.class)
-    private Porto portoDestino;
-
 	public Integer getId() {
 		return id;
 	}
@@ -80,13 +77,4 @@ public class Conteiner implements Serializable {
 	public void setPortoOrigem(Porto portoOrigem) {
 		this.portoOrigem = portoOrigem;
 	}
-
-	public Porto getPortoDestino() {
-		return portoDestino;
-	}
-
-	public void setPortoDestino(Porto portoDestino) {
-		this.portoDestino = portoDestino;
-	}
-
 }
