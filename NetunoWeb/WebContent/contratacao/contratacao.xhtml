@@ -16,73 +16,78 @@
 		
 		<h:form>
 			<h:outputLabel value="Endereço de coleta" />
-			<h:selectBooleanCheckbox value="#{contratacaoModel.enderecoColeta}">
-                <f:ajax execute="@form" event="click" render="@form" listener="#{contratacaoController.atualizarPrazo()}" />
-            </h:selectBooleanCheckbox><br />
-            <h:inputText value="#{contratacaoModel.contrato.enderecoColeta}" disabled="#{not contratacaoModel.enderecoColeta}"/><br />
+			<p:selectBooleanCheckbox value="#{contratacaoModel.enderecoColeta}">
+                <p:ajax update="enderecoColetaInputText dataEstimada" listener="#{contratacaoController.atualizarPrazo()}" />
+            </p:selectBooleanCheckbox><br />
+            <h:inputText 	id="enderecoColetaInputText"
+            				value="#{contratacaoModel.contrato.enderecoColeta}"
+            				disabled="#{not contratacaoModel.enderecoColeta}"/><br />
             
             <h:outputLabel value="Endereço de entrega" />
-			<h:selectBooleanCheckbox value="#{contratacaoModel.enderecoEntrega}">
-                <f:ajax execute="@form" event="click" render="@form" listener="#{contratacaoController.atualizarPrazo()}" />
-            </h:selectBooleanCheckbox><br />
-            <h:inputText value="#{contratacaoModel.contrato.enderecoEntrega}" disabled="#{not contratacaoModel.enderecoEntrega}"/><br />
+			<p:selectBooleanCheckbox value="#{contratacaoModel.enderecoEntrega}">
+                <p:ajax update="enderecoEntregaInputText dataEstimada" listener="#{contratacaoController.atualizarPrazo()}" />
+            </p:selectBooleanCheckbox><br />
+            <h:inputText 	id="enderecoEntregaInputText"
+            				value="#{contratacaoModel.contrato.enderecoEntrega}"
+            				disabled="#{not contratacaoModel.enderecoEntrega}"/><br />
             
             <h:outputLabel value="Porto Origem" />
-            <h:selectOneMenu value="#{contratacaoModel.contrato.portoOrigem}" converter="portoConverter">
+            <p:selectOneMenu value="#{contratacaoModel.contrato.portoOrigem}" converter="portoConverter">
             	<f:selectItem itemLabel="-" itemValue=""/>
 	   			<f:selectItems 	value="#{contratacaoModel.portos}"
 	   							var="portoOrigem"
 	   							itemLabel="#{portoOrigem.nome}"
 	   							itemValue="#{portoOrigem}" />
-	   			<f:ajax execute="@form" event="change" listener="#{contratacaoController.atualizarPrazo()}" render="@form"/>
-	   		</h:selectOneMenu><br />
+	   			<f:ajax listener="#{contratacaoController.atualizarPrazo()}" update="dataEstimada"/>
+	   		</p:selectOneMenu><br />
 	   		
 	   		<h:outputLabel value="Porto Destino" />
-            <h:selectOneMenu value="#{contratacaoModel.contrato.portoDestino}" converter="portoConverter">
+            <p:selectOneMenu value="#{contratacaoModel.contrato.portoDestino}" converter="portoConverter">
             	<f:selectItem itemLabel="-" itemValue=""/>
 	   			<f:selectItems 	value="#{contratacaoModel.portos}"
 	   							var="portoDestino"
 	   							itemLabel="#{portoDestino.nome}"
 	   							itemValue="#{portoDestino}" />
-	   			<f:ajax execute="@form" event="change" listener="#{contratacaoController.atualizarPrazo()}" render="@form"/>
-	   		</h:selectOneMenu><br />
+	   			<p:ajax listener="#{contratacaoController.atualizarPrazo()}" update="dataEstimada"/>
+	   		</p:selectOneMenu><br />
 	   		
 	   		<h:outputLabel value="Data estimada" />
-	   		<h:outputText value="#{contratacaoModel.contrato.dataEstimada}">
-				<f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+	   		<h:outputText 	id="dataEstimada"
+	   						value="#{contratacaoModel.contrato.dataEstimada}">
+				<f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
 			</h:outputText><br /><br />
 			
 			<p:commandButton value="Nova Carga" update="@form"
 				action="#{contratacaoController.adicionarCarga(false)}" />
-				<p:commandButton value="Nova Carga Perecível " update="@form"
+			<p:commandButton value="Nova Carga Perecível " update="@form"
 				action="#{contratacaoController.adicionarCarga(true)}" />
 
-			<h:dataTable 	value="#{contratacaoModel.contrato.cargas}"
+			<p:dataTable 	value="#{contratacaoModel.contrato.cargas}"
 							var="carga">
-				<h:column>
+				<p:column>
 					<f:facet name="header">Descrição</f:facet>
-					<h:inputText value="#{carga.descricao}" />
-				</h:column>
-				<h:column>
+					<p:inputText value="#{carga.descricao}" />
+				</p:column>
+				<p:column>
 					<f:facet name="header">Peso</f:facet>
-					<h:inputText value="#{carga.peso}" />
-				</h:column>
-				<h:column>
+					<p:inputText value="#{carga.peso}" />
+				</p:column>
+				<p:column>
 					<f:facet name="header">Data de Validade</f:facet>
 					<h:outputLabel value="-" rendered="#{not carga.cargaPerecivel}"/>
-					<h:outputLabel value="#{carga.dataValidade}" rendered="#{carga.cargaPerecivel}"/>
-				</h:column>
-				<h:column>
+					<p:calendar value="carga.dataValidade" rendered="#{carga.cargaPerecivel}"/> 
+				</p:column>
+				<p:column>
 					<f:facet name="header">Operação</f:facet>
 					<p:commandButton 	value="Apagar"
 										update="@form"
 										action="#{contratacaoController.removerCarga(carga)}"/>
-				</h:column>
-			</h:dataTable>
+				</p:column>
+			</p:dataTable>
 
 			<br /><br />	   		
-	   		<h:commandButton action="#{contratacaoController.salvar()}" value="Salvar" />
-	   		<h:commandButton action="#{contratacaoController.cancelar()}" value="Cancelar" />
+	   		<p:commandButton action="#{contratacaoController.salvar()}" value="Salvar" ajax="false"/>
+	   		<p:commandButton action="#{contratacaoController.cancelar()}" value="Cancelar" ajax="false"/>
 		</h:form>
 		
 		</ui:define>
