@@ -41,45 +41,78 @@ public abstract class CargaComponente implements Serializable {
 	
 	@Column(name = "peso")
 	private Double peso;
+	
+	@Column(name = "altura")
+	private Double altura;
+	
+	@Column(name = "largura")
+	private Double largura;
+	
+	@Column(name = "comprimento")
+	private Double comprimento;
+
+	public Integer getId() {
+		return id;
+	}
 
 	public AgenteCarga getAgenteEmbarque() {
 		return agenteEmbarque;
-	}
-
-	public void setAgenteEmbarque(AgenteCarga agenteEmbarque) {
-		this.agenteEmbarque = agenteEmbarque;
 	}
 
 	public AgenteCarga getAgenteDesembarque() {
 		return agenteDesembarque;
 	}
 
-	public void setAgenteDesembarque(AgenteCarga agenteDesembarque) {
-		this.agenteDesembarque = agenteDesembarque;
-	}
-
 	public Conteiner getConteiner() {
 		return conteiner;
-	}
-
-	public void setConteiner(Conteiner conteiner) {
-		this.conteiner = conteiner;
-	}
-
-	public Integer getId() {
-		return id;
 	}
 
 	public Double getPeso() {
 		return peso;
 	}
 
+	public Double getAltura() {
+		return altura;
+	}
+
+	public Double getLargura() {
+		return largura;
+	}
+
+	public Double getComprimento() {
+		return comprimento;
+	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
+	public void setAgenteEmbarque(AgenteCarga agenteEmbarque) {
+		this.agenteEmbarque = agenteEmbarque;
+	}
+
+	public void setAgenteDesembarque(AgenteCarga agenteDesembarque) {
+		this.agenteDesembarque = agenteDesembarque;
+	}
+
+	public void setConteiner(Conteiner conteiner) {
+		this.conteiner = conteiner;
+	}
+
 	public void setPeso(Double peso) {
 		this.peso = peso;
+	}
+
+	public void setAltura(Double altura) {
+		this.altura = altura;
+	}
+
+	public void setLargura(Double largura) {
+		this.largura = largura;
+	}
+
+	public void setComprimento(Double comprimento) {
+		this.comprimento = comprimento;
 	}
 
 }
