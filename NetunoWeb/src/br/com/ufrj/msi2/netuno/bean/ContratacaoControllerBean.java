@@ -67,17 +67,17 @@ public class ContratacaoControllerBean extends MBean {
 	}
 	
 	public String salvar() {
-		if(!contratacaoModelBean.isEnderecoColeta()) {
-			contratacaoModelBean.getContrato().setEnderecoColeta(null);
-		}
-		
-		if(!contratacaoModelBean.isEnderecoEntrega()) {
-			contratacaoModelBean.getContrato().setEnderecoEntrega(null);
-		}
-		
-		contratacaoService.salvarContrato(contratacaoModelBean.getContratante(), contratacaoModelBean.getContrato());
-		
-		super.sendMessage(null, FacesMessage.SEVERITY_INFO, "Contrato criado com sucesso", null);
+//		if(!contratacaoModelBean.isEnderecoColeta()) {
+//			contratacaoModelBean.getContrato().setEnderecoColeta(null);
+//		}
+//		
+//		if(!contratacaoModelBean.isEnderecoEntrega()) {
+//			contratacaoModelBean.getContrato().setEnderecoEntrega(null);
+//		}
+//		
+//		contratacaoService.salvarContrato(contratacaoModelBean.getContratante(), contratacaoModelBean.getContrato());
+//		
+//		super.sendMessage(null, FacesMessage.SEVERITY_INFO, "Contrato criado com sucesso", null);
 
 		return "verContratos";
 	}

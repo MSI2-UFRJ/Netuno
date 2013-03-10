@@ -78,4 +78,18 @@
    <to-view-id>/logistica/home.xhtml</to-view-id>
   </navigation-case>
  </navigation-rule>
+ 
+ <!-- Definicao do arquivo de mensagens -->  
+  
+<application>  
+    <resource-bundle>  
+        <base-name>br.com.ufrj.msi2.netuno.resources.ContratacaoMessages</base-name>
+        <var>contratacaoMsg</var>  
+    </resource-bundle>
+    <locale-config>
+        <default-locale>pt</default-locale>
+        <supported-locale>pt</supported-locale>
+        <supported-locale>en</supported-locale>
+   </locale-config>
+</application>  
 </faces-config>

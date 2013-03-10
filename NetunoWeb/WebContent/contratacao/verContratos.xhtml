@@ -22,12 +22,9 @@
 
 		    <p:commandButton value="Novo contrato" action="#{verContratosController.novoContrato()}" ajax="false"/>
 
-		    <p:outputLabel value="Sem contratos" rendered="#{empty verContratosModel.listaContratos}"/>
-
 			<p:dataTable 	id="tabelaContratos"
 							value="#{verContratosModel.listaContratos}"
-							var="contrato"
-							rendered="#{not empty verContratosModel.listaContratos}">
+							var="contrato">
 				<p:column>
 					<f:facet name="header">Identificador</f:facet>
 					<p:outputLabel value="#{contrato.id}" />

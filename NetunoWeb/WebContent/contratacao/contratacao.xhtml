@@ -12,25 +12,31 @@
 <ui:composition template="/templates/template.xhtml">
 	<ui:define name="content">
 		<p:messages id="mensagens" globalOnly="true" />
-		<h:outputLabel value="Olá, " /><h:outputText value="#{contratacaoModel.contratante.nome}" rendered="#{not empty contratacaoController}" /><br />
+		<h:outputLabel value="Ola, " /><h:outputText value="#{contratacaoModel.contratante.nome}" rendered="#{not empty contratacaoController}" /><br />
 		<h:outputLabel value="Novo Contrato" /><br />
 		
-		<h:form>
+		<h:form id="formContrato">
 			<h:outputLabel value="Endereço de coleta" />
 			<p:selectBooleanCheckbox value="#{contratacaoModel.enderecoColeta}">
                 <p:ajax update="enderecoColetaInputText dataEstimada" listener="#{contratacaoController.atualizarPrazo()}" />
             </p:selectBooleanCheckbox><br />
-            <h:inputText 	id="enderecoColetaInputText"
+            <p:inputText 	id="enderecoColetaInputText"
             				value="#{contratacaoModel.contrato.enderecoColeta}"
-            				disabled="#{not contratacaoModel.enderecoColeta}"/><br />
+            				disabled="#{not contratacaoModel.enderecoColeta}"
+            				required="true"
+            				requiredMessage="Esse campo deve ser preenchido."/>
+            <p:message for="enderecoColetaInputText" autoUpdate="true"/><br />
             
             <h:outputLabel value="Endereço de entrega" />
 			<p:selectBooleanCheckbox value="#{contratacaoModel.enderecoEntrega}">
                 <p:ajax update="enderecoEntregaInputText dataEstimada" listener="#{contratacaoController.atualizarPrazo()}" />
             </p:selectBooleanCheckbox><br />
-            <h:inputText 	id="enderecoEntregaInputText"
+            <p:inputText 	id="enderecoEntregaInputText"
             				value="#{contratacaoModel.contrato.enderecoEntrega}"
-            				disabled="#{not contratacaoModel.enderecoEntrega}"/><br />
+            				disabled="#{not contratacaoModel.enderecoEntrega}"
+            				required="true"
+            				requiredMessage="Esse campo deve ser preenchido."/>
+            <p:message for="enderecoEntregaInputText" autoUpdate="true"/><br />
             
             <h:outputLabel value="Porto Origem" />
             <p:selectOneMenu value="#{contratacaoModel.contrato.portoOrigem}" converter="portoConverter">
@@ -87,7 +93,7 @@
 			</p:dataTable>
 
 			<br /><br />	   		
-	   		<p:commandButton action="#{contratacaoController.salvar()}" value="Salvar" ajax="false"/>
+	   		<p:commandButton action="#{contratacaoController.salvar()}" value="Salvar" type="submit" update="formContrato"/>
 	   		<p:commandButton action="#{contratacaoController.cancelar()}" value="Cancelar" ajax="false"/>
 		</h:form>
 		
