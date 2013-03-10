@@ -9,3 +9,6 @@
 /NetunoWeb/WebContent/WEB-INF/lib/NetunoModelo.jar
 /NetunoWeb/WebContent/WEB-INF/lib/NetunoSistema.jar
 /NetunoModelo/src/db_schema.sql
+
+/NetunoCarga/build/classes/META-INF/MANIFEST.MF
+/NetunoCarga/build/classes/META-INF/ejb-jar.xml

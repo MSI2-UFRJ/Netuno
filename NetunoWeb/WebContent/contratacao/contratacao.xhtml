@@ -11,6 +11,7 @@
 <h:body>
 <ui:composition template="/templates/template.xhtml">
 	<ui:define name="content">
+		<p:messages id="mensagens" globalOnly="true" />
 		<h:outputLabel value="Olá, " /><h:outputText value="#{contratacaoModel.contratante.nome}" rendered="#{not empty contratacaoController}" /><br />
 		<h:outputLabel value="Novo Contrato" /><br />
 		

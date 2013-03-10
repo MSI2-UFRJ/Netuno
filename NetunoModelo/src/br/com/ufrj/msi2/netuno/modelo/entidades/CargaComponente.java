@@ -41,15 +41,6 @@ public abstract class CargaComponente implements Serializable {
 	
 	@Column(name = "peso")
 	private Double peso;
-	
-	@Column(name = "altura")
-	private Double altura;
-	
-	@Column(name = "largura")
-	private Double largura;
-	
-	@Column(name = "comprimento")
-	private Double comprimento;
 
 	public Integer getId() {
 		return id;
@@ -71,18 +62,6 @@ public abstract class CargaComponente implements Serializable {
 		return peso;
 	}
 
-	public Double getAltura() {
-		return altura;
-	}
-
-	public Double getLargura() {
-		return largura;
-	}
-
-	public Double getComprimento() {
-		return comprimento;
-	}
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -101,18 +80,6 @@ public abstract class CargaComponente implements Serializable {
 
 	public void setPeso(Double peso) {
 		this.peso = peso;
-	}
-
-	public void setAltura(Double altura) {
-		this.altura = altura;
-	}
-
-	public void setLargura(Double largura) {
-		this.largura = largura;
-	}
-
-	public void setComprimento(Double comprimento) {
-		this.comprimento = comprimento;
 	}
 
 }
