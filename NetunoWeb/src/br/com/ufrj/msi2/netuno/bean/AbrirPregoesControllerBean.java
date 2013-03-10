@@ -29,7 +29,7 @@ public class AbrirPregoesControllerBean {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		AgenteLogistica agentelogistica = (AgenteLogistica) session.getAttribute(Attributes.SessionAttributes.LOGIN.toString());
 		if(agentelogistica != null) abrirPregoesModelBean.setAgentelogistica(agentelogistica);
-		abrirPregoesModelBean.setCargasSemPregao(logisticaService.getCargasSemPregao());
+		//abrirPregoesModelBean.setCargasSemPregao(logisticaService.getCargasSemPregao());
 	}
 	
 	public AbrirPregoesModelBean getAbrirPregoesModelBean() {

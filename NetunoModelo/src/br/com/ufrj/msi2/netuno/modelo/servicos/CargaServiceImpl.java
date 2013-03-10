@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+
 import br.com.ufrj.msi2.netuno.modelo.entidades.Carga;
 
 
@@ -35,6 +36,11 @@ public class CargaServiceImpl implements CargaService {
 	
 	public void salvarCarga(Carga carga) {
 		em.persist(carga);
+	}
+	
+	@Override
+	public Carga obterPorId(Integer idCarga){
+		return this.em.find(Carga.class, idCarga);
 	}
 
 }

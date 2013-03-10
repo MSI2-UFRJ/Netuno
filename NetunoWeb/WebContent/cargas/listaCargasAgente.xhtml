@@ -11,20 +11,32 @@
 	<ui:composition template="/templates/template.xhtml">
 		<ui:define name="content">
 			<f:metadata>
-		        <f:event type="preRenderView" listener="#{listaCargasAgenteController.onPageLoad}"/>
+				<f:event type="preRenderView"
+					listener="#{listaCargasAgenteController.onPageLoad}" />
 			</f:metadata>
+			<h3>Lista de Cargas Normais</h3>
 			<h:form>
-			<h:dataTable 	id="tabelaCargas"
-							value="#{listaCargasAgenteModel.listaCargas}"
-							var="carga"
-							rendered="#{not empty listaCargasAgenteModel.listaCargas}">
+				<h:dataTable id="tabelaCargas"
+					value="#{listaCargasAgenteModel.listaCargas}" var="carga"
+					rendered="#{not empty listaCargasAgenteModel.listaCargas}">
 					<h:column>
 						<f:facet name="header">Identificador</f:facet>
 						<h:outputLabel value="#{carga.id}" />
 					</h:column>
 					<h:column>
+						<f:facet name="header">Descricao</f:facet>
+						<h:outputLabel value="#{carga.descricao}" />
+					</h:column>
+					<h:column>
 						<f:facet name="header">Peso</f:facet>
 						<h:outputLabel value="#{carga.peso}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header"></f:facet>
+						<h:button outcome="/cargas/alocaCargaConteiner"
+							value="Alocar no Conteiner">
+							<f:param name="cargaId" value="#{carga.id}" />
+						</h:button>
 					</h:column>
 				</h:dataTable>
 			</h:form>

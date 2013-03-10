@@ -16,5 +16,6 @@ public interface CargaService extends Serializable {
 	public CriteriaBuilder getCriteriaBuilder();
 
 	public void salvarCarga(Carga carga);
-
+	
+	public Carga obterPorId(Integer idCarga);
 }

@@ -10,5 +10,6 @@ import br.com.ufrj.msi2.netuno.modelo.entidades.Carga;
 
 @Local
 public interface GerenciarCargasService extends Serializable {
-	public List<Carga> listaCargasAgente(AgenteCarga agente);
+	public List<Carga> listaCargasParaEmbarque(AgenteCarga agente);
+	public Carga obterPorId(Integer idCarga);
 }

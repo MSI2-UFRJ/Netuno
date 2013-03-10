@@ -32,7 +32,7 @@ public class ListaCargasAgenteControllerBean extends MBean {
 	
 	public void onPageLoad()
 	{
-		listaCargasAgenteModelBean.setListaCargas(this.cargaService.listaCargasAgente(agente));
+		listaCargasAgenteModelBean.setListaCargas(this.cargaService.listaCargasParaEmbarque(agente));
 	}
 	
 	public GerenciarCargasService getCargaService() {

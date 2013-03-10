@@ -7,6 +7,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Root;
 
 import br.com.ufrj.msi2.netuno.modelo.entidades.AgenteCarga;
@@ -29,7 +30,7 @@ public class GerenciarCargasServiceImpl implements GerenciarCargasService {
 	}
 
 	@Override
-	public List<Carga> listaCargasAgente(AgenteCarga agente) {
+	public List<Carga> listaCargasParaEmbarque(AgenteCarga agente) {
 		List<Carga> resultList = new ArrayList<Carga>();
 
 		try {
@@ -37,8 +38,9 @@ public class GerenciarCargasServiceImpl implements GerenciarCargasService {
 			CriteriaBuilder builder = cargaService.getCriteriaBuilder();
 			CriteriaQuery<Carga> criteria = builder.createQuery(Carga.class);
 			Root<Carga> cargaRoot = criteria.from(Carga.class);
-			Root<AgenteCarga> agenteEmbRoot = criteria.from(AgenteCarga.class);
-			criteria.where(builder.equal(agenteEmbRoot, cargaRoot.get("agenteEmbarque")));
+			
+			Expression<String> agenteEmbarque = cargaRoot.get("agenteEmbarque");
+			criteria.select(cargaRoot).where(builder.equal(builder.lower(agenteEmbarque),agente.getId()));
 			
 			resultList = cargaService.filtrar(criteria);
 		} catch (Exception e) {
@@ -46,4 +48,13 @@ public class GerenciarCargasServiceImpl implements GerenciarCargasService {
 		}
 		return resultList;
 	}
+	
+	@Override
+	public Carga obterPorId(Integer idCarga)
+	{
+		if(idCarga!=null && idCarga > 0) return this.cargaService.obterPorId(idCarga);
+		else return null;
+	}
+	
+	
 }
