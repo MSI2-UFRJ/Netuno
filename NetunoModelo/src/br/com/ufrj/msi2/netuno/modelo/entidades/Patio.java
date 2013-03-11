@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -23,6 +24,17 @@ public class Patio implements Serializable {
 	@OneToMany
 	@JoinColumn(name="patio_id")  
 	private List<CargaComponente> cargasComponente;
+	
+	@ManyToOne
+	private Porto porto;
+
+	public Porto getPorto() {
+		return porto;
+	}
+
+	public void setPorto(Porto porto) {
+		this.porto = porto;
+	}
 
 	public Integer getId() {
 		return id;
