@@ -7,10 +7,12 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import br.com.ufrj.msi2.netuno.modelo.entidades.CPF;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Carga;
 import br.com.ufrj.msi2.netuno.modelo.entidades.CargaLog;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Contratante;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Contrato;
+import br.com.ufrj.msi2.netuno.modelo.exceptions.ResultadoNaoEncontradoException;
 import br.com.ufrj.msi2.netuno.modelo.servicos.CargaLogService;
 import br.com.ufrj.msi2.netuno.modelo.servicos.CargaService;
 import br.com.ufrj.msi2.netuno.modelo.servicos.ContratanteService;
@@ -83,6 +85,10 @@ public class ContratacaoServiceImpl implements ContratacaoService {
 
 	        contrato.setDataEstimada(cal.getTime());
 		}
+	}
+	
+	public Contratante recuperaContratantePorCPF(CPF cpf) throws ResultadoNaoEncontradoException {
+		return this.contratanteService.recuperaPorCPF(cpf);
 	}
 	
 	public Contrato recuperaContratoComCargas(Contrato contrato) {

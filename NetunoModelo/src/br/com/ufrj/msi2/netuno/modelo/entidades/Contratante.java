@@ -18,7 +18,9 @@ import javax.persistence.Table;
 @NamedQueries(
 		{
 			@NamedQuery(name="Contratante.recuperaPorIdComFetch",
-					query="select contratante from Contratante contratante left join fetch contratante.contratos c where contratante.id = :id")
+					query="select contratante from Contratante contratante left join fetch contratante.contratos c where contratante.id = :id"),
+			@NamedQuery(name="Contratante.recuperaPorCPF",
+					query="select contratante from Contratante contratante where contratante.cpf = :cpf")
 		}
 	)
 @Entity
