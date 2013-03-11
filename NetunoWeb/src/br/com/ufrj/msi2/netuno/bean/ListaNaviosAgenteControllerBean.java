@@ -35,7 +35,7 @@ public class ListaNaviosAgenteControllerBean extends MBean {
 		listaNaviosAgenteModelBean.setListaNavios(this.navioService.listaNaviosComCarga(agente));
 	}
 	
-	public GerenciarNaviosService getCargaService() {
+	public GerenciarNaviosService getNavioService() {
 		return navioService;
 	}
 

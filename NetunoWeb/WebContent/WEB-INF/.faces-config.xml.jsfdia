@@ -8,9 +8,9 @@
     NAME="output" PATH="/dashboard.xhtml"
     TARGET="rules:#dashboard.xhtml" TITLE="#{Login.autenticar}:logado" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT
-    ID="agenteCarga:#{Login.autenticar}:#cargas#listaCargasAgente.xhtml"
-    NAME="output1" PATH="/cargas/listaCargasAgente.xhtml"
-    TARGET="rules:#cargas#listaCargasAgente.xhtml"
+    ID="agenteCarga:#{Login.autenticar}:#cargas#home.xhtml"
+    NAME="output1" PATH="/cargas/home.xhtml"
+    TARGET="rules:#cargas#home.xhtml"
     TITLE="#{Login.autenticar}:agenteCarga" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT
     ID="contratante:#{Login.autenticar}:#contratacao#verContratos.xhtml"
@@ -95,6 +95,24 @@
  <PROCESS-ITEM NAME="rules:#logistica#pregoes#abrir.xhtml"
   PATH="/logistica/pregoes/abrir.xhtml" SHAPE="392,392,50,25"
   model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#cargas#home.xhtml" PATH="/cargas/home.xhtml"
+  SHAPE="296,488,50,25" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#cargas#home.xhtml:0" NAME="item"
+   PATH="/cargas/home.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="listaCargasAgente::#cargas#listaCargasAgente.xhtml"
+    NAME="output" PATH="/cargas/listaCargasAgente.xhtml"
+    TARGET="rules:#cargas#listaCargasAgente.xhtml"
+    TITLE="listaCargasAgente" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="listaNaviosAgente::#cargas#listaNaviosAgente.xhtml"
+    NAME="output1" PATH="/cargas/listaNaviosAgente.xhtml"
+    TARGET="rules:#cargas#listaNaviosAgente.xhtml"
+    TITLE="listaNaviosAgente" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#cargas#listaCargasAgente.xhtml"
-  PATH="/cargas/listaCargasAgente.xhtml" SHAPE="304,673,0,0" model-entity="JSFProcessGroup"/>
+  PATH="/cargas/listaCargasAgente.xhtml" SHAPE="504,496,50,25" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#cargas#listaNaviosAgente.xhtml"
+  PATH="/cargas/listaNaviosAgente.xhtml" SHAPE="504,544,50,25" model-entity="JSFProcessGroup"/>
 </PROCESS>

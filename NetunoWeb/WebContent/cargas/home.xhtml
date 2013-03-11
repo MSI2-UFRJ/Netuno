@@ -11,7 +11,13 @@
 <h:body>
 <ui:composition template="/templates/template.xhtml">
 	<ui:define name="content">
-		<h:outputLabel value="Cargas" />
+		<h:outputLabel value="Home - Agente de Cargas" />
+		<br></br>
+		<h:button outcome="listaCargasAgente"	value="Listar Cargas">
+		</h:button>
+		<br></br>
+		<h:button outcome="listaNaviosAgente"	value="Listar Navios">
+		</h:button>
 	</ui:define>
 </ui:composition>
 </h:body>
