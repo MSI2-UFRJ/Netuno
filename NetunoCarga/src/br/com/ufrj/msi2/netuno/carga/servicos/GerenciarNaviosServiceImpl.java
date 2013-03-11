@@ -31,19 +31,21 @@ public class GerenciarNaviosServiceImpl implements GerenciarNaviosService {
 
 	@Override
 	public List<Navio> listaNaviosComCarga(AgenteCarga agente) {
-		List<Navio> resultList = new ArrayList<Navio>();
+		//List<Navio> resultList = new ArrayList<Navio>();
 
-		try {
-
-			CriteriaBuilder builder = navioService.getCriteriaBuilder();
-			CriteriaQuery<Navio> criteria = builder.createQuery(Navio.class);
-			Root<Navio> navioRoot = criteria.from(Navio.class);
-			criteria.select(navioRoot);
-			resultList = navioService.filtrar(criteria);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		return resultList;
+//		try {
+//
+//			CriteriaBuilder builder = navioService.getCriteriaBuilder();
+//			CriteriaQuery<Navio> criteria = builder.createQuery(Navio.class);
+//			Root<Navio> navioRoot = criteria.from(Navio.class);
+//			criteria.select(navioRoot);
+//			resultList = navioService.filtrar(criteria);
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
+//		return resultList;
+		
+		return this.navioService.recuperaTodos();
 	}
 	
 	@Override
