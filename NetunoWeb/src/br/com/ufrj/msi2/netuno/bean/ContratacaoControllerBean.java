@@ -94,6 +94,15 @@ public class ContratacaoControllerBean extends MBean {
 			valida = false;
 		}
 		
+		for(Carga carga : contratacaoModelBean.getContrato().getCargas()) {
+			if(carga.getDataValidade() != null) {
+				if(carga.getDataValidade().before(contratacaoModelBean.getContrato().getDataEstimada())) {
+					super.sendMessage(null, FacesMessage.SEVERITY_ERROR, "Existe carga perecível com data de validade anterior à data estimada de entrega.", null);
+					valida = false;
+				}
+			}
+		}
+		
 		if(valida) {
 			contratacaoService.salvarContrato(contratacaoModelBean.getContratante(), contratacaoModelBean.getContrato());
 			

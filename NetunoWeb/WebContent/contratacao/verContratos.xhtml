@@ -12,6 +12,7 @@
 <ui:composition template="/templates/template.xhtml">
 	<ui:define name="content">
 		<p:outputLabel value="Olá, " /><h:outputText value="#{verContratosModel.contratante.nome}" rendered="#{not empty verContratosController}" /><br />
+		<p:messages id="mensagens" globalOnly="true" autoUpdate="true"/>
 		<p:outputLabel value="Ver contratos " />
 		<h:form>
 			<p:selectOneRadio id="options" value="#{verContratosModel.tipoContratoExibido}" >  

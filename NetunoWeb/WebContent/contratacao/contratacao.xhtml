@@ -100,7 +100,7 @@
 					</p:column>
 					<p:column>
 						<f:facet name="header">Peso</f:facet>
-						<h:inputText 	id="peso"
+						<p:inputText 	id="peso"
 										value="#{carga.peso}"
 										required="#{empty param['disableValidation']}"
 										requiredMessage="Peso deve ser preenchido."/>
@@ -111,7 +111,7 @@
 						<f:facet name="header">Data de Validade</f:facet>
 						<h:outputLabel value="-" rendered="#{not carga.cargaPerecivel}"/>
 						<p:calendar 	id="data"
-										value="carga.dataValidade"
+										value="#{carga.dataValidade}"
 										rendered="#{carga.cargaPerecivel}"
 										required="#{empty param['disableValidation']}"
 										requiredMessage="Data de validade deve ser escolhida"
