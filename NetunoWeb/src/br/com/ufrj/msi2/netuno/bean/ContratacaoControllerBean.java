@@ -16,6 +16,7 @@ import br.com.ufrj.msi2.netuno.contratacao.servicos.ContratacaoService;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Carga;
 import br.com.ufrj.msi2.netuno.modelo.entidades.CargaPerecivel;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Contratante;
+import br.com.ufrj.msi2.netuno.modelo.entidades.Contrato;
 import br.com.ufrj.msi2.netuno.modelo.servicos.PortoService;
 
 @ManagedBean(name="contratacaoController")
@@ -37,8 +38,26 @@ public class ContratacaoControllerBean extends MBean {
 		
 		Contratante contratante = (Contratante) session.getAttribute(Attributes.SessionAttributes.CONTRATANTE.toString());
 		contratacaoModelBean.setContratante(contratante);
-		contratacaoModelBean.setContrato(this.contratacaoService.criarContrato());
-		contratacaoModelBean.getContrato().setCargas(new ArrayList<Carga>());
+		
+		if(session.getAttribute(Attributes.SessionAttributes.CONTRATO.toString()) == null) {
+			contratacaoModelBean.setContrato(this.contratacaoService.criarContrato());
+			contratacaoModelBean.getContrato().setCargas(new ArrayList<Carga>());
+		} else {
+			Contrato contrato = (Contrato) session.getAttribute(Attributes.SessionAttributes.CONTRATO.toString());
+			Contrato contratoComCargas = contratacaoService.recuperaContratoComCargas(contrato);
+			contratacaoModelBean.setContrato(contratoComCargas);
+			
+			if(contratacaoModelBean.getContrato().getEnderecoColeta() != null) {
+				contratacaoModelBean.setEnderecoColeta(true);
+			}
+			
+			if(contratacaoModelBean.getContrato().getEnderecoEntrega() != null) {
+				contratacaoModelBean.setEnderecoEntrega(true);
+			}
+			
+			contratacaoModelBean.setModoVerDetalhes(true);
+		}
+
 		contratacaoModelBean.setPortos(this.portoService.obterTodos());
 	}
 	

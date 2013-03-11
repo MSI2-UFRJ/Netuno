@@ -79,6 +79,10 @@ public class ContratacaoServiceImpl implements ContratacaoService {
 	        contrato.setDataEstimada(cal.getTime());
 		}
 	}
+	
+	public Contrato recuperaContratoComCargas(Contrato contrato) {
+		return this.contratoService.recuperaContratoComCargas(contrato);
+	}
 
 	public CargaService getCargaService() {
 		return cargaService;

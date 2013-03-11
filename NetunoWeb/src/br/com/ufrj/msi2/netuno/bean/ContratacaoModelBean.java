@@ -22,6 +22,8 @@ public class ContratacaoModelBean extends MBean {
 	
 	private boolean enderecoEntrega;
 	
+	private boolean modoVerDetalhes;
+	
 	private List<Porto> portos;
 
 	@PostConstruct
@@ -45,6 +47,10 @@ public class ContratacaoModelBean extends MBean {
 		return enderecoEntrega;
 	}
 
+	public boolean isModoVerDetalhes() {
+		return modoVerDetalhes;
+	}
+
 	public List<Porto> getPortos() {
 		return portos;
 	}
@@ -63,6 +69,10 @@ public class ContratacaoModelBean extends MBean {
 
 	public void setEnderecoEntrega(boolean enderecoEntrega) {
 		this.enderecoEntrega = enderecoEntrega;
+	}
+
+	public void setModoVerDetalhes(boolean modoVerDetalhes) {
+		this.modoVerDetalhes = modoVerDetalhes;
 	}
 
 	public void setPortos(List<Porto> portos) {
