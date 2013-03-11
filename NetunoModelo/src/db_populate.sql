@@ -34,7 +34,7 @@ INSERT INTO netuno.agenterota VALUES(7);
 INSERT INTO `netuno`.`usuario` VALUES(8,'rota2','rota2','rota2');
 INSERT INTO netuno.agenterota VALUES(8);
 -- CONTRATANTE 
-INSERT INTO `netuno`.`usuario` VALUES(9,'contratante1','contratante1','contratante1');
+INSERT INTO `netuno`.`usuario` VALUES(9,'c','contratante1','c');
 INSERT INTO netuno.contratante VALUES(9);
 
 INSERT INTO `netuno`.`usuario` VALUES(10,'contratante2','contratante2','contratante2');

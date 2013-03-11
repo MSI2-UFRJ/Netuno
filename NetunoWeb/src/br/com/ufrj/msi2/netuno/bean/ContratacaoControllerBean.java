@@ -66,21 +66,11 @@ public class ContratacaoControllerBean extends MBean {
 	public String salvar() {
 		boolean valida = true;
 		
-		if(contratacaoModelBean.isEnderecoColeta()) {
-			if(contratacaoModelBean.getContrato().getEnderecoColeta().trim().equals("")) {
-				super.sendMessage(null, FacesMessage.SEVERITY_ERROR, "Endereço de coleta inválido.", null);
-				valida = false;
-			}
-		} else {
+		if(!contratacaoModelBean.isEnderecoColeta()) {
 			contratacaoModelBean.getContrato().setEnderecoColeta(null);
 		}
 		
-		if(contratacaoModelBean.isEnderecoEntrega()) {
-			if(contratacaoModelBean.getContrato().getEnderecoEntrega().trim().equals("")) {
-				super.sendMessage(null, FacesMessage.SEVERITY_ERROR, "Endereço de entrega inválido.", null);
-				valida = false;
-			}
-		} else {
+		if(!contratacaoModelBean.isEnderecoEntrega()) {
 			contratacaoModelBean.getContrato().setEnderecoEntrega(null);
 		}
 

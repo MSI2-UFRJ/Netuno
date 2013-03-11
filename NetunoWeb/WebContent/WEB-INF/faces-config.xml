@@ -100,5 +100,5 @@
    <supported-locale>pt</supported-locale>
    <supported-locale>en</supported-locale>
   </locale-config>
- </application>
+ </application> 
 </faces-config>

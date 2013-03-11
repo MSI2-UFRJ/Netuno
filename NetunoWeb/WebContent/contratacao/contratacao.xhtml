@@ -19,25 +19,30 @@
 				<p:messages id="mensagens" globalOnly="true" autoUpdate="true"/>
 
 				<p:selectBooleanCheckbox value="#{contratacaoModel.enderecoColeta}">
-	                <p:ajax update="enderecoColetaInputText dataEstimada" listener="#{contratacaoController.atualizarPrazo()}" />
+	                <p:ajax process="@this enderecoColetaInputText" event="change" update="enderecoColetaInputText dataEstimada" listener="#{contratacaoController.atualizarPrazo()}" />
+	                
 	            </p:selectBooleanCheckbox>
 				<h:outputLabel value="Endereço de coleta" />			
 	            <p:inputText 	id="enderecoColetaInputText"
 	            				value="#{contratacaoModel.contrato.enderecoColeta}"
 	            				disabled="#{not contratacaoModel.enderecoColeta}"
 	            				required="#{empty param['disableValidation']}"
-	            				requiredMessage="Esse campo deve ser preenchido."/>
+	            				requiredMessage="Esse campo deve ser preenchido.">
+	            	<f:validator validatorId="trimValidator" disabled="#{not empty param['disableValidation']}"/>
+	            </p:inputText>
 	            <p:message for="enderecoColetaInputText" autoUpdate="true"/><br />
 	            
 	            <p:selectBooleanCheckbox value="#{contratacaoModel.enderecoEntrega}">
-	                <p:ajax update="enderecoEntregaInputText dataEstimada" listener="#{contratacaoController.atualizarPrazo()}" />
+	                <p:ajax process="@this enderecoEntregaInputText" event="change" update="enderecoEntregaInputText dataEstimada" listener="#{contratacaoController.atualizarPrazo()}" />
 	            </p:selectBooleanCheckbox>
 	            <h:outputLabel value="Endereço de entrega" />			
 	            <p:inputText 	id="enderecoEntregaInputText"
 	            				value="#{contratacaoModel.contrato.enderecoEntrega}"
 	            				disabled="#{not contratacaoModel.enderecoEntrega}"
 	            				required="#{empty param['disableValidation']}"
-	            				requiredMessage="Esse campo deve ser preenchido."/>
+	            				requiredMessage="Esse campo deve ser preenchido.">
+	            	<f:validator validatorId="trimValidator" disabled="#{not empty param['disableValidation']}"/>
+	            </p:inputText>
 	            <p:message for="enderecoEntregaInputText" autoUpdate="true"/><br />
 	            
 	            <h:outputLabel value="Porto Origem" />
@@ -95,7 +100,9 @@
 						<p:inputText 	id="descricao"
 										value="#{carga.descricao}"
 										required="#{empty param['disableValidation']}"
-										requiredMessage="Descrição deve ser preenchida."/>
+										requiredMessage="Descrição deve ser preenchida.">
+							<f:validator validatorId="trimValidator" disabled="#{not empty param['disableValidation']}"/>
+						</p:inputText>
 						<p:message for="descricao" auto-update="true"/>
 					</p:column>
 					<p:column>
@@ -103,7 +110,10 @@
 						<p:inputText 	id="peso"
 										value="#{carga.peso}"
 										required="#{empty param['disableValidation']}"
-										requiredMessage="Peso deve ser preenchido."/>
+										requiredMessage="Peso deve ser preenchido."
+										converterMessage="Deve ser um número real.">
+							<f:validator validatorId="pesoCargaValidator" disabled="#{not empty param['disableValidation']}"/>
+						</p:inputText>
 						<p:outputLabel value=" Kg"/>
 						<p:message for="peso" auto-update="true"/>
 					</p:column>
