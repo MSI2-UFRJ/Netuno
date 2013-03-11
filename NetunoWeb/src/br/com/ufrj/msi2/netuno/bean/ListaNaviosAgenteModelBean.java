@@ -16,7 +16,6 @@ public class ListaNaviosAgenteModelBean extends MBean {
 
 	@PostConstruct
 	public void construct() {
-		
 	}
 	
 	public List<Navio> getListaNavios() {
@@ -26,5 +25,4 @@ public class ListaNaviosAgenteModelBean extends MBean {
 	public void setListaNavios(List<Navio> listaNavios) {
 		this.listaNavios = listaNavios;
 	}
-
 }

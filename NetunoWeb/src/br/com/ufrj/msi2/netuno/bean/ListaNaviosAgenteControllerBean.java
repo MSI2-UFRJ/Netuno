@@ -28,38 +28,35 @@ public class ListaNaviosAgenteControllerBean extends MBean {
 	public void construct() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		agente = (AgenteCarga) session.getAttribute(Attributes.SessionAttributes.LOGIN.toString());
-		
-		listaNaviosAgenteModelBean.setListaNavios(this.navioService.listaNaviosComCarga(agente));
 	}
 	
 	public void onPageLoad()
 	{
-		//listaNaviosAgenteModelBean.setListaNavios(this.navioService.listaNaviosComCarga(agente));
+		listaNaviosAgenteModelBean.setListaNavios(this.navioService.listaNaviosComCarga(agente));
 	}
-
+	
 	public GerenciarNaviosService getNavioService() {
 		return navioService;
-	}
-
-	public AgenteCarga getAgente() {
-		return agente;
-	}
-
-	public ListaNaviosAgenteModelBean getListaNaviosAgenteModelBean() {
-		return listaNaviosAgenteModelBean;
 	}
 
 	public void setNavioService(GerenciarNaviosService navioService) {
 		this.navioService = navioService;
 	}
 
+	public ListaNaviosAgenteModelBean getListaNaviosAgenteModelBean() {
+		return listaNaviosAgenteModelBean;
+	}
+
+	public void setNaviosAgenteModelBean(ListaNaviosAgenteModelBean ListaNaviosAgenteModelBean){
+		this.listaNaviosAgenteModelBean = ListaNaviosAgenteModelBean;
+	}
+	
+
+	public AgenteCarga getAgente() {
+		return agente;
+	}
+
 	public void setAgente(AgenteCarga agente) {
 		this.agente = agente;
 	}
-
-	public void setListaNaviosAgenteModelBean(
-			ListaNaviosAgenteModelBean listaNaviosAgenteModelBean) {
-		this.listaNaviosAgenteModelBean = listaNaviosAgenteModelBean;
-	}
-
 }

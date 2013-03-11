@@ -7,17 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-@NamedQueries(
-		{
-			@NamedQuery(name="Navio.recuperarTodos",
-						query="SELECT n FROM Navio n"
-			)
-		}
-	)
 @Entity
 @Table(name="navio")
 public class Navio implements Serializable {

@@ -5,11 +5,9 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
-import br.com.ufrj.msi2.netuno.modelo.entidades.Contrato;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Navio;
 
 
@@ -43,11 +41,5 @@ public class NavioServiceImpl implements NavioService {
 	@Override
 	public Navio obterPorId(Integer idNavio){
 		return this.em.find(Navio.class, idNavio);
-	}
-	
-	@SuppressWarnings("unchecked")
-	public List<Navio> recuperaTodos() {
-		Query query = em.createNamedQuery("Navio.recuperarTodos");
-		return (List<Navio>) query.getResultList();
 	}
 }
