@@ -31,7 +31,6 @@ import javax.persistence.Table;
 				query="select carga from Carga carga left join fetch carga.partes p where carga.id = :id")
 		}
 )
-
 @Entity
 @Table(name="carga")
 @PrimaryKeyJoinColumn(name="id")

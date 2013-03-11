@@ -103,7 +103,8 @@
 	
 				<p:dataTable 	id="tabela"
 								value="#{contratacaoModel.contrato.cargas}"
-								var="carga">
+								var="carga"
+								binding="#{table}">
 					<p:column headerText="Descrição">
 						<p:inputText 	id="descricao"
 										value="#{carga.descricao}"
@@ -148,6 +149,11 @@
 											rendered="#{not contratacaoModel.modoVerDetalhes}">
 							<f:param name="disableValidation" value="true" />
 						</p:commandButton>
+						<h:outputLabel value="#{contratacaoModel.logs[table.rowIndex].data}" rendered="#{contratacaoModel.modoVerDetalhes}">
+							<f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+						</h:outputLabel>
+						<h:outputLabel value=" - " rendered="#{contratacaoModel.modoVerDetalhes}"/>
+						<h:outputLabel value="#{contratacaoModel.logs[table.rowIndex].descricao}" rendered="#{contratacaoModel.modoVerDetalhes}"/>
 					</p:column>
 				</p:dataTable>
 	

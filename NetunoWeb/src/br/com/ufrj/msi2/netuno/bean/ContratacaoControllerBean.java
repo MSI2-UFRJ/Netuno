@@ -1,6 +1,7 @@
 package br.com.ufrj.msi2.netuno.bean;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import br.com.ufrj.msi2.netuno.attributes.Attributes;
 import br.com.ufrj.msi2.netuno.contratacao.servicos.ContratacaoService;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Carga;
+import br.com.ufrj.msi2.netuno.modelo.entidades.CargaLog;
 import br.com.ufrj.msi2.netuno.modelo.entidades.CargaPerecivel;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Contratante;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Contrato;
@@ -31,7 +33,7 @@ public class ContratacaoControllerBean extends MBean {
 
 	@ManagedProperty(value="#{contratacaoModel}")
 	private ContratacaoModelBean contratacaoModelBean;
-
+	
 	@PostConstruct
 	public void construct() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
@@ -54,6 +56,20 @@ public class ContratacaoControllerBean extends MBean {
 			if(contratacaoModelBean.getContrato().getEnderecoEntrega() != null) {
 				contratacaoModelBean.setEnderecoEntrega(true);
 			}
+			
+			List<CargaLog> logs = new ArrayList<CargaLog>();
+
+			for(Carga carga : contratoComCargas.getCargas()) {
+				CargaLog cargaLog = this.contratacaoService.recuperaUltimoCargaLogDeCarga(carga);
+				
+				if(cargaLog == null) {
+					cargaLog = new CargaLog();
+				}
+				
+				logs.add(cargaLog);
+			}
+			
+			contratacaoModelBean.setLogs(logs);
 			
 			contratacaoModelBean.setModoVerDetalhes(true);
 		}
