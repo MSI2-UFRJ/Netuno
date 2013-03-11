@@ -10,7 +10,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
 import br.com.ufrj.msi2.netuno.modelo.entidades.Carga;
-import br.com.ufrj.msi2.netuno.modelo.entidades.Contratante;
 
 @Stateless
 public class CargaServiceImpl implements CargaService {

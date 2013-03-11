@@ -30,7 +30,9 @@ import br.com.ufrj.msi2.netuno.modelo.enums.SituacaoContratoEnum;
 		@NamedQuery(name="Contrato.recuperaPorContratante",
 					query="select contrato from Contratante contratante inner join contratante.contratos contrato where (contratante = :contratante and contrato.situacao = :situacao)"),
 		@NamedQuery(name="Contrato.recuperaPorId",
-					query="select contrato from Contrato contrato where contrato.id = :id")
+					query="select contrato from Contrato contrato where contrato.id = :id"),
+		@NamedQuery(name="Contrato.recuperaPorIdComFetch",
+					query="select contrato from Contrato contrato left join fetch contrato.cargas c where contrato.id = :id")
 	}
 )
 @Entity

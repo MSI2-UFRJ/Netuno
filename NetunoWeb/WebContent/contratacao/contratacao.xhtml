@@ -18,31 +18,36 @@
 			<f:validateBean disabled="#{not empty param['disableValidation']}">
 				<p:messages id="mensagens" globalOnly="true" autoUpdate="true"/>
 
-				<p:selectBooleanCheckbox value="#{contratacaoModel.enderecoColeta}">
+				<p:selectBooleanCheckbox value="#{contratacaoModel.enderecoColeta}" disabled="#{contratacaoModel.modoVerDetalhes}">
 	                <p:ajax process="@this enderecoColetaInputText" event="change" update="enderecoColetaInputText dataEstimada" listener="#{contratacaoController.atualizarPrazo()}" />
-	                
+	                <f:param name="disableValidation" value="true" />
 	            </p:selectBooleanCheckbox>
-				<h:outputLabel value="Endereço de coleta" />			
+				<h:outputLabel value="Endereço de coleta:  " />			
 	            <p:inputText 	id="enderecoColetaInputText"
 	            				value="#{contratacaoModel.contrato.enderecoColeta}"
 	            				disabled="#{not contratacaoModel.enderecoColeta}"
 	            				required="#{empty param['disableValidation']}"
-	            				requiredMessage="Esse campo deve ser preenchido.">
+	            				requiredMessage="Esse campo deve ser preenchido."
+	            				rendered="#{not contratacaoModel.modoVerDetalhes}">
 	            	<f:validator validatorId="trimValidator" disabled="#{not empty param['disableValidation']}"/>
 	            </p:inputText>
+	            <p:outputLabel value="#{contratacaoModel.contrato.enderecoColeta}" rendered="#{contratacaoModel.modoVerDetalhes}"/>
 	            <p:message for="enderecoColetaInputText" autoUpdate="true"/><br />
 	            
-	            <p:selectBooleanCheckbox value="#{contratacaoModel.enderecoEntrega}">
+	            <p:selectBooleanCheckbox value="#{contratacaoModel.enderecoEntrega}" disabled="#{contratacaoModel.modoVerDetalhes}">
 	                <p:ajax process="@this enderecoEntregaInputText" event="change" update="enderecoEntregaInputText dataEstimada" listener="#{contratacaoController.atualizarPrazo()}" />
+	                <f:param name="disableValidation" value="true" />
 	            </p:selectBooleanCheckbox>
-	            <h:outputLabel value="Endereço de entrega" />			
+	            <h:outputLabel value="Endereço de entrega:  " />			
 	            <p:inputText 	id="enderecoEntregaInputText"
 	            				value="#{contratacaoModel.contrato.enderecoEntrega}"
 	            				disabled="#{not contratacaoModel.enderecoEntrega}"
 	            				required="#{empty param['disableValidation']}"
-	            				requiredMessage="Esse campo deve ser preenchido.">
+	            				requiredMessage="Esse campo deve ser preenchido."
+	            				rendered="#{not contratacaoModel.modoVerDetalhes}">
 	            	<f:validator validatorId="trimValidator" disabled="#{not empty param['disableValidation']}"/>
 	            </p:inputText>
+	            <p:outputLabel value="#{contratacaoModel.contrato.enderecoEntrega}" rendered="#{contratacaoModel.modoVerDetalhes}"/>
 	            <p:message for="enderecoEntregaInputText" autoUpdate="true"/><br />
 	            
 	            <h:outputLabel value="Porto Origem" />
@@ -50,7 +55,8 @@
 	            					value="#{contratacaoModel.contrato.portoOrigem}"
 	            					converter="portoConverter"
 	            					required="#{empty param['disableValidation']}"
-	            					requiredMessage="Selecione um porto.">
+	            					requiredMessage="Selecione um porto."
+	            					disabled="#{contratacaoModel.modoVerDetalhes}">
 	            	<f:selectItem itemLabel="-" itemValue=""/>
 		   			<f:selectItems 	value="#{contratacaoModel.portos}"
 		   							var="portoOrigem"
@@ -65,7 +71,8 @@
 	            					value="#{contratacaoModel.contrato.portoDestino}"
 	            					converter="portoConverter"
 	            					required="#{empty param['disableValidation']}"
-	            					requiredMessage="Selecione um porto.">
+	            					requiredMessage="Selecione um porto."
+	            					disabled="#{contratacaoModel.modoVerDetalhes}">
 	            	<f:selectItem itemLabel="-" itemValue=""/>
 		   			<f:selectItems 	value="#{contratacaoModel.portos}"
 		   							var="portoDestino"
@@ -73,7 +80,7 @@
 		   							itemValue="#{portoDestino}" />
 		   			<p:ajax listener="#{contratacaoController.atualizarPrazo()}" update="dataEstimada"/>
 		   		</p:selectOneMenu>
-				<p:message for="portoDestinoMenu" autoUpdate="true"/><br /><br />
+				<p:message for="portoDestinoMenu" autoUpdate="true"/><br />
 		   		
 		   		<h:outputLabel value="Data estimada:  " />
 		   		<h:outputText 	id="dataEstimada"
@@ -83,64 +90,77 @@
 				
 				<p:commandButton 	value="Nova Carga"
 									update="@form"
-									action="#{contratacaoController.adicionarCarga(false)}">
+									action="#{contratacaoController.adicionarCarga(false)}"
+									rendered="#{not contratacaoModel.modoVerDetalhes}">
 					<f:param name="disableValidation" value="true" />
 				</p:commandButton>
 				<p:commandButton 	value="Nova Carga Perecível "
 									update="@form"
-									action="#{contratacaoController.adicionarCarga(true)}">
+									action="#{contratacaoController.adicionarCarga(true)}"
+									rendered="#{not contratacaoModel.modoVerDetalhes}">
 					<f:param name="disableValidation" value="true" />
 				</p:commandButton><br />
 	
 				<p:dataTable 	id="tabela"
 								value="#{contratacaoModel.contrato.cargas}"
-								var="carga">
-					<p:column>
-						<f:facet name="header">Descrição</f:facet>
+								var="carga"
+								binding="#{table}">
+					<p:column headerText="Descrição">
 						<p:inputText 	id="descricao"
 										value="#{carga.descricao}"
 										required="#{empty param['disableValidation']}"
-										requiredMessage="Descrição deve ser preenchida.">
+										requiredMessage="Descrição deve ser preenchida."
+										rendered="#{not contratacaoModel.modoVerDetalhes}">
 							<f:validator validatorId="trimValidator" disabled="#{not empty param['disableValidation']}"/>
 						</p:inputText>
+						<p:outputLabel value="#{carga.descricao}" rendered="#{contratacaoModel.modoVerDetalhes}"/>
 						<p:message for="descricao" auto-update="true"/>
 					</p:column>
-					<p:column>
-						<f:facet name="header">Peso</f:facet>
+					<p:column headerText="Peso">
 						<p:inputText 	id="peso"
 										value="#{carga.peso}"
 										required="#{empty param['disableValidation']}"
 										requiredMessage="Peso deve ser preenchido."
-										converterMessage="Deve ser um número real.">
+										converterMessage="Deve ser um número real."
+										rendered="#{not contratacaoModel.modoVerDetalhes}">
 							<f:validator validatorId="pesoCargaValidator" disabled="#{not empty param['disableValidation']}"/>
 						</p:inputText>
+						<p:outputLabel value="#{carga.peso}" rendered="#{contratacaoModel.modoVerDetalhes}"/>
 						<p:outputLabel value=" Kg"/>
 						<p:message for="peso" auto-update="true"/>
 					</p:column>
-					<p:column>
-						<f:facet name="header">Data de Validade</f:facet>
+					<p:column headerText="Data de Validade">
 						<h:outputLabel value="-" rendered="#{not carga.cargaPerecivel}"/>
 						<p:calendar 	id="data"
 										value="#{carga.dataValidade}"
-										rendered="#{carga.cargaPerecivel}"
+										rendered="#{carga.cargaPerecivel and not contratacaoModel.modoVerDetalhes}"
 										required="#{empty param['disableValidation']}"
 										requiredMessage="Data de validade deve ser escolhida"
 										readonlyInput="true"/>
+						<h:outputLabel value="#{carga.dataValidade}" rendered="#{contratacaoModel.modoVerDetalhes}">
+							<f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+						</h:outputLabel>
 						<p:message for="data" auto-update="true"/> 
 					</p:column>
-					<p:column>
-						<f:facet name="header"></f:facet>
+					<p:column headerText="#{contratacaoModel.modoVerDetalhes ? 'Tracking' : ' '}">
 						<p:commandButton 	value="Remover"
 											update="tabela"
-											action="#{contratacaoController.removerCarga(carga)}">
+											action="#{contratacaoController.removerCarga(carga)}"
+											rendered="#{not contratacaoModel.modoVerDetalhes}">
 							<f:param name="disableValidation" value="true" />
 						</p:commandButton>
+						<h:outputLabel value="#{contratacaoModel.logs[table.rowIndex].data}" rendered="#{contratacaoModel.modoVerDetalhes}">
+							<f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+						</h:outputLabel>
+						<h:outputLabel value=" - " rendered="#{contratacaoModel.modoVerDetalhes}"/>
+						<h:outputLabel value="#{contratacaoModel.logs[table.rowIndex].descricao}" rendered="#{contratacaoModel.modoVerDetalhes}"/>
 					</p:column>
 				</p:dataTable>
 	
 				<br /><br />
-		   		<p:commandButton action="#{contratacaoController.salvar()}" value="Salvar" type="submit" update="formContrato"/>
-		   		<p:commandButton action="#{contratacaoController.cancelar()}" value="Cancelar" ajax="false" immediate="true"/>
+		   		<p:commandButton action="#{contratacaoController.salvar()}" value="Criar contrato" type="submit" update="formContrato" rendered="#{not contratacaoModel.modoVerDetalhes}"/>
+		   		<p:commandButton action="#{contratacaoController.cancelar()}" value="#{contratacaoModel.modoVerDetalhes ? 'Voltar' : 'Cancelar'}" ajax="false" immediate="true"/>
+		   		<br />
 			</f:validateBean>
 		</h:form>
 		</ui:define>

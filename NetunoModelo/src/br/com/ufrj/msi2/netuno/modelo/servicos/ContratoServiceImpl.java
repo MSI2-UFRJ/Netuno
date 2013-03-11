@@ -35,6 +35,12 @@ public class ContratoServiceImpl implements ContratoService {
 		query.setParameter("id", id);
 		return (Contrato) query.getSingleResult();
 	}
+	
+	public Contrato recuperaContratoComCargas(Contrato contrato) {
+		Query query = em.createNamedQuery("Contrato.recuperaPorIdComFetch");
+		query.setParameter("id", contrato.getId());
+		return (Contrato) query.getSingleResult();
+	}
 
 	@SuppressWarnings("unchecked")
 	private List<Contrato> recuperaContratosPorContratante(Contratante contratante, SituacaoContratoEnum situacao) {
