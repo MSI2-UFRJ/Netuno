@@ -43,14 +43,16 @@ public class PortoServiceImpl implements PortoService{
 	 */
 	@Override
 	public void salvar(Porto porto) throws Exception {
-		List<Porto> valida = filtrar(porto);
-		if (!valida.isEmpty()) throw new Exception("Já existe um porto com o mesmo nome e localização");
+		Porto filtroPorto = new Porto();
+		filtroPorto.setLocalizacao(porto.getLocalizacao());
+		filtroPorto.setNome(porto.getNome());
+		List<Porto> valida = filtrar(filtroPorto);
+		if (valida!=null && !valida.isEmpty()) throw new Exception("Já existe um porto com o mesmo nome e localização");
 		try{
 			this.em.persist(porto);
 		} catch (Exception e){
-			throw new Exception("Não foi possível salvar o porto.", e.getCause());
+			throw new Exception("Ocorreu um erro ao incluir o porto.", e.getCause());
 		}
-		
 	}
 
 	/**
@@ -59,13 +61,16 @@ public class PortoServiceImpl implements PortoService{
 	 */
 	@Override
 	public void alterar(Porto porto) throws Exception {
-		List<Porto> valida = filtrar(porto);
-		if (!valida.isEmpty() && !porto.getId().equals(valida.get(0).getId()))
+		Porto filtroPorto = new Porto();
+		filtroPorto.setLocalizacao(porto.getLocalizacao());
+		filtroPorto.setNome(porto.getNome());
+		List<Porto> valida = filtrar(filtroPorto);
+		if (valida!=null && !valida.isEmpty() && !porto.getId().equals(valida.get(0).getId()))
 			throw new Exception("Já existe um porto com o mesmo nome e localização");
 		try{
 			this.em.merge(porto);
 		} catch (Exception e){
-			throw new Exception("Não foi possível alterar o porto.", e.getCause());
+			throw new Exception("Ocorreu um erro ao alterar o porto.", e.getCause());
 		}
 	}
 	
@@ -96,7 +101,7 @@ public class PortoServiceImpl implements PortoService{
 				Expression<String> localizacao = portoRoot.get("localizacao");
 				predicados.add(cb.like(cb.lower(localizacao), porto.getLocalizacao().toLowerCase()+"%"));
 			} 
-			if(porto.getNome()!=null && !porto.equals("")){
+			if(porto.getNome()!=null && !porto.getNome().equals("")){
 				Expression<String> nome = portoRoot.get("nome");
 				predicados.add(cb.like(cb.lower(nome), porto.getNome().toLowerCase()+"%"));
 			}

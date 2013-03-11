@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/templates/template.xhtml">
+	<ui:define name="content">
+		<div class="grid_12">
+			<h2>Navios do Netuno</h2>
+			<div class="box-5">
+				<h:form id="formListaNavios">
+				<p:panelGrid id="painelConsulta" columns="8">			
+					<p:outputLabel id="nomeLabel" value="Nome: " />
+					<p:inputText id="nomeInput" value="#{navioBean.navio.nome}" />
+					
+					<p:commandButton title="Filtrar navios." value="Consultar" icon="ui-icon-search" action="#{navioBean.consultar}" update="formListaNavios"/>
+				</p:panelGrid>
+					<p:messages id="mensagens" globalOnly="true" />
+					<p:dataTable var="navio" value="#{navioBean.navios}" emptyMessage="Nenhum navio foi encontrado.">
+											
+						<p:column headerText="Nome" sortBy="#{navio.nome}">
+							<h:outputText value="#{navio.nome}"/>
+						</p:column>
+						
+						<p:column>
+							<p:button title="Alterar dados básicos do navio." outcome="/navios/alterar" icon="ui-icon-pencil">
+								<f:param name="idNavio" value="#{navio.id}"/>
+							</p:button>
+							
+							<p:commandButton title="Excluir o navio" icon="ui-icon-closethick" onclick="confirmacao.show()">
+								<f:setPropertyActionListener target="#{navioBean.idNavio}" value="#{navio.id}" />
+							</p:commandButton>
+						</p:column>
+						
+						<f:facet name="footer">
+								<p:button outcome="/navios/criar" value="Criar" icon="ui-icon-plus"/>
+						</f:facet>
+					</p:dataTable>
+					<p:confirmDialog id="confirmDialog" message="Tem certeza de que quer excluir este navio?" header="Processo de exclusão de navio" severity="alert" widgetVar="confirmacao">  
+						<p:commandButton id="confirma" value="Sim" oncomplete="confirmacao.hide()" action="#{navioBean.excluir}" update="formListaNavios"/>  
+       					<p:commandButton id="cancela" value="Não" onclick="confirmacao.hide()"/>   
+  					</p:confirmDialog> 
+				</h:form>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

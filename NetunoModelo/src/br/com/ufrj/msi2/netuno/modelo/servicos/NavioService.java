@@ -15,9 +15,15 @@ public interface NavioService extends Serializable {
 	
 	public CriteriaBuilder getCriteriaBuilder();
 
-	public void salvar(Navio navio);
+	public void salvar(Navio navio) throws Exception;
 	
 	public Navio obterPorId(Integer idNavio);
 	
 	public List<Navio> recuperaTodos();
+	
+	public void alterar(Navio navio) throws Exception;
+	
+	public void excluir(Integer idNavio) throws Exception;
+	
+	public List<Navio> filtrar(Navio navio);
 }
