@@ -11,7 +11,6 @@ import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import br.com.ufrj.msi2.netuno.modelo.entidades.AgenteCarga;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Carga;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Conteiner;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Porto;
@@ -19,15 +18,16 @@ import br.com.ufrj.msi2.netuno.modelo.servicos.ConteinerService;
 
 @Stateless
 public class GerenciarConteinersServiceImpl implements GerenciarConteinersService {
-	private static final long serialVersionUID = -1640096335992798113L;
 
+	private static final long serialVersionUID = -1640096335992798113L;
+	
 	@EJB
-	ConteinerService service;	
+	ConteinerService service;
 	
 	public ConteinerService getConteinerService() {
 		return service;
 	}
-	
+	@Override
 	public List<Conteiner> listaConteinersDisponiveis(Carga carga,Porto porto)
 	{
 		List<Conteiner> resultList = new ArrayList<Conteiner>();
@@ -52,10 +52,26 @@ public class GerenciarConteinersServiceImpl implements GerenciarConteinersServic
 		return resultList;
 	}
 	
+	@Override
+	public Conteiner obterPorId(Integer id)
+	{
+		if(id!=null && id > 0) return this.service.obterPorId(id);
+		else return null;
+	}
+	
+	@Override
 	public void criarNovoConteiner(Porto porto){
 		Conteiner novo = new Conteiner();
 		novo.setPortoOrigem(porto);
 		novo.setPesoDisponivel((double)Conteiner.getPesomaximo());
 		service.salvarConteiner(novo);
+	}
+	@Override
+	public void AtualizaPeso(Conteiner conteiner, double novoPeso)
+	{
+		conteiner = service.obterPorId(conteiner.getId());
+		conteiner.setPesoDisponivel(novoPeso < 0? 0 : novoPeso);
+		
+		service.salvarConteiner(conteiner);
 	}
 }

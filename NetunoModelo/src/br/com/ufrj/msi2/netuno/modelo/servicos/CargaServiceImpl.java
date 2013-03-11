@@ -5,10 +5,12 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
 import br.com.ufrj.msi2.netuno.modelo.entidades.Carga;
+import br.com.ufrj.msi2.netuno.modelo.entidades.Contratante;
 
 @Stateless
 public class CargaServiceImpl implements CargaService {
@@ -38,7 +40,9 @@ public class CargaServiceImpl implements CargaService {
 	}
 	
 	@Override
-	public Carga obterPorId(Integer idCarga){
-		return this.em.find(Carga.class, idCarga);
+	public Carga obterPorId(Integer id){
+		Query query = em.createNamedQuery("Carga.recuperaPorIdComFetch");
+		query.setParameter("id", id);
+		return (Carga) query.getSingleResult();
 	}
 }

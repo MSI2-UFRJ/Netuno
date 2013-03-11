@@ -26,7 +26,9 @@ import javax.persistence.Table;
 		{
 			@NamedQuery(name="Carga.recuperaCargasSemPregao",
 						query="from Carga as carga where carga not in (select carga from Pregao as pregao inner join pregao.anuncia as carga)"
-			)
+			),
+			@NamedQuery(name="Carga.recuperaPorIdComFetch",
+				query="select carga from Carga carga left join fetch carga.partes p where carga.id = :id")
 		}
 )
 
@@ -40,7 +42,7 @@ public class Carga extends CargaComponente {
 	@Column(name = "descricao")
 	private String descricao;
 	
-	@OneToMany(mappedBy="carga")
+	@OneToMany(mappedBy = "carga")
     private List<ParteCarga> partes;
 	
 	@ManyToOne

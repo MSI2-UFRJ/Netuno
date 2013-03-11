@@ -14,4 +14,6 @@ import br.com.ufrj.msi2.netuno.modelo.entidades.Porto;
 public interface GerenciarConteinersService extends Serializable{
 	public List<Conteiner> listaConteinersDisponiveis(Carga carga,Porto porto);
 	public void criarNovoConteiner(Porto porto);
+	public void AtualizaPeso(Conteiner conteiner, double novoPeso);
+	public Conteiner obterPorId(Integer id);
 }

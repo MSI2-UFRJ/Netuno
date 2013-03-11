@@ -2,6 +2,7 @@ package br.com.ufrj.msi2.netuno.bean;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -12,6 +13,7 @@ import br.com.ufrj.msi2.netuno.attributes.Attributes;
 import br.com.ufrj.msi2.netuno.carga.servicos.GerenciarCargasService;
 import br.com.ufrj.msi2.netuno.carga.servicos.GerenciarConteinersService;
 import br.com.ufrj.msi2.netuno.modelo.entidades.AgenteCarga;
+import br.com.ufrj.msi2.netuno.modelo.entidades.Conteiner;
 
 @ManagedBean(name="alocaCargaConteinerController")
 @ViewScoped
@@ -39,10 +41,14 @@ public class AlocaCargaConteinerControllerBean extends MBean {
 	{
 		if(cargaId > 0)
 		{
-			alocaCargaConteinerModelBean.setCarga(gCargaService.obterPorId(cargaId));
-			
-			alocaCargaConteinerModelBean.setListDisponiveis(gConteinerService.listaConteinersDisponiveis(alocaCargaConteinerModelBean.getCarga(),agente.getPertence()));
+			this.getInformations();
 		}
+	}
+	
+	private void getInformations()
+	{
+			alocaCargaConteinerModelBean.setCarga(gCargaService.obterPorId(cargaId));
+			alocaCargaConteinerModelBean.setListDisponiveis(gConteinerService.listaConteinersDisponiveis(alocaCargaConteinerModelBean.getCarga(),agente.getPertence()));
 	}
 	
 
@@ -63,9 +69,15 @@ public class AlocaCargaConteinerControllerBean extends MBean {
 		this.alocaCargaConteinerModelBean = alocaCargaConteinerModelBean;
 	}
 	
-	public void alocar()
-	{
+	public void alocarCarga()
+	{	
+		Conteiner conteiner = gConteinerService.obterPorId(alocaCargaConteinerModelBean.getConteinerSelecionado());
 		
+		gCargaService.alocarCarga(alocaCargaConteinerModelBean.getCarga(), conteiner);
+
+		super.sendMessage(null, FacesMessage.SEVERITY_INFO, "Carga Alocada Com Sucesso !", null);
+		
+		this.getInformations();
 	}
 
 }

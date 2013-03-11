@@ -19,7 +19,7 @@
 			<h:form id="formAlocaCarga">
 				<div>
 					<h2>Alocar Carga</h2>
-					<div style="width: 300px;margin-left: 20%;">
+					<div style="width: 300px; margin-left: 20%;">
 						<p:dataTable id="tabelaInfoCarga"
 							value="#{alocaCargaConteinerModel.carga}" var="carga">
 							<p:column>
@@ -34,24 +34,46 @@
 								<f:facet name="header">Peso Total</f:facet>
 								<p:outputLabel value="#{carga.peso}" />
 							</p:column>
+							<p:column>
+								<f:facet name="header">Peso Restante</f:facet>
+								<p:outputLabel value="#{alocaCargaConteinerModel.pesoCargaRestante}" />
+							</p:column>
 						</p:dataTable>
+						<h:dataTable id="tabelaParteCargas"
+							value="#{alocaCargaConteinerModel.carga.partes}" var="parte"
+							rendered="#{not empty alocaCargaConteinerModel.carga.partes}">
+							<h:column>
+								<f:facet name="header">Identificador da Parte</f:facet>
+								<h:outputLabel value="#{parte.id}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">Peso Alocado</f:facet>
+								<h:outputLabel value="#{parte.peso}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header">Identificador do Conteiner</f:facet>
+								<h:outputLabel value="#{parte.conteiner.id}" />
+							</h:column>
+						</h:dataTable>
 					</div>
+					<br/>
+					<br/>
 					<div class="box-5">
-						<h:outputText value="Alocar em: " />
-						<p:selectOneMenu value="#{alocaCargaConteinerModel.conteinerSelecionado}">
+						<h:outputText value="Alocar carga em: " />
+						<p:selectOneMenu
+							value="#{alocaCargaConteinerModel.conteinerSelecionado}">
 							<f:selectItem itemLabel="Selecione" itemValue="" />
 							<f:selectItems
 								value="#{alocaCargaConteinerModel.listDisponiveis}"
-								var="conteiner" itemLabel="Conteiner - #{conteiner.id} - Disponivel - #{conteiner.pesoDisponivel}"
+								var="conteiner"
+								itemLabel="Conteiner - #{conteiner.id} - Disponivel - #{conteiner.pesoDisponivel}"
 								itemValue="#{conteiner.id}" />
 						</p:selectOneMenu>
-						<p:commandButton title="Alocar Carga"
-							action="#{alocaCargaConteinerController.alocar}"
-							update="formAlocaCarga">
+						<p:commandButton title="Alocar Carga" type="submit"
+							value="Alocar Carga"
+							action="#{alocaCargaConteinerController.alocarCarga}">
 						</p:commandButton>
 					</div>
-
-					
 				</div>
 			</h:form>
 		</ui:define>
