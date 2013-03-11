@@ -18,4 +18,6 @@ public interface NavioService extends Serializable {
 	public void salvar(Navio navio);
 	
 	public Navio obterPorId(Integer idNavio);
+	
+	public List<Navio> recuperaTodos();
 }

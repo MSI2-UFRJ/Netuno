@@ -31,7 +31,7 @@ public class GerenciarNaviosServiceImpl implements GerenciarNaviosService {
 
 	@Override
 	public List<Navio> listaNaviosComCarga(AgenteCarga agente) {
-		List<Navio> resultList = new ArrayList<Navio>();
+		/*List<Navio> resultList = new ArrayList<Navio>();
 
 		try {
 
@@ -43,7 +43,8 @@ public class GerenciarNaviosServiceImpl implements GerenciarNaviosService {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		return resultList;
+		return resultList;*/
+		return this.navioService.recuperaTodos();
 	}
 	
 	@Override

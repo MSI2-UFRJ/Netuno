@@ -40,8 +40,10 @@ public class LoginMBean extends MBean {
 			HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 			session.setAttribute(Attributes.SessionAttributes.LOGIN.toString(), usuario);
 			
+			System.out.println("Tipo: " + usuario.getTipo());
 			return usuario.getTipo();
 		} catch (NaoAutenticadoException e) {
+			System.out.println("Oie");
 			sendMessage("lM", FacesMessage.SEVERITY_ERROR, "Erro no login", "Usuario e/ou Senha invalido(s) !");
 			return "";
 		}
