@@ -28,7 +28,7 @@ import javax.persistence.Table;
 						query="from Carga as carga where carga not in (select carga from Pregao as pregao inner join pregao.anuncia as carga)"
 			),
 			@NamedQuery(name="Carga.recuperaPorIdComFetch",
-				query="select carga from Carga carga left join fetch carga.partes p where carga.id = :id")
+				query="select carga from Carga carga left join fetch carga.partes where carga.id = :id")
 		}
 )
 @Entity

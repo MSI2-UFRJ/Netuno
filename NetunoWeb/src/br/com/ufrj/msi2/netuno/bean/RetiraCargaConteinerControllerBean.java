@@ -13,6 +13,7 @@ import br.com.ufrj.msi2.netuno.attributes.Attributes;
 import br.com.ufrj.msi2.netuno.carga.servicos.GerenciarCargasService;
 import br.com.ufrj.msi2.netuno.carga.servicos.GerenciarConteinersService;
 import br.com.ufrj.msi2.netuno.modelo.entidades.AgenteCarga;
+import br.com.ufrj.msi2.netuno.modelo.entidades.Carga;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Conteiner;
 
 @ManagedBean(name = "retiraCargaConteinerController")
@@ -28,8 +29,18 @@ public class RetiraCargaConteinerControllerBean extends MBean {
 
 	private int cargaId = 0;
 	
+	private int parteSelecionada;
+	
+	public int getParteSelecionada() {
+		return parteSelecionada;
+	}
+
+	public void setParteSelecionada(int parteSelecionada) {
+		this.parteSelecionada = parteSelecionada;
+	}
+
 	@ManagedProperty(value = "#{retiraCargaConrteinerModel}")
-	private RetiraCargaConteinerModelBean retiraAlocaCargaConteinerModelBean;
+	private RetiraCargaConteinerModelBean retiraCargaConteinerModelBean;
 
 	@PostConstruct
 	public void construct() {
@@ -47,12 +58,9 @@ public class RetiraCargaConteinerControllerBean extends MBean {
 	}
 
 	private void getInformations() {
-//		reti
-//				.setCarga(gCargaService.obterPorId(cargaId));
-//		alocaCargaConteinerModelBean.setListDisponiveis(gConteinerService
-//				.listaConteinersDisponiveis(
-//						alocaCargaConteinerModelBean.getCarga(),
-//						agente.getPertence()));
+		retiraCargaConteinerModelBean.setCarga(gCargaService.obterPorId(cargaId));
+		retiraCargaConteinerModelBean.setListPartes(gCargaService.listaParteCargasComConteiner(
+				retiraCargaConteinerModelBean.getCarga()));
 	}
 
 	public int getCargaId() {
@@ -64,39 +72,24 @@ public class RetiraCargaConteinerControllerBean extends MBean {
 	}
 
 	public RetiraCargaConteinerModelBean getRetiraCargaConteinerModelBean() {
-		return retiraAlocaCargaConteinerModelBean;
+		return retiraCargaConteinerModelBean;
 	}
 
 	public void setRetiraCargaConteinerModelBean(
-			RetiraCargaConteinerModelBean retiraAlocaCargaConteinerModelBean) {
-		this.retiraAlocaCargaConteinerModelBean = retiraAlocaCargaConteinerModelBean;
+			RetiraCargaConteinerModelBean retiraCargaConteinerModelBean) {
+		this.retiraCargaConteinerModelBean = retiraCargaConteinerModelBean;
 	}
 
-	public void alocarCarga() {
-		boolean valida = true;
-		if (retiraAlocaCargaConteinerModelBean.getConteinerSelecionado() == 0) {
-			valida = false;
-			super.sendMessage(null, FacesMessage.SEVERITY_ERROR, "Selecione um conteiner.", null);
-		}
+	public void desalocarCarga() {
+		
+			this.getParteSelecionada();
+			
+//			super.sendMessage(null, FacesMessage.SEVERITY_INFO,
+//					"Parte da Carga Desalocada do conteiner com Sucesso !", null);
 
-		if (valida) {
-			Conteiner conteiner = gConteinerService
-					.obterPorId(retiraAlocaCargaConteinerModelBean
-							.getConteinerSelecionado());
-			gCargaService.alocarCarga(retiraAlocaCargaConteinerModelBean.getCarga(),
-					conteiner);
-
-			super.sendMessage(null, FacesMessage.SEVERITY_INFO,
-					"Carga Alocada Com Sucesso !", null);
-
-			// this.getInformations();
 
 		}
-	}
-
-	public String cancelar() {
-		return "listaCarga";
-	}
+	
 
 	public AgenteCarga getAgente() {
 		return agente;

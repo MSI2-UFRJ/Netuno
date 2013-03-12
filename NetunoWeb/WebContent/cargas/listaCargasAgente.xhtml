@@ -19,33 +19,36 @@
 			<p:outputLabel value="Olá, " /><h:outputText value="#{listaCargasAgenteController.agente.nome}" rendered="#{not empty listaCargasAgenteController}" /><br />
 			<h3>Lista de Cargas Normais</h3>
 			<h:form>
-				<h:dataTable id="tabelaCargas"
+				<p:dataTable id="tabelaCargas"
 					value="#{listaCargasAgenteModel.listaCargas}" var="carga"
 					rendered="#{not empty listaCargasAgenteModel.listaCargas}">
-					<h:column>
+					<p:column>
 						<f:facet name="header">Identificador</f:facet>
 						<h:outputLabel value="#{carga.id}" />
-					</h:column>
-					<h:column>
+					</p:column>
+					<p:column>
 						<f:facet name="header">Descricao</f:facet>
 						<h:outputLabel value="#{carga.descricao}" />
-					</h:column>
-					<h:column>
+					</p:column>
+					<p:column>
 						<f:facet name="header">Peso</f:facet>
 						<h:outputLabel value="#{carga.peso}" />
-					</h:column>
-					<h:column>
+					</p:column>
+					<p:column>
 						<f:facet name="header"></f:facet>
-						<h:button outcome="/cargas/alocaCargaConteiner" rendered="#{listaCargasAgenteController.embarque}"
+						<p:button outcome="/cargas/alocaCargaConteiner" rendered="#{listaCargasAgenteController.embarque}"
 							value="Alocar no Conteiner">
 							<f:param name="cargaId" value="#{carga.id}" />
-						</h:button>
-						<h:button outcome="/cargas/retiraCargaConteiner" rendered="#{not listaCargasAgenteController.embarque}"
+						</p:button>
+						<p:button outcome="/cargas/retiraCargaConteiner" rendered="#{not listaCargasAgenteController.embarque}"
 							value="Desalocar do Conteiner">
 							<f:param name="cargaId" value="#{carga.id}" />
-						</h:button>
-					</h:column>
-				</h:dataTable>
+						</p:button>
+					</p:column>
+				</p:dataTable>
+				
+				<p:button value="Home" outcome="/cargas/home" >
+				</p:button>
 			</h:form>
 		</ui:define>
 	</ui:composition>

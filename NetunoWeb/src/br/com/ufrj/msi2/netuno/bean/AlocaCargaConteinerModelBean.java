@@ -16,6 +16,8 @@ import br.com.ufrj.msi2.netuno.modelo.entidades.ParteCarga;
 public class AlocaCargaConteinerModelBean extends MBean {
 	
 	private Carga carga;
+	private List<ParteCarga> partes;
+
 	private List<Conteiner> listDisponiveis;
 	
 	private int conteinerSelecionado;
@@ -32,11 +34,6 @@ public class AlocaCargaConteinerModelBean extends MBean {
 
 	public void setCarga(Carga carga) {
 		this.carga = carga;
-		pesoCargaRestante = this.carga.getPeso();
-		for (ParteCarga parte : carga.getPartes()) {
-			pesoCargaRestante -= parte.getPeso();
-		}
-		
 	}
 
 	public List<Conteiner> getListDisponiveis() {
@@ -58,11 +55,19 @@ public class AlocaCargaConteinerModelBean extends MBean {
 	
 
 	public double getPesoCargaRestante() {
+		pesoCargaRestante = this.carga.getPeso();
+		for (ParteCarga parte : partes) {
+			pesoCargaRestante -= parte.getPeso();
+		}
+		
 		return pesoCargaRestante;
 	}
 
-	public void setPesoCargaRestante(double pesoCargaRestante) {
-		this.pesoCargaRestante = pesoCargaRestante;
+	public List<ParteCarga> getPartes() {
+		return partes;
 	}
 
+	public void setPartes(List<ParteCarga> partes) {
+		this.partes = partes;
+	}
 }

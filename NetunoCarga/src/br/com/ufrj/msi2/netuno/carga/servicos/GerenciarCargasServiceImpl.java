@@ -92,6 +92,31 @@ public class GerenciarCargasServiceImpl implements GerenciarCargasService {
 	}
 	
 	@Override
+	public List<ParteCarga> listaParteCargasComConteiner(Carga carga) {
+		List<ParteCarga> resultList = new ArrayList<ParteCarga>();
+
+		try {
+
+			CriteriaBuilder builder = cargaService.getCriteriaBuilder();
+			CriteriaQuery<ParteCarga> criteria = builder.createQuery(ParteCarga.class);
+			Root<ParteCarga> root = criteria.from(ParteCarga.class);
+			
+			ArrayList<Predicate> predicados = new ArrayList<Predicate>();
+			
+			Expression<String> exp = root.get("carga");
+			predicados.add(builder.equal(builder.lower(exp),carga.getId()));
+			
+			criteria.select(root).where(predicados.toArray(new Predicate[]{}));
+			
+			resultList = parteCargaService.filtrar(criteria);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return resultList;
+	}
+	
+	
+	@Override
 	public Carga obterPorId(Integer idCarga)
 	{
 		if(idCarga!=null && idCarga > 0) return this.cargaService.obterPorId(idCarga);
@@ -100,33 +125,42 @@ public class GerenciarCargasServiceImpl implements GerenciarCargasService {
 
 	@Override
 	public void alocarCarga(Carga carga, Conteiner conteiner) {
+		
+		carga = this.obterPorId(carga.getId());
+		
+		carga.setPartes(this.listaParteCargasComConteiner(carga));
+		
 		//peso ainda a ser alocado
 		double peso = carga.getPeso();
-		//se for null, a carga nunca foi alocada
-		if(carga.getPartes() != null)
+		if(peso > 0)
 		{
-			for (ParteCarga parte : carga.getPartes()) {
-				peso -= parte.getPeso();
+				
+			//se for null, a carga nunca foi alocada
+			if(carga.getPartes() != null)
+			{
+				for (ParteCarga parte : carga.getPartes()) {
+					peso -= parte.getPeso();
+				}
 			}
+			
+			ParteCarga parteCarga = new ParteCarga();
+			parteCarga.setCarga(carga);
+			parteCarga.setConteiner(conteiner);
+			
+			double pesoParte = (peso > conteiner.getPesoDisponivel()) ? conteiner.getPesoDisponivel() : peso;
+			parteCarga.setPeso(pesoParte);
+			if(carga.getAgenteEmbarque() != null) { parteCarga.setAgenteEmbarque(carga.getAgenteEmbarque()); }
+			if(carga.getAgenteDesembarque() != null) { parteCarga.setAgenteDesembarque(carga.getAgenteDesembarque()); }
+			
+			parteCargaService.salvar(parteCarga);
+			
+			if(peso - pesoParte <= 0)
+			{
+				carga.setAlocacaoCompleta(true);
+				this.cargaService.salvar(carga);
+			}
+			
+			gConteinerService.AtualizaPeso(conteiner, conteiner.getPesoDisponivel() - parteCarga.getPeso());
 		}
-		
-		ParteCarga parteCarga = new ParteCarga();
-		parteCarga.setCarga(carga);
-		parteCarga.setConteiner(conteiner);
-		
-		double pesoParte = (peso > conteiner.getPesoDisponivel()) ? conteiner.getPesoDisponivel() : peso;
-		parteCarga.setPeso(pesoParte);
-		if(carga.getAgenteEmbarque() != null) { parteCarga.setAgenteEmbarque(carga.getAgenteEmbarque()); }
-		if(carga.getAgenteDesembarque() != null) { parteCarga.setAgenteDesembarque(carga.getAgenteDesembarque()); }
-		parteCargaService.salvar(parteCarga);
-		
-		if(peso - pesoParte == 0)
-		{
-			carga = this.obterPorId(carga.getId());
-			carga.setAlocacaoCompleta(true);
-			this.cargaService.salvar(carga);
-		}
-		
-		gConteinerService.AtualizaPeso(conteiner, conteiner.getPesoDisponivel() - parteCarga.getPeso());
 	}
 }

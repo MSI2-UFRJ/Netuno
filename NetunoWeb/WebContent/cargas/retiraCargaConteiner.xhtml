@@ -12,18 +12,18 @@
 		<ui:define name="content">
 			<f:metadata>
 				<f:viewParam name="cargaId"
-					value="#{alocaCargaConteinerController.cargaId}"></f:viewParam>
+					value="#{retiraCargaConteinerController.cargaId}"></f:viewParam>
 				<f:event type="preRenderView"
-					listener="#{alocaCargaConteinerController.onPageLoad}" />
+					listener="#{retiraCargaConteinerController.onPageLoad}" />
 			</f:metadata>
-			<h:form id="formAlocaCarga">
+			<h:form id="formRetiraCarga">
 			<p:outputLabel value="Olá, " /><h:outputText value="#{retiraCargaConteinerController.agente.nome}" rendered="#{not empty retiraCargaConteinerController}" /><br />
 				<p:messages id="mensagens" globalOnly="true" autoUpdate="true"/>
 				<div>
-					<h2>Retirar Carga</h2>
+					<h2>Retirar Carga de Conteiners</h2>
 					<div style="width: 300px; margin-left: 20%;">
 						<p:dataTable id="tabelaInfoCarga"
-							value="#{alocaCargaConteinerModel.carga}" var="carga">
+							value="#{retiraCargaConteinerModel.carga}" var="carga">
 							<p:column>
 								<f:facet name="header">Identificador</f:facet>
 								<p:outputLabel value="#{carga.id}" />
@@ -36,49 +36,39 @@
 								<f:facet name="header">Peso Total</f:facet>
 								<p:outputLabel value="#{carga.peso}" />
 							</p:column>
-							<p:column>
-								<f:facet name="header">Peso Restante</f:facet>
-								<p:outputLabel value="#{alocaCargaConteinerModel.pesoCargaRestante}" />
-							</p:column>
 						</p:dataTable>
-						<h:dataTable id="tabelaParteCargas"
-							value="#{alocaCargaConteinerModel.carga.partes}" var="parte"
-							rendered="#{not empty alocaCargaConteinerModel.carga.partes}">
-							<h:column>
+						<p:dataTable id="tabelaParteCargas"
+							value="#{retiraCargaConteinerModel.listPartes}" var="parte"
+							rendered="#{not empty retiraCargaConteinerModel.listPartes}">
+							<p:column>
 								<f:facet name="header">Identificador da Parte</f:facet>
 								<h:outputLabel value="#{parte.id}" />
-							</h:column>
-							<h:column>
+							</p:column>
+							<p:column>
 								<f:facet name="header">Peso Alocado</f:facet>
 								<h:outputLabel value="#{parte.peso}" />
-							</h:column>
-							<h:column>
+							</p:column>
+							<p:column>
 								<f:facet name="header">Identificador do Conteiner</f:facet>
 								<h:outputLabel value="#{parte.conteiner.id}" />
-							</h:column>
-						</h:dataTable>
+							</p:column>
+							<p:column>
+								<f:facet name="header">Porto de Origem</f:facet>
+								<h:outputLabel value="#{parte.conteiner.portoOrigem.nome} - #{parte.conteiner.portoOrigem.localizacao}" />
+							</p:column>
+							<p:column>
+								<p:commandButton title="Desalocar Carga" type="submit" disabled="#{empty retiraCargaConteinerModel.listPartes}"
+									value="Desalocar Carga do Conteiner" update="@form" action="#{retiraCargaConteinerController.desalocarCarga}">
+									<f:setPropertyActionListener target="#{retiraCargaConteinerController.parteSelecionada}" value="#{parte.id}" />
+								</p:commandButton>
+							</p:column>
+						</p:dataTable>
 					</div>
 					<br/>
 					<br/>
-					<div class="box-5">
-						<h:outputText value="Alocar carga em: " />
-						<p:selectOneMenu
-							value="#{alocaCargaConteinerModel.conteinerSelecionado}" disabled="#{alocaCargaConteinerModel.pesoCargaRestante == 0}">
-							<f:selectItem itemLabel="Selecione" itemValue="" />
-							<f:selectItems
-								value="#{alocaCargaConteinerModel.listDisponiveis}"									
-								var="conteiner"
-								itemLabel="Conteiner - #{conteiner.id} - Disponivel - #{conteiner.pesoDisponivel}"
-								itemValue="#{conteiner.id}" 
-								requiredMessage="Selecione um conteiner."
-								/>
-						</p:selectOneMenu>
-						<p:commandButton title="Alocar Carga" type="submit" disabled="#{alocaCargaConteinerModel.pesoCargaRestante == 0}"
-							value="Alocar Carga" update="@form" action="#{alocaCargaConteinerController.alocarCarga}">
-						</p:commandButton>
-					</div>
-					
-		   			<p:commandButton  action="#{alocaCargaConteinerController.cancelar()}" value="Cancelar" ajax="false" immediate="true"/>
+					<p:button value="Voltar" outcome="/cargas/listaCargasAgente" >
+						<f:param name="embarque" value="false" />
+					</p:button>
 				</div>
 			</h:form>
 		</ui:define>

@@ -9,16 +9,25 @@
 <h:head />
 
 <h:body>
-<ui:composition template="/templates/template.xhtml">
-	<ui:define name="content">
-		<h:outputLabel value="Home - Agente de Cargas" />
-		<br></br>
-		<h:button outcome="listaCargasAgente"	value="Listar Cargas">
-		</h:button>
-		<br></br>
-		<h:button outcome="listaNaviosAgente"	value="Listar Navios">
-		</h:button>
-	</ui:define>
-</ui:composition>
+	<ui:composition template="/templates/template.xhtml">
+		<ui:define name="content">
+			<p:outputLabel value="Home - Agente de Cargas" />
+			<br/>
+			<br/>
+			<p:button outcome="/cargas/listaCargasAgente"
+				value="Listar Cargas Para Embarque">
+				<f:param name="embarque" value="true" />
+			</p:button>
+			<br/>
+			<br/>
+			<p:button outcome="/cargas/listaCargasAgente"
+				value="Listar Cargas para Desembarque">
+				<f:param name="embarque" value="false" />
+			</p:button>
+			<br/>
+			<p:button outcome="listaNaviosAgente" value="Listar Navios">
+			</p:button>
+		</ui:define>
+	</ui:composition>
 </h:body>
 </html>

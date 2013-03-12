@@ -16,11 +16,16 @@ import br.com.ufrj.msi2.netuno.modelo.entidades.ParteCarga;
 public class RetiraCargaConteinerModelBean extends MBean {
 	
 	private Carga carga;
-	private List<Conteiner> listDisponiveis;
+
+	private List<ParteCarga> listPartes;
 	
-	private int conteinerSelecionado;
-	
-	private double pesoCargaRestante = 0;
+	public List<ParteCarga> getListPartes() {
+		return listPartes;
+	}
+
+	public void setListPartes(List<ParteCarga> listPartes) {
+		this.listPartes = listPartes;
+	}
 
 	@PostConstruct
 	public void construct() {
@@ -32,37 +37,5 @@ public class RetiraCargaConteinerModelBean extends MBean {
 
 	public void setCarga(Carga carga) {
 		this.carga = carga;
-		pesoCargaRestante = this.carga.getPeso();
-		for (ParteCarga parte : carga.getPartes()) {
-			pesoCargaRestante -= parte.getPeso();
-		}
-		
 	}
-
-	public List<Conteiner> getListDisponiveis() {
-		return listDisponiveis;
-	}
-
-	public void setListDisponiveis(List<Conteiner> listDisponiveis) {
-		this.listDisponiveis = listDisponiveis;
-	}
-	
-
-	public int getConteinerSelecionado() {
-		return conteinerSelecionado;
-	}
-
-	public void setConteinerSelecionado(int conteinerSelecionado) {
-		this.conteinerSelecionado = conteinerSelecionado;
-	}
-	
-
-	public double getPesoCargaRestante() {
-		return pesoCargaRestante;
-	}
-
-	public void setPesoCargaRestante(double pesoCargaRestante) {
-		this.pesoCargaRestante = pesoCargaRestante;
-	}
-
 }

@@ -41,22 +41,26 @@
 								<p:outputLabel value="#{alocaCargaConteinerModel.pesoCargaRestante}" />
 							</p:column>
 						</p:dataTable>
-						<h:dataTable id="tabelaParteCargas"
-							value="#{alocaCargaConteinerModel.carga.partes}" var="parte"
-							rendered="#{not empty alocaCargaConteinerModel.carga.partes}">
-							<h:column>
+						<p:dataTable id="tabelaParteCargas"
+							value="#{alocaCargaConteinerModel.partes}" var="parte"
+							rendered="#{not empty alocaCargaConteinerModel.partes}">
+							<p:column>
 								<f:facet name="header">Identificador da Parte</f:facet>
-								<h:outputLabel value="#{parte.id}" />
-							</h:column>
-							<h:column>
+								<p:outputLabel value="#{parte.id}" />
+							</p:column>
+							<p:column>
 								<f:facet name="header">Peso Alocado</f:facet>
-								<h:outputLabel value="#{parte.peso}" />
-							</h:column>
-							<h:column>
+								<p:outputLabel value="#{parte.peso}" />
+							</p:column>
+							<p:column>
 								<f:facet name="header">Identificador do Conteiner</f:facet>
-								<h:outputLabel value="#{parte.conteiner.id}" />
-							</h:column>
-						</h:dataTable>
+								<p:outputLabel value="#{parte.conteiner.id}" />
+							</p:column>
+							<p:column>
+								<f:facet name="header">Porto de Origem</f:facet>
+								<p:outputLabel value="#{parte.conteiner.portoOrigem.localizacao}" />
+							</p:column>
+						</p:dataTable>
 					</div>
 					<br/>
 					<br/>
@@ -77,8 +81,9 @@
 							value="Alocar Carga" update="@form" action="#{alocaCargaConteinerController.alocarCarga}">
 						</p:commandButton>
 					</div>
-					
-		   			<p:commandButton  action="#{alocaCargaConteinerController.cancelar()}" value="Cancelar" ajax="false" immediate="true"/>
+					<p:button value="Voltar" outcome="/cargas/listaCargasAgente" >
+						<f:param name="embarque" value="true" />
+					</p:button>
 				</div>
 			</h:form>
 		</ui:define>

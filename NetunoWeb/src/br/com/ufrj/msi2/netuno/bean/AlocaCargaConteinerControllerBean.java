@@ -50,10 +50,11 @@ public class AlocaCargaConteinerControllerBean extends MBean {
 	private void getInformations() {
 		alocaCargaConteinerModelBean
 				.setCarga(gCargaService.obterPorId(cargaId));
+		alocaCargaConteinerModelBean.setPartes(gCargaService.listaParteCargasComConteiner(
+				alocaCargaConteinerModelBean.getCarga()));
 		alocaCargaConteinerModelBean.setListDisponiveis(gConteinerService
 				.listaConteinersDisponiveis(
-						alocaCargaConteinerModelBean.getCarga(),
-						agente.getPertence()));
+						alocaCargaConteinerModelBean.getCarga(),agente.getPertence()));
 	}
 
 	public int getCargaId() {
@@ -90,7 +91,7 @@ public class AlocaCargaConteinerControllerBean extends MBean {
 			super.sendMessage(null, FacesMessage.SEVERITY_INFO,
 					"Carga Alocada Com Sucesso !", null);
 
-			// this.getInformations();
+			this.getInformations();
 
 		}
 	}
