@@ -13,7 +13,7 @@ import br.com.ufrj.msi2.netuno.modelo.entidades.Carga;
 public class ListaCargasAgenteModelBean extends MBean {
 
 	private List<Carga> listaCargas;
-
+	
 	@PostConstruct
 	public void construct() {
 	}

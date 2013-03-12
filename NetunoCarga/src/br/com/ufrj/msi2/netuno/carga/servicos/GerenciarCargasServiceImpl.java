@@ -5,10 +5,10 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.faces.application.FacesMessage;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import br.com.ufrj.msi2.netuno.modelo.entidades.AgenteCarga;
@@ -47,8 +47,42 @@ public class GerenciarCargasServiceImpl implements GerenciarCargasService {
 			CriteriaQuery<Carga> criteria = builder.createQuery(Carga.class);
 			Root<Carga> cargaRoot = criteria.from(Carga.class);
 			
+			ArrayList<Predicate> predicados = new ArrayList<Predicate>();
+			
 			Expression<String> agenteEmbarque = cargaRoot.get("agenteEmbarque");
-			criteria.select(cargaRoot).where(builder.equal(builder.lower(agenteEmbarque),agente.getId()));
+			predicados.add(builder.equal(builder.lower(agenteEmbarque),agente.getId()));
+
+			Expression<String> alocacao = cargaRoot.get("alocacaoCompleta");
+			predicados.add(builder.equal((alocacao),false));
+			
+			criteria.select(cargaRoot).where(predicados.toArray(new Predicate[]{}));
+			
+			resultList = cargaService.filtrar(criteria);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return resultList;
+	}
+	
+	@Override
+	public List<Carga> listaCargasParaDesembarque(AgenteCarga agente) {
+		List<Carga> resultList = new ArrayList<Carga>();
+
+		try {
+
+			CriteriaBuilder builder = cargaService.getCriteriaBuilder();
+			CriteriaQuery<Carga> criteria = builder.createQuery(Carga.class);
+			Root<Carga> cargaRoot = criteria.from(Carga.class);
+			
+			ArrayList<Predicate> predicados = new ArrayList<Predicate>();
+			
+			Expression<String> agenteEmbarque = cargaRoot.get("agenteDesembarque");
+			predicados.add(builder.equal(builder.lower(agenteEmbarque),agente.getId()));
+
+			Expression<String> alocacao = cargaRoot.get("alocacaoCompleta");
+			predicados.add(builder.equal((alocacao),true));
+			
+			criteria.select(cargaRoot).where(predicados.toArray(new Predicate[]{}));
 			
 			resultList = cargaService.filtrar(criteria);
 		} catch (Exception e) {
@@ -69,7 +103,7 @@ public class GerenciarCargasServiceImpl implements GerenciarCargasService {
 		//peso ainda a ser alocado
 		double peso = carga.getPeso();
 		//se for null, a carga nunca foi alocada
-		if(carga.getPartes() == null)
+		if(carga.getPartes() != null)
 		{
 			for (ParteCarga parte : carga.getPartes()) {
 				peso -= parte.getPeso();
@@ -79,10 +113,19 @@ public class GerenciarCargasServiceImpl implements GerenciarCargasService {
 		ParteCarga parteCarga = new ParteCarga();
 		parteCarga.setCarga(carga);
 		parteCarga.setConteiner(conteiner);
-		parteCarga.setPeso((peso > conteiner.getPesoDisponivel()) ? conteiner.getPesoDisponivel() : peso);
+		
+		double pesoParte = (peso > conteiner.getPesoDisponivel()) ? conteiner.getPesoDisponivel() : peso;
+		parteCarga.setPeso(pesoParte);
 		if(carga.getAgenteEmbarque() != null) { parteCarga.setAgenteEmbarque(carga.getAgenteEmbarque()); }
 		if(carga.getAgenteDesembarque() != null) { parteCarga.setAgenteDesembarque(carga.getAgenteDesembarque()); }
 		parteCargaService.salvar(parteCarga);
+		
+		if(peso - pesoParte == 0)
+		{
+			carga = this.obterPorId(carga.getId());
+			carga.setAlocacaoCompleta(true);
+			this.cargaService.salvar(carga);
+		}
 		
 		gConteinerService.AtualizaPeso(conteiner, conteiner.getPesoDisponivel() - parteCarga.getPeso());
 	}

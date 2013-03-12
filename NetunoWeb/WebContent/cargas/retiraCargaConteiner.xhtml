@@ -17,10 +17,10 @@
 					listener="#{alocaCargaConteinerController.onPageLoad}" />
 			</f:metadata>
 			<h:form id="formAlocaCarga">
-			<p:outputLabel value="Olá, " /><h:outputText value="#{alocaCargaConteinerController.agente.nome}" rendered="#{not empty alocaCargaConteinerController}" /><br />
+			<p:outputLabel value="Olá, " /><h:outputText value="#{retiraCargaConteinerController.agente.nome}" rendered="#{not empty retiraCargaConteinerController}" /><br />
 				<p:messages id="mensagens" globalOnly="true" autoUpdate="true"/>
 				<div>
-					<h2>Alocar Carga</h2>
+					<h2>Retirar Carga</h2>
 					<div style="width: 300px; margin-left: 20%;">
 						<p:dataTable id="tabelaInfoCarga"
 							value="#{alocaCargaConteinerModel.carga}" var="carga">

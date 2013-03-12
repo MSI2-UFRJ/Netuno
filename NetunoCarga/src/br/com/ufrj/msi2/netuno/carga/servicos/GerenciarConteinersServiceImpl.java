@@ -43,6 +43,9 @@ public class GerenciarConteinersServiceImpl implements GerenciarConteinersServic
 				predicados.add(builder.equal(builder.lower(exp),porto.getId()));
 			} 
 			
+			Expression<String> expQt = root.get("pesoDisponivel");
+			predicados.add(builder.notEqual(builder.lower(expQt),"0"));
+			
 			criteria.select(root).where(predicados.toArray(new Predicate[]{}));
 			
 			resultList = service.filtrar(criteria);

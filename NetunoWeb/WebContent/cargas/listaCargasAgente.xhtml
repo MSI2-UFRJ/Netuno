@@ -11,9 +11,12 @@
 	<ui:composition template="/templates/template.xhtml">
 		<ui:define name="content">
 			<f:metadata>
+				<f:viewParam name="embarque"
+					value="#{listaCargasAgenteController.embarque}"></f:viewParam>
 				<f:event type="preRenderView"
 					listener="#{listaCargasAgenteController.onPageLoad}" />
 			</f:metadata>
+			<p:outputLabel value="Olá, " /><h:outputText value="#{listaCargasAgenteController.agente.nome}" rendered="#{not empty listaCargasAgenteController}" /><br />
 			<h3>Lista de Cargas Normais</h3>
 			<h:form>
 				<h:dataTable id="tabelaCargas"
@@ -33,8 +36,12 @@
 					</h:column>
 					<h:column>
 						<f:facet name="header"></f:facet>
-						<h:button outcome="/cargas/alocaCargaConteiner"
+						<h:button outcome="/cargas/alocaCargaConteiner" rendered="#{listaCargasAgenteController.embarque}"
 							value="Alocar no Conteiner">
+							<f:param name="cargaId" value="#{carga.id}" />
+						</h:button>
+						<h:button outcome="/cargas/retiraCargaConteiner" rendered="#{not listaCargasAgenteController.embarque}"
+							value="Desalocar do Conteiner">
 							<f:param name="cargaId" value="#{carga.id}" />
 						</h:button>
 					</h:column>

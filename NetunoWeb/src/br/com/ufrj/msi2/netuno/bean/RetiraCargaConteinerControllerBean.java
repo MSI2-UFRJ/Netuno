@@ -15,9 +15,9 @@ import br.com.ufrj.msi2.netuno.carga.servicos.GerenciarConteinersService;
 import br.com.ufrj.msi2.netuno.modelo.entidades.AgenteCarga;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Conteiner;
 
-@ManagedBean(name = "alocaCargaConteinerController")
+@ManagedBean(name = "retiraCargaConteinerController")
 @ViewScoped
-public class AlocaCargaConteinerControllerBean extends MBean {
+public class RetiraCargaConteinerControllerBean extends MBean {
 	@EJB
 	public GerenciarCargasService gCargaService;
 
@@ -25,12 +25,11 @@ public class AlocaCargaConteinerControllerBean extends MBean {
 	public GerenciarConteinersService gConteinerService;
 
 	private AgenteCarga agente;
-	
 
 	private int cargaId = 0;
-
-	@ManagedProperty(value = "#{alocaCargaConteinerModel}")
-	private AlocaCargaConteinerModelBean alocaCargaConteinerModelBean;
+	
+	@ManagedProperty(value = "#{retiraCargaConrteinerModel}")
+	private RetiraCargaConteinerModelBean retiraAlocaCargaConteinerModelBean;
 
 	@PostConstruct
 	public void construct() {
@@ -48,12 +47,12 @@ public class AlocaCargaConteinerControllerBean extends MBean {
 	}
 
 	private void getInformations() {
-		alocaCargaConteinerModelBean
-				.setCarga(gCargaService.obterPorId(cargaId));
-		alocaCargaConteinerModelBean.setListDisponiveis(gConteinerService
-				.listaConteinersDisponiveis(
-						alocaCargaConteinerModelBean.getCarga(),
-						agente.getPertence()));
+//		reti
+//				.setCarga(gCargaService.obterPorId(cargaId));
+//		alocaCargaConteinerModelBean.setListDisponiveis(gConteinerService
+//				.listaConteinersDisponiveis(
+//						alocaCargaConteinerModelBean.getCarga(),
+//						agente.getPertence()));
 	}
 
 	public int getCargaId() {
@@ -64,27 +63,27 @@ public class AlocaCargaConteinerControllerBean extends MBean {
 		this.cargaId = cargaId;
 	}
 
-	public AlocaCargaConteinerModelBean getAlocaCargaConteinerModelBean() {
-		return alocaCargaConteinerModelBean;
+	public RetiraCargaConteinerModelBean getRetiraCargaConteinerModelBean() {
+		return retiraAlocaCargaConteinerModelBean;
 	}
 
-	public void setAlocaCargaConteinerModelBean(
-			AlocaCargaConteinerModelBean alocaCargaConteinerModelBean) {
-		this.alocaCargaConteinerModelBean = alocaCargaConteinerModelBean;
+	public void setRetiraCargaConteinerModelBean(
+			RetiraCargaConteinerModelBean retiraAlocaCargaConteinerModelBean) {
+		this.retiraAlocaCargaConteinerModelBean = retiraAlocaCargaConteinerModelBean;
 	}
 
 	public void alocarCarga() {
 		boolean valida = true;
-		if (alocaCargaConteinerModelBean.getConteinerSelecionado() == 0) {
+		if (retiraAlocaCargaConteinerModelBean.getConteinerSelecionado() == 0) {
 			valida = false;
 			super.sendMessage(null, FacesMessage.SEVERITY_ERROR, "Selecione um conteiner.", null);
 		}
 
 		if (valida) {
 			Conteiner conteiner = gConteinerService
-					.obterPorId(alocaCargaConteinerModelBean
+					.obterPorId(retiraAlocaCargaConteinerModelBean
 							.getConteinerSelecionado());
-			gCargaService.alocarCarga(alocaCargaConteinerModelBean.getCarga(),
+			gCargaService.alocarCarga(retiraAlocaCargaConteinerModelBean.getCarga(),
 					conteiner);
 
 			super.sendMessage(null, FacesMessage.SEVERITY_INFO,
@@ -98,7 +97,7 @@ public class AlocaCargaConteinerControllerBean extends MBean {
 	public String cancelar() {
 		return "listaCarga";
 	}
-	
+
 	public AgenteCarga getAgente() {
 		return agente;
 	}
@@ -106,5 +105,4 @@ public class AlocaCargaConteinerControllerBean extends MBean {
 	public void setAgente(AgenteCarga agente) {
 		this.agente = agente;
 	}
-
 }

@@ -18,7 +18,8 @@ public class ListaCargasAgenteControllerBean extends MBean {
 
 	@EJB
 	public GerenciarCargasService cargaService;
-	
+
+	private boolean embarque;
 	private AgenteCarga agente;
 
 	@ManagedProperty(value="#{listaCargasAgenteModel}")
@@ -32,7 +33,15 @@ public class ListaCargasAgenteControllerBean extends MBean {
 	
 	public void onPageLoad()
 	{
-		listaCargasAgenteModelBean.setListaCargas(this.cargaService.listaCargasParaEmbarque(agente));
+		if(this.isEmbarque())
+		{
+			listaCargasAgenteModelBean.setListaCargas(this.cargaService.listaCargasParaEmbarque(agente));
+		}
+		else
+		{
+			listaCargasAgenteModelBean.setListaCargas(this.cargaService.listaCargasParaDesembarque(agente));
+		}
+		
 	}
 	
 	public GerenciarCargasService getCargaService() {
@@ -60,4 +69,13 @@ public class ListaCargasAgenteControllerBean extends MBean {
 	public void setAgente(AgenteCarga agente) {
 		this.agente = agente;
 	}
+	
+	public boolean isEmbarque() {
+		return embarque;
+	}
+
+	public void setEmbarque(boolean isEmbarque) {
+		this.embarque = isEmbarque;
+	}
+
 }

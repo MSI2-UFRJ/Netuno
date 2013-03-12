@@ -31,7 +31,6 @@ import javax.persistence.Table;
 				query="select carga from Carga carga left join fetch carga.partes p where carga.id = :id")
 		}
 )
-
 @Entity
 @Table(name="carga")
 @PrimaryKeyJoinColumn(name="id")
@@ -49,6 +48,17 @@ public class Carga extends CargaComponente {
 	@JoinColumn(name="contrato_id")
 	private Contrato contrato;
 	
+	@Column(name = "alocao_completa")
+	private boolean alocacaoCompleta; 
+	
+	public boolean isAlocacaoCompleta() {
+		return alocacaoCompleta;
+	}
+
+	public void setAlocacaoCompleta(boolean alocada) {
+		this.alocacaoCompleta = alocada;
+	}
+
 	public boolean isCargaPerecivel() {
 		return false;
 	}
