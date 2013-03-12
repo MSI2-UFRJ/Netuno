@@ -145,18 +145,22 @@ public class ContratacaoControllerBean extends MBean {
 			
 			super.sendMessage(null, FacesMessage.SEVERITY_INFO, "Contrato criado com sucesso", null);
 
-			if(this.deveRedirecionarParaTelaDeAtendente) {
-				return "telaAtendente";
-			} else {
-				return "verContratos"; 
-			}
+			return navegacao();
 		}
 		
 		return null;
 	}
 	
 	public String cancelar() {
-		return "verContratos";
+		return navegacao();
+	}
+	
+	public String navegacao() {
+		if(this.deveRedirecionarParaTelaDeAtendente) {
+			return "telaAtendente";
+		} else {
+			return "verContratos"; 
+		}
 	}
 
 	public ContratacaoService getContratacaoService() {
