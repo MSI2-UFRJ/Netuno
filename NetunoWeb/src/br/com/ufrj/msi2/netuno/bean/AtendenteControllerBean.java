@@ -6,7 +6,10 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
+import br.com.ufrj.msi2.netuno.attributes.Attributes;
 import br.com.ufrj.msi2.netuno.contratacao.servicos.ContratacaoService;
 import br.com.ufrj.msi2.netuno.modelo.entidades.CPF;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Contratante;
@@ -30,6 +33,12 @@ public class AtendenteControllerBean extends MBean {
 	public String verificarCPF() {
 		try {
 			Contratante contratante = this.contratacaoService.recuperaContratantePorCPF(atendenteModelBean.getCpf());
+			
+			HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+			session.setAttribute(Attributes.SessionAttributes.CONTRATANTE.toString(), contratante);
+			session.setAttribute(Attributes.SessionAttributes.VIAATENDENTE.toString(), "atendente");
+			
+			return "contratacao";
 		} catch (ResultadoNaoEncontradoException e) {
 			super.sendMessage(null, FacesMessage.SEVERITY_ERROR, "Contratante não encontrado.", null);
 			e.printStackTrace();

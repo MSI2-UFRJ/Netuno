@@ -34,12 +34,24 @@ public class ContratacaoControllerBean extends MBean {
 	@ManagedProperty(value="#{contratacaoModel}")
 	private ContratacaoModelBean contratacaoModelBean;
 	
+	private boolean deveRedirecionarParaTelaDeAtendente;
+	
 	@PostConstruct
 	public void construct() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		
 		Contratante contratante = (Contratante) session.getAttribute(Attributes.SessionAttributes.CONTRATANTE.toString());
 		contratacaoModelBean.setContratante(contratante);
+		
+		if(session.getAttribute(Attributes.SessionAttributes.VIAATENDENTE.toString()) == null) {
+			this.deveRedirecionarParaTelaDeAtendente = false;
+		} else {
+			if(session.getAttribute(Attributes.SessionAttributes.VIAATENDENTE.toString()).toString() == "atendente") {
+				this.deveRedirecionarParaTelaDeAtendente = true;
+			}
+			
+			session.removeAttribute(Attributes.SessionAttributes.VIAATENDENTE.toString());
+		}
 		
 		if(session.getAttribute(Attributes.SessionAttributes.CONTRATO.toString()) == null) {
 			contratacaoModelBean.setContrato(this.contratacaoService.criarContrato());
@@ -133,7 +145,11 @@ public class ContratacaoControllerBean extends MBean {
 			
 			super.sendMessage(null, FacesMessage.SEVERITY_INFO, "Contrato criado com sucesso", null);
 
-			return "verContratos";
+			if(this.deveRedirecionarParaTelaDeAtendente) {
+				return "telaAtendente";
+			} else {
+				return "verContratos"; 
+			}
 		}
 		
 		return null;
@@ -147,24 +163,33 @@ public class ContratacaoControllerBean extends MBean {
 		return contratacaoService;
 	}
 
+	public PortoService getPortoService() {
+		return portoService;
+	}
+
 	public ContratacaoModelBean getContratacaoModelBean() {
 		return contratacaoModelBean;
+	}
+
+	public boolean isDeveRedirecionarParaTelaDeAtendente() {
+		return deveRedirecionarParaTelaDeAtendente;
 	}
 
 	public void setContratacaoService(ContratacaoService contratacaoService) {
 		this.contratacaoService = contratacaoService;
 	}
 
+	public void setPortoService(PortoService portoService) {
+		this.portoService = portoService;
+	}
+
 	public void setContratacaoModelBean(ContratacaoModelBean contratacaoModelBean) {
 		this.contratacaoModelBean = contratacaoModelBean;
 	}
 
-	public PortoService getPortoService() {
-		return portoService;
-	}
-
-	public void setPortoService(PortoService portoService) {
-		this.portoService = portoService;
+	public void setDeveRedirecionarParaTelaDeAtendente(
+			boolean deveRedirecionarParaTelaDeAtendente) {
+		this.deveRedirecionarParaTelaDeAtendente = deveRedirecionarParaTelaDeAtendente;
 	}
 	
 }

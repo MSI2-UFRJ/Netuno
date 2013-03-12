@@ -85,6 +85,11 @@
     ID="verContratos::#contratacao#verContratos.xhtml" NAME="output"
     PATH="/contratacao/verContratos.xhtml"
     TARGET="rules:#contratacao#verContratos.xhtml" TITLE="verContratos" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="telaAtendente::#contratacao#atendente#home.xhtml" NAME="output1"
+    PATH="/contratacao/atendente/home.xhtml"
+    TARGET="rules:#contratacao#atendente#home.xhtml"
+    TITLE="telaAtendente" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#logistica#transporte#cadEmpTrans.xhtml"
@@ -121,5 +126,12 @@
  <PROCESS-ITEM NAME="rules:#cargas#listaNaviosAgente.xhtml"
   PATH="/cargas/listaNaviosAgente.xhtml" SHAPE="504,544,50,25" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#contratacao#atendente#home.xhtml"
-  PATH="/contratacao/atendente/home.xhtml" SHAPE="304,849,0,0" model-entity="JSFProcessGroup"/>
+  PATH="/contratacao/atendente/home.xhtml" SHAPE="304,849,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#contratacao#atendente#home.xhtml:0"
+   NAME="item" PATH="/contratacao/atendente/home.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="contratacao::#contratacao#contratacao.xhtml"
+    NAME="output" PATH="/contratacao/contratacao.xhtml"
+    TARGET="rules:#contratacao#contratacao.xhtml" TITLE="contratacao" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
 </PROCESS>

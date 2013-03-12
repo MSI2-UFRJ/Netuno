@@ -4,6 +4,7 @@ public abstract class Attributes {
 	public static enum SessionAttributes {
 		LOGIN,
 		CONTRATANTE,
-		CONTRATO;
+		CONTRATO,
+		VIAATENDENTE;
 	}
 }
