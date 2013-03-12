@@ -7,9 +7,13 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import br.com.ufrj.msi2.netuno.modelo.entidades.CPF;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Carga;
+import br.com.ufrj.msi2.netuno.modelo.entidades.CargaLog;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Contratante;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Contrato;
+import br.com.ufrj.msi2.netuno.modelo.exceptions.ResultadoNaoEncontradoException;
+import br.com.ufrj.msi2.netuno.modelo.servicos.CargaLogService;
 import br.com.ufrj.msi2.netuno.modelo.servicos.CargaService;
 import br.com.ufrj.msi2.netuno.modelo.servicos.ContratanteService;
 import br.com.ufrj.msi2.netuno.modelo.servicos.ContratoService;
@@ -20,6 +24,9 @@ public class ContratacaoServiceImpl implements ContratacaoService {
 	
 	@EJB
 	CargaService cargaService;
+	
+	@EJB
+	CargaLogService cargaLogService;
 	
 	@EJB
 	ContratanteService contratanteService;
@@ -79,9 +86,25 @@ public class ContratacaoServiceImpl implements ContratacaoService {
 	        contrato.setDataEstimada(cal.getTime());
 		}
 	}
+	
+	public Contratante recuperaContratantePorCPF(CPF cpf) throws ResultadoNaoEncontradoException {
+		return this.contratanteService.recuperaPorCPF(cpf);
+	}
+	
+	public Contrato recuperaContratoComCargas(Contrato contrato) {
+		return this.contratoService.recuperaContratoComCargas(contrato);
+	}
+	
+	public CargaLog recuperaUltimoCargaLogDeCarga(Carga carga) {
+		return this.cargaLogService.recuperaUltimoCargaLogDeCarga(carga);
+	}
 
 	public CargaService getCargaService() {
 		return cargaService;
+	}
+
+	public CargaLogService getCargaLogService() {
+		return cargaLogService;
 	}
 
 	public ContratanteService getContratanteService() {
@@ -94,6 +117,10 @@ public class ContratacaoServiceImpl implements ContratacaoService {
 
 	public void setCargaService(CargaService cargaService) {
 		this.cargaService = cargaService;
+	}
+
+	public void setCargaLogService(CargaLogService cargaLogService) {
+		this.cargaLogService = cargaLogService;
 	}
 
 	public void setContratanteService(ContratanteService contratanteService) {

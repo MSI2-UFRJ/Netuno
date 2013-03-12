@@ -3,6 +3,7 @@ package br.com.ufrj.msi2.netuno.modelo.entidades;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -40,6 +41,9 @@ public abstract class Usuario implements Serializable {
 	@Column(name="nome")
 	private String nome;
 	
+	@Embedded
+	private CPF cpf;
+
 	public Integer getId() {
 		return id;
 	}
@@ -56,6 +60,10 @@ public abstract class Usuario implements Serializable {
 		return nome;
 	}
 
+	public CPF getCpf() {
+		return cpf;
+	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -70,6 +78,10 @@ public abstract class Usuario implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public void setCpf(CPF cpf) {
+		this.cpf = cpf;
 	}
 
 	public abstract String getTipo();

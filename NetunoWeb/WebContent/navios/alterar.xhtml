@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<ui:composition template="/templates/template.xhtml">
+	<f:metadata>
+		<f:viewParam name="idNavio" value="#{navioBean.idNavio}"/>
+		<f:event type="preRenderView" listener="#{navioBean.recuperarNavio}" />
+	</f:metadata>
+	<ui:define name="content">
+		<h2>Alteração de Navio</h2>
+		<div class="grid_12">
+			<div class="box-5">
+				<h:form id="formAlteracaoNavio">
+				<p:messages id="mensagens" globalOnly="true" />
+						<p:panelGrid columns="3" cellspacing="10" cellpadding="10" id="grid">
+							<f:facet name="header">
+								Navio
+							</f:facet>
+							
+							<h:outputLabel for="nome" value="Nome*: "/>
+							<p:inputText id="nome" value="#{navioBean.navio.nome}" required="true" requiredMessage="Por favor, informe o nome do navio."/>
+							<p:message for="nome" autoUpdate="true"/>
+														
+							<f:facet name="footer">
+								<p:commandButton type="submit" value="Confirmar" icon="ui-icon-check" action="#{navioBean.salvar}" update="formAlteracaoNavio"/>
+							</f:facet>
+							<f:facet name="footer">
+								<p:button outcome="/navios/listar" value="Cancelar" icon="ui-icon-arrowreturnthick-1-w"/>
+							</f:facet>
+						</p:panelGrid>
+				</h:form>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

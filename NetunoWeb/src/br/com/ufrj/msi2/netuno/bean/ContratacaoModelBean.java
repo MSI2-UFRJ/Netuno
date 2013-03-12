@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import br.com.ufrj.msi2.netuno.modelo.entidades.CargaLog;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Contratante;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Contrato;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Porto;
@@ -22,7 +23,11 @@ public class ContratacaoModelBean extends MBean {
 	
 	private boolean enderecoEntrega;
 	
+	private boolean modoVerDetalhes;
+	
 	private List<Porto> portos;
+	
+	private List<CargaLog> logs;
 
 	@PostConstruct
 	public void construct() {
@@ -45,8 +50,16 @@ public class ContratacaoModelBean extends MBean {
 		return enderecoEntrega;
 	}
 
+	public boolean isModoVerDetalhes() {
+		return modoVerDetalhes;
+	}
+
 	public List<Porto> getPortos() {
 		return portos;
+	}
+
+	public List<CargaLog> getLogs() {
+		return logs;
 	}
 
 	public void setContratante(Contratante contratante) {
@@ -65,8 +78,16 @@ public class ContratacaoModelBean extends MBean {
 		this.enderecoEntrega = enderecoEntrega;
 	}
 
+	public void setModoVerDetalhes(boolean modoVerDetalhes) {
+		this.modoVerDetalhes = modoVerDetalhes;
+	}
+
 	public void setPortos(List<Porto> portos) {
 		this.portos = portos;
+	}
+
+	public void setLogs(List<CargaLog> logs) {
+		this.logs = logs;
 	}
 
 }

@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -16,6 +18,13 @@ import javax.persistence.Table;
  * @author Thiago, Paula
  *
  */
+@NamedQueries(
+		{
+			@NamedQuery(name="CargaLog.recuperaUltimaCargaLogDeCarga",
+						query="select cargaLog from CargaLog cargaLog where cargaLog.carga = :carga order by cargaLog.data DESC"
+			)
+		}
+)
 @Entity
 @Table(name="cargalog")
 public class CargaLog implements Serializable {

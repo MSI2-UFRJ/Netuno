@@ -25,6 +25,39 @@ public class Porto implements Serializable {
 	@OneToMany(mappedBy="pertence")
 	private List<AgentePorto> agentes;
 	
+	@OneToMany(mappedBy="porto")
+	private List<Atraque> atraques;
+	
+	@OneToMany(mappedBy="porto")
+	private List<Patio> patios;
+	
+	@OneToMany(mappedBy="porto")
+	private List<Slot> slots;
+	
+	public List<Slot> getSlots() {
+		return slots;
+	}
+
+	public void setSlots(List<Slot> slots) {
+		this.slots = slots;
+	}
+
+	public List<Atraque> getAtraques() {
+		return atraques;
+	}
+
+	public void setAtraques(List<Atraque> atraques) {
+		this.atraques = atraques;
+	}
+
+	public List<Patio> getPatios() {
+		return patios;
+	}
+
+	public void setPatios(List<Patio> patios) {
+		this.patios = patios;
+	}
+
 	@Column(name="nome", nullable = false)
 	private String nome;
 

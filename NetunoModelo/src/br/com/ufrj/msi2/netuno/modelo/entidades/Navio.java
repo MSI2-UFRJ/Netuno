@@ -1,13 +1,23 @@
 package br.com.ufrj.msi2.netuno.modelo.entidades;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+@NamedQueries(
+		{
+			@NamedQuery(name="Navio.recuperarTodos", query="select n from Navio n")
+		}
+)
 
 @Entity
 @Table(name="navio")
@@ -20,6 +30,17 @@ public class Navio implements Serializable {
 	
 	@Column
 	private String nome;
+	
+	@OneToMany(mappedBy="navio")
+	private List<Atraque> atraque;
+
+	public List<Atraque> getAtraque() {
+		return atraque;
+	}
+
+	public void setAtraque(List<Atraque> atraque) {
+		this.atraque = atraque;
+	}
 
 	public Integer getId() {
 		return id;

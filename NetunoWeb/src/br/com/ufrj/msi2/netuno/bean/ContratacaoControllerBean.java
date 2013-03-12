@@ -1,6 +1,7 @@
 package br.com.ufrj.msi2.netuno.bean;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -14,8 +15,10 @@ import javax.servlet.http.HttpSession;
 import br.com.ufrj.msi2.netuno.attributes.Attributes;
 import br.com.ufrj.msi2.netuno.contratacao.servicos.ContratacaoService;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Carga;
+import br.com.ufrj.msi2.netuno.modelo.entidades.CargaLog;
 import br.com.ufrj.msi2.netuno.modelo.entidades.CargaPerecivel;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Contratante;
+import br.com.ufrj.msi2.netuno.modelo.entidades.Contrato;
 import br.com.ufrj.msi2.netuno.modelo.servicos.PortoService;
 
 @ManagedBean(name="contratacaoController")
@@ -30,15 +33,59 @@ public class ContratacaoControllerBean extends MBean {
 
 	@ManagedProperty(value="#{contratacaoModel}")
 	private ContratacaoModelBean contratacaoModelBean;
-
+	
+	private boolean deveRedirecionarParaTelaDeAtendente;
+	
 	@PostConstruct
 	public void construct() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		
 		Contratante contratante = (Contratante) session.getAttribute(Attributes.SessionAttributes.CONTRATANTE.toString());
 		contratacaoModelBean.setContratante(contratante);
-		contratacaoModelBean.setContrato(this.contratacaoService.criarContrato());
-		contratacaoModelBean.getContrato().setCargas(new ArrayList<Carga>());
+		
+		if(session.getAttribute(Attributes.SessionAttributes.VIAATENDENTE.toString()) == null) {
+			this.deveRedirecionarParaTelaDeAtendente = false;
+		} else {
+			if(session.getAttribute(Attributes.SessionAttributes.VIAATENDENTE.toString()).toString() == "atendente") {
+				this.deveRedirecionarParaTelaDeAtendente = true;
+			}
+			
+			session.removeAttribute(Attributes.SessionAttributes.VIAATENDENTE.toString());
+		}
+		
+		if(session.getAttribute(Attributes.SessionAttributes.CONTRATO.toString()) == null) {
+			contratacaoModelBean.setContrato(this.contratacaoService.criarContrato());
+			contratacaoModelBean.getContrato().setCargas(new ArrayList<Carga>());
+		} else {
+			Contrato contrato = (Contrato) session.getAttribute(Attributes.SessionAttributes.CONTRATO.toString());
+			Contrato contratoComCargas = contratacaoService.recuperaContratoComCargas(contrato);
+			contratacaoModelBean.setContrato(contratoComCargas);
+			
+			if(contratacaoModelBean.getContrato().getEnderecoColeta() != null) {
+				contratacaoModelBean.setEnderecoColeta(true);
+			}
+			
+			if(contratacaoModelBean.getContrato().getEnderecoEntrega() != null) {
+				contratacaoModelBean.setEnderecoEntrega(true);
+			}
+			
+			List<CargaLog> logs = new ArrayList<CargaLog>();
+
+			for(Carga carga : contratoComCargas.getCargas()) {
+				CargaLog cargaLog = this.contratacaoService.recuperaUltimoCargaLogDeCarga(carga);
+				
+				if(cargaLog == null) {
+					cargaLog = new CargaLog();
+				}
+				
+				logs.add(cargaLog);
+			}
+			
+			contratacaoModelBean.setLogs(logs);
+			
+			contratacaoModelBean.setModoVerDetalhes(true);
+		}
+
 		contratacaoModelBean.setPortos(this.portoService.obterTodos());
 	}
 	
@@ -66,21 +113,11 @@ public class ContratacaoControllerBean extends MBean {
 	public String salvar() {
 		boolean valida = true;
 		
-		if(contratacaoModelBean.isEnderecoColeta()) {
-			if(contratacaoModelBean.getContrato().getEnderecoColeta().trim().equals("")) {
-				super.sendMessage(null, FacesMessage.SEVERITY_ERROR, "Endereço de coleta inválido.", null);
-				valida = false;
-			}
-		} else {
+		if(!contratacaoModelBean.isEnderecoColeta()) {
 			contratacaoModelBean.getContrato().setEnderecoColeta(null);
 		}
 		
-		if(contratacaoModelBean.isEnderecoEntrega()) {
-			if(contratacaoModelBean.getContrato().getEnderecoEntrega().trim().equals("")) {
-				super.sendMessage(null, FacesMessage.SEVERITY_ERROR, "Endereço de entrega inválido.", null);
-				valida = false;
-			}
-		} else {
+		if(!contratacaoModelBean.isEnderecoEntrega()) {
 			contratacaoModelBean.getContrato().setEnderecoEntrega(null);
 		}
 
@@ -108,38 +145,55 @@ public class ContratacaoControllerBean extends MBean {
 			
 			super.sendMessage(null, FacesMessage.SEVERITY_INFO, "Contrato criado com sucesso", null);
 
-			return "verContratos";
+			return navegacao();
 		}
 		
 		return null;
 	}
 	
 	public String cancelar() {
-		return "verContratos";
+		return navegacao();
+	}
+	
+	public String navegacao() {
+		if(this.deveRedirecionarParaTelaDeAtendente) {
+			return "telaAtendente";
+		} else {
+			return "verContratos"; 
+		}
 	}
 
 	public ContratacaoService getContratacaoService() {
 		return contratacaoService;
 	}
 
+	public PortoService getPortoService() {
+		return portoService;
+	}
+
 	public ContratacaoModelBean getContratacaoModelBean() {
 		return contratacaoModelBean;
+	}
+
+	public boolean isDeveRedirecionarParaTelaDeAtendente() {
+		return deveRedirecionarParaTelaDeAtendente;
 	}
 
 	public void setContratacaoService(ContratacaoService contratacaoService) {
 		this.contratacaoService = contratacaoService;
 	}
 
+	public void setPortoService(PortoService portoService) {
+		this.portoService = portoService;
+	}
+
 	public void setContratacaoModelBean(ContratacaoModelBean contratacaoModelBean) {
 		this.contratacaoModelBean = contratacaoModelBean;
 	}
 
-	public PortoService getPortoService() {
-		return portoService;
-	}
-
-	public void setPortoService(PortoService portoService) {
-		this.portoService = portoService;
+	public void setDeveRedirecionarParaTelaDeAtendente(
+			boolean deveRedirecionarParaTelaDeAtendente) {
+		this.deveRedirecionarParaTelaDeAtendente = deveRedirecionarParaTelaDeAtendente;
 	}
 	
 }
