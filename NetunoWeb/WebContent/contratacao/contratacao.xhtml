@@ -86,20 +86,25 @@
 		   		<h:outputText 	id="dataEstimada"
 		   						value="#{contratacaoModel.contrato.dataEstimada}">
 					<f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
-				</h:outputText><br /><br />
+				</h:outputText><br />
 				
-				<h:outputLabel value="Forma de Pagamento: " />
+				<h:outputLabel value="Preço:  " rendered="#{contratacaoModel.modoVerDetalhes}" />
+		   		<h:outputText 	id="preco"
+		   						value="#{contratacaoModel.contrato.preco}"
+		   						rendered="#{contratacaoModel.modoVerDetalhes}">
+					<f:convertNumber type="currency" currencySymbol="$" />
+				</h:outputText><br />
+				
+				<h:outputLabel value="Forma de Pagamento: " rendered="#{contratacaoModel.modoVerDetalhes}"/>
 	            <p:selectOneMenu 	id="pagamentoMenu"
 	            					value="#{contratacaoModel.contrato.formaPagamento}"
-	            					required="#{empty param['disableValidation']}"
-	            					requiredMessage="Selecione uma forma de pagamento."
-	            					disabled="#{contratacaoModel.modoVerDetalhes}">
+	            					rendered="#{contratacaoModel.modoVerDetalhes}"
+	            					disabled="true">
 		   			<f:selectItems 	value="#{contratacaoModel.formasPagamento}"
 		   							var="formaPagamento"
 		   							itemLabel="#{formaPagamento}"
 		   							itemValue="#{formaPagamento}" />
-		   		</p:selectOneMenu>
-				<p:message for="pagamentoMenu" autoUpdate="true"/><br />
+		   		</p:selectOneMenu><br />
 				
 				<p:commandButton 	value="Nova Carga"
 									update="@form"
@@ -171,7 +176,7 @@
 				</p:dataTable>
 	
 				<br /><br />
-		   		<p:commandButton action="#{contratacaoController.salvar()}" value="Criar contrato" type="submit" update="formContrato" rendered="#{not contratacaoModel.modoVerDetalhes}"/>
+		   		<p:commandButton action="#{contratacaoController.avancarParaFecharContrato()}" value="Avançar" type="submit" update="formContrato" rendered="#{not contratacaoModel.modoVerDetalhes}"/>
 		   		<p:commandButton action="#{contratacaoController.cancelar()}" value="#{contratacaoModel.modoVerDetalhes ? 'Voltar' : 'Cancelar'}" ajax="false" immediate="true"/>
 		   		<br />
 			</f:validateBean>

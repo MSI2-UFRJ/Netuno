@@ -1,6 +1,7 @@
 package br.com.ufrj.msi2.netuno.modelo.entidades;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -71,6 +72,9 @@ public class Contrato implements Serializable {
 	@Enumerated(EnumType.ORDINAL)
 	private FormaPagamentoEnum formaPagamento;
 	
+	@Column(name="preco")
+	private BigDecimal preco;
+	
 	@Column(name="endereco_coleta")
 	private String enderecoColeta;
 	
@@ -107,6 +111,10 @@ public class Contrato implements Serializable {
 
 	public FormaPagamentoEnum getFormaPagamento() {
 		return formaPagamento;
+	}
+
+	public BigDecimal getPreco() {
+		return preco;
 	}
 
 	public String getEnderecoColeta() {
@@ -147,6 +155,10 @@ public class Contrato implements Serializable {
 
 	public void setFormaPagamento(FormaPagamentoEnum formaPagamento) {
 		this.formaPagamento = formaPagamento;
+	}
+
+	public void setPreco(BigDecimal preco) {
+		this.preco = preco;
 	}
 
 	public void setEnderecoColeta(String enderecoColeta) {

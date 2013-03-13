@@ -1,5 +1,6 @@
 package br.com.ufrj.msi2.netuno.contratacao.servicos;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -102,6 +103,40 @@ public class ContratacaoServiceImpl implements ContratacaoService {
 
 	        contrato.setDataEstimada(cal.getTime());
 		}
+	}
+	
+	public void calcularPreco(Contrato contrato, boolean temColeta, boolean temEntrega) {
+		BigDecimal preco = new BigDecimal(0.0);
+		
+		for(Carga c : contrato.getCargas()) {
+			if(c.isCargaPerecivel()) {
+				preco = preco.add(new BigDecimal(100.0));
+			}
+			
+			if(temColeta) {
+				preco = preco.add(new BigDecimal(50.0));
+			}
+			
+			if(temEntrega) {
+				preco = preco.add(new BigDecimal(50.0));
+			}
+			
+			if(c.getPeso() <= 10.0) {
+				preco = preco.add(new BigDecimal(50.0));
+			} else if(c.getPeso() <= 100.0) {
+				preco = preco.add(new BigDecimal(500.0));
+			} else if(c.getPeso() <= 500.0) {
+				preco = preco.add(new BigDecimal(2500.0));
+			} else if(c.getPeso() <= 1000.0) {
+				preco = preco.add(new BigDecimal(5000.0));
+			} else if(c.getPeso() <= 2000.0) {
+				preco = preco.add(new BigDecimal(10000.0));
+			} else {
+				preco = preco.add(new BigDecimal(c.getPeso()));
+			} 
+		}
+		
+		contrato.setPreco(preco);
 	}
 	
 	public Contratante recuperaContratantePorCPF(CPF cpf) throws ResultadoNaoEncontradoException {

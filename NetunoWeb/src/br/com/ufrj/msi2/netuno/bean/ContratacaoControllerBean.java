@@ -28,15 +28,15 @@ public class ContratacaoControllerBean extends MBean {
 
 	@EJB
 	ContratacaoService contratacaoService;
-	
+
 	@EJB
 	private PortoService portoService;
 
 	@ManagedProperty(value="#{contratacaoModel}")
 	private ContratacaoModelBean contratacaoModelBean;
-	
+
 	private boolean deveRedirecionarParaTelaDeAtendente;
-	
+
 	@PostConstruct
 	public void construct() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
@@ -50,8 +50,6 @@ public class ContratacaoControllerBean extends MBean {
 			if(session.getAttribute(Attributes.SessionAttributes.VIAATENDENTE.toString()).toString() == "atendente") {
 				this.deveRedirecionarParaTelaDeAtendente = true;
 			}
-			
-			session.removeAttribute(Attributes.SessionAttributes.VIAATENDENTE.toString());
 		}
 		
 		if(session.getAttribute(Attributes.SessionAttributes.CONTRATO.toString()) == null) {
@@ -60,6 +58,7 @@ public class ContratacaoControllerBean extends MBean {
 		} else {
 			Contrato contrato = (Contrato) session.getAttribute(Attributes.SessionAttributes.CONTRATO.toString());
 			Contrato contratoComCargas = contratacaoService.recuperaContratoComCargas(contrato);
+
 			contratacaoModelBean.setContrato(contratoComCargas);
 			
 			if(contratacaoModelBean.getContrato().getEnderecoColeta() != null) {
@@ -112,7 +111,7 @@ public class ContratacaoControllerBean extends MBean {
 		contratacaoModelBean.getContrato().getCargas().remove(carga);
 	}
 	
-	public String salvar() {
+	public String avancarParaFecharContrato() {
 		boolean valida = true;
 		
 		if(!contratacaoModelBean.isEnderecoColeta()) {
@@ -141,23 +140,23 @@ public class ContratacaoControllerBean extends MBean {
 				}
 			}
 		}
-		
-		if(valida) {
-			contratacaoService.salvarContrato(contratacaoModelBean.getContratante(), contratacaoModelBean.getContrato());
-			
-			super.sendMessage(null, FacesMessage.SEVERITY_INFO, "Contrato criado com sucesso", null);
 
-			return navegacao();
+		if(valida) {
+			this.contratacaoService.calcularPreco(contratacaoModelBean.getContrato(), contratacaoModelBean.isEnderecoColeta(), contratacaoModelBean.isEnderecoEntrega());
+			HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+			session.setAttribute(Attributes.SessionAttributes.CONTRATO.toString(), contratacaoModelBean.getContrato());
+			return "fecharContrato";
 		}
 		
 		return null;
 	}
 	
 	public String cancelar() {
-		return navegacao();
-	}
-	
-	public String navegacao() {
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+		session.removeAttribute(Attributes.SessionAttributes.CONTRATANTE.toString());
+		session.removeAttribute(Attributes.SessionAttributes.CONTRATO.toString());
+		session.removeAttribute(Attributes.SessionAttributes.VIAATENDENTE.toString());
+		
 		if(this.deveRedirecionarParaTelaDeAtendente) {
 			return "telaAtendente";
 		} else {

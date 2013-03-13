@@ -79,6 +79,21 @@
 	<navigation-rule>
 		<from-view-id>/contratacao/contratacao.xhtml</from-view-id>
 		<navigation-case>
+			<from-outcome>fecharContrato</from-outcome>
+			<to-view-id>/contratacao/fecharContrato.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>verContratos</from-outcome>
+			<to-view-id>/contratacao/verContratos.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>telaAtendente</from-outcome>
+			<to-view-id>/contratacao/atendente/home.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/contratacao/fecharContrato.xhtml</from-view-id>
+		<navigation-case>
 			<from-outcome>verContratos</from-outcome>
 			<to-view-id>/contratacao/verContratos.xhtml</to-view-id>
 		</navigation-case>

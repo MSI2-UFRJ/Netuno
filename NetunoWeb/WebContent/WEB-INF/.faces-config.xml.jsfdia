@@ -82,9 +82,10 @@
   <PROCESS-ITEM ID="rules:#contratacao#contratacao.xhtml:0" NAME="item"
    PATH="/contratacao/contratacao.xhtml" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
-    ID="verContratos::#contratacao#verContratos.xhtml" NAME="output"
-    PATH="/contratacao/verContratos.xhtml"
-    TARGET="rules:#contratacao#verContratos.xhtml" TITLE="verContratos" model-entity="JSFProcessItemOutput"/>
+    ID="fecharContrato::#contratacao#fecharContrato.xhtml" NAME="output"
+    PATH="/contratacao/fecharContrato.xhtml"
+    TARGET="rules:#contratacao#fecharContrato.xhtml"
+    TITLE="fecharContrato" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT
     ID="telaAtendente::#contratacao#atendente#home.xhtml" NAME="output1"
     PATH="/contratacao/atendente/home.xhtml"
@@ -125,6 +126,34 @@
    <PROCESS-ITEM-OUTPUT ID="contratacao::#contratacao#contratacao.xhtml"
     NAME="output" PATH="/contratacao/contratacao.xhtml"
     TARGET="rules:#contratacao#contratacao.xhtml" TITLE="contratacao" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#cargas#ListaNaviosAgente.xhtml"
+  PATH="/cargas/ListaNaviosAgente.xhtml" SHAPE="32,1137,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#cargas#ListaNaviosAgente.xhtml:0" NAME="item"
+   PATH="/cargas/ListaNaviosAgente.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="listaConteinersNavio::#cargas#listaConteinersNavioAgente.xhtml"
+    NAME="output" PATH="/cargas/listaConteinersNavioAgente.xhtml"
+    TARGET="rules:#cargas#listaConteinersNavioAgente.xhtml"
+    TITLE="listaConteinersNavio" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#cargas#listaConteinersNavioAgente.xhtml"
+  PATH="/cargas/listaConteinersNavioAgente.xhtml" SHAPE="240,1153,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#contratacao#fecharContrato.xhtml"
+  PATH="/contratacao/fecharContrato.xhtml" SHAPE="32,289,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#contratacao#fecharContrato.xhtml:0"
+   NAME="item" PATH="/contratacao/fecharContrato.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="verContratos::#contratacao#verContratos.xhtml" NAME="output"
+    PATH="/contratacao/verContratos.xhtml"
+    TARGET="rules:#contratacao#verContratos.xhtml" TITLE="verContratos" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="telaAtendente::#contratacao#atendente#home.xhtml" NAME="output1"
+    PATH="/contratacao/atendente/home.xhtml"
+    TARGET="rules:#contratacao#atendente#home.xhtml"
+    TITLE="telaAtendente" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
 </PROCESS>
