@@ -5,6 +5,7 @@ public abstract class Attributes {
 		LOGIN,
 		CONTRATANTE,
 		CONTRATO,
-		VIAATENDENTE;
+		VIAATENDENTE,
+		NAVIO;
 	}
 }

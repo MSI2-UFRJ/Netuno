@@ -28,7 +28,9 @@
 						<h:outputLabel value="#{navio.nome}" />
 					</h:column>
 					<h:column>
-						<f:facet name="header"></f:facet>
+						<p:commandButton action="#{listarConteinerController.listaConteinersNavio(navio)}"
+							value="Ver Conteiners" ajax="false"/>
+
 					</h:column>
 				</h:dataTable>
 			</h:form>

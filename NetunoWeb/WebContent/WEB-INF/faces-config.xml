@@ -101,6 +101,13 @@
 			<to-view-id>/cargas/listaNaviosAgente.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/cargas/ListaNaviosAgente.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>listaConteinersNavio</from-outcome>
+			<to-view-id>/cargas/listaConteinersNavioAgente.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 	<!-- Definicao do arquivo de mensagens -->
 	<application>
 		<resource-bundle>
