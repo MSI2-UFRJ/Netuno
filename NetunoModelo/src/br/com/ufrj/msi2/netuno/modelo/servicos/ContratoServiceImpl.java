@@ -22,12 +22,17 @@ public class ContratoServiceImpl implements ContratoService {
 		Contrato contrato = new Contrato();
 		
 		contrato.setSituacao(SituacaoContratoEnum.aberto);
-		
+
 		return contrato;
 	}
 
 	public void salvarContrato(Contrato contrato) {
 		em.persist(contrato);
+	}
+	
+	public void salvarContratoAguardandoColeta(Contrato contrato) {
+		contrato.setSituacao(SituacaoContratoEnum.aguardandoColeta);
+		this.salvarContrato(contrato);
 	}
 
 	public Contrato recuperaContratoPorId(Integer id) {
@@ -43,19 +48,19 @@ public class ContratoServiceImpl implements ContratoService {
 	}
 
 	@SuppressWarnings("unchecked")
-	private List<Contrato> recuperaContratosPorContratante(Contratante contratante, SituacaoContratoEnum situacao) {
-		Query query = em.createNamedQuery("Contrato.recuperaPorContratante");
+	public List<Contrato> recuperaContratosAbertosPorContratante(Contratante contratante) {
+		Query query = em.createNamedQuery("Contrato.recuperaAbertoPorContratante");
 		query.setParameter("contratante", contratante);
-		query.setParameter("situacao", situacao.name());
+		query.setParameter("situacao", SituacaoContratoEnum.aguardandoEntrega.ordinal());
 		return (List<Contrato>) query.getResultList();
 	}
 
-	public List<Contrato> recuperaContratosAbertosPorContratante(Contratante contratante) {
-		return this.recuperaContratosPorContratante(contratante, SituacaoContratoEnum.aberto);
-	}
-
+	@SuppressWarnings("unchecked")
 	public List<Contrato> recuperaContratosFechadosPorContratante(Contratante contratante) {
-		return this.recuperaContratosPorContratante(contratante, SituacaoContratoEnum.finalizado);
+		Query query = em.createNamedQuery("Contrato.recuperaFinalizadoPorContratante");
+		query.setParameter("contratante", contratante);
+		query.setParameter("situacao", SituacaoContratoEnum.finalizado.ordinal());
+		return (List<Contrato>) query.getResultList();
 	}
 
 	public EntityManager getEm() {

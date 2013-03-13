@@ -27,7 +27,9 @@ import br.com.ufrj.msi2.netuno.modelo.enums.SituacaoContratoEnum;
  */
 @NamedQueries(
 	{
-		@NamedQuery(name="Contrato.recuperaPorContratante",
+		@NamedQuery(name="Contrato.recuperaAbertoPorContratante",
+					query="select contrato from Contratante contratante inner join contratante.contratos contrato where (contratante = :contratante and contrato.situacao <= :situacao)"),
+		@NamedQuery(name="Contrato.recuperaFinalizadoPorContratante",
 					query="select contrato from Contratante contratante inner join contratante.contratos contrato where (contratante = :contratante and contrato.situacao = :situacao)"),
 		@NamedQuery(name="Contrato.recuperaPorId",
 					query="select contrato from Contrato contrato where contrato.id = :id"),
@@ -61,7 +63,7 @@ public class Contrato implements Serializable {
 	private Date dataEstimada;
 	
 	@Column(name="situacao")
-	@Enumerated(EnumType.STRING)  
+	@Enumerated(EnumType.ORDINAL)  
 	private SituacaoContratoEnum situacao;
 	
 	@Column(name="endereco_coleta")

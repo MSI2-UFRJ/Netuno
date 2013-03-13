@@ -13,6 +13,7 @@ public interface ContratoService extends Serializable {
 	
 	public Contrato criarContrato();
 	public void salvarContrato(Contrato contrato);
+	public void salvarContratoAguardandoColeta(Contrato contrato);
 	public Contrato recuperaContratoPorId(Integer id);
 	public Contrato recuperaContratoComCargas(Contrato contrato);
 	public List<Contrato> recuperaContratosAbertosPorContratante(Contratante contratante);

@@ -46,7 +46,11 @@ public class ContratacaoServiceImpl implements ContratacaoService {
 		
 		contratanteService.salvarContratante(contratanteComContratosCarregados);
 		
-		contratoService.salvarContrato(contrato);
+		if(contrato.getEnderecoColeta() == null) {
+			contratoService.salvarContrato(contrato);
+		} else {
+			contratoService.salvarContratoAguardandoColeta(contrato);
+		}
 
 		for(Carga c : contrato.getCargas()) {
 			cargaService.salvar(c);

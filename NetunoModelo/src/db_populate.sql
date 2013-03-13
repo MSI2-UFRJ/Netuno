@@ -67,9 +67,9 @@ insert into navio(nome) values ('Australis');
 insert into navio(nome) values ('Borealis');
 
 -- CONTRATOS
-insert into contrato(data_criacao, data_estimada, situacao, portoDestino_id, portoOrigem_id, contratante_id) values ('2013-03-05 10:00:00', '2013-03-20 16:00:00', 'aberto', 2, 1, 9);
-insert into contrato(data_criacao, data_estimada, situacao, portoDestino_id, portoOrigem_id, contratante_id) values ('2013-03-06 11:00:00', '2013-03-22 17:00:00', 'finalizado', 2, 1, 9);
-insert into contrato(data_criacao, data_estimada, situacao, portoDestino_id, portoOrigem_id, contratante_id) values ('2013-03-06 15:00:00', '2013-03-20 16:00:00', 'aberto', 2, 1, 10);
+insert into contrato(data_criacao, data_estimada, situacao, portoDestino_id, portoOrigem_id, contratante_id) values ('2013-03-05 10:00:00', '2013-03-20 16:00:00', 1, 2, 1, 9);
+insert into contrato(data_criacao, data_estimada, situacao, portoDestino_id, portoOrigem_id, contratante_id) values ('2013-03-06 11:00:00', '2013-03-22 17:00:00', 3, 2, 1, 9);
+insert into contrato(data_criacao, data_estimada, situacao, portoDestino_id, portoOrigem_id, contratante_id) values ('2013-03-06 15:00:00', '2013-03-20 16:00:00', 1, 2, 1, 10);
 
 
 -- CARGAS
