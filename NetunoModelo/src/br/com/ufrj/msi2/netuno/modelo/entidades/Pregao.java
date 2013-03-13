@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @NamedQueries(
 		{
 			@NamedQuery(name="Pregao.recuperaPregoesAtivos",
-						query="from Pregao"
+						query="from Pregao as pregao order by pregao.id"
 			)
 		}
 )

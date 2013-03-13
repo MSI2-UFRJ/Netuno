@@ -25,7 +25,11 @@ import javax.persistence.Table;
 @NamedQueries(
 		{
 			@NamedQuery(name="Carga.recuperaCargasSemPregao",
-						query="from Carga as carga where carga not in (select carga from Pregao as pregao inner join pregao.anuncia as carga)"
+						query="select carga from Carga as carga inner join carga.contrato as contrato " +
+						"where (contrato.situacao = 0 or contrato.situacao = 2) " +
+						"and carga not in ("+
+							"select carga from Pregao as pregao inner join pregao.anuncia as carga) " +
+						"order by carga.id"
 			),
 			@NamedQuery(name="Carga.recuperaPorIdComFetch",
 				query="select carga from Carga carga left join fetch carga.partes where carga.id = :id")
