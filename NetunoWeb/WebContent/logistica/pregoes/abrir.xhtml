@@ -27,6 +27,9 @@
 									<p:column headerText="Descrição" sortBy="#{carga.descricao}">
 										<p:outputLabel value="#{carga.descricao}" />
 									</p:column>
+									<p:column headerText="Situação" sortBy="#{carga.contrato.situacao}">
+										<p:outputLabel value="#{carga.contrato.situacao}" />
+									</p:column>
 									<p:column headerText="Pregão">
 										<p:commandButton value="Abrir pregão" icon="ui-icon-squaresmall-plus" action="#{abrirPregoesController.inserirPregao(carga)}" update="@form"/>
 									</p:column>

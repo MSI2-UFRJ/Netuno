@@ -30,6 +30,12 @@
 									<p:column headerText="Carga (ID)" sortBy="#{pregao.anuncia.id}">
 										<p:outputLabel value="#{pregao.anuncia.id}" />
 									</p:column>
+									<p:column headerText="Descrição" sortBy="#{pregao.anuncia.descricao}">
+										<p:outputLabel value="#{pregao.anuncia.descricao}" />
+									</p:column>
+									<p:column headerText="Situação" sortBy="#{pregao.anuncia.contrato.situacao}">
+										<p:outputLabel value="#{pregao.anuncia.contrato.situacao}" />
+									</p:column>
 								</p:dataTable>
 								<f:facet name="footer">
 									<p:button outcome="/logistica/home" value="Voltar" icon="ui-icon-arrowreturnthick-1-w"/>
