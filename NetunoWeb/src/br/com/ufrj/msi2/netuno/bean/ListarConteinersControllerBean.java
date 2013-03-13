@@ -9,6 +9,8 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import br.com.ufrj.msi2.netuno.attributes.Attributes;
+import br.com.ufrj.msi2.netuno.carga.servicos.GerenciarConteinersService;
+import br.com.ufrj.msi2.netuno.modelo.entidades.Contratante;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Navio;
 import br.com.ufrj.msi2.netuno.modelo.servicos.ConteinerService;
 
@@ -17,13 +19,18 @@ import br.com.ufrj.msi2.netuno.modelo.servicos.ConteinerService;
 public class ListarConteinersControllerBean {
 
 	@EJB
-	ConteinerService conteinerService;
+	GerenciarConteinersService conteinerService;
 	
 	@ManagedProperty(value="#{listarConteinersModel}")
 	private ListarConteinersModelBean listarConteinersModel;
 	
+	
 	@PostConstruct
 	public void construct(){
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+		
+		Navio navio = (Navio) session.getAttribute(Attributes.SessionAttributes.NAVIO.toString());
+		listarConteinersModel.setListaConteiners(this.conteinerService.recuperarConteinersPorNavio(navio));
 		
 	}
 	
@@ -35,17 +42,8 @@ public class ListarConteinersControllerBean {
 		
 		return "listaConteinersNavio";
 	}
-	
-	public void setConteinerService(ConteinerService conteinerService) {
-		this.conteinerService = conteinerService;
-	}
 
-	public void setListarConteinersModel(
-			ListarConteinersModelBean listarConteinersModel) {
-		this.listarConteinersModel = listarConteinersModel;
-	}
-
-	public ConteinerService getConteinerService() {
+	public GerenciarConteinersService getConteinerService() {
 		return conteinerService;
 	}
 
@@ -53,7 +51,13 @@ public class ListarConteinersControllerBean {
 		return listarConteinersModel;
 	}
 
-	
-	
+	public void setConteinerService(GerenciarConteinersService conteinerService) {
+		this.conteinerService = conteinerService;
+	}
+
+	public void setListarConteinersModel(
+			ListarConteinersModelBean listarConteinersModel) {
+		this.listarConteinersModel = listarConteinersModel;
+	}
 
 }

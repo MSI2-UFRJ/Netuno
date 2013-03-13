@@ -13,6 +13,7 @@ import javax.persistence.criteria.Root;
 
 import br.com.ufrj.msi2.netuno.modelo.entidades.Carga;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Conteiner;
+import br.com.ufrj.msi2.netuno.modelo.entidades.Navio;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Porto;
 import br.com.ufrj.msi2.netuno.modelo.servicos.ConteinerService;
 
@@ -76,5 +77,13 @@ public class GerenciarConteinersServiceImpl implements GerenciarConteinersServic
 		conteiner.setPesoDisponivel(novoPeso < 0? 0 : novoPeso);
 		
 		service.salvarConteiner(conteiner);
+	}
+	@Override
+	public List<Conteiner> recuperarTodos() {
+		return service.recuperarTodos();
+	}
+	@Override
+	public List<Conteiner> recuperarConteinersPorNavio(Navio navio) {
+		return service.recuperarConteinersPorNavio(navio);
 	}
 }

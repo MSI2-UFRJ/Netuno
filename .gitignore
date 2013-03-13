@@ -1,5 +1,5 @@
 *.class
-
+/NetunoWeb/WebContent/WEB-INF/*.jsfdia$
 # Package Files #
 *.jar
 *.war

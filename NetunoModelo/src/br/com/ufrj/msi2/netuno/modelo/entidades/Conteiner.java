@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  * A unidade mínima para o transporte de cargas na empresa.
@@ -20,6 +22,11 @@ import javax.persistence.Table;
  * @author Thiago, Paula
  *
  */
+@NamedQueries(
+		{
+			@NamedQuery(name="Conteiner.recuperarTodos", query="select c from Conteiner c")
+		}
+)
 @Entity
 @Table(name="conteiner")
 public class Conteiner implements Serializable {

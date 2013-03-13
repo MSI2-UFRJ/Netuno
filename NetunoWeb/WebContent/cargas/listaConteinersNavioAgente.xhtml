@@ -10,25 +10,18 @@
 <h:body>
 	<ui:composition template="/templates/template.xhtml">
 		<ui:define name="content">
-			<f:metadata>
-				<f:event type="preRenderView"
-					listener="#{listaNaviosAgenteController.onPageLoad}" />
-			</f:metadata>
-			<h3>Lista de Navios</h3>
+			<h3>Lista de Conteiners</h3>
 			<h:form>
-				<h:dataTable id="tabelaNavios"
-					value="#{listaNaviosAgenteModel.listaNavios}" var="navio"
-					rendered="#{not empty listaNaviosAgenteModel.listaNavios}">
+				<h:dataTable id="tabelaConteiners"
+					value="#{listarConteinersModel.listaConteiners}" var="conteiner"
+					rendered="#{not empty listarConteinersModel.listaConteiners}">
 					<h:column>
-						<f:facet name="header">Identificador: </f:facet>
-						<h:outputLabel value="#{navio.id}" />
+						<f:facet name="header">Conteiner ID: </f:facet>
+						<h:outputLabel value="#{conteiner.id}" />
 					</h:column>
 					<h:column>
-						<f:facet name="header">Nome: </f:facet>
-						<h:outputLabel value="#{navio.nome}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header"></f:facet>
+						<f:facet name="header">Peso Disponível: </f:facet>
+						<h:outputLabel value="#{conteiner.pesoDisponivel}" />
 					</h:column>
 				</h:dataTable>
 			</h:form>

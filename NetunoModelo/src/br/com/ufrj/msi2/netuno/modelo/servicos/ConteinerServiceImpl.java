@@ -5,10 +5,12 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
 import br.com.ufrj.msi2.netuno.modelo.entidades.Conteiner;
+import br.com.ufrj.msi2.netuno.modelo.entidades.Navio;
 
 /**
  * Session Bean implementation class ConteinerServiceImpl
@@ -44,5 +46,21 @@ public class ConteinerServiceImpl implements ConteinerService {
 	@Override
 	public Conteiner obterPorId(Integer idConteiner) {
 		return this.em.find(Conteiner.class, idConteiner);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Conteiner> recuperarTodos() {
+		Query query = em.createNamedQuery("Conteiner.recuperarTodos");
+		return (List<Conteiner>) query.getResultList();
+	}
+	
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Conteiner> recuperarConteinersPorNavio(Navio navio) {
+		//TODO: Mudar para recuperar de acordo com o navio
+		Query query = em.createNamedQuery("Conteiner.recuperarTodos");
+		return (List<Conteiner>) query.getResultList();
 	}
 }

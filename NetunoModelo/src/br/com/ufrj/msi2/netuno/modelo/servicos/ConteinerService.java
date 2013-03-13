@@ -8,6 +8,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
 import br.com.ufrj.msi2.netuno.modelo.entidades.Conteiner;
+import br.com.ufrj.msi2.netuno.modelo.entidades.Navio;
 
 @Local
 public interface ConteinerService extends Serializable {
@@ -18,4 +19,8 @@ public interface ConteinerService extends Serializable {
 	public void salvarConteiner(Conteiner conteiner);
 	
 	public Conteiner obterPorId(Integer idConteiner);
+	
+	public List<Conteiner> recuperarConteinersPorNavio(Navio navio);
+	
+	public List<Conteiner> recuperarTodos();
 }
