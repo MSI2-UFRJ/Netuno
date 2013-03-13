@@ -54,6 +54,19 @@ public class ContratacaoServiceImpl implements ContratacaoService {
 
 		for(Carga c : contrato.getCargas()) {
 			cargaService.salvar(c);
+			
+			CargaLog cargaLog = cargaLogService.criarCargaLog();
+			cargaLog.setCarga(c);
+			cargaLog.setData(new Date());
+			
+			
+			if(contrato.getEnderecoColeta() == null) {
+				cargaLog.setDescricao("Aguardando carga ser entregue ao porto origem");
+			} else {
+				cargaLog.setDescricao("Aguardando coleta da carga");
+			}
+			
+			cargaLogService.salvarCargaLog(cargaLog);
 		}
 	}
 

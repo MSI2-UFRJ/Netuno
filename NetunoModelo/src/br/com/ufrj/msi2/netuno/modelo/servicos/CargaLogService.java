@@ -10,6 +10,8 @@ import br.com.ufrj.msi2.netuno.modelo.entidades.CargaLog;
 @Local
 public interface CargaLogService extends Serializable {
 
+	public CargaLog criarCargaLog();
+	public void salvarCargaLog(CargaLog cargaLog);
 	public CargaLog recuperaUltimoCargaLogDeCarga(Carga carga);
 
 }

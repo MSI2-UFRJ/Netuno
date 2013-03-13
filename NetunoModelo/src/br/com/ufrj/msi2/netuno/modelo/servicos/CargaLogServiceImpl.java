@@ -18,8 +18,12 @@ public class CargaLogServiceImpl implements CargaLogService {
 	@PersistenceContext
 	EntityManager em;
 	
-	public EntityManager getEm() {
-		return em;
+	public CargaLog criarCargaLog() {
+		return new CargaLog();
+	}
+	
+	public void salvarCargaLog(CargaLog cargaLog) {
+		em.persist(cargaLog);
 	}
 	
 	@Override
@@ -36,6 +40,10 @@ public class CargaLogServiceImpl implements CargaLogService {
 		}
 		
 		return lista.get(0);
+	}
+	
+	public EntityManager getEm() {
+		return em;
 	}
 	
 }
