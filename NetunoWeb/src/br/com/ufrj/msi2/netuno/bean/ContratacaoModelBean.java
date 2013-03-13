@@ -10,6 +10,7 @@ import br.com.ufrj.msi2.netuno.modelo.entidades.CargaLog;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Contratante;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Contrato;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Porto;
+import br.com.ufrj.msi2.netuno.modelo.enums.FormaPagamentoEnum;
 
 @ManagedBean(name="contratacaoModel")
 @ViewScoped
@@ -28,6 +29,8 @@ public class ContratacaoModelBean extends MBean {
 	private List<Porto> portos;
 	
 	private List<CargaLog> logs;
+	
+	private FormaPagamentoEnum[] formasPagamento;
 
 	@PostConstruct
 	public void construct() {
@@ -62,6 +65,10 @@ public class ContratacaoModelBean extends MBean {
 		return logs;
 	}
 
+	public FormaPagamentoEnum[] getFormasPagamento() {
+		return formasPagamento;
+	}
+
 	public void setContratante(Contratante contratante) {
 		this.contratante = contratante;
 	}
@@ -88,6 +95,10 @@ public class ContratacaoModelBean extends MBean {
 
 	public void setLogs(List<CargaLog> logs) {
 		this.logs = logs;
+	}
+
+	public void setFormasPagamento(FormaPagamentoEnum[] formasPagamento) {
+		this.formasPagamento = formasPagamento;
 	}
 
 }

@@ -18,6 +18,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import br.com.ufrj.msi2.netuno.modelo.enums.FormaPagamentoEnum;
 import br.com.ufrj.msi2.netuno.modelo.enums.SituacaoContratoEnum;
 
 /**
@@ -63,8 +64,12 @@ public class Contrato implements Serializable {
 	private Date dataEstimada;
 	
 	@Column(name="situacao")
-	@Enumerated(EnumType.ORDINAL)  
+	@Enumerated(EnumType.ORDINAL)
 	private SituacaoContratoEnum situacao;
+	
+	@Column(name="forma_pagamento")
+	@Enumerated(EnumType.ORDINAL)
+	private FormaPagamentoEnum formaPagamento;
 	
 	@Column(name="endereco_coleta")
 	private String enderecoColeta;
@@ -98,6 +103,10 @@ public class Contrato implements Serializable {
 
 	public SituacaoContratoEnum getSituacao() {
 		return situacao;
+	}
+
+	public FormaPagamentoEnum getFormaPagamento() {
+		return formaPagamento;
 	}
 
 	public String getEnderecoColeta() {
@@ -134,6 +143,10 @@ public class Contrato implements Serializable {
 
 	public void setSituacao(SituacaoContratoEnum situacao) {
 		this.situacao = situacao;
+	}
+
+	public void setFormaPagamento(FormaPagamentoEnum formaPagamento) {
+		this.formaPagamento = formaPagamento;
 	}
 
 	public void setEnderecoColeta(String enderecoColeta) {

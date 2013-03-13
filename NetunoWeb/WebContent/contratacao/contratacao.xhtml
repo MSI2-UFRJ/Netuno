@@ -88,6 +88,19 @@
 					<f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
 				</h:outputText><br /><br />
 				
+				<h:outputLabel value="Forma de Pagamento: " />
+	            <p:selectOneMenu 	id="pagamentoMenu"
+	            					value="#{contratacaoModel.contrato.formaPagamento}"
+	            					required="#{empty param['disableValidation']}"
+	            					requiredMessage="Selecione uma forma de pagamento."
+	            					disabled="#{contratacaoModel.modoVerDetalhes}">
+		   			<f:selectItems 	value="#{contratacaoModel.formasPagamento}"
+		   							var="formaPagamento"
+		   							itemLabel="#{formaPagamento}"
+		   							itemValue="#{formaPagamento}" />
+		   		</p:selectOneMenu>
+				<p:message for="pagamentoMenu" autoUpdate="true"/><br />
+				
 				<p:commandButton 	value="Nova Carga"
 									update="@form"
 									action="#{contratacaoController.adicionarCarga(false)}"

@@ -19,6 +19,7 @@ import br.com.ufrj.msi2.netuno.modelo.entidades.CargaLog;
 import br.com.ufrj.msi2.netuno.modelo.entidades.CargaPerecivel;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Contratante;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Contrato;
+import br.com.ufrj.msi2.netuno.modelo.enums.FormaPagamentoEnum;
 import br.com.ufrj.msi2.netuno.modelo.servicos.PortoService;
 
 @ManagedBean(name="contratacaoController")
@@ -87,6 +88,7 @@ public class ContratacaoControllerBean extends MBean {
 		}
 
 		contratacaoModelBean.setPortos(this.portoService.obterTodos());
+		contratacaoModelBean.setFormasPagamento(FormaPagamentoEnum.values());
 	}
 	
 	public void atualizarPrazo() {
