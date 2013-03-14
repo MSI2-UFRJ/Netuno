@@ -1,5 +1,7 @@
 package br.com.ufrj.msi2.netuno.bean;
 
+import java.util.ResourceBundle;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -23,12 +25,18 @@ public class ContratanteControllerBean extends MBean {
 
 	@ManagedProperty(value="#{contratanteModel}")
 	private ContratanteModelBean contratanteModelBean;
+	
+	private ResourceBundle contratacaoBundle;
 
 	@PostConstruct
 	public void construct() {
 		Contratante contratante = this.contratacaoService.criarContratante();
 		contratante.setCpf(new CPF());
 		contratanteModelBean.setContratante(contratante);
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		ResourceBundle bundle = context.getApplication().getResourceBundle(context, "contratacaoMsg");
+		this.contratacaoBundle = bundle;
 	}
 
 	public String criar() {
@@ -38,17 +46,17 @@ public class ContratanteControllerBean extends MBean {
 
 		if(!contratante.getSenha().equals(contratanteModelBean.getConfirmacaoSenha())) {
 			contratanteValido = false;
-			super.sendMessage(null, FacesMessage.SEVERITY_ERROR, "Senhas não correspondem", null);
+			super.sendMessage(null, FacesMessage.SEVERITY_ERROR, this.contratacaoBundle.getString("atendente.msg_senhasDiferentes"), null);
 		}
 
 		if(contratacaoService.existeUsuarioComLogin(contratante.getLogin())) {
 			contratanteValido = false;
-			super.sendMessage(null, FacesMessage.SEVERITY_ERROR, "Já existe usuário com esse login", null);
+			super.sendMessage(null, FacesMessage.SEVERITY_ERROR, this.contratacaoBundle.getString("atendente.msg_loginUsado"), null);
 		}
 
 		if(contratacaoService.existeUsuarioComCPF(contratante.getCpf())) {
 			contratanteValido = false;
-			super.sendMessage(null, FacesMessage.SEVERITY_ERROR, "Já existe usuário com esse CPF", null);
+			super.sendMessage(null, FacesMessage.SEVERITY_ERROR, this.contratacaoBundle.getString("atendente.msg_CPFUsado"), null);
 		}
 
 		if(contratanteValido) {
@@ -58,7 +66,7 @@ public class ContratanteControllerBean extends MBean {
 			session.setAttribute(Attributes.SessionAttributes.CONTRATANTE.toString(), contratanteModelBean.getContratante());
 			session.setAttribute(Attributes.SessionAttributes.VIAATENDENTE.toString(), "atendente");
 			
-			super.sendMessage(null, FacesMessage.SEVERITY_INFO, "Contratante criado com sucesso", null);
+			super.sendMessage(null, FacesMessage.SEVERITY_INFO, this.contratacaoBundle.getString("atendente.msg_contratanteCriado"), null);
 			return "contratacao";
 		}
 		
@@ -77,6 +85,10 @@ public class ContratanteControllerBean extends MBean {
 		return contratanteModelBean;
 	}
 
+	public ResourceBundle getContratacaoBundle() {
+		return contratacaoBundle;
+	}
+
 	public void setContratacaoService(ContratacaoService contratacaoService) {
 		this.contratacaoService = contratacaoService;
 	}
@@ -84,5 +96,9 @@ public class ContratanteControllerBean extends MBean {
 	public void setContratanteModelBean(ContratanteModelBean contratanteModelBean) {
 		this.contratanteModelBean = contratanteModelBean;
 	}
-	
+
+	public void setContratacaoBundle(ResourceBundle contratacaoBundle) {
+		this.contratacaoBundle = contratacaoBundle;
+	}	
+
 }

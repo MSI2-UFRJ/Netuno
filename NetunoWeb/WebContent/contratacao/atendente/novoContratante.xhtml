@@ -11,67 +11,67 @@
 <h:body>
 <ui:composition template="/templates/template.xhtml">
 	<ui:define name="content">
-		<h:outputLabel value="Novo Contratante" rendered="#{not empty contratanteController}" /><br />
+		<h:outputLabel value="#{contratacaoMsg['atendente.novoContratante']}" rendered="#{not empty contratanteController}" /><br /><br />
 		
 		<h:form id="formContratante">
 			<p:messages id="mensagens" globalOnly="true" autoUpdate="true"/>
 
-			<h:outputLabel value="Nome:  " />			
+			<h:outputLabel value="#{contratacaoMsg['atendente.nome']}" />			
             <p:inputText 	id="nomeInput"
             				value="#{contratanteModel.contratante.nome}"
             				required="true"
-            				requiredMessage="Esse campo deve ser preenchido.">
+            				requiredMessage="#{contratacaoMsg['contratacao.msg_campoObrigatorio']}">
             	<f:validator validatorId="trimValidator"/>
             </p:inputText>
             <p:message for="nomeInput" autoUpdate="true"/><br /><br />
             
-            <h:outputLabel value="Login:  " />			
+            <h:outputLabel value="#{contratacaoMsg['atendente.login']}" />			
             <p:inputText 	id="loginInput"
             				value="#{contratanteModel.contratante.login}"
             				required="true"
-            				requiredMessage="Esse campo deve ser preenchido.">
+            				requiredMessage="#{contratacaoMsg['contratacao.msg_campoObrigatorio']}">
             	<f:validator validatorId="trimValidator"/>
             </p:inputText>
             <p:message for="loginInput" autoUpdate="true"/><br /><br />
             
-            <h:outputLabel value="Senha:  " />			
+            <h:outputLabel value="#{contratacaoMsg['atendente.senha']}" />			
             <p:password 	id="senhaInput"
             				value="#{contratanteModel.contratante.senha}"
             				required="true"
-            				requiredMessage="Esse campo deve ser preenchido.">
+            				requiredMessage="#{contratacaoMsg['contratacao.msg_campoObrigatorio']}">
             	<f:validator validatorId="trimValidator"/>
             </p:password>
             <p:message for="senhaInput" autoUpdate="true"/><br /><br />
             
-            <h:outputLabel value="Confirme a senha:  " />			
+            <h:outputLabel value="#{contratacaoMsg['atendente.confirmaSenha']}" />			
             <p:password 	id="confirmacaoSenhaInput"
             				value="#{contratanteModel.confirmacaoSenha}"
             				required="true"
-            				requiredMessage="Esse campo deve ser preenchido.">
+            				requiredMessage="#{contratacaoMsg['contratacao.msg_campoObrigatorio']}">
             	<f:validator validatorId="trimValidator"/>
             </p:password>
             <p:message for="confirmacaoSenhaInput" autoUpdate="true"/><br /><br />
             
-            <h:outputLabel value="Email:  " />			
+            <h:outputLabel value="#{contratacaoMsg['atendente.email']}" />			
             <p:inputText 	id="emailInput"
             				value="#{contratanteModel.contratante.email}"
             				required="true"
-            				requiredMessage="Esse campo deve ser preenchido.">
+            				requiredMessage="#{contratacaoMsg['contratacao.msg_campoObrigatorio']}">
             	<f:validator validatorId="trimValidator"/>
             </p:inputText>
             <p:message for="emailInput" autoUpdate="true"/><br /><br />
             
-            <h:outputLabel value="CPF:  " />			
+            <h:outputLabel value="#{contratacaoMsg['atendente.cpf']}" />			
             <p:inputText 	id="cpfInput"
             				value="#{contratanteModel.contratante.cpf.cpf}"
             				required="true"
-            				requiredMessage="Esse campo deve ser preenchido.">
+            				requiredMessage="#{contratacaoMsg['contratacao.msg_campoObrigatorio']}">
             	<f:validator validatorId="cpfValidator"/>
             </p:inputText>
             <p:message for="cpfInput" autoUpdate="true"/><br /><br />
             
-	   		<p:commandButton action="#{contratanteController.criar()}" value="Avançar" type="submit" update="formContratante"/>
-	   		<p:commandButton action="#{contratanteController.cancelar()}" value="Cancelar" ajax="false" immediate="true"/>
+	   		<p:commandButton action="#{contratanteController.criar()}" value="#{contratacaoMsg['atendente.botaoAvancar']}" type="submit" update="formContratante"/>
+	   		<p:commandButton action="#{contratanteController.cancelar()}" value="#{contratacaoMsg['atendente.botaoCancelar']}" ajax="false" immediate="true"/>
 	   		<br />
 		</h:form>
 		</ui:define>

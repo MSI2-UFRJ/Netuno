@@ -11,29 +11,29 @@
 <h:body>
 <ui:composition template="/templates/template.xhtml">
 	<ui:define name="content">
-		<h:outputLabel value="Home - Atendente" rendered="#{not empty atendenteController}"/><br /><br />
+		<h:outputLabel value="#{contratacaoMsg['atendente.homeAtendente']}" rendered="#{not empty atendenteController}"/><br /><br />
 		
 		<p:messages id="mensagens" globalOnly="true" autoUpdate="true"/>
 		
 		<h:form>
-			<p:outputLabel value="Cliente já cadastrado"/><br />
+			<p:outputLabel value="#{contratacaoMsg['atendente.clienteJaCadastrado']}"/><br />
 			
-			<p:outputLabel value="CPF: "/>
+			<p:outputLabel value="#{contratacaoMsg['atendente.cpf']}"/>
 			<p:inputText	id="cpfInputText"
 							value="#{atendenteModel.cpf.cpf}"
 							required="true"
-	            			requiredMessage="Esse campo deve ser preenchido.">
+	            			requiredMessage="#{contratacaoMsg['contratacao.msg_campoObrigatorio']}">
 	            <f:validator validatorId="cpfValidator"/>
 	        </p:inputText>
 	        <p:commandButton 	action="#{atendenteController.verificarCPF()}"
-	        					value="Avançar"
+	        					value="#{contratacaoMsg['atendente.botaoAvancar']}"
 	        					type="submit"
 	        					update="@form"/>	        
 	        <p:message for="cpfInputText" autoUpdate="true"/><br /><br />
 	        
-	        <p:outputLabel value="Cliente não cadastrado"/><br />
+	        <p:outputLabel value="#{contratacaoMsg['atendente.clienteNaoCadastrado']}"/><br />
 	        <p:commandButton 	action="#{atendenteController.irCadastro()}"
-		   						value="Cadastrar cliente"
+		   						value="#{contratacaoMsg['atendente.botaoCadastrarUsuario']}"
 		   						ajax="false"
 		   						immediate="true"/>
 		</h:form>
