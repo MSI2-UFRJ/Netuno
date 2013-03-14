@@ -11,8 +11,11 @@
 <h:body>
 <ui:composition template="/templates/template.xhtml">
 	<ui:define name="content">
-		<h:outputLabel value="Ola, " /><h:outputText value="#{contratacaoModel.contratante.nome}" rendered="#{not empty contratacaoController}" /><br />
-		<h:outputLabel value="Novo Contrato" /><br />
+		<h:outputLabel value="#{contratacaoMsg['contratacao.contratacao.ola']}" />
+		<h:outputText value="#{contratacaoModel.contratante.nome}" rendered="#{not empty contratacaoController}" />
+		<br />
+
+		<h:outputLabel value="#{contratacaoMsg['contratacao.contratacao.novoContrato']}" /><br />
 		
 		<h:form id="formContrato">
 			<f:validateBean disabled="#{not empty param['disableValidation']}">
@@ -22,7 +25,7 @@
 	                <p:ajax process="@this enderecoColetaInputText" event="change" update="enderecoColetaInputText dataEstimada" listener="#{contratacaoController.atualizarPrazo()}" />
 	                <f:param name="disableValidation" value="true" />
 	            </p:selectBooleanCheckbox>
-				<h:outputLabel value="Endereço de coleta:  " />			
+				<h:outputLabel value="#{contratacaoMsg['contratacao.contratacao.enderecoColeta']}" />			
 	            <p:inputText 	id="enderecoColetaInputText"
 	            				value="#{contratacaoModel.contrato.enderecoColeta}"
 	            				disabled="#{not contratacaoModel.enderecoColeta}"
@@ -38,7 +41,7 @@
 	                <p:ajax process="@this enderecoEntregaInputText" event="change" update="enderecoEntregaInputText dataEstimada" listener="#{contratacaoController.atualizarPrazo()}" />
 	                <f:param name="disableValidation" value="true" />
 	            </p:selectBooleanCheckbox>
-	            <h:outputLabel value="Endereço de entrega:  " />			
+	            <h:outputLabel value="#{contratacaoMsg['contratacao.contratacao.enderecoEntrega']}" />			
 	            <p:inputText 	id="enderecoEntregaInputText"
 	            				value="#{contratacaoModel.contrato.enderecoEntrega}"
 	            				disabled="#{not contratacaoModel.enderecoEntrega}"
@@ -50,7 +53,7 @@
 	            <p:outputLabel value="#{contratacaoModel.contrato.enderecoEntrega}" rendered="#{contratacaoModel.modoVerDetalhes}"/>
 	            <p:message for="enderecoEntregaInputText" autoUpdate="true"/><br />
 	            
-	            <h:outputLabel value="Porto Origem" />
+	            <h:outputLabel value="#{contratacaoMsg['contratacao.contratacao.portoOrigem']}" />
 	            <p:selectOneMenu 	id="portoOrigemMenu"
 	            					value="#{contratacaoModel.contrato.portoOrigem}"
 	            					converter="portoConverter"
@@ -66,7 +69,7 @@
 		   		</p:selectOneMenu>
 		   		<p:message for="portoOrigemMenu" autoUpdate="true"/><br />
 		   		
-		   		<h:outputLabel value="Porto Destino" />
+		   		<h:outputLabel value="#{contratacaoMsg['contratacao.contratacao.portoDestino']}" />
 	            <p:selectOneMenu 	id="portoDestinoMenu"
 	            					value="#{contratacaoModel.contrato.portoDestino}"
 	            					converter="portoConverter"
@@ -82,20 +85,20 @@
 		   		</p:selectOneMenu>
 				<p:message for="portoDestinoMenu" autoUpdate="true"/><br />
 		   		
-		   		<h:outputLabel value="Data estimada:  " />
+		   		<h:outputLabel value="#{contratacaoMsg['contratacao.contratacao.dataEstimada']}" />
 		   		<h:outputText 	id="dataEstimada"
 		   						value="#{contratacaoModel.contrato.dataEstimada}">
-					<f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+					<f:convertDateTime type="date" pattern="#{contratacaoMsg['contratacao.contratacao.dataPattern']}"/>
 				</h:outputText><br />
 				
-				<h:outputLabel value="Preço:  " rendered="#{contratacaoModel.modoVerDetalhes}" />
+				<h:outputLabel value="#{contratacaoMsg['contratacao.contratacao.preco']}" rendered="#{contratacaoModel.modoVerDetalhes}" />
 		   		<h:outputText 	id="preco"
 		   						value="#{contratacaoModel.contrato.preco}"
 		   						rendered="#{contratacaoModel.modoVerDetalhes}">
 					<f:convertNumber type="currency" currencySymbol="$" />
 				</h:outputText><br />
 				
-				<h:outputLabel value="Forma de Pagamento: " rendered="#{contratacaoModel.modoVerDetalhes}"/>
+				<h:outputLabel value="#{contratacaoMsg['contratacao.contratacao.formaPagamento']}" rendered="#{contratacaoModel.modoVerDetalhes}"/>
 	            <p:selectOneMenu 	id="pagamentoMenu"
 	            					value="#{contratacaoModel.contrato.formaPagamento}"
 	            					rendered="#{contratacaoModel.modoVerDetalhes}"
@@ -106,13 +109,13 @@
 		   							itemValue="#{formaPagamento}" />
 		   		</p:selectOneMenu><br />
 				
-				<p:commandButton 	value="Nova Carga"
+				<p:commandButton 	value="#{contratacaoMsg['contratacao.contratacao.botaoNovaCarga']}"
 									update="@form"
 									action="#{contratacaoController.adicionarCarga(false)}"
 									rendered="#{not contratacaoModel.modoVerDetalhes}">
 					<f:param name="disableValidation" value="true" />
 				</p:commandButton>
-				<p:commandButton 	value="Nova Carga Perecível "
+				<p:commandButton 	value="#{contratacaoMsg['contratacao.contratacao.botaoNovaCargaPerecivel']}"
 									update="@form"
 									action="#{contratacaoController.adicionarCarga(true)}"
 									rendered="#{not contratacaoModel.modoVerDetalhes}">
@@ -123,7 +126,7 @@
 								value="#{contratacaoModel.contrato.cargas}"
 								var="carga"
 								binding="#{table}">
-					<p:column headerText="Descrição">
+					<p:column headerText="#{contratacaoMsg['contratacao.contratacao.descricao']}">
 						<p:inputText 	id="descricao"
 										value="#{carga.descricao}"
 										required="#{empty param['disableValidation']}"
@@ -134,7 +137,7 @@
 						<p:outputLabel value="#{carga.descricao}" rendered="#{contratacaoModel.modoVerDetalhes}"/>
 						<p:message for="descricao" auto-update="true"/>
 					</p:column>
-					<p:column headerText="Peso">
+					<p:column headerText="#{contratacaoMsg['contratacao.contratacao.peso']}">
 						<p:inputText 	id="peso"
 										value="#{carga.peso}"
 										required="#{empty param['disableValidation']}"
@@ -144,10 +147,10 @@
 							<f:validator validatorId="pesoCargaValidator" disabled="#{not empty param['disableValidation']}"/>
 						</p:inputText>
 						<p:outputLabel value="#{carga.peso}" rendered="#{contratacaoModel.modoVerDetalhes}"/>
-						<p:outputLabel value=" Kg"/>
+						<p:outputLabel value="#{contratacaoMsg['contratacao.contratacao.kg']}"/>
 						<p:message for="peso" auto-update="true"/>
 					</p:column>
-					<p:column headerText="Data de Validade">
+					<p:column headerText="#{contratacaoMsg['contratacao.contratacao.dataValidade']}">
 						<h:outputLabel value="-" rendered="#{not carga.cargaPerecivel}"/>
 						<p:calendar 	id="data"
 										value="#{carga.dataValidade}"
@@ -156,19 +159,19 @@
 										requiredMessage="Data de validade deve ser escolhida"
 										readonlyInput="true"/>
 						<h:outputLabel value="#{carga.dataValidade}" rendered="#{contratacaoModel.modoVerDetalhes}">
-							<f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+							<f:convertDateTime type="date" pattern="#{contratacaoMsg['contratacao.contratacao.dataPattern']}"/>
 						</h:outputLabel>
 						<p:message for="data" auto-update="true"/> 
 					</p:column>
-					<p:column headerText="#{contratacaoModel.modoVerDetalhes ? 'Tracking' : ' '}">
-						<p:commandButton 	value="Remover"
+					<p:column headerText="#{contratacaoModel.modoVerDetalhes ? contratacaoMsg['contratacao.contratacao.tracking'] : ''}">
+						<p:commandButton 	value="#{contratacaoMsg['contratacao.contratacao.botaoRemoverCarga']}"
 											update="tabela"
 											action="#{contratacaoController.removerCarga(carga)}"
 											rendered="#{not contratacaoModel.modoVerDetalhes}">
 							<f:param name="disableValidation" value="true" />
 						</p:commandButton>
 						<h:outputLabel value="#{contratacaoModel.logs[table.rowIndex].data}" rendered="#{contratacaoModel.modoVerDetalhes}">
-							<f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+							<f:convertDateTime type="date" pattern="#{contratacaoMsg['contratacao.contratacao.dataPattern']}"/>
 						</h:outputLabel>
 						<h:outputLabel value=" - " rendered="#{contratacaoModel.modoVerDetalhes}"/>
 						<h:outputLabel value="#{contratacaoModel.logs[table.rowIndex].descricao}" rendered="#{contratacaoModel.modoVerDetalhes}"/>
@@ -176,8 +179,11 @@
 				</p:dataTable>
 	
 				<br /><br />
-		   		<p:commandButton action="#{contratacaoController.avancarParaFecharContrato()}" value="Avançar" type="submit" update="formContrato" rendered="#{not contratacaoModel.modoVerDetalhes}"/>
-		   		<p:commandButton action="#{contratacaoController.cancelar()}" value="#{contratacaoModel.modoVerDetalhes ? 'Voltar' : 'Cancelar'}" ajax="false" immediate="true"/>
+		   		<p:commandButton action="#{contratacaoController.avancarParaFecharContrato()}" value="#{contratacaoMsg['contratacao.contratacao.botaoAvancar']}" type="submit" update="formContrato" rendered="#{not contratacaoModel.modoVerDetalhes}"/>
+		   		<p:commandButton 	action="#{contratacaoController.cancelar()}"
+		   							value="#{contratacaoModel.modoVerDetalhes ? contratacaoMsg['contratacao.contratacao.botaoVoltar'] : contratacaoMsg['contratacao.contratacao.botaoCancelar']}"
+		   							ajax="false"
+		   							immediate="true"/>
 		   		<br />
 			</f:validateBean>
 		</h:form>

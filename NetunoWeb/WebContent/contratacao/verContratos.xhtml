@@ -11,36 +11,44 @@
 <h:body>
 <ui:composition template="/templates/template.xhtml">
 	<ui:define name="content">
-		<p:outputLabel value="Olá, " /><h:outputText value="#{verContratosModel.contratante.nome}" rendered="#{not empty verContratosController}" /><br />
+		<p:outputLabel value="#{contratacaoMsg['contratacao.verContratos.ola']}" />
+		<h:outputText value="#{verContratosModel.contratante.nome}" rendered="#{not empty verContratosController}" />
+		<br />
+
 		<p:messages id="mensagens" globalOnly="true" autoUpdate="true"/>
-		<p:outputLabel value="Ver contratos " />
+
+		<p:outputLabel value="#{contratacaoMsg['contratacao.verContratos.verContratos']}" />
+
 		<h:form>
-			<p:selectOneRadio id="options" value="#{verContratosModel.tipoContratoExibido}" >  
-		        <f:selectItem itemLabel="Abertos" itemValue="1" />  
-		        <f:selectItem itemLabel="Fechados" itemValue="2" />
-		        <p:ajax event="change" listener="#{verContratosController.trocarTabela()}" update="tabelaContratos"/>
+			<p:selectOneRadio 	id="options"
+								value="#{verContratosModel.tipoContratoExibido}" >  
+		        <f:selectItem itemLabel="#{contratacaoMsg['contratacao.verContratos.aberto']}" itemValue="1" />  
+		        <f:selectItem itemLabel="#{contratacaoMsg['contratacao.verContratos.finalizado']}" itemValue="2" />
+		        <p:ajax event="change"
+		        		listener="#{verContratosController.trocarTabela()}"
+		        		update="tabelaContratos"/>
 		    </p:selectOneRadio><br />
 
-		    <p:commandButton value="Novo contrato" action="#{verContratosController.novoContrato()}" ajax="false"/>
+		    <p:commandButton 	value="#{contratacaoMsg['contratacao.verContratos.novoContrato']}"
+		    					action="#{verContratosController.novoContrato()}"
+		    					ajax="false"/>
 
 			<p:dataTable 	id="tabelaContratos"
 							value="#{verContratosModel.listaContratos}"
-							var="contrato">
-				<p:column>
-					<f:facet name="header">Identificador</f:facet>
+							var="contrato"
+		    				emptyMessage="#{contratacaoMsg['contratacao.verContratos.msg_semContrato']}">
+				<p:column headerText="#{contratacaoMsg['contratacao.verContratos.identificador']}">
 					<p:outputLabel value="#{contrato.id}" />
 				</p:column>
-				<p:column>
-					<f:facet name="header">Data</f:facet>
+				<p:column headerText="#{contratacaoMsg['contratacao.verContratos.data']}">
 					<h:outputLabel value="#{contrato.dataCriacao}">
-						<f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+						<f:convertDateTime type="date" pattern="#{contratacaoMsg['contratacao.verContratos.dataPattern']}"/>
 					</h:outputLabel>
 					
 				</p:column>
-				<p:column>
-					<f:facet name="header">Operações</f:facet>
+				<p:column headerText="">
 					<p:commandButton 	action="#{verContratosController.verDetalhes(contrato)}"
-										value="Ver Detalhes"
+										value="#{contratacaoMsg['contratacao.verContratos.verDetalhes']}"
 										ajax="false"/>
 				</p:column>
 			</p:dataTable>
