@@ -89,6 +89,10 @@
 			<from-outcome>atendente</from-outcome>
 			<to-view-id>/contratacao/atendente/home.xhtml</to-view-id>
 		</navigation-case>
+		<navigation-case>
+			<from-outcome>contratacao</from-outcome>
+			<to-view-id>/contratacao/contratacao.xhtml</to-view-id>
+		</navigation-case>
 	</navigation-rule>
 
 	<navigation-rule>

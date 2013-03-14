@@ -178,6 +178,9 @@
     ID="atendente::#contratacao#atendente#home.xhtml" NAME="output"
     PATH="/contratacao/atendente/home.xhtml"
     TARGET="rules:#contratacao#atendente#home.xhtml" TITLE="atendente" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="contratacao::#contratacao#contratacao.xhtml"
+    NAME="output1" PATH="/contratacao/contratacao.xhtml"
+    TARGET="rules:#contratacao#contratacao.xhtml" TITLE="contratacao" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
 </PROCESS>

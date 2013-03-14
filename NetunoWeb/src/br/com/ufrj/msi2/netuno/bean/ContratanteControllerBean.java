@@ -6,7 +6,10 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
+import br.com.ufrj.msi2.netuno.attributes.Attributes;
 import br.com.ufrj.msi2.netuno.contratacao.servicos.ContratacaoService;
 import br.com.ufrj.msi2.netuno.modelo.entidades.CPF;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Contratante;
@@ -50,8 +53,13 @@ public class ContratanteControllerBean extends MBean {
 
 		if(contratanteValido) {
 			contratacaoService.salvarContratante(contratanteModelBean.getContratante());
+			
+			HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+			session.setAttribute(Attributes.SessionAttributes.CONTRATANTE.toString(), contratanteModelBean.getContratante());
+			session.setAttribute(Attributes.SessionAttributes.VIAATENDENTE.toString(), "atendente");
+			
 			super.sendMessage(null, FacesMessage.SEVERITY_INFO, "Contratante criado com sucesso", null);
-			return "atendente";
+			return "contratacao";
 		}
 		
 		return null;

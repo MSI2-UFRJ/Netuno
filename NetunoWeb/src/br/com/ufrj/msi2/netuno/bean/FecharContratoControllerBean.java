@@ -40,8 +40,6 @@ public class FecharContratoControllerBean extends MBean {
 			if(session.getAttribute(Attributes.SessionAttributes.VIAATENDENTE.toString()).toString() == "atendente") {
 				this.deveRedirecionarParaTelaDeAtendente = true;
 			}
-			
-			session.removeAttribute(Attributes.SessionAttributes.VIAATENDENTE.toString());
 		}
 		
 		Contrato contrato = (Contrato) session.getAttribute(Attributes.SessionAttributes.CONTRATO.toString());
