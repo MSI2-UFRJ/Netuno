@@ -56,8 +56,9 @@
             <p:inputText 	id="emailInput"
             				value="#{contratanteModel.contratante.email}"
             				required="true"
-            				requiredMessage="#{contratacaoMsg['contratacao.msg_campoObrigatorio']}">
-            	<f:validator validatorId="trimValidator"/>
+            				requiredMessage="#{contratacaoMsg['contratacao.msg_campoObrigatorio']}"
+            				validatorMessage="#{contratacaoMsg['contratacao.msg_emailInvalido']}">
+            	<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
             </p:inputText>
             <p:message for="emailInput" autoUpdate="true"/><br /><br />
             
