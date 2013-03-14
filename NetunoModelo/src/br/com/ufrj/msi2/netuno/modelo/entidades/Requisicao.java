@@ -1,5 +1,10 @@
 package br.com.ufrj.msi2.netuno.modelo.entidades;
 
+/**
+ * É feito por um AgenteRota que quer quer indicar em qual navio um conteiner deve ser embarcado.
+ * @author Luiz, Bruno
+ *
+ */
 import java.io.Serializable;
 import java.util.Date;
 
@@ -9,8 +14,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-
+@NamedQueries(
+	{
+		@NamedQuery(name="Requisicao.obterPorId",
+				query="select r from Requisicao r where r.id = :id"),
+		@NamedQuery(name="Requisicao.obterTodos",
+				query="select r from Requisicao r")
+	}
+)
 @Entity
 @Table(name="requisicao")
 public class Requisicao implements Serializable {

@@ -1,5 +1,8 @@
 package br.com.ufrj.msi2.netuno.bean;
-
+//TODO: Adicionar comentario
+/**
+ * @author Luiz e Bruno
+ */
 import java.util.List;
 
 import javax.annotation.PostConstruct;

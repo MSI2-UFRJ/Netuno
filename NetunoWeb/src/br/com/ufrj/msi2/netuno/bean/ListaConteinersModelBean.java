@@ -11,7 +11,7 @@ import br.com.ufrj.msi2.netuno.modelo.entidades.Conteiner;
 
 @ManagedBean(name="listarConteinersModel")
 @ViewScoped
-public class ListarConteinersModelBean {
+public class ListaConteinersModelBean {
 
 	private List<Conteiner> listaConteiners;
 	

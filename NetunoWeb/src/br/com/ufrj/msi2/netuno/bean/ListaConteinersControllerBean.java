@@ -10,26 +10,27 @@ import javax.servlet.http.HttpSession;
 
 import br.com.ufrj.msi2.netuno.attributes.Attributes;
 import br.com.ufrj.msi2.netuno.carga.servicos.GerenciarConteinersService;
-import br.com.ufrj.msi2.netuno.modelo.entidades.Contratante;
+import br.com.ufrj.msi2.netuno.modelo.entidades.AgenteCarga;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Navio;
-import br.com.ufrj.msi2.netuno.modelo.servicos.ConteinerService;
 
 @ManagedBean(name="listarConteinerController")
 @ViewScoped
-public class ListarConteinersControllerBean {
+public class ListaConteinersControllerBean {
 
 	@EJB
 	GerenciarConteinersService conteinerService;
 	
-	@ManagedProperty(value="#{listarConteinersModel}")
-	private ListarConteinersModelBean listarConteinersModel;
+	private AgenteCarga agente;
 	
+	@ManagedProperty(value="#{listarConteinersModel}")
+	private ListaConteinersModelBean listarConteinersModel;
 	
 	@PostConstruct
 	public void construct(){
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		
 		Navio navio = (Navio) session.getAttribute(Attributes.SessionAttributes.NAVIO.toString());
+		agente = (AgenteCarga) session.getAttribute(Attributes.SessionAttributes.LOGIN.toString());
 		listarConteinersModel.setListaConteiners(this.conteinerService.recuperarConteinersPorNavio(navio));
 		
 	}
@@ -47,7 +48,7 @@ public class ListarConteinersControllerBean {
 		return conteinerService;
 	}
 
-	public ListarConteinersModelBean getListarConteinersModel() {
+	public ListaConteinersModelBean getListarConteinersModel() {
 		return listarConteinersModel;
 	}
 
@@ -56,7 +57,7 @@ public class ListarConteinersControllerBean {
 	}
 
 	public void setListarConteinersModel(
-			ListarConteinersModelBean listarConteinersModel) {
+			ListaConteinersModelBean listarConteinersModel) {
 		this.listarConteinersModel = listarConteinersModel;
 	}
 

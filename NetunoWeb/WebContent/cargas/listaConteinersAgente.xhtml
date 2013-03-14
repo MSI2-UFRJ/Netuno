@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head />
+
+<h:body>
+	<ui:composition template="/templates/template.xhtml">
+		<ui:define name="content">
+			<h3>Conteiners para Embarcar</h3>
+			<h:form>
+				<p:dataTable id="tabelaConteinersEmbarcar"
+					value="#{listarConteinersModel.listaConteiners}" var="conteiner"
+					rendered="#{not empty listarConteinersModel.listaConteiners}">
+					<p:column>
+						<f:facet name="header">Identificador: </f:facet>
+						<h:outputLabel value="#{conteiner.id}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">Navio ID: </f:facet>
+						<h:outputLabel value="#{carga.descricao}" />
+					</p:column>
+					<p:column>
+						<p:button outcome="#{listarConteinerController.embarcarConteinerNavio(navio)}" rendered="#{listaCargasAgenteController.embarque}"
+							value="Embarcar no Navio">
+							<f:param name="cargaId" value="#{carga.id}" />
+						</p:button>
+					</p:column>
+				</p:dataTable>
+				
+				<p:button value="Home" outcome="/cargas/home" >
+				</p:button>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
