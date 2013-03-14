@@ -7,7 +7,6 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.bean.ManagedBean;
 
 import br.com.ufrj.msi2.netuno.modelo.entidades.Carga;
-import br.com.ufrj.msi2.netuno.modelo.entidades.Conteiner;
 import br.com.ufrj.msi2.netuno.modelo.entidades.ParteCarga;
 
 
@@ -24,6 +23,7 @@ public class RetiraCargaConteinerModelBean extends MBean {
 	}
 
 	public void setListPartes(List<ParteCarga> listPartes) {
+		System.out.println(listPartes.size());
 		this.listPartes = listPartes;
 	}
 

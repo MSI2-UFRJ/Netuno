@@ -46,7 +46,7 @@ public class Conteiner implements Serializable {
 	private List<CargaComponente> cargasComponente;
 	
 	@ManyToOne(targetEntity = Porto.class)
-    private Porto portoOrigem;
+    private Porto porto;
 
 	public Integer getId() {
 		return id;
@@ -77,11 +77,11 @@ public class Conteiner implements Serializable {
 	}
 	
 
-	public Porto getPortoOrigem() {
-		return portoOrigem;
+	public Porto getPorto() {
+		return porto;
 	}
 
-	public void setPortoOrigem(Porto portoOrigem) {
-		this.portoOrigem = portoOrigem;
+	public void setPorto(Porto porto) {
+		this.porto = porto;
 	}
 }

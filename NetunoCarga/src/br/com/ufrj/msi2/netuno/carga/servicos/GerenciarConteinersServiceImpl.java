@@ -40,7 +40,7 @@ public class GerenciarConteinersServiceImpl implements GerenciarConteinersServic
 			
 			ArrayList<Predicate> predicados = new ArrayList<Predicate>();
 			if(porto.getLocalizacao()!= null && !porto.getLocalizacao().equals("")){
-				Expression<String> exp = root.get("portoOrigem");
+				Expression<String> exp = root.get("porto");
 				predicados.add(builder.equal(builder.lower(exp),porto.getId()));
 			} 
 			
@@ -66,7 +66,7 @@ public class GerenciarConteinersServiceImpl implements GerenciarConteinersServic
 	@Override
 	public void criarNovoConteiner(Porto porto){
 		Conteiner novo = new Conteiner();
-		novo.setPortoOrigem(porto);
+		novo.setPorto(porto);
 		novo.setPesoDisponivel((double)Conteiner.getPesomaximo());
 		service.salvarConteiner(novo);
 	}
