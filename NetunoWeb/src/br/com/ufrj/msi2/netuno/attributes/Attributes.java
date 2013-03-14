@@ -6,6 +6,7 @@ public abstract class Attributes {
 		CONTRATANTE,
 		CONTRATO,
 		VIAATENDENTE,
+		CARREGACARGAS,
 		NAVIO;
 	}
 }

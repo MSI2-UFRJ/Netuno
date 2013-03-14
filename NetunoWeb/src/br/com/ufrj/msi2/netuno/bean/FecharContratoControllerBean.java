@@ -44,7 +44,6 @@ public class FecharContratoControllerBean extends MBean {
 			session.removeAttribute(Attributes.SessionAttributes.VIAATENDENTE.toString());
 		}
 		
-		
 		Contrato contrato = (Contrato) session.getAttribute(Attributes.SessionAttributes.CONTRATO.toString());
 		fecharContratoModelBean.setContrato(contrato);
 		fecharContratoModelBean.setFormasPagamento(FormaPagamentoEnum.values());
@@ -56,6 +55,10 @@ public class FecharContratoControllerBean extends MBean {
 		super.sendMessage(null, FacesMessage.SEVERITY_INFO, "Contrato criado com sucesso", null);
 		limpaSession();
 		return navegacao();
+	}
+	
+	public String voltar() {
+		return "contratacao";
 	}
 	
 	public String cancelar() {

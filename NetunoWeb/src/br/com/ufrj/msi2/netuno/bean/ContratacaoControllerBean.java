@@ -57,7 +57,29 @@ public class ContratacaoControllerBean extends MBean {
 			contratacaoModelBean.getContrato().setCargas(new ArrayList<Carga>());
 		} else {
 			Contrato contrato = (Contrato) session.getAttribute(Attributes.SessionAttributes.CONTRATO.toString());
-			Contrato contratoComCargas = contratacaoService.recuperaContratoComCargas(contrato);
+			Contrato contratoComCargas;
+			
+			if(session.getAttribute(Attributes.SessionAttributes.CARREGACARGAS.toString()) != null) {
+				contratoComCargas = contratacaoService.recuperaContratoComCargas(contrato);
+				session.removeAttribute(Attributes.SessionAttributes.CARREGACARGAS.toString());
+				
+				List<CargaLog> logs = new ArrayList<CargaLog>();
+
+				for(Carga carga : contratoComCargas.getCargas()) {
+					CargaLog cargaLog = this.contratacaoService.recuperaUltimoCargaLogDeCarga(carga);
+					
+					if(cargaLog == null) {
+						cargaLog = new CargaLog();
+					}
+					
+					logs.add(cargaLog);
+				}
+				
+				contratacaoModelBean.setLogs(logs);
+				contratacaoModelBean.setModoVerDetalhes(true);
+			} else {
+				contratoComCargas = contrato;
+			}
 
 			contratacaoModelBean.setContrato(contratoComCargas);
 			
@@ -68,22 +90,6 @@ public class ContratacaoControllerBean extends MBean {
 			if(contratacaoModelBean.getContrato().getEnderecoEntrega() != null) {
 				contratacaoModelBean.setEnderecoEntrega(true);
 			}
-			
-			List<CargaLog> logs = new ArrayList<CargaLog>();
-
-			for(Carga carga : contratoComCargas.getCargas()) {
-				CargaLog cargaLog = this.contratacaoService.recuperaUltimoCargaLogDeCarga(carga);
-				
-				if(cargaLog == null) {
-					cargaLog = new CargaLog();
-				}
-				
-				logs.add(cargaLog);
-			}
-			
-			contratacaoModelBean.setLogs(logs);
-			
-			contratacaoModelBean.setModoVerDetalhes(true);
 		}
 
 		contratacaoModelBean.setPortos(this.portoService.obterTodos());

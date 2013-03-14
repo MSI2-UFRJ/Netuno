@@ -60,6 +60,8 @@ public class VerContratosControllerBean extends MBean {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		session.setAttribute(Attributes.SessionAttributes.CONTRATANTE.toString(), verContratosModelBean.getContratante());
 		session.setAttribute(Attributes.SessionAttributes.CONTRATO.toString(), contrato);
+		session.setAttribute(Attributes.SessionAttributes.CARREGACARGAS.toString(), "carrega");
+
 		return "contratacao";
 	}
 

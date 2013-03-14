@@ -62,6 +62,7 @@
 			<to-view-id>/portos/listar.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+
 	<navigation-rule>
 		<from-view-id>/contratacao/verContratos.xhtml</from-view-id>
 		<navigation-case>
@@ -69,6 +70,7 @@
 			<to-view-id>/contratacao/contratacao.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+
 	<navigation-rule>
 		<from-view-id>/contratacao/atendente/home.xhtml</from-view-id>
 		<navigation-case>
@@ -76,6 +78,7 @@
 			<to-view-id>/contratacao/contratacao.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+
 	<navigation-rule>
 		<from-view-id>/contratacao/contratacao.xhtml</from-view-id>
 		<navigation-case>
@@ -91,8 +94,13 @@
 			<to-view-id>/contratacao/atendente/home.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+
 	<navigation-rule>
 		<from-view-id>/contratacao/fecharContrato.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>contratacao</from-outcome>
+			<to-view-id>/contratacao/contratacao.xhtml</to-view-id>
+		</navigation-case>
 		<navigation-case>
 			<from-outcome>verContratos</from-outcome>
 			<to-view-id>/contratacao/verContratos.xhtml</to-view-id>
@@ -102,6 +110,7 @@
 			<to-view-id>/contratacao/atendente/home.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+
 	<navigation-rule>
 		<from-view-id>/logistica/transporte/cadEmpTrans.xhtml</from-view-id>
 		<navigation-case>
