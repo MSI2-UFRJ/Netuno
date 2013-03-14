@@ -14,6 +14,7 @@ import br.com.ufrj.msi2.netuno.modelo.entidades.CargaLog;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Contratante;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Contrato;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Usuario;
+import br.com.ufrj.msi2.netuno.modelo.enums.CargaLogEnum;
 import br.com.ufrj.msi2.netuno.modelo.exceptions.ResultadoNaoEncontradoException;
 import br.com.ufrj.msi2.netuno.modelo.servicos.CargaLogService;
 import br.com.ufrj.msi2.netuno.modelo.servicos.CargaService;
@@ -67,9 +68,9 @@ public class ContratacaoServiceImpl implements ContratacaoService {
 			
 			
 			if(contrato.getEnderecoColeta() == null) {
-				cargaLog.setDescricao("Aguardando carga ser entregue ao porto origem");
+				cargaLog.setDescricao(CargaLogEnum.aguardandoClienteEntregar);
 			} else {
-				cargaLog.setDescricao("Aguardando coleta da carga");
+				cargaLog.setDescricao(CargaLogEnum.aguardandoColeta);
 			}
 			
 			cargaLogService.salvarCargaLog(cargaLog);

@@ -104,9 +104,9 @@
 	            					rendered="#{contratacaoModel.modoVerDetalhes}"
 	            					disabled="true">
 		   			<f:selectItems 	value="#{contratacaoModel.formasPagamento}"
-		   							var="formaPagamento"
-		   							itemLabel="#{formaPagamento}"
-		   							itemValue="#{formaPagamento}" />
+		   							var="pagamento"
+		   							itemLabel="#{contratacaoMsg[pagamento.text]}"
+		   							itemValue="#{pagamento}" />
 		   		</p:selectOneMenu><br />
 				
 				<p:commandButton 	value="#{contratacaoMsg['contratacao.contratacao.botaoNovaCarga']}"
@@ -175,7 +175,7 @@
 							<f:convertDateTime type="date" pattern="#{contratacaoMsg['contratacao.contratacao.dataPattern']}"/>
 						</h:outputLabel>
 						<h:outputLabel value=" - " rendered="#{contratacaoModel.modoVerDetalhes}"/>
-						<h:outputLabel value="#{contratacaoModel.logs[table.rowIndex].descricao}" rendered="#{contratacaoModel.modoVerDetalhes}"/>
+						<h:outputLabel value="#{contratacaoMsg[contratacaoModel.logs[table.rowIndex].descricao.descricao]}" rendered="#{contratacaoModel.modoVerDetalhes}"/>
 					</p:column>
 				</p:dataTable>
 	

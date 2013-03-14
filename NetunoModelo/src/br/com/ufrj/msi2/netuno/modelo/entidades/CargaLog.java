@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+
+import br.com.ufrj.msi2.netuno.modelo.enums.CargaLogEnum;
 
 /**
  * Representa informações sobre o status de entrega da carga. Usado no tracking. 
@@ -40,8 +44,9 @@ public class CargaLog implements Serializable {
 	@Column(name = "data")
 	private Date data;
 	
-	@Column(name = "descricao")
-	private String descricao;
+	@Column(name="descricao")
+	@Enumerated(EnumType.ORDINAL)
+	private CargaLogEnum descricao;
 
 	public Integer getId() {
 		return id;
@@ -55,7 +60,7 @@ public class CargaLog implements Serializable {
 		return data;
 	}
 
-	public String getDescricao() {
+	public CargaLogEnum getDescricao() {
 		return descricao;
 	}
 
@@ -71,7 +76,7 @@ public class CargaLog implements Serializable {
 		this.data = data;
 	}
 
-	public void setDescricao(String descricao) {
+	public void setDescricao(CargaLogEnum descricao) {
 		this.descricao = descricao;
 	}
 

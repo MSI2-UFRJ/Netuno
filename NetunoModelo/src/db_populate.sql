@@ -67,15 +67,20 @@ insert into contrato(data_criacao, data_estimada, situacao, portoDestino_id, por
 -- CARGAS
 insert into netuno.carga_componente values (1,100, 1, NULL, NULL, 1);
 insert into netuno.carga values(0,'a',1,1);
+insert into netuno.cargalog values (1, '2013-03-05 05:00:00', 2, 1);
+insert into netuno.cargalog values (2, '2013-03-05 10:00:00', 4, 1);
 
 insert into netuno.carga_componente values (2, 550, 1, NULL, NULL, 1);
 insert into netuno.carga values(0,'b',2,1);
+insert into netuno.cargalog values (3, '2013-03-05 05:00:00', 2, 2);
 
 insert into netuno.carga_componente values (3,1000, 1, NULL, NULL, 1);
 insert into netuno.carga values(0,'c',3,1);
+insert into netuno.cargalog values (4, '2013-03-05 05:00:00', 2, 3);
 
 insert into netuno.carga_componente values (4,5000, 2, NULL, NULL, 2);
 insert into netuno.carga values(0,'d',4,2);
+insert into netuno.cargalog values (5, '2013-03-05 05:00:00', 2, 4);
 
 -- PERECIVEL
 insert into netuno.carga_componente values (5, 10000, 2, NULL, NULL, 2);

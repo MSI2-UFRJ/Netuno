@@ -2,8 +2,8 @@ package br.com.ufrj.msi2.netuno.modelo.enums;
 
 public enum FormaPagamentoEnum {
 	
-	cartao("Cartão de Crédito"),
-	boleto("Boleto Bancário");
+	cartao("formaPagamento.cartao"),
+	boleto("formaPagamento.boleto");
 
 	private final String text;
 
@@ -11,7 +11,11 @@ public enum FormaPagamentoEnum {
         this.text = text;
     }
 
-    public String toString() {
+    public String getText() {
+		return text;
+	}
+
+	public String toString() {
         return text;
     }
 

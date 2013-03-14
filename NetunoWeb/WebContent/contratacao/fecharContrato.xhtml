@@ -28,7 +28,7 @@
             					requiredMessage="#{contratacaoMsg['contratacao.msg_selecionarFormaPagamento']}">
 	   			<f:selectItems 	value="#{fecharContratoModel.formasPagamento}"
 	   							var="formaPagamento"
-	   							itemLabel="#{formaPagamento}"
+	   							itemLabel="#{contratacaoMsg[formaPagamento.text]}"
 	   							itemValue="#{formaPagamento}" />
 	   		</p:selectOneMenu>
 			<p:message for="pagamentoMenu" autoUpdate="true"/><br />
