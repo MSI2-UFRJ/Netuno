@@ -142,7 +142,7 @@
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
-		<from-view-id>/cargas/ListaNaviosAgente.xhtml</from-view-id>
+		<from-view-id>/cargas/listaNaviosAgente.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>listaConteinersNavio</from-outcome>
 			<to-view-id>/cargas/listaConteinersNavioAgente.xhtml</to-view-id>
