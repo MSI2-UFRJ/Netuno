@@ -11,32 +11,32 @@
 <h:body>
 <ui:composition template="/templates/template.xhtml">
 	<ui:define name="content">
-		<h:outputLabel value="Ola, " /><h:outputText value="#{fecharContratoModel.contratante.nome}" rendered="#{not empty fecharContratoController}" /><br />
-		<h:outputLabel value="Novo Contrato" /><br />
+		<h:outputLabel value="#{contratacaoMsg['contratacao.contratacao.ola']}" /><h:outputText value="#{fecharContratoModel.contratante.nome}" rendered="#{not empty fecharContratoController}" /><br /><br />
+		<h:outputLabel value="#{contratacaoMsg['contratacao.contratacao.novoContrato']}" /><br /><br />
 		
 		<h:form id="formContrato">
-				<h:outputLabel value="Preço:  " />
-		   		<h:outputText 	id="preco"
-		   						value="#{fecharContratoModel.contrato.preco}">
-					<f:convertNumber type="currency" currencySymbol="$" />
-				</h:outputText><br /><br />
-				
-				<h:outputLabel value="Forma de Pagamento: " />
-	            <p:selectOneMenu 	id="pagamentoMenu"
-	            					value="#{fecharContratoModel.contrato.formaPagamento}"
-	            					required="true"
-	            					requiredMessage="Selecione uma forma de pagamento.">
-		   			<f:selectItems 	value="#{fecharContratoModel.formasPagamento}"
-		   							var="formaPagamento"
-		   							itemLabel="#{formaPagamento}"
-		   							itemValue="#{formaPagamento}" />
-		   		</p:selectOneMenu>
-				<p:message for="pagamentoMenu" autoUpdate="true"/><br />
-	
-				<br />
-		   		<p:commandButton action="#{fecharContratoController.fecharContrato()}" value="Fechar contrato" type="submit"/>
-		   		<p:commandButton action="#{fecharContratoController.voltar()}" value="Voltar" ajax="false" immediate="true"/>
-		   		<p:commandButton action="#{fecharContratoController.cancelar()}" value="Cancelar" ajax="false" immediate="true"/>
+			<h:outputLabel value="#{contratacaoMsg['contratacao.contratacao.preco']}" />
+	   		<h:outputText 	id="preco"
+	   						value="#{fecharContratoModel.contrato.preco}">
+				<f:convertNumber type="currency" currencySymbol="$" />
+			</h:outputText><br /><br />
+			
+			<h:outputLabel value="#{contratacaoMsg['contratacao.contratacao.formaPagamento']}" />
+            <p:selectOneMenu 	id="pagamentoMenu"
+            					value="#{fecharContratoModel.contrato.formaPagamento}"
+            					required="true"
+            					requiredMessage="#{contratacaoMsg['contratacao.msg_selecionarFormaPagamento']}">
+	   			<f:selectItems 	value="#{fecharContratoModel.formasPagamento}"
+	   							var="formaPagamento"
+	   							itemLabel="#{formaPagamento}"
+	   							itemValue="#{formaPagamento}" />
+	   		</p:selectOneMenu>
+			<p:message for="pagamentoMenu" autoUpdate="true"/><br />
+
+			<br />
+	   		<p:commandButton action="#{fecharContratoController.fecharContrato()}" value="#{contratacaoMsg['contratacao.contratacao.botaoFecharContrato']}" type="submit"/>
+	   		<p:commandButton action="#{fecharContratoController.voltar()}" value="#{contratacaoMsg['contratacao.contratacao.botaoVoltar']}" ajax="false" immediate="true"/>
+	   		<p:commandButton action="#{fecharContratoController.cancelar()}" value="#{contratacaoMsg['contratacao.contratacao.botaoCancelar']}" ajax="false" immediate="true"/>
 		</h:form>
 		</ui:define>
 	</ui:composition>

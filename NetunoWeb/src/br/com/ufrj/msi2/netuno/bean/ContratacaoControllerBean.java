@@ -2,6 +2,7 @@ package br.com.ufrj.msi2.netuno.bean;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -36,6 +37,8 @@ public class ContratacaoControllerBean extends MBean {
 	private ContratacaoModelBean contratacaoModelBean;
 
 	private boolean deveRedirecionarParaTelaDeAtendente;
+	
+	private ResourceBundle contratacaoBundle;
 
 	@PostConstruct
 	public void construct() {
@@ -94,6 +97,10 @@ public class ContratacaoControllerBean extends MBean {
 
 		contratacaoModelBean.setPortos(this.portoService.obterTodos());
 		contratacaoModelBean.setFormasPagamento(FormaPagamentoEnum.values());
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		ResourceBundle bundle = context.getApplication().getResourceBundle(context, "contratacaoMsg");
+		this.contratacaoBundle = bundle;
 	}
 	
 	public void atualizarPrazo() {
@@ -129,19 +136,19 @@ public class ContratacaoControllerBean extends MBean {
 		}
 
 		if(contratacaoModelBean.getContrato().getPortoOrigem().equals(contratacaoModelBean.getContrato().getPortoDestino())) {
-			super.sendMessage(null, FacesMessage.SEVERITY_ERROR, "O porto origem deve ser diferente do porto destino.", null);
+			super.sendMessage(null, FacesMessage.SEVERITY_ERROR, this.contratacaoBundle.getString("contratacao.msg_portoOrigemEDestinoIguais"), null);
 			valida = false;
 		}
 		
 		if(contratacaoModelBean.getContrato().getCargas().size() == 0) {
-			super.sendMessage(null, FacesMessage.SEVERITY_ERROR, "Cargas devem ser adicionadas ao contrato.", null);
+			super.sendMessage(null, FacesMessage.SEVERITY_ERROR, this.contratacaoBundle.getString("contratacao.msg_erroSemCarga"), null);
 			valida = false;
 		}
 		
 		for(Carga carga : contratacaoModelBean.getContrato().getCargas()) {
 			if(carga.getDataValidade() != null) {
 				if(carga.getDataValidade().before(contratacaoModelBean.getContrato().getDataEstimada())) {
-					super.sendMessage(null, FacesMessage.SEVERITY_ERROR, "Existe carga perecível com data de validade anterior à data estimada de entrega.", null);
+					super.sendMessage(null, FacesMessage.SEVERITY_ERROR, this.contratacaoBundle.getString("contratacao.msg_cargaPerecivelExpira"), null);
 					valida = false;
 				}
 			}
@@ -186,6 +193,10 @@ public class ContratacaoControllerBean extends MBean {
 		return deveRedirecionarParaTelaDeAtendente;
 	}
 
+	public ResourceBundle getContratacaoBundle() {
+		return contratacaoBundle;
+	}
+
 	public void setContratacaoService(ContratacaoService contratacaoService) {
 		this.contratacaoService = contratacaoService;
 	}
@@ -201,6 +212,10 @@ public class ContratacaoControllerBean extends MBean {
 	public void setDeveRedirecionarParaTelaDeAtendente(
 			boolean deveRedirecionarParaTelaDeAtendente) {
 		this.deveRedirecionarParaTelaDeAtendente = deveRedirecionarParaTelaDeAtendente;
+	}
+
+	public void setContratacaoBundle(ResourceBundle contratacaoBundle) {
+		this.contratacaoBundle = contratacaoBundle;
 	}
 	
 }

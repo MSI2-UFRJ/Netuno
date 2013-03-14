@@ -1,5 +1,7 @@
 package br.com.ufrj.msi2.netuno.validator;
 
+import java.util.ResourceBundle;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -30,7 +32,9 @@ public class CPFValidator implements Validator {
 		}
 		
 		if(!cpfValido) {
-			FacesMessage msg = new FacesMessage("CPF inválido");
+			ResourceBundle bundle = context.getApplication().getResourceBundle(context, "contratacaoMsg");
+			
+			FacesMessage msg = new FacesMessage(bundle.getString("cpfvalidator.erro"));
 			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
 			throw new ValidatorException(msg);
 		}

@@ -1,5 +1,7 @@
 package br.com.ufrj.msi2.netuno.bean;
 
+import java.util.ResourceBundle;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -26,6 +28,8 @@ public class FecharContratoControllerBean extends MBean {
 	private FecharContratoModelBean fecharContratoModelBean;
 
 	private boolean deveRedirecionarParaTelaDeAtendente;
+	
+	private ResourceBundle contratacaoBundle;
 
 	@PostConstruct
 	public void construct() {
@@ -45,12 +49,16 @@ public class FecharContratoControllerBean extends MBean {
 		Contrato contrato = (Contrato) session.getAttribute(Attributes.SessionAttributes.CONTRATO.toString());
 		fecharContratoModelBean.setContrato(contrato);
 		fecharContratoModelBean.setFormasPagamento(FormaPagamentoEnum.values());
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		ResourceBundle bundle = context.getApplication().getResourceBundle(context, "contratacaoMsg");
+		this.contratacaoBundle = bundle;
 	}
 	
 	public String fecharContrato() {
 		contratacaoService.salvarContrato(fecharContratoModelBean.getContratante(), fecharContratoModelBean.getContrato());
 		
-		super.sendMessage(null, FacesMessage.SEVERITY_INFO, "Contrato criado com sucesso", null);
+		super.sendMessage(null, FacesMessage.SEVERITY_INFO, this.contratacaoBundle.getString("contratacao.msg_contratoCriadoComSucesso"), null);
 		limpaSession();
 		return navegacao();
 	}
@@ -91,6 +99,10 @@ public class FecharContratoControllerBean extends MBean {
 		return deveRedirecionarParaTelaDeAtendente;
 	}
 
+	public ResourceBundle getContratacaoBundle() {
+		return contratacaoBundle;
+	}
+
 	public void setContratacaoService(ContratacaoService contratacaoService) {
 		this.contratacaoService = contratacaoService;
 	}
@@ -103,6 +115,10 @@ public class FecharContratoControllerBean extends MBean {
 	public void setDeveRedirecionarParaTelaDeAtendente(
 			boolean deveRedirecionarParaTelaDeAtendente) {
 		this.deveRedirecionarParaTelaDeAtendente = deveRedirecionarParaTelaDeAtendente;
+	}
+
+	public void setContratacaoBundle(ResourceBundle contratacaoBundle) {
+		this.contratacaoBundle = contratacaoBundle;
 	}
 	
 }

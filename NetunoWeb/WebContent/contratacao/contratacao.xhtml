@@ -15,7 +15,7 @@
 		<h:outputText value="#{contratacaoModel.contratante.nome}" rendered="#{not empty contratacaoController}" />
 		<br />
 
-		<h:outputLabel value="#{contratacaoMsg['contratacao.contratacao.novoContrato']}" /><br />
+		<h:outputLabel value="#{contratacaoMsg['contratacao.contratacao.novoContrato']}" rendered="#{not contratacaoModel.modoVerDetalhes}" /><br />
 		
 		<h:form id="formContrato">
 			<f:validateBean disabled="#{not empty param['disableValidation']}">
@@ -30,7 +30,7 @@
 	            				value="#{contratacaoModel.contrato.enderecoColeta}"
 	            				disabled="#{not contratacaoModel.enderecoColeta}"
 	            				required="#{empty param['disableValidation']}"
-	            				requiredMessage="Esse campo deve ser preenchido."
+	            				requiredMessage="#{contratacaoMsg['contratacao.msg_campoObrigatorio']}"
 	            				rendered="#{not contratacaoModel.modoVerDetalhes}">
 	            	<f:validator validatorId="trimValidator" disabled="#{not empty param['disableValidation']}"/>
 	            </p:inputText>
@@ -46,7 +46,7 @@
 	            				value="#{contratacaoModel.contrato.enderecoEntrega}"
 	            				disabled="#{not contratacaoModel.enderecoEntrega}"
 	            				required="#{empty param['disableValidation']}"
-	            				requiredMessage="Esse campo deve ser preenchido."
+	            				requiredMessage="#{contratacaoMsg['contratacao.msg_campoObrigatorio']}"
 	            				rendered="#{not contratacaoModel.modoVerDetalhes}">
 	            	<f:validator validatorId="trimValidator" disabled="#{not empty param['disableValidation']}"/>
 	            </p:inputText>
@@ -58,7 +58,7 @@
 	            					value="#{contratacaoModel.contrato.portoOrigem}"
 	            					converter="portoConverter"
 	            					required="#{empty param['disableValidation']}"
-	            					requiredMessage="Selecione um porto."
+	            					requiredMessage="#{contratacaoMsg['contratacao.msg_portoObrigatorio']}"
 	            					disabled="#{contratacaoModel.modoVerDetalhes}">
 	            	<f:selectItem itemLabel="-" itemValue=""/>
 		   			<f:selectItems 	value="#{contratacaoModel.portos}"
@@ -74,7 +74,7 @@
 	            					value="#{contratacaoModel.contrato.portoDestino}"
 	            					converter="portoConverter"
 	            					required="#{empty param['disableValidation']}"
-	            					requiredMessage="Selecione um porto."
+	            					requiredMessage="#{contratacaoMsg['contratacao.msg_portoObrigatorio']}"
 	            					disabled="#{contratacaoModel.modoVerDetalhes}">
 	            	<f:selectItem itemLabel="-" itemValue=""/>
 		   			<f:selectItems 	value="#{contratacaoModel.portos}"
@@ -125,12 +125,13 @@
 				<p:dataTable 	id="tabela"
 								value="#{contratacaoModel.contrato.cargas}"
 								var="carga"
-								binding="#{table}">
+								binding="#{table}"
+								emptyMessage="#{contratacaoMsg['contratacao.msg_semCarga']}">
 					<p:column headerText="#{contratacaoMsg['contratacao.contratacao.descricao']}">
 						<p:inputText 	id="descricao"
 										value="#{carga.descricao}"
 										required="#{empty param['disableValidation']}"
-										requiredMessage="Descrição deve ser preenchida."
+										requiredMessage="#{contratacaoMsg['contratacao.msg_campoObrigatorio']}"
 										rendered="#{not contratacaoModel.modoVerDetalhes}">
 							<f:validator validatorId="trimValidator" disabled="#{not empty param['disableValidation']}"/>
 						</p:inputText>
@@ -141,8 +142,8 @@
 						<p:inputText 	id="peso"
 										value="#{carga.peso}"
 										required="#{empty param['disableValidation']}"
-										requiredMessage="Peso deve ser preenchido."
-										converterMessage="Deve ser um número real."
+										requiredMessage="#{contratacaoMsg['contratacao.msg_campoObrigatorio']}"
+										converterMessage="#{contratacaoMsg['contratacao.msg_deveSerUmNumero']}"
 										rendered="#{not contratacaoModel.modoVerDetalhes}">
 							<f:validator validatorId="pesoCargaValidator" disabled="#{not empty param['disableValidation']}"/>
 						</p:inputText>
@@ -156,7 +157,7 @@
 										value="#{carga.dataValidade}"
 										rendered="#{carga.cargaPerecivel and not contratacaoModel.modoVerDetalhes}"
 										required="#{empty param['disableValidation']}"
-										requiredMessage="Data de validade deve ser escolhida"
+										requiredMessage="#{contratacaoMsg['contratacao.msg_selecionarDataValidade']}"
 										readonlyInput="true"/>
 						<h:outputLabel value="#{carga.dataValidade}" rendered="#{contratacaoModel.modoVerDetalhes}">
 							<f:convertDateTime type="date" pattern="#{contratacaoMsg['contratacao.contratacao.dataPattern']}"/>
