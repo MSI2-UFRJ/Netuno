@@ -10,11 +10,15 @@
 <h:body>
 	<ui:composition template="/templates/template.xhtml">
 		<ui:define name="content">
+			<f:metadata>
+				<f:event type="preRenderView"
+					listener="#{listaConteinersController.onPageLoad}" />
+			</f:metadata>
 			<h3>Lista de Conteiners</h3>
 			<h:form>
 				<h:dataTable id="tabelaConteiners"
-					value="#{listarConteinersModel.listaConteiners}" var="conteiner"
-					rendered="#{not empty listarConteinersModel.listaConteiners}">
+					value="#{listaConteinersModel.listaConteiners}" var="conteiner"
+					rendered="#{not empty listaConteinersModel.listaConteiners}">
 					<h:column>
 						<f:facet name="header">Conteiner ID: </f:facet>
 						<h:outputLabel value="#{conteiner.id}" />

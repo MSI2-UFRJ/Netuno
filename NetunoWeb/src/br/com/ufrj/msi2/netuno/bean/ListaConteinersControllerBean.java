@@ -11,9 +11,10 @@ import javax.servlet.http.HttpSession;
 import br.com.ufrj.msi2.netuno.attributes.Attributes;
 import br.com.ufrj.msi2.netuno.carga.servicos.GerenciarConteinersService;
 import br.com.ufrj.msi2.netuno.modelo.entidades.AgenteCarga;
+import br.com.ufrj.msi2.netuno.modelo.entidades.Conteiner;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Navio;
 
-@ManagedBean(name="listarConteinerController")
+@ManagedBean(name="listaConteinersController")
 @ViewScoped
 public class ListaConteinersControllerBean {
 
@@ -22,17 +23,21 @@ public class ListaConteinersControllerBean {
 	
 	private AgenteCarga agente;
 	
-	@ManagedProperty(value="#{listarConteinersModel}")
-	private ListaConteinersModelBean listarConteinersModel;
+	@ManagedProperty(value="#{listaConteinersModel}")
+	private ListaConteinersModelBean listaConteinersModelBean;
 	
 	@PostConstruct
 	public void construct(){
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+		agente = (AgenteCarga) session.getAttribute(Attributes.SessionAttributes.LOGIN.toString());
+	}
+	
+	public void onPageLoad()
+	{
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		
 		Navio navio = (Navio) session.getAttribute(Attributes.SessionAttributes.NAVIO.toString());
-		agente = (AgenteCarga) session.getAttribute(Attributes.SessionAttributes.LOGIN.toString());
-		listarConteinersModel.setListaConteiners(this.conteinerService.recuperarConteinersPorNavio(navio));
-		
+		listaConteinersModelBean.setListaConteiners(this.conteinerService.recuperarConteinersPorNavio(navio));
 	}
 	
 	public String listaConteinersNavio(Navio navio){
@@ -48,17 +53,20 @@ public class ListaConteinersControllerBean {
 		return conteinerService;
 	}
 
-	public ListaConteinersModelBean getListarConteinersModel() {
-		return listarConteinersModel;
+	public ListaConteinersModelBean getListaConteinersModelBean() {
+		return listaConteinersModelBean;
 	}
 
 	public void setConteinerService(GerenciarConteinersService conteinerService) {
 		this.conteinerService = conteinerService;
 	}
 
-	public void setListarConteinersModel(
-			ListaConteinersModelBean listarConteinersModel) {
-		this.listarConteinersModel = listarConteinersModel;
+	public void setListaConteinersModelBean(
+			ListaConteinersModelBean listaConteinersModelBean) {
+		this.listaConteinersModelBean = listaConteinersModelBean;
 	}
-
+	
+	public String embarcarConteinerNavio(Navio navio){
+		return "";
+	}
 }

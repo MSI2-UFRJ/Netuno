@@ -10,12 +10,15 @@
 <h:body>
 	<ui:composition template="/templates/template.xhtml">
 		<ui:define name="content">
+			<f:metadata>
+				<f:event type="preRenderView"
+					listener="#{listaRequisicoesController.onPageLoad}" />
+			</f:metadata>
 			<h:form>
 				<h3>Requisicoes: </h3>
-				<h:outputText value="#{listarRequisicoesModel.listaRequisicoes.size()}" />
 				<p:dataTable id="tabelaListaRequisicoes"
-				value="#{listarRequisicoesModel.listaRequisicoes}" var="requisicao"
-				rendered="#{not empty listarRequisicoesModel.listaRequisicoes}">
+				value="#{listaRequisicoesModel.listaRequisicoes}" var="requisicao"
+				rendered="#{not empty listaRequisicoesModel.listaRequisicoes}">
 				<p:column>
 					<f:facet name="header">Requisicao ID: </f:facet>
 					<h:outputLabel value="#{requisicao.id}" />
@@ -37,12 +40,12 @@
 					<h:outputLabel value="#{requisicao.agenteCarga.id}" />
 				</p:column>
 				</p:dataTable>
-				<p:commandButton rendered="#{not empty listarRequisicoesController}" value="Do Sth" action="#{listarRequisicoesController.doSth}" />
+				<p:commandButton rendered="#{not empty listaRequisicoesController}" value="Do Sth" action="#{listaRequisicoesController.doSth}" />
 				<h3>Conteiners para Embarcar: </h3>
 				
 				<p:dataTable id="tabelaConteinersEmbarcar"
-					value="#{listarConteinersModel.listaConteiners}" var="conteiner"
-					rendered="#{not empty listarConteinersModel.listaConteiners}">
+					value="#{listaConteinersModel.listaConteiners}" var="conteiner"
+					rendered="#{not empty listaConteinersModel.listaConteiners}">
 					<p:column>
 						<f:facet name="header">Identificador: </f:facet>
 						<h:outputLabel value="#{conteiner.id}" />
@@ -52,7 +55,7 @@
 						<h:outputLabel value="#{carga.descricao}" />
 					</p:column>
 					<p:column>
-						<p:button outcome="#{listarConteinerController.embarcarConteinerNavio(navio)}" rendered="#{listaCargasAgenteController.embarque}"
+						<p:button outcome="#{listaConteinersController.embarcarConteinerNavio(navio)}" rendered="#{listaCargasAgenteController.embarque}"
 							value="Embarcar no Navio">
 							<f:param name="cargaId" value="#{carga.id}" />
 						</p:button>

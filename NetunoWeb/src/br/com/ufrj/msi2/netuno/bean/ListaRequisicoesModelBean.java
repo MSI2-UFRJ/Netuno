@@ -8,7 +8,7 @@ import javax.faces.bean.ViewScoped;
 
 import br.com.ufrj.msi2.netuno.modelo.entidades.Requisicao;
 
-@ManagedBean(name="listarRequisicoesModel")
+@ManagedBean(name="listaRequisicoesModel")
 @ViewScoped
 public class ListaRequisicoesModelBean extends MBean {
 
