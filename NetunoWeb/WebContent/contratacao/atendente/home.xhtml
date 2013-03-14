@@ -23,7 +23,7 @@
 							value="#{atendenteModel.cpf.cpf}"
 							required="true"
 	            			requiredMessage="Esse campo deve ser preenchido.">
-	            <f:validator validatorId="trimValidator"/>
+	            <f:validator validatorId="cpfValidator"/>
 	        </p:inputText>
 	        <p:commandButton 	action="#{atendenteController.verificarCPF()}"
 	        					value="Avançar"
