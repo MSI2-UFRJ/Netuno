@@ -27,11 +27,34 @@ public class ContratanteControllerBean extends MBean {
 		contratante.setCpf(new CPF());
 		contratanteModelBean.setContratante(contratante);
 	}
-	
+
 	public String criar() {
-		contratacaoService.salvarContratante(contratanteModelBean.getContratante());
-		super.sendMessage(null, FacesMessage.SEVERITY_INFO, "Contratante criado com sucesso", null);
-		return "atendente";
+		boolean contratanteValido = true;
+
+		Contratante contratante = contratanteModelBean.getContratante();
+
+		if(!contratante.getSenha().equals(contratanteModelBean.getConfirmacaoSenha())) {
+			contratanteValido = false;
+			super.sendMessage(null, FacesMessage.SEVERITY_ERROR, "Senhas não correspondem", null);
+		}
+
+		if(contratacaoService.existeUsuarioComLogin(contratante.getLogin())) {
+			contratanteValido = false;
+			super.sendMessage(null, FacesMessage.SEVERITY_ERROR, "Já existe usuário com esse login", null);
+		}
+
+		if(contratacaoService.existeUsuarioComCPF(contratante.getCpf())) {
+			contratanteValido = false;
+			super.sendMessage(null, FacesMessage.SEVERITY_ERROR, "Já existe usuário com esse CPF", null);
+		}
+
+		if(contratanteValido) {
+			contratacaoService.salvarContratante(contratanteModelBean.getContratante());
+			super.sendMessage(null, FacesMessage.SEVERITY_INFO, "Contratante criado com sucesso", null);
+			return "atendente";
+		}
+		
+		return null;
 	}
 	
 	public String cancelar() {

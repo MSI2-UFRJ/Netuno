@@ -18,8 +18,11 @@ import javax.persistence.Table;
 @NamedQueries(
 	{
 		@NamedQuery(name="Usuario.recuperarPorLoginESenha",
-					query="SELECT u FROM Usuario u WHERE u.login = :login AND u.senha = :senha"
-		)
+					query="SELECT u FROM Usuario u WHERE u.login = :login AND u.senha = :senha"),
+		@NamedQuery(name="Usuario.recuperaPorCPF",
+					query="select u from Usuario u where u.cpf = :cpf"),
+		@NamedQuery(name="Usuario.recuperaPorLogin",
+					query="select u from Usuario u where u.login = :login")
 	}
 )
 @Entity

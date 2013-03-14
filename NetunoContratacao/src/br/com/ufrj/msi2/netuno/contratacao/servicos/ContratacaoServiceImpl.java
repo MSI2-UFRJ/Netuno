@@ -13,11 +13,13 @@ import br.com.ufrj.msi2.netuno.modelo.entidades.Carga;
 import br.com.ufrj.msi2.netuno.modelo.entidades.CargaLog;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Contratante;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Contrato;
+import br.com.ufrj.msi2.netuno.modelo.entidades.Usuario;
 import br.com.ufrj.msi2.netuno.modelo.exceptions.ResultadoNaoEncontradoException;
 import br.com.ufrj.msi2.netuno.modelo.servicos.CargaLogService;
 import br.com.ufrj.msi2.netuno.modelo.servicos.CargaService;
 import br.com.ufrj.msi2.netuno.modelo.servicos.ContratanteService;
 import br.com.ufrj.msi2.netuno.modelo.servicos.ContratoService;
+import br.com.ufrj.msi2.netuno.modelo.servicos.UsuarioService;
 
 @Stateless
 public class ContratacaoServiceImpl implements ContratacaoService {
@@ -34,6 +36,9 @@ public class ContratacaoServiceImpl implements ContratacaoService {
 
 	@EJB
 	ContratoService contratoService;
+	
+	@EJB
+	UsuarioService usuarioService;
 	
 	public Contrato criarContrato() {
 		return this.contratoService.criarContrato();
@@ -158,6 +163,26 @@ public class ContratacaoServiceImpl implements ContratacaoService {
 	public void salvarContratante(Contratante contratante) {
 		this.contratanteService.salvarContratante(contratante);
 	}
+	
+	public boolean existeUsuarioComCPF(CPF cpf) {
+		Usuario usuario = this.usuarioService.recuperarUsuario(cpf);
+
+		if(usuario == null) {
+			return false;
+		}
+
+		return true;
+	}
+	
+	public boolean existeUsuarioComLogin(String login) {
+		Usuario usuario = this.usuarioService.recuperarUsuario(login);
+
+		if(usuario == null) {
+			return false;
+		}
+
+		return true;
+	}
 
 	public CargaService getCargaService() {
 		return cargaService;
@@ -175,6 +200,10 @@ public class ContratacaoServiceImpl implements ContratacaoService {
 		return contratoService;
 	}
 
+	public UsuarioService getUsuarioService() {
+		return usuarioService;
+	}
+
 	public void setCargaService(CargaService cargaService) {
 		this.cargaService = cargaService;
 	}
@@ -189,6 +218,10 @@ public class ContratacaoServiceImpl implements ContratacaoService {
 
 	public void setContratoService(ContratoService contratoService) {
 		this.contratoService = contratoService;
+	}
+
+	public void setUsuarioService(UsuarioService usuarioService) {
+		this.usuarioService = usuarioService;
 	}
 
 }

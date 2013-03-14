@@ -36,5 +36,9 @@ public interface ContratacaoService extends Serializable {
 	public Contratante criarContratante();
 	
 	public void salvarContratante(Contratante contratante);
+	
+	public boolean existeUsuarioComCPF(CPF cpf);
+	
+	public boolean existeUsuarioComLogin(String login);
 
 }

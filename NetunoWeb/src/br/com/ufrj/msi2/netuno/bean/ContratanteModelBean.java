@@ -9,10 +9,10 @@ import br.com.ufrj.msi2.netuno.modelo.entidades.Contratante;
 @ManagedBean(name="contratanteModel")
 @ViewScoped
 public class ContratanteModelBean extends MBean {
-	
+
 	private Contratante contratante;
-	
-	private String senha;
+
+	private String confirmacaoSenha;
 
 	@PostConstruct
 	public void construct() {
@@ -23,16 +23,16 @@ public class ContratanteModelBean extends MBean {
 		return contratante;
 	}
 
-	public String getSenha() {
-		return senha;
+	public String getConfirmacaoSenha() {
+		return confirmacaoSenha;
 	}
 
 	public void setContratante(Contratante contratante) {
 		this.contratante = contratante;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setConfirmacaoSenha(String confirmacaoSenha) {
+		this.confirmacaoSenha = confirmacaoSenha;
 	}
 
 }
