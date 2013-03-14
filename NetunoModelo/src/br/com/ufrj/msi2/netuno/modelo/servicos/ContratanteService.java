@@ -11,8 +11,12 @@ import br.com.ufrj.msi2.netuno.modelo.exceptions.ResultadoNaoEncontradoException
 @Local
 public interface ContratanteService extends Serializable {
 	
+	public Contratante criarContratante();
+
 	public void salvarContratante(Contratante contratante);
+
 	public Contratante recuperaPorId(Integer id);
+
 	public Contratante recuperaPorCPF(CPF cpf) throws ResultadoNaoEncontradoException;
 
 }

@@ -150,6 +150,14 @@ public class ContratacaoServiceImpl implements ContratacaoService {
 	public CargaLog recuperaUltimoCargaLogDeCarga(Carga carga) {
 		return this.cargaLogService.recuperaUltimoCargaLogDeCarga(carga);
 	}
+	
+	public Contratante criarContratante() {
+		return this.contratanteService.criarContratante();
+	}
+	
+	public void salvarContratante(Contratante contratante) {
+		this.contratanteService.salvarContratante(contratante);
+	}
 
 	public CargaService getCargaService() {
 		return cargaService;

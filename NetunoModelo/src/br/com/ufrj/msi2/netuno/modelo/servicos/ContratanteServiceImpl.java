@@ -17,6 +17,10 @@ public class ContratanteServiceImpl implements ContratanteService {
 	@PersistenceContext
 	EntityManager em;
 	
+	public Contratante criarContratante() {
+		return new Contratante();
+	}
+	
 	public void salvarContratante(Contratante contratante) {
 		em.persist(contratante);
 	}

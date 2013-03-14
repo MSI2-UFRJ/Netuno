@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head />
+
+<h:body>
+<ui:composition template="/templates/template.xhtml">
+	<ui:define name="content">
+		<h:outputLabel value="Novo Contratante" rendered="#{not empty contratanteController}" /><br />
+		
+		<h:form id="formContratante">
+			<p:messages id="mensagens" globalOnly="true" autoUpdate="true"/>
+
+			<h:outputLabel value="Nome:  " />			
+            <p:inputText 	id="nomeInput"
+            				value="#{contratanteModel.contratante.nome}"
+            				required="true"
+            				requiredMessage="Esse campo deve ser preenchido.">
+            	<f:validator validatorId="trimValidator"/>
+            </p:inputText>
+            <p:message for="nomeInput" autoUpdate="true"/><br /><br />
+            
+            <h:outputLabel value="Login:  " />			
+            <p:inputText 	id="loginInput"
+            				value="#{contratanteModel.contratante.login}"
+            				required="true"
+            				requiredMessage="Esse campo deve ser preenchido.">
+            	<f:validator validatorId="trimValidator"/>
+            </p:inputText>
+            <p:message for="loginInput" autoUpdate="true"/><br /><br />
+            
+            <h:outputLabel value="Senha:  " />			
+            <p:password 	id="senhaInput"
+            				value="#{contratanteModel.contratante.senha}"
+            				required="true"
+            				requiredMessage="Esse campo deve ser preenchido.">
+            	<f:validator validatorId="trimValidator"/>
+            </p:password>
+            <p:message for="senhaInput" autoUpdate="true"/><br /><br />
+            
+            <h:outputLabel value="Confirme a senha:  " />			
+            <p:password 	id="confirmacaoSenhaInput"
+            				value="#{contratanteModel.senha}"
+            				required="true"
+            				requiredMessage="Esse campo deve ser preenchido.">
+            	<f:validator validatorId="trimValidator"/>
+            </p:password>
+            <p:message for="confirmacaoSenhaInput" autoUpdate="true"/><br /><br />
+            
+            <h:outputLabel value="Email:  " />			
+            <p:inputText 	id="emailInput"
+            				value="#{contratanteModel.contratante.email}"
+            				required="true"
+            				requiredMessage="Esse campo deve ser preenchido.">
+            	<f:validator validatorId="trimValidator"/>
+            </p:inputText>
+            <p:message for="emailInput" autoUpdate="true"/><br /><br />
+            
+            <h:outputLabel value="CPF:  " />			
+            <p:inputText 	id="cpfInput"
+            				value="#{contratanteModel.contratante.cpf.cpf}"
+            				required="true"
+            				requiredMessage="Esse campo deve ser preenchido.">
+            	<f:validator validatorId="cpfValidator"/>
+            </p:inputText>
+            <p:message for="cpfInput" autoUpdate="true"/><br /><br />
+            
+	   		<p:commandButton action="#{contratanteController.criar()}" value="Avançar" type="submit" update="formContratante"/>
+	   		<p:commandButton action="#{contratanteController.cancelar()}" value="Cancelar" ajax="false" immediate="true"/>
+	   		<br />
+		</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

@@ -48,7 +48,7 @@ public class AtendenteControllerBean extends MBean {
 	}
 	
 	public String irCadastro() {
-		return "cadastroCliente";
+		return "novoContratante";
 	}
 
 	public ContratacaoService getContratacaoService() {

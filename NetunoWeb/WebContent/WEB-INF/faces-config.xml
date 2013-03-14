@@ -77,6 +77,18 @@
 			<from-outcome>contratacao</from-outcome>
 			<to-view-id>/contratacao/contratacao.xhtml</to-view-id>
 		</navigation-case>
+		<navigation-case>
+			<from-outcome>novoContratante</from-outcome>
+			<to-view-id>/contratacao/atendente/novoContratante.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/contratacao/atendente/novoContratante.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>atendente</from-outcome>
+			<to-view-id>/contratacao/atendente/home.xhtml</to-view-id>
+		</navigation-case>
 	</navigation-rule>
 
 	<navigation-rule>

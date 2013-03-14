@@ -41,6 +41,9 @@ public abstract class Usuario implements Serializable {
 	@Column(name="nome")
 	private String nome;
 	
+	@Column(name="email")
+	private String email;
+	
 	@Embedded
 	private CPF cpf;
 
@@ -58,6 +61,10 @@ public abstract class Usuario implements Serializable {
 
 	public String getNome() {
 		return nome;
+	}
+
+	public String getEmail() {
+		return email;
 	}
 
 	public CPF getCpf() {
@@ -78,6 +85,10 @@ public abstract class Usuario implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public void setCpf(CPF cpf) {
