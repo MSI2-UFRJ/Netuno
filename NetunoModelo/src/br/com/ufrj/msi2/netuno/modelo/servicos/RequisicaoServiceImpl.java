@@ -41,7 +41,7 @@ public class RequisicaoServiceImpl implements RequisicaoService {
 	@Override
 	public List<Requisicao> recuperarTodos() {
 		Query query = em.createNamedQuery("Requisicao.obterTodos");
-		return (List<Requisicao>) query.getSingleResult();
+		return (List<Requisicao>) query.getResultList();
 	}
 
 	@Override

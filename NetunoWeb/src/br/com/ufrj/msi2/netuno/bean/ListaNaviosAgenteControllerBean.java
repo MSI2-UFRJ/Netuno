@@ -30,11 +30,11 @@ public class ListaNaviosAgenteControllerBean extends MBean {
 		agente = (AgenteCarga) session.getAttribute(Attributes.SessionAttributes.LOGIN.toString());
 		
 		listaNaviosAgenteModelBean.setListaNavios(this.navioService.listaNaviosComCarga(agente));
+		
 	}
 	
 	public void onPageLoad()
 	{
-		//listaNaviosAgenteModelBean.setListaNavios(this.navioService.listaNaviosComCarga(agente));
 	}
 
 	public GerenciarNaviosService getNavioService() {
