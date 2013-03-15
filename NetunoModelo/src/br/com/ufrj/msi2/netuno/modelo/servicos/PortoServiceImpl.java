@@ -6,6 +6,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
@@ -41,8 +42,10 @@ public class PortoServiceImpl implements PortoService{
 
 	@Override
 	public Porto obterPorId(Integer idPorto){
-		if(idPorto!=null) return this.em.find(Porto.class, idPorto);
-		else return null;
+		if(idPorto == null) return null;
+		Query query = em.createNamedQuery("Porto.recuperaPorId");
+		query.setParameter("id", idPorto);
+		return (Porto) query.getSingleResult();
 	}
 
 	/**
@@ -85,7 +88,7 @@ public class PortoServiceImpl implements PortoService{
 	@Override
 	public void excluir(Integer idPorto) throws Exception{
 		try{
-			Porto porto = this.em.find(Porto.class, idPorto);
+			Porto porto = this.obterPorId(idPorto);
 			this.em.remove(porto);
 		} catch (Exception e){
 			throw new Exception("Não foi possível excluir o porto selecionado.", e.getCause());

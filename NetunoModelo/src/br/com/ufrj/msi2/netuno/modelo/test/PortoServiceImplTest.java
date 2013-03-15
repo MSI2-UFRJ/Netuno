@@ -39,7 +39,7 @@ public class PortoServiceImplTest  extends BaseSessionBeanFixture<PortoServiceIm
 	private static final CSVInitialDataSet<Porto> CSV_SET1 = 
             new CSVInitialDataSet<Porto>(
                     Porto.class, "porto.csv", 
-                    "localizacao", "nome");
+                    "id", "localizacao", "nome");
 	
 	//Não precisa estar aqui nesse teste, só para fins ilustrativos.
 	private static final CSVInitialDataSet<Patio> CSV_SET2 = 
@@ -63,9 +63,7 @@ public class PortoServiceImplTest  extends BaseSessionBeanFixture<PortoServiceIm
 	
 	public void testObterPorId() {
 		Porto porto;
-		
 		porto = service.obterPorId(1);
-		//TODO Ocasionalmente falha aqui com NullPointerException. Por que?
 		assertEquals("RJ", porto.getLocalizacao());
 		porto = service.obterPorId(2);
 		assertEquals("SP", porto.getLocalizacao());
@@ -93,7 +91,7 @@ public class PortoServiceImplTest  extends BaseSessionBeanFixture<PortoServiceIm
 			service.salvar(porto);
 			tx.commit();
 		} catch (Exception e) {
-			tx.rollback();
+			if(tx.isActive()) tx.rollback();
 			fail("Falha na persistência: " + e.getMessage());
 		}
 		
@@ -105,8 +103,9 @@ public class PortoServiceImplTest  extends BaseSessionBeanFixture<PortoServiceIm
 	public void testeAlterar(){
 		Porto porto = new Porto();
 		
+		porto.setId(1);
 		porto.setLocalizacao("RJ");
-		porto.setNome("Rio");
+		porto.setNome("Rio de Janeiro");
 		porto.setAgentes(null);
 		porto.setAtraques(null);
 		porto.setPatios(null);
@@ -118,18 +117,19 @@ public class PortoServiceImplTest  extends BaseSessionBeanFixture<PortoServiceIm
 			service.alterar(porto);
 			tx.commit();
 		} catch (Exception e) {
-			//TODO Não sei porque está caindo aqui.
-			tx.rollback();
+			if(tx.isActive()) tx.rollback();
 			fail("Falha na persistência: " + e.getMessage());
 		}
 		
 		List<Porto> lista = service.filtrar(porto);
-		assertEquals("PA", lista.get(0).getLocalizacao());
+		assertEquals("RJ", lista.get(0).getLocalizacao());
+		assertEquals("Rio de Janeiro", lista.get(0).getNome());
 	}
 	
 	public void testExcluir(){
 		Porto porto = new Porto();
 		
+		porto.setId(1);
 		porto.setLocalizacao("RJ");
 		porto.setNome("Rio");
 		porto.setAgentes(null);
@@ -143,8 +143,8 @@ public class PortoServiceImplTest  extends BaseSessionBeanFixture<PortoServiceIm
 			service.excluir(1);
 			tx.commit();
 		} catch (Exception e) {
-			//TODO Não sei porque está caindo aqui. Sei que o problema está no em.remove(...) de excluir(...).
-			tx.rollback();
+			//TODO Não sei porque está caindo aqui.
+			if(tx.isActive()) tx.rollback();
 			fail("Falha na persistência: " + e.getMessage());
 		}
 		
@@ -155,6 +155,7 @@ public class PortoServiceImplTest  extends BaseSessionBeanFixture<PortoServiceIm
 	public void testFiltrar(){		
 		Porto porto = new Porto();
 		
+		porto.setId(1);
 		porto.setLocalizacao("RJ");
 		porto.setNome("Rio");
 		porto.setAgentes(null);
