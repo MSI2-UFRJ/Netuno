@@ -44,11 +44,13 @@ INSERT INTO `netuno`.`usuario` VALUES(12,'12345678922','a@b.com','a','Atendente'
 INSERT INTO netuno.atendente VALUES(12);
 
 -- PATIOS
-insert into patio () values ();
-insert into patio () values ();
-insert into patio () values ();
-insert into patio () values ();
-insert into patio () values ();
+insert into patio () values (1,1);
+insert into patio () values (2,1);
+insert into patio () values (3,1);
+insert into patio () values (4,2);
+insert into patio () values (5,2);
+insert into patio () values (6,3);
+insert into patio () values (7,4);
 
 -- EMPRESAS
 insert empresatransporte(nome) values ('ABCTrans');
@@ -64,26 +66,27 @@ insert into contrato(data_criacao, data_estimada, situacao, portoDestino_id, por
 insert into contrato(data_criacao, data_estimada, situacao, portoDestino_id, portoOrigem_id, contratante_id, forma_pagamento, preco) values ('2013-03-06 15:00:00', '2013-03-20 16:00:00', 1, 2, 1, 10, 0, 0.50);
 
 
+
 -- CARGAS
-insert into netuno.carga_componente values (1,100, 1, NULL, NULL, 1);
+insert into netuno.carga_componente values (1,0,100, 1, NULL, NULL, 1);
 insert into netuno.carga values(0,'a',1,1);
 insert into netuno.cargalog values (1, '2013-03-05 05:00:00', 2, 1);
 insert into netuno.cargalog values (2, '2013-03-05 10:00:00', 4, 1);
 
-insert into netuno.carga_componente values (2, 550, 1, NULL, NULL, 1);
+insert into netuno.carga_componente values (2,0, 550, 1, NULL, NULL, 1);
 insert into netuno.carga values(0,'b',2,1);
 insert into netuno.cargalog values (3, '2013-03-05 05:00:00', 2, 2);
 
-insert into netuno.carga_componente values (3,1000, 1, NULL, NULL, 1);
+insert into netuno.carga_componente values (3,0,1000, 1, NULL, NULL, 1);
 insert into netuno.carga values(0,'c',3,1);
 insert into netuno.cargalog values (4, '2013-03-05 05:00:00', 2, 3);
 
-insert into netuno.carga_componente values (4,5000, 2, NULL, NULL, 2);
+insert into netuno.carga_componente values (4,0,5000, 2, NULL, NULL, 2);
 insert into netuno.carga values(0,'d',4,2);
 insert into netuno.cargalog values (5, '2013-03-05 05:00:00', 2, 4);
 
 -- PERECIVEL
-insert into netuno.carga_componente values (5, 10000, 2, NULL, NULL, 2);
+insert into netuno.carga_componente values (5,0, 10000, 2, NULL, NULL, 2);
 insert into netuno.carga values(0,'e',5,3);
 insert into carga_perecivel values('2013-04-28 00:00:00',5);
 
@@ -91,7 +94,10 @@ insert into pregao(abertoPor_id, anuncia_id) values (3, 1);
 insert into pregao(abertoPor_id, anuncia_id) values (4, 2);
 
 insert into conteiner values(1,20000,1);
+insert into conteiner values(6,20000,1);
 insert into conteiner values(2,20000,1);
+insert into conteiner values(4,20000,null);
+insert into conteiner values(5,20000,null);
 insert into conteiner values(3,20000,2);
 
 insert into netuno.requisicao(data, agenteCarga_id, conteiner_id, navio_id, agenteRota_id) values('2013-01-01 10:10:10',1,1,1,7);

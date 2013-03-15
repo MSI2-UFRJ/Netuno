@@ -97,11 +97,30 @@ public class RetiraCargaConteinerControllerBean extends MBean {
 	}
 
 	public void desembarcarCarga(int parteId) {
-			System.out.println("desembarquei");
+			try {
+				gCargaService.desalocarParteCarga(parteId);
+			} catch (Exception e) {
+				super.sendMessage(null, FacesMessage.SEVERITY_ERROR,
+						"Ocorreu um erro ao desembarcar a parte. Tente novamente.", null);
+				return;
+			}
+			
 			super.sendMessage(null, FacesMessage.SEVERITY_INFO,
-					"Parte da Carga Desembarcada do conteiner com Sucesso!", null);
-
+					"Parte da Carga Desembarcada do conteiner com Sucesso!", null);			
 	}
+	
+	public void desembarcarTodas(int cargaId) {
+		try {
+			gCargaService.desalocarTodasPartes(cargaId);
+		} catch (Exception e) {
+			super.sendMessage(null, FacesMessage.SEVERITY_ERROR,
+					"Ocorreu um erro ao desembarcar a carga completamente. Tente novamente.", null);
+			return;
+		}
+		
+		super.sendMessage(null, FacesMessage.SEVERITY_INFO,
+				"Carga completamente desembarcada do conteiner com Sucesso!", null);			
+}
 	
 
 	public AgenteCarga getAgente() {

@@ -40,7 +40,6 @@ public class GerenciarCargasServiceImpl implements GerenciarCargasService {
 	@Override
 	public List<Carga> listaCargasParaEmbarque(AgenteCarga agente) {
 		List<Carga> resultList = new ArrayList<Carga>();
-
 		try {
 
 			CriteriaBuilder builder = cargaService.getCriteriaBuilder();
@@ -54,6 +53,12 @@ public class GerenciarCargasServiceImpl implements GerenciarCargasService {
 
 			Expression<String> alocacao = cargaRoot.get("alocacaoCompleta");
 			predicados.add(builder.equal((alocacao),false));
+
+			Expression<String> conteiner = cargaRoot.get("conteiner");
+			predicados.add(builder.isNull(conteiner));
+			
+			Expression<String> desembarcada = cargaRoot.get("desembarcada");
+			predicados.add(builder.equal((desembarcada),false));
 			
 			criteria.select(cargaRoot).where(predicados.toArray(new Predicate[]{}));
 			
@@ -161,5 +166,50 @@ public class GerenciarCargasServiceImpl implements GerenciarCargasService {
 			
 			gConteinerService.AtualizaPeso(conteiner, conteiner.getPesoDisponivel() - parteCarga.getPeso());
 		}
+	}
+
+	@Override
+	public void desalocarParteCarga(int parteId) {
+		ParteCarga parte = parteCargaService.obterPorId(parteId);
+		parte.setDesembarcada(true);
+		parte.setConteiner(null);
+		parteCargaService.salvar(parte);
+		
+		this.desalocarCarga(parte.getCarga());
+	}
+	
+	private void desalocarCarga(Carga carga) {
+		carga = cargaService.obterPorId(carga.getId());
+		boolean todasOk = true;
+		for(ParteCarga parte : carga.getPartes())
+		{
+			if(!parte.isDesembarcada())
+			{
+				todasOk = false;
+				break;
+			}
+		}
+		
+		if(todasOk)
+		{
+			carga.setDesembarcada(true);
+			cargaService.salvar(carga);
+		}
+	}
+
+	@Override
+	public void desalocarTodasPartes(int cargaId) {
+		Carga carga = cargaService.obterPorId(cargaId);
+		for(ParteCarga parte : carga.getPartes())
+		{
+			parte.setDesembarcada(true);
+			parte.setConteiner(null);
+			parteCargaService.salvar(parte);
+			
+			this.desalocarCarga(parte.getCarga());
+		}
+		
+		carga.setDesembarcada(true);
+		cargaService.salvar(carga);
 	}
 }

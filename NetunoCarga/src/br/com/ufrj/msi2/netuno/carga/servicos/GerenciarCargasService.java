@@ -18,4 +18,9 @@ public interface GerenciarCargasService extends Serializable {
 	public Carga obterPorId(Integer idCarga);
 	
 	public void alocarCarga(Carga carga,Conteiner conteiner);
+	
+	public void desalocarParteCarga(int parteId);
+
+	public void desalocarTodasPartes(int cargaId);
+	
 }

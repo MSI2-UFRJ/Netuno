@@ -40,6 +40,12 @@
 								<f:facet name="header">Peso Total</f:facet>
 								<p:outputLabel value="#{carga.peso}" />
 							</p:column>
+							<p:column>
+								<f:facet name="header">Desalocar Todas as Cargas</f:facet>
+								<p:commandButton title="Desembarcar Tudo" type="submit"
+									value="Desembarcar Tudo" update="@form" action="#{retiraCargaConteinerController.desembarcarTodas(carga.id)}">
+								</p:commandButton>
+							</p:column>
 						</p:dataTable>
 						<br/><br/>
 						<p:dataTable id="tabelaParteCargas"
