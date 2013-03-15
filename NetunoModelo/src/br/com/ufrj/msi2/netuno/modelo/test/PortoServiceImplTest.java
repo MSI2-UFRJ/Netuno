@@ -53,6 +53,7 @@ public class PortoServiceImplTest  extends BaseSessionBeanFixture<PortoServiceIm
 	
 	public void testObterTodos() {
 		service = this.getBeanToTest();
+		
 		List<Porto> lista = service.obterTodos();
 		assertEquals("BA", (lista.get(0)).getLocalizacao());
 		assertEquals("ES", (lista.get(1)).getLocalizacao());
@@ -64,7 +65,9 @@ public class PortoServiceImplTest  extends BaseSessionBeanFixture<PortoServiceIm
 	
 	public void testObterPorId() {
 		service = this.getBeanToTest();
+		
 		Porto porto;
+		
 		porto = service.obterPorId(1);
 		assertEquals("RJ", porto.getLocalizacao());
 		porto = service.obterPorId(2);
@@ -79,7 +82,9 @@ public class PortoServiceImplTest  extends BaseSessionBeanFixture<PortoServiceIm
 	
 	public void testeSalvar() {
 		service = this.getBeanToTest();
+		
 		Porto porto = new Porto();
+		
 		porto.setLocalizacao("PA");
 		porto.setNome("Pará");
 		porto.setAgentes(null);
@@ -94,12 +99,82 @@ public class PortoServiceImplTest  extends BaseSessionBeanFixture<PortoServiceIm
 			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
-			fail("Falha ao persistir.");
+			fail("Falha na persistência.");
 		}
 		
 		List<Porto> lista = service.filtrar(porto);
 		assertEquals("PA", lista.get(0).getLocalizacao());
 		
+	}
+	
+	public void testeAlterar(){
+		service = this.getBeanToTest();
+		
+		Porto porto = new Porto();
+		
+		porto.setLocalizacao("PA");
+		porto.setNome("Pará");
+		porto.setAgentes(null);
+		porto.setAtraques(null);
+		porto.setPatios(null);
+		porto.setSlots(null);
+		
+		EntityTransaction tx = this.getEntityManager().getTransaction();
+		try {
+			tx.begin();
+			service.salvar(porto);
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			fail("Falha na persistência.");
+		}
+		
+		List<Porto> lista = service.filtrar(porto);
+		assertEquals("PA", lista.get(0).getLocalizacao());
+	}
+	
+	public void testExcluir(){
+		service = this.getBeanToTest();
+		
+		Porto porto = new Porto();
+		
+		porto.setLocalizacao("RJ");
+		porto.setNome("Rio");
+		porto.setAgentes(null);
+		porto.setAtraques(null);
+		porto.setPatios(null);
+		porto.setSlots(null);
+		
+		EntityTransaction tx = this.getEntityManager().getTransaction();
+		try {
+			tx.begin();
+			service.excluir(1);
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			//TODO Não sei porque está caindo aqui...
+			fail("Falha na persistência.");
+		}
+		
+		List<Porto> lista = service.filtrar(porto);
+		assertNull(lista);
+	}
+	
+	public void testFiltrar(){
+		service = this.getBeanToTest();
+		
+		Porto porto = new Porto();
+		
+		porto.setLocalizacao("RJ");
+		porto.setNome("Rio");
+		porto.setAgentes(null);
+		porto.setAtraques(null);
+		porto.setPatios(null);
+		porto.setSlots(null);
+		
+		List<Porto> lista = service.filtrar(porto);
+		assertEquals("RJ", lista.get(0).getLocalizacao());
+		assertEquals(1, lista.size());
 	}
 	
 	@Override
