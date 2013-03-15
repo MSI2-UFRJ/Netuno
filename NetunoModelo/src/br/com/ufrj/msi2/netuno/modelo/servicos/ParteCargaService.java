@@ -18,5 +18,7 @@ public interface ParteCargaService extends Serializable {
 	public void salvar(ParteCarga carga);
 	
 	public ParteCarga obterPorId(Integer idCarga);
+	
+	public List<ParteCarga> listaParteCargasDisponiveis(AgenteCarga agente);
 
 }

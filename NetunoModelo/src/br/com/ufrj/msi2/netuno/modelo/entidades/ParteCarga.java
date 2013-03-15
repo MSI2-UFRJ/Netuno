@@ -3,9 +3,18 @@ package br.com.ufrj.msi2.netuno.modelo.entidades;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-
+@NamedQueries(
+		{
+			@NamedQuery(
+					name="ParteCarga.listaParteCargasParaDesembarque",
+					query="select parteCarga from ParteCarga parteCarga where parteCarga.agenteDesembarque.id = :agente and parteCarga.patio.porto.id = :porto"
+			)
+		}
+)
 @Entity
 @Table(name="parte_carga")
 @PrimaryKeyJoinColumn(name="id")

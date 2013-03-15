@@ -36,30 +36,35 @@
 								<f:facet name="header">Peso Total</f:facet>
 								<p:outputLabel value="#{carga.peso}" />
 							</p:column>
+							<p:column>
+								<f:facet name="header">Peso Total</f:facet>
+								<p:outputLabel value="#{carga.peso}" />
+							</p:column>
 						</p:dataTable>
+						<br/><br/>
 						<p:dataTable id="tabelaParteCargas"
 							value="#{retiraCargaConteinerModel.listPartes}" var="parte"
-							rendered="#{not empty retiraCargaConteinerModel.listPartes}">
+							rendered="#{not empty retiraCargaConteinerModel.listPartes}" emptyMessage="Nao existem partes disponiveis">
 							<p:column>
 								<f:facet name="header">Identificador da Parte</f:facet>
-								<h:outputLabel value="#{parte.id}" />
+								<p:outputLabel value="#{parte.id}" />
 							</p:column>
 							<p:column>
 								<f:facet name="header">Peso Alocado</f:facet>
-								<h:outputLabel value="#{parte.peso}" />
+								<p:outputLabel value="#{parte.peso}" />
 							</p:column>
 							<p:column>
 								<f:facet name="header">Identificador do Conteiner</f:facet>
-								<h:outputLabel value="#{parte.conteiner.id}" />
+								<p:outputLabel value="#{parte.conteiner.id}" />
 							</p:column>
 							<p:column>
-								<f:facet name="header">Porto de Origem</f:facet>
-								<h:outputLabel value="#{parte.conteiner.portoOrigem.nome} - #{parte.conteiner.portoOrigem.localizacao}" />
+								<f:facet name="header">Porto</f:facet>
+								<p:outputLabel value="#{parte.conteiner.porto.localizacao}" />
 							</p:column>
 							<p:column>
-								<p:commandButton title="Desalocar Carga" type="submit" disabled="#{empty retiraCargaConteinerModel.listPartes}"
-									value="Desalocar Carga do Conteiner" update="@form" action="#{retiraCargaConteinerController.desalocarCarga}">
-									<f:setPropertyActionListener target="#{retiraCargaConteinerController.parteSelecionada}" value="#{parte.id}" />
+								<f:facet name="header">Acao</f:facet>
+								<p:commandButton title="Desembarcar Parte" type="submit"
+									value="Desembarcar Carga" update="@form" action="#{retiraCargaConteinerController.desembarcarCarga(parte.id)}">
 								</p:commandButton>
 							</p:column>
 						</p:dataTable>

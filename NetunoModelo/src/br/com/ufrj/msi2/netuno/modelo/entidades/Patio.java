@@ -21,11 +21,11 @@ public class Patio implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	@OneToMany
-	@JoinColumn(name="patio_id")  
+	@OneToMany 
+	@JoinColumn(name="patio_id")
 	private List<CargaComponente> cargasComponente;
 	
-	@ManyToOne
+	@ManyToOne 
 	private Porto porto;
 
 	public Porto getPorto() {

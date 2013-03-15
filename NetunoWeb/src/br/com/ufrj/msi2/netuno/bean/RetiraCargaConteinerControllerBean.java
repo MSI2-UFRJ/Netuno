@@ -1,5 +1,8 @@
 package br.com.ufrj.msi2.netuno.bean;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -15,6 +18,7 @@ import br.com.ufrj.msi2.netuno.carga.servicos.GerenciarConteinersService;
 import br.com.ufrj.msi2.netuno.modelo.entidades.AgenteCarga;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Carga;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Conteiner;
+import br.com.ufrj.msi2.netuno.modelo.entidades.ParteCarga;
 
 @ManagedBean(name = "retiraCargaConteinerController")
 @ViewScoped
@@ -29,25 +33,13 @@ public class RetiraCargaConteinerControllerBean extends MBean {
 
 	private int cargaId = 0;
 	
-	private int parteSelecionada;
-	
-	public int getParteSelecionada() {
-		return parteSelecionada;
-	}
-
-	public void setParteSelecionada(int parteSelecionada) {
-		this.parteSelecionada = parteSelecionada;
-	}
-
-	@ManagedProperty(value = "#{retiraCargaConrteinerModel}")
+	@ManagedProperty(value = "#{retiraCargaConteinerModel}")
 	private RetiraCargaConteinerModelBean retiraCargaConteinerModelBean;
 
 	@PostConstruct
 	public void construct() {
-		HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
-				.getExternalContext().getSession(true);
-		agente = (AgenteCarga) session
-				.getAttribute(Attributes.SessionAttributes.LOGIN.toString());
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+		agente = (AgenteCarga) session.getAttribute(Attributes.SessionAttributes.LOGIN.toString());
 
 	}
 
@@ -59,8 +51,32 @@ public class RetiraCargaConteinerControllerBean extends MBean {
 
 	private void getInformations() {
 		retiraCargaConteinerModelBean.setCarga(gCargaService.obterPorId(cargaId));
-		retiraCargaConteinerModelBean.setListPartes(gCargaService.listaParteCargasComConteiner(
-				retiraCargaConteinerModelBean.getCarga()));
+		
+		retiraCargaConteinerModelBean.setListPartes(
+				this.trataListParteCargaDesembarque(
+						gCargaService.listaParteCargasComConteiner(
+								retiraCargaConteinerModelBean.getCarga()
+								)
+						)
+				);
+		
+	}
+	
+	private List<ParteCarga> trataListParteCargaDesembarque(List<ParteCarga> list)
+	{
+		List<ParteCarga> listResult = new ArrayList<ParteCarga>();
+		for(ParteCarga parte : list)
+		{
+			boolean found = false;
+			if(parte.getConteiner().getPorto() != null)
+			{
+				found = true;
+			}
+			if(found)
+				listResult.add(parte);
+		}
+		
+		return listResult;
 	}
 
 	public int getCargaId() {
@@ -80,15 +96,12 @@ public class RetiraCargaConteinerControllerBean extends MBean {
 		this.retiraCargaConteinerModelBean = retiraCargaConteinerModelBean;
 	}
 
-	public void desalocarCarga() {
-		
-			this.getParteSelecionada();
-			
-//			super.sendMessage(null, FacesMessage.SEVERITY_INFO,
-//					"Parte da Carga Desalocada do conteiner com Sucesso !", null);
+	public void desembarcarCarga(int parteId) {
+			System.out.println("desembarquei");
+			super.sendMessage(null, FacesMessage.SEVERITY_INFO,
+					"Parte da Carga Desembarcada do conteiner com Sucesso!", null);
 
-
-		}
+	}
 	
 
 	public AgenteCarga getAgente() {

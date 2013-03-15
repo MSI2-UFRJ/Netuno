@@ -39,10 +39,8 @@ public class GerenciarConteinersServiceImpl implements GerenciarConteinersServic
 			Root<Conteiner> root = criteria.from(Conteiner.class);
 			
 			ArrayList<Predicate> predicados = new ArrayList<Predicate>();
-			if(porto.getLocalizacao()!= null && !porto.getLocalizacao().equals("")){
-				Expression<String> exp = root.get("porto");
-				predicados.add(builder.equal(builder.lower(exp),porto.getId()));
-			} 
+			Expression<String> exp = root.get("porto");
+			predicados.add(builder.equal(builder.lower(exp),porto.getId()));
 			
 			Expression<String> expQt = root.get("pesoDisponivel");
 			predicados.add(builder.notEqual(builder.lower(expQt),"0"));

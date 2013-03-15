@@ -23,7 +23,6 @@ public class RetiraCargaConteinerModelBean extends MBean {
 	}
 
 	public void setListPartes(List<ParteCarga> listPartes) {
-		System.out.println(listPartes.size());
 		this.listPartes = listPartes;
 	}
 

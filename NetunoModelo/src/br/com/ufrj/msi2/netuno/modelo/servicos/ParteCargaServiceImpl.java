@@ -5,9 +5,11 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
+import br.com.ufrj.msi2.netuno.modelo.entidades.AgenteCarga;
 import br.com.ufrj.msi2.netuno.modelo.entidades.ParteCarga;
 
 
@@ -41,5 +43,16 @@ public class ParteCargaServiceImpl implements ParteCargaService {
 	@Override
 	public ParteCarga obterPorId(Integer id){
 		return this.em.find(ParteCarga.class, id);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ParteCarga> listaParteCargasDisponiveis(AgenteCarga agente) {
+		Query query = em.createNamedQuery("ParteCarga.listaParteCargasParaDesembarque");
+		query.setParameter("porto", agente.getPertence().getId());
+		query.setParameter("agente", agente.getId());
+		return query.getResultList();
+
+		
 	}
 }

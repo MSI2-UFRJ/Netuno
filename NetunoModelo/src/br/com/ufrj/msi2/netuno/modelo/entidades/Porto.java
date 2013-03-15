@@ -13,27 +13,27 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="porto",
-	   uniqueConstraints=@UniqueConstraint(columnNames={"localizacao","nome"}))
+@Table(name = "porto", uniqueConstraints = @UniqueConstraint(columnNames = {
+		"localizacao", "nome" }))
 public class Porto implements Serializable {
 	private static final long serialVersionUID = -4513783540480470840L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	@OneToMany(mappedBy="pertence")
+
+	@OneToMany(mappedBy = "pertence")
 	private List<AgentePorto> agentes;
-	
-	@OneToMany(mappedBy="porto")
+
+	@OneToMany(mappedBy = "porto")
 	private List<Atraque> atraques;
-	
-	@OneToMany(mappedBy="porto")
+
+	@OneToMany(mappedBy = "porto")
 	private List<Patio> patios;
-	
-	@OneToMany(mappedBy="porto")
+
+	@OneToMany(mappedBy = "porto")
 	private List<Slot> slots;
-	
+
 	public List<Slot> getSlots() {
 		return slots;
 	}
@@ -58,12 +58,12 @@ public class Porto implements Serializable {
 		this.patios = patios;
 	}
 
-	@Column(name="nome", nullable = false)
+	@Column(name = "nome", nullable = false)
 	private String nome;
 
 	@Column(name = "localizacao", nullable = false)
 	private String localizacao;
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -71,20 +71,20 @@ public class Porto implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
-	public String getLocalizacao(){
+
+	public String getLocalizacao() {
 		return localizacao;
 	}
-	
-	public void setLocalizacao(String localizacao){
+
+	public void setLocalizacao(String localizacao) {
 		this.localizacao = localizacao;
 	}
-	
-	public String getNome(){
+
+	public String getNome() {
 		return this.nome;
 	}
-	
-	public void setNome(String nome){
+
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
@@ -95,16 +95,16 @@ public class Porto implements Serializable {
 	public void setAgentes(List<AgentePorto> agentes) {
 		this.agentes = agentes;
 	}
-	
+
 	@Override
 	public boolean equals(Object arg0) {
 		Porto porto = (Porto) arg0;
-		
-		if(porto == null) {
+
+		if (porto == null) {
 			return false;
 		}
-		
+
 		return this.id == porto.getId();
 	}
-	
+
 }

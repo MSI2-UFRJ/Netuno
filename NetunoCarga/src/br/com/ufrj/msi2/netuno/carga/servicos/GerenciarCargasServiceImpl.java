@@ -65,30 +65,29 @@ public class GerenciarCargasServiceImpl implements GerenciarCargasService {
 	}
 	
 	@Override
-	public List<Carga> listaCargasParaDesembarque(AgenteCarga agente) {
-		List<Carga> resultList = new ArrayList<Carga>();
+	public List<Carga> listaCargasParaDesembarque(AgenteCarga agente) {	
+		List<ParteCarga> partes = this.parteCargaService.listaParteCargasDisponiveis(agente);
 
-		try {
-
-			CriteriaBuilder builder = cargaService.getCriteriaBuilder();
-			CriteriaQuery<Carga> criteria = builder.createQuery(Carga.class);
-			Root<Carga> cargaRoot = criteria.from(Carga.class);
-			
-			ArrayList<Predicate> predicados = new ArrayList<Predicate>();
-			
-			Expression<String> agenteEmbarque = cargaRoot.get("agenteDesembarque");
-			predicados.add(builder.equal(builder.lower(agenteEmbarque),agente.getId()));
-
-			Expression<String> alocacao = cargaRoot.get("alocacaoCompleta");
-			predicados.add(builder.equal((alocacao),true));
-			
-			criteria.select(cargaRoot).where(predicados.toArray(new Predicate[]{}));
-			
-			resultList = cargaService.filtrar(criteria);
-		} catch (Exception e) {
-			// TODO: handle exception
+		List<Carga> listCarga = new ArrayList<Carga>();
+		
+		
+		for (ParteCarga parteCarga : partes) {
+			boolean found = false;
+			for(Carga carga : listCarga)
+			{
+				if(carga.getId() == parteCarga.getCarga().getId())
+				{
+					found = true;
+					break;
+				}
+			}
+			if(!found)
+			{
+				listCarga.add(parteCarga.getCarga());
+			}
 		}
-		return resultList;
+		
+		return listCarga;
 	}
 	
 	@Override

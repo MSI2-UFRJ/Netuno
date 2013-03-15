@@ -38,9 +38,16 @@ public abstract class CargaComponente implements Serializable {
 	@ManyToOne(targetEntity = Conteiner.class)
 	//@JoinColumn(name="conteiner_id")
 	private Conteiner conteiner;
+
+	@ManyToOne(targetEntity = Patio.class)
+	private Patio patio;
 	
 	@Column(name = "peso")
 	private Double peso;
+	
+	@Column(name="desembarcada")
+	private boolean desembarcada;
+
 
 	public Integer getId() {
 		return id;
@@ -81,5 +88,22 @@ public abstract class CargaComponente implements Serializable {
 	public void setPeso(Double peso) {
 		this.peso = peso;
 	}
+	
+	public Patio getPatio() {
+		return patio;
+	}
+
+	public void setPatio(Patio patio) {
+		this.patio = patio;
+	}
+	
+	public boolean isDesembarcada() {
+		return desembarcada;
+	}
+
+	public void setDesembarcada(boolean desembarcada) {
+		this.desembarcada = desembarcada;
+	}
+
 
 }
