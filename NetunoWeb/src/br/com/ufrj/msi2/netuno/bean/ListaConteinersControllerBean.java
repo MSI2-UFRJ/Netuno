@@ -66,7 +66,4 @@ public class ListaConteinersControllerBean {
 		this.listaConteinersModelBean = listaConteinersModelBean;
 	}
 	
-	public String embarcarConteinerNavio(Navio navio){
-		return "";
-	}
 }

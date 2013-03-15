@@ -15,55 +15,36 @@
 					listener="#{listaRequisicoesController.onPageLoad}" />
 			</f:metadata>
 			<h:form>
-				<h3>Requisicoes: </h3>
+				<h3>Conteiners para Embarcar: </h3>
 				<p:dataTable id="tabelaListaRequisicoes"
 				value="#{listaRequisicoesModel.listaRequisicoes}" var="requisicao"
 				rendered="#{not empty listaRequisicoesModel.listaRequisicoes}">
 				<p:column>
-					<f:facet name="header">Requisicao ID: </f:facet>
+					<f:facet name="header">Requisicao ID</f:facet>
 					<h:outputLabel value="#{requisicao.id}" />
 				</p:column>
 				<p:column>
-					<f:facet name="header">Navio ID: </f:facet>
-					<h:outputLabel value="#{requisicao.navio.id}" />
+					<f:facet name="header">Navio Nome</f:facet>
+					<h:outputLabel value="#{requisicao.navio.nome}" />
 				</p:column>
 				<p:column>
-					<f:facet name="header">Data: </f:facet>
+					<f:facet name="header">Data</f:facet>
 					<h:outputLabel value="#{requisicao.data}" />
 				</p:column>
 				<p:column>
-					<f:facet name="header">Conteiner ID: </f:facet>
+					<f:facet name="header">Conteiner ID</f:facet>
 					<h:outputLabel value="#{requisicao.conteiner.id}" />
 				</p:column>
 				<p:column>
-					<f:facet name="header">Agente ID: </f:facet>
-					<h:outputLabel value="#{requisicao.agenteCarga.id}" />
+					<f:facet name="header">Agente Nome</f:facet>
+					<h:outputLabel value="#{requisicao.agenteCarga.nome}" />
 				</p:column>
-				</p:dataTable>
-				<p:commandButton rendered="#{not empty listaRequisicoesController}" value="Do Sth" action="#{listaRequisicoesController.doSth}" />
-				<h3>Conteiners para Embarcar: </h3>
-				
-				<p:dataTable id="tabelaConteinersEmbarcar"
-					value="#{listaConteinersModel.listaConteiners}" var="conteiner"
-					rendered="#{not empty listaConteinersModel.listaConteiners}">
-					<p:column>
-						<f:facet name="header">Identificador: </f:facet>
-						<h:outputLabel value="#{conteiner.id}" />
-					</p:column>
-					<p:column>
-						<f:facet name="header">Navio ID: </f:facet>
-						<h:outputLabel value="#{carga.descricao}" />
-					</p:column>
-					<p:column>
-						<p:button outcome="#{listaConteinersController.embarcarConteinerNavio(navio)}" rendered="#{listaCargasAgenteController.embarque}"
+				<p:column>
+						<p:commandButton outcome="#{listaRequisicoesController.embarcarConteinerNavio(requisicao)}" rendered="#{not empty listaRequisicoesController}"
 							value="Embarcar no Navio">
-							<f:param name="cargaId" value="#{carga.id}" />
-						</p:button>
+						</p:commandButton>
 					</p:column>
 				</p:dataTable>
-				
-				
-				
 				<p:button value="Home" outcome="/cargas/home" >
 				</p:button>
 			</h:form>

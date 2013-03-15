@@ -93,3 +93,7 @@ insert into pregao(abertoPor_id, anuncia_id) values (4, 2);
 insert into conteiner values(1,20000,1);
 insert into conteiner values(2,20000,1);
 insert into conteiner values(3,20000,2);
+
+insert into netuno.requisicao(data, agenteCarga_id, conteiner_id, navio_id, agenteRota_id) values('2013-01-01 10:10:10',1,1,1,7);
+insert into netuno.requisicao(data, agenteCarga_id, conteiner_id, navio_id, agenteRota_id) values('2013-01-01 10:10:10',1,2,1,7);
+insert into netuno.requisicao(data, agenteCarga_id, conteiner_id, navio_id, agenteRota_id) values('2013-01-01 10:10:10',1,3,1,7);

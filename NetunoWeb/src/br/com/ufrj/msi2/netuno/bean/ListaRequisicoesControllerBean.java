@@ -1,12 +1,9 @@
 package br.com.ufrj.msi2.netuno.bean;
 
-import java.util.ArrayList;
-
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -32,31 +29,24 @@ public class ListaRequisicoesControllerBean {
 	@PostConstruct
 	public void construct(){
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-		
-		//Navio navio = (Navio) session.getAttribute(Attributes.SessionAttributes.NAVIO.toString());
-		agente = (AgenteCarga) session.getAttribute(Attributes.SessionAttributes.LOGIN.toString());
-		//TODO: recuperar requisicoes por agente id e porto id. da pra fazer passando so o agente
-		listaRequisicoesModelBean.setListaRequisicoes(this.requisicoesService.recuperarTodos());
-		
-		ArrayList<Requisicao> reqs = (ArrayList<Requisicao>) listaRequisicoesModelBean.getListaRequisicoes();		
-	}
-	
-	public String doSth(){
-		return "BLA";
+		agente = (AgenteCarga) session.getAttribute(Attributes.SessionAttributes.LOGIN.toString());	
 	}
 	
 	public void onPageLoad()
 	{
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		
-		//Navio navio = (Navio) session.getAttribute(Attributes.SessionAttributes.NAVIO.toString());
+		Navio navio = (Navio) session.getAttribute(Attributes.SessionAttributes.NAVIO.toString());
 		agente = (AgenteCarga) session.getAttribute(Attributes.SessionAttributes.LOGIN.toString());
 		//TODO: recuperar requisicoes por agente id e porto id. da pra fazer passando so o agente
 		listaRequisicoesModelBean.setListaRequisicoes(this.requisicoesService.recuperarTodos());
-		
-		ArrayList<Requisicao> reqs = (ArrayList<Requisicao>) listaRequisicoesModelBean.getListaRequisicoes();
 	}
 
+
+	public String embarcarConteinerNavio(Requisicao requisicao){
+		return "";
+	}
+	
 	public GerenciarRequisicoesService getRequisicoesService() {
 		return requisicoesService;
 	}
