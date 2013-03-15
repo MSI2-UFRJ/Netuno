@@ -52,8 +52,6 @@ public class PortoServiceImplTest  extends BaseSessionBeanFixture<PortoServiceIm
 	}
 	
 	public void testObterTodos() {
-		service = this.getBeanToTest();
-		
 		List<Porto> lista = service.obterTodos();
 		assertEquals("BA", (lista.get(0)).getLocalizacao());
 		assertEquals("ES", (lista.get(1)).getLocalizacao());
@@ -64,11 +62,10 @@ public class PortoServiceImplTest  extends BaseSessionBeanFixture<PortoServiceIm
 	}
 	
 	public void testObterPorId() {
-		service = this.getBeanToTest();
-		
 		Porto porto;
 		
 		porto = service.obterPorId(1);
+		//TODO Ocasionalmente falha aqui com NullPointerException. Por que?
 		assertEquals("RJ", porto.getLocalizacao());
 		porto = service.obterPorId(2);
 		assertEquals("SP", porto.getLocalizacao());
@@ -81,8 +78,6 @@ public class PortoServiceImplTest  extends BaseSessionBeanFixture<PortoServiceIm
 	}
 	
 	public void testeSalvar() {
-		service = this.getBeanToTest();
-		
 		Porto porto = new Porto();
 		
 		porto.setLocalizacao("PA");
@@ -99,7 +94,7 @@ public class PortoServiceImplTest  extends BaseSessionBeanFixture<PortoServiceIm
 			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
-			fail("Falha na persistência.");
+			fail("Falha na persistência: " + e.getMessage());
 		}
 		
 		List<Porto> lista = service.filtrar(porto);
@@ -108,12 +103,10 @@ public class PortoServiceImplTest  extends BaseSessionBeanFixture<PortoServiceIm
 	}
 	
 	public void testeAlterar(){
-		service = this.getBeanToTest();
-		
 		Porto porto = new Porto();
 		
-		porto.setLocalizacao("PA");
-		porto.setNome("Pará");
+		porto.setLocalizacao("RJ");
+		porto.setNome("Rio");
 		porto.setAgentes(null);
 		porto.setAtraques(null);
 		porto.setPatios(null);
@@ -122,11 +115,12 @@ public class PortoServiceImplTest  extends BaseSessionBeanFixture<PortoServiceIm
 		EntityTransaction tx = this.getEntityManager().getTransaction();
 		try {
 			tx.begin();
-			service.salvar(porto);
+			service.alterar(porto);
 			tx.commit();
 		} catch (Exception e) {
+			//TODO Não sei porque está caindo aqui.
 			tx.rollback();
-			fail("Falha na persistência.");
+			fail("Falha na persistência: " + e.getMessage());
 		}
 		
 		List<Porto> lista = service.filtrar(porto);
@@ -134,8 +128,6 @@ public class PortoServiceImplTest  extends BaseSessionBeanFixture<PortoServiceIm
 	}
 	
 	public void testExcluir(){
-		service = this.getBeanToTest();
-		
 		Porto porto = new Porto();
 		
 		porto.setLocalizacao("RJ");
@@ -151,18 +143,16 @@ public class PortoServiceImplTest  extends BaseSessionBeanFixture<PortoServiceIm
 			service.excluir(1);
 			tx.commit();
 		} catch (Exception e) {
+			//TODO Não sei porque está caindo aqui. Sei que o problema está no em.remove(...) de excluir(...).
 			tx.rollback();
-			//TODO Não sei porque está caindo aqui...
-			fail("Falha na persistência.");
+			fail("Falha na persistência: " + e.getMessage());
 		}
 		
 		List<Porto> lista = service.filtrar(porto);
 		assertNull(lista);
 	}
 	
-	public void testFiltrar(){
-		service = this.getBeanToTest();
-		
+	public void testFiltrar(){		
 		Porto porto = new Porto();
 		
 		porto.setLocalizacao("RJ");
@@ -180,5 +170,6 @@ public class PortoServiceImplTest  extends BaseSessionBeanFixture<PortoServiceIm
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
+		service = this.getBeanToTest();
 	}
 }
