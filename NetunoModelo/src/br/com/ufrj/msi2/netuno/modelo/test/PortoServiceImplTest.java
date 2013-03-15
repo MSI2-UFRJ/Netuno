@@ -149,7 +149,7 @@ public class PortoServiceImplTest  extends BaseSessionBeanFixture<PortoServiceIm
 		}
 		
 		List<Porto> lista = service.filtrar(porto);
-		assertNull(lista);
+		assertEquals(0,lista.size());
 	}
 	
 	public void testFiltrar(){		

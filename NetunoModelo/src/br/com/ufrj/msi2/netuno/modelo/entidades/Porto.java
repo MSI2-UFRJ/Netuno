@@ -3,6 +3,7 @@ package br.com.ufrj.msi2.netuno.modelo.entidades;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,13 +35,13 @@ public class Porto implements Serializable {
 	@OneToMany(mappedBy = "pertence")
 	private List<AgentePorto> agentes;
 
-	@OneToMany(mappedBy = "porto")
+	@OneToMany(mappedBy = "porto", cascade=CascadeType.REMOVE)
 	private List<Atraque> atraques;
 
-	@OneToMany(mappedBy = "porto")
+	@OneToMany(mappedBy = "porto", cascade=CascadeType.REMOVE)
 	private List<Patio> patios;
 
-	@OneToMany(mappedBy = "porto")
+	@OneToMany(mappedBy = "porto", cascade=CascadeType.REMOVE)
 	private List<Slot> slots;
 
 	public List<Slot> getSlots() {
