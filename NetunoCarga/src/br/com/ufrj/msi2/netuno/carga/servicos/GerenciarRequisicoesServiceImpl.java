@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import br.com.ufrj.msi2.netuno.modelo.entidades.AgenteCarga;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Requisicao;
 import br.com.ufrj.msi2.netuno.modelo.servicos.RequisicaoService;
 
@@ -18,6 +19,11 @@ public class GerenciarRequisicoesServiceImpl implements GerenciarRequisicoesServ
 	@Override
 	public List<Requisicao> recuperarTodos() {
 		return requisicaoService.recuperarTodos();
+	}
+	
+	@Override
+	public List<Requisicao> obterPorAgenteCarga(AgenteCarga agente) {
+		return requisicaoService.obterPorAgenteCarga(agente);
 	}
 
 	@Override

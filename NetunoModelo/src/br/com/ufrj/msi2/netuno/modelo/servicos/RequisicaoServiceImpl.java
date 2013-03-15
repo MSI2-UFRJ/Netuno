@@ -10,6 +10,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import br.com.ufrj.msi2.netuno.modelo.entidades.AgenteCarga;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Requisicao;
 
 @Stateless
@@ -36,7 +37,15 @@ public class RequisicaoServiceImpl implements RequisicaoService {
 		query.setParameter("id", idRequisicao);
 		return (Requisicao) query.getSingleResult();
 	}
-
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Requisicao> obterPorAgenteCarga(AgenteCarga agente) {
+		Query query = em.createNamedQuery("Requisicao.obterPorAgenteCarga");
+		query.setParameter("agente", agente);
+		return (List<Requisicao>) query.getResultList();
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Requisicao> recuperarTodos() {

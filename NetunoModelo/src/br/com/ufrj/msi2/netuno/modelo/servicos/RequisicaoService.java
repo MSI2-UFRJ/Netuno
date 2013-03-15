@@ -7,6 +7,7 @@ import javax.ejb.Local;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
+import br.com.ufrj.msi2.netuno.modelo.entidades.AgenteCarga;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Requisicao;
 
 @Local
@@ -21,6 +22,8 @@ public interface RequisicaoService extends Serializable {
 	public void salvarRequisicao(Requisicao requisicao);
 	
 	public Requisicao obterPorId(Integer idRequisicao);
+	
+	public List<Requisicao> obterPorAgenteCarga(AgenteCarga agente);
 	
 	public List<Requisicao> recuperarTodos();
 	

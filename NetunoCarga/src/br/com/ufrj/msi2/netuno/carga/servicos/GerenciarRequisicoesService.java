@@ -5,11 +5,12 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import br.com.ufrj.msi2.netuno.modelo.entidades.AgenteCarga;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Requisicao;
 
 @Local
 public interface GerenciarRequisicoesService extends Serializable{
 	public List<Requisicao> recuperarTodos();
+	public List<Requisicao> obterPorAgenteCarga(AgenteCarga agente);
 	public Requisicao obterPorId(int idRequisicao);
-	
 }

@@ -35,11 +35,13 @@ public class ListaRequisicoesControllerBean {
 	public void onPageLoad()
 	{
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-		
+
 		Navio navio = (Navio) session.getAttribute(Attributes.SessionAttributes.NAVIO.toString());
 		agente = (AgenteCarga) session.getAttribute(Attributes.SessionAttributes.LOGIN.toString());
+		AgenteCarga arg0;
 		//TODO: recuperar requisicoes por agente id e porto id. da pra fazer passando so o agente
-		listaRequisicoesModelBean.setListaRequisicoes(this.requisicoesService.recuperarTodos());
+		//listaRequisicoesModelBean.setListaRequisicoes(this.requisicoesService.recuperarTodos());
+		listaRequisicoesModelBean.setListaRequisicoes(this.requisicoesService.obterPorAgenteCarga(agente));		
 	}
 
 

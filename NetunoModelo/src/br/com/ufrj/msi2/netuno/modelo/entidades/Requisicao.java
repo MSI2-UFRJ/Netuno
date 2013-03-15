@@ -20,9 +20,11 @@ import javax.persistence.Table;
 @NamedQueries(
 	{
 		@NamedQuery(name="Requisicao.obterPorId",
-				query="select r from Requisicao r where r.id = :id"),
+			query="select r from Requisicao r where r.id = :id"),
 		@NamedQuery(name="Requisicao.obterTodos",
-				query="select r from Requisicao r")
+			query="select r from Requisicao r"),
+		@NamedQuery(name="Requisicao.obterPorAgenteCarga",
+			query="select r from Requisicao r where r.agenteCarga = :agente")
 	}
 )
 @Entity
