@@ -143,7 +143,6 @@ public class PortoServiceImplTest  extends BaseSessionBeanFixture<PortoServiceIm
 			service.excluir(1);
 			tx.commit();
 		} catch (Exception e) {
-			//TODO Não sei porque está caindo aqui.
 			if(tx.isActive()) tx.rollback();
 			fail("Falha na persistência: " + e.getMessage());
 		}
