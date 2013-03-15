@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.EntityTransaction;
 
+import org.junit.Test;
+
 import br.com.ufrj.msi2.netuno.modelo.entidades.AgenteCarga;
 import br.com.ufrj.msi2.netuno.modelo.entidades.AgenteLogistica;
 import br.com.ufrj.msi2.netuno.modelo.entidades.AgentePorto;
@@ -51,6 +53,7 @@ public class PortoServiceImplTest  extends BaseSessionBeanFixture<PortoServiceIm
 		super(PortoServiceImpl.class, usedBeans, CSV_SET1, CSV_SET2);
 	}
 	
+	@Test
 	public void testObterTodos() {
 		List<Porto> lista = service.obterTodos();
 		assertEquals("BA", (lista.get(0)).getLocalizacao());
@@ -61,8 +64,10 @@ public class PortoServiceImplTest  extends BaseSessionBeanFixture<PortoServiceIm
 		assertEquals(5, lista.size());
 	}
 	
+	@Test
 	public void testObterPorId() {
 		Porto porto;
+		
 		porto = service.obterPorId(1);
 		assertEquals("RJ", porto.getLocalizacao());
 		porto = service.obterPorId(2);
@@ -75,7 +80,8 @@ public class PortoServiceImplTest  extends BaseSessionBeanFixture<PortoServiceIm
 		assertEquals("ES", porto.getLocalizacao());
 	}
 	
-	public void testeSalvar() {
+	@Test
+	public void testSalvar() {
 		Porto porto = new Porto();
 		
 		porto.setLocalizacao("PA");
@@ -100,7 +106,8 @@ public class PortoServiceImplTest  extends BaseSessionBeanFixture<PortoServiceIm
 		
 	}
 	
-	public void testeAlterar(){
+	@Test
+	public void testAlterar(){
 		Porto porto = new Porto();
 		
 		porto.setId(1);
@@ -126,6 +133,7 @@ public class PortoServiceImplTest  extends BaseSessionBeanFixture<PortoServiceIm
 		assertEquals("Rio de Janeiro", lista.get(0).getNome());
 	}
 	
+	@Test
 	public void testExcluir(){
 		Porto porto = new Porto();
 		
@@ -151,6 +159,7 @@ public class PortoServiceImplTest  extends BaseSessionBeanFixture<PortoServiceIm
 		assertEquals(0,lista.size());
 	}
 	
+	@Test
 	public void testFiltrar(){		
 		Porto porto = new Porto();
 		
@@ -168,7 +177,7 @@ public class PortoServiceImplTest  extends BaseSessionBeanFixture<PortoServiceIm
 	}
 	
 	@Override
-	public void setUp() throws Exception {
+	public void setUp() throws Exception{
 		super.setUp();
 		service = this.getBeanToTest();
 	}
