@@ -21,6 +21,14 @@ public class PortoServiceImpl implements PortoService{
 	@PersistenceContext
 	EntityManager em;
 	
+	public EntityManager getEm() {
+		return em;
+	}
+
+	public void setEm(EntityManager em) {
+		this.em = em;
+	}
+
 	@Override
 	public List<Porto> obterTodos(){
 		CriteriaBuilder builder = em.getCriteriaBuilder();
