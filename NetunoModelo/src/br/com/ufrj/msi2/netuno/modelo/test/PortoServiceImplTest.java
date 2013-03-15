@@ -2,8 +2,6 @@ package br.com.ufrj.msi2.netuno.modelo.test;
 
 import java.util.List;
 
-import javax.persistence.Query;
-
 import br.com.ufrj.msi2.netuno.modelo.entidades.AgenteCarga;
 import br.com.ufrj.msi2.netuno.modelo.entidades.AgenteLogistica;
 import br.com.ufrj.msi2.netuno.modelo.entidades.AgentePorto;
@@ -44,13 +42,15 @@ public class PortoServiceImplTest  extends BaseSessionBeanFixture<PortoServiceIm
 	}
 	
 	//Teste para verificar se a persistência funciona corretamente.
-	@SuppressWarnings("unchecked")
-	public void testeRecuperacaoDeCargas() {
+	public void testeObterTodos() {
 		final PortoServiceImpl service = this.getBeanToTest();
-		Query q = service.getEm().createQuery("from Porto order by id");
-		assertEquals("RJ", ((Porto)q.getResultList().get(0)).getLocalizacao());
-		assertEquals("SP", ((Porto)q.getResultList().get(1)).getLocalizacao());
-		assertEquals(5, ((List<Porto>)q.getResultList()).size());
+		List<Porto> lista = service.obterTodos();
+		assertEquals("BA", (lista.get(0)).getLocalizacao());
+		assertEquals("ES", (lista.get(1)).getLocalizacao());
+		assertEquals("RJ", (lista.get(2)).getLocalizacao());
+		assertEquals("SP", (lista.get(3)).getLocalizacao());
+		assertEquals("SV", (lista.get(4)).getLocalizacao());
+		assertEquals(5, lista.size());
 	}
 	
 	@Override
