@@ -9,39 +9,39 @@
 
 <ui:composition template="/templates/template.xhtml">
 	<ui:define name="content">
-		<h2>Cadastro de empresa de transporte</h2>
+		<h2>#{logisticaMsg['logistica.home.cadEmpTrans']}</h2>
 		<div class="grid_12">
 			<div class="box-5">
 				<h:form id="formCadEmpTrans">
 				<p:messages id="mensagens" globalOnly="false" autoUpdate="true"/>
 						<p:panelGrid columns="2" cellspacing="10" cellpadding="10" id="grid">
 							<f:facet name="header">
-								Empresa de transporte
+								#{logisticaMsg['logistica.cadEmpTrans.empTrans']}
 							</f:facet>
-							<p:outputLabel for="nome" value="Nome:"/>
-							<p:inputText id="nome" value="#{empTransModel.empTrans.nome}" required="true" requiredMessage="Por favor, informe o nome da empresa."/>
+							<p:outputLabel for="nome" value="#{logisticaMsg['logistica.cadEmpTrans.nome']}:"/>
+							<p:inputText id="nome" value="#{empTransModel.empTrans.nome}" required="true" requiredMessage="#{logisticaMsg['logistica.cadEmpTrans.informeNome']}"/>
 							
-							<p:outputLabel for="representantes" value="Representantes:"/>
-							<p:dataTable id="representantes" var="representante" value="#{empTransController.listRepToInsert}" emptyMessage="Nenhum representante adicionado.">
-								<p:column headerText="Nome">
-									<p:inputText value="#{representante.nome}" required="true" requiredMessage="Por favor, informe o nome do representante." />
+							<p:outputLabel for="representantes" value="#{logisticaMsg['logistica.cadEmpTrans.representante']}:"/>
+							<p:dataTable id="representantes" var="representante" value="#{empTransController.listRepToInsert}" emptyMessage="#{logisticaMsg['logistica.cadEmpTrans.nenhumRepresentante']}">
+								<p:column headerText="#{logisticaMsg['logistica.cadEmpTrans.nome']}">
+									<p:inputText value="#{representante.nome}" required="true" requiredMessage="#{logisticaMsg['logistica.cadEmpTrans.nomeRepresentante']}" />
 								</p:column>
-								<p:column headerText="Login">
-									<p:inputText value="#{representante.login}" required="true" requiredMessage="Por favor, informe o login do representante."/>
+								<p:column headerText="#{logisticaMsg['logistica.cadEmpTrans.login']}">
+									<p:inputText value="#{representante.login}" required="true" requiredMessage="#{logisticaMsg['logistica.cadEmpTrans.loginRepresentante']}"/>
 								</p:column>
-								<p:column headerText="Senha">
-									<p:inputText value="#{representante.senha}" required="true" requiredMessage="Por favor, informe a senha do representante."/>
+								<p:column headerText="#{logisticaMsg['logistica.cadEmpTrans.senha']}">
+									<p:inputText value="#{representante.senha}" required="true" requiredMessage="#{logisticaMsg['logistica.cadEmpTrans.senhaRepresentante']}"/>
 								</p:column>
 							</p:dataTable>
 							
 							<f:facet name="footer">
-								<p:commandButton value="Adicionar Representante" icon="ui-icon-squaresmall-plus" action="#{empTransController.preparaInserirRep()}" update="formCadEmpTrans"/>
+								<p:commandButton value="#{logisticaMsg['logistica.cadEmpTrans.adicionarRepresentante']}" icon="ui-icon-squaresmall-plus" action="#{empTransController.preparaInserirRep()}" update="formCadEmpTrans"/>
 							</f:facet>													
 							<f:facet name="footer">
-								<p:commandButton type="submit" value="Confirmar" icon="ui-icon-check" action="#{empTransController.salvar}" update="formCadEmpTrans"/>
+								<p:commandButton type="submit" value="#{logisticaMsg['logistica.cadEmpTrans.confirmar']}" icon="ui-icon-check" action="#{empTransController.salvar}" update="formCadEmpTrans"/>
 							</f:facet>
 							<f:facet name="footer">
-								<p:button outcome="/logistica/home" value="Cancelar" icon="ui-icon-arrowreturnthick-1-w"/>
+								<p:button outcome="/logistica/home" value="#{logisticaMsg['logistica.cadEmpTrans.cancelar']}" icon="ui-icon-arrowreturnthick-1-w"/>
 							</f:facet>
 						</p:panelGrid>
 				</h:form>

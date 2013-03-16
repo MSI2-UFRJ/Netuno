@@ -11,31 +11,31 @@
 	<h:body>
 		<ui:composition template="/templates/template.xhtml">
 			<ui:define name="content">
-				<p:outputLabel value="Olá, " /><b><h:outputText value="#{abrirPregoesModel.agentelogistica.nome}" rendered="#{not empty abrirPregoesController}" /></b><br /><br />
+				<p:outputLabel value="#{logisticaMsg['logistica.abrir.ola']}, " /><b><h:outputText value="#{abrirPregoesModel.agentelogistica.nome}" rendered="#{not empty abrirPregoesController}" /></b><br /><br />
 				<div class="grid_12">
 					<div class="box-5">
 						<h:form id="formAbrirPregao">
-							<h2>Abrir pregões</h2>
+							<h2>#{logisticaMsg['logistica.abrir.abrirPregoes']}</h2>
 							<p:panelGrid columns="1" cellspacing="10" cellpadding="10" id="grid">
 								<p:dataTable 	id="tabelaCargas"
 												value="#{abrirPregoesModel.cargasSemPregao}"
 												var="carga"
-												emptyMessage="Nenhuma carga sem pregão.">
-									<p:column headerText="Identificador" sortBy="#{carga.id}">
+												emptyMessage="#{logisticaMsg['logistica.abrir.nenhumaCarga']}">
+									<p:column headerText="#{logisticaMsg['logistica.abrir.identificador']}" sortBy="#{carga.id}">
 										<p:outputLabel value="#{carga.id}" />
 									</p:column>
-									<p:column headerText="Descrição" sortBy="#{carga.descricao}">
+									<p:column headerText="#{logisticaMsg['logistica.abrir.descricao']}" sortBy="#{carga.descricao}">
 										<p:outputLabel value="#{carga.descricao}" />
 									</p:column>
-									<p:column headerText="Situação" sortBy="#{carga.contrato.situacao}">
+									<p:column headerText="#{logisticaMsg['logistica.abrir.situacao']}" sortBy="#{carga.contrato.situacao}">
 										<p:outputLabel value="#{carga.contrato.situacao}" />
 									</p:column>
-									<p:column headerText="Pregão">
-										<p:commandButton value="Abrir pregão" icon="ui-icon-squaresmall-plus" action="#{abrirPregoesController.inserirPregao(carga)}" update="@form"/>
+									<p:column headerText="#{logisticaMsg['logistica.abrir.pregao']}">
+										<p:commandButton value="#{logisticaMsg['logistica.abrir.abrirPregao']}" icon="ui-icon-squaresmall-plus" action="#{abrirPregoesController.inserirPregao(carga)}" update="@form"/>
 									</p:column>
 								</p:dataTable>													
 								<f:facet name="footer">
-									<p:button outcome="/logistica/home" value="Voltar" icon="ui-icon-arrowreturnthick-1-w"/>
+									<p:button outcome="/logistica/home" value="#{logisticaMsg['logistica.abrir.voltar']}" icon="ui-icon-arrowreturnthick-1-w"/>
 								</f:facet>
 							</p:panelGrid>
 						</h:form>

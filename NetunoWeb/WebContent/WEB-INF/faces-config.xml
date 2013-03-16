@@ -161,6 +161,10 @@
 			<base-name>br.com.ufrj.msi2.netuno.resources.ContratacaoMessages</base-name>
 			<var>contratacaoMsg</var>
 		</resource-bundle>
+		<resource-bundle>
+			<base-name>br.com.ufrj.msi2.netuno.resources.LogisticaMessages</base-name>
+			<var>logisticaMsg</var>
+		</resource-bundle>
 		<locale-config>
 			<default-locale>pt</default-locale>
 			<supported-locale>pt</supported-locale>

@@ -12,11 +12,11 @@
 	<ui:composition template="/templates/template.xhtml">
 		<ui:define name="content">
 			<p:button 	outcome="verPregoes"
-						value="Ver Pregões" /><br /><br />
+						value="#{logisticaMsg['logistica.home.verPregoes']}" /><br /><br />
 			<p:button 	outcome="cadEmpTrans"
-						value="Cadastrar empresa de transporte" /><br /><br />
+						value="#{logisticaMsg['logistica.home.cadEmpTrans']}" /><br /><br />
 			<p:button 	outcome="abrirPregao"
-						value="Abrir pregão para uma carga" />
+						value="#{logisticaMsg['logistica.home.abrirPregao']}" />
 		</ui:define>
 	</ui:composition>
 </h:body>
