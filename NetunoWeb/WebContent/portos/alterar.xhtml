@@ -14,7 +14,7 @@
 		<f:event type="preRenderView" listener="#{portoBean.recuperarPorto}" />
 	</f:metadata>
 	<ui:define name="content">
-		<h2>Alteração de Porto</h2>
+		<h2>#{portoMsg['porto.alterar.titulo']}</h2>
 		<div class="grid_12">
 			<div class="box-5">
 				<h:form id="formAlteracaoPorto">
@@ -23,19 +23,19 @@
 							<f:facet name="header">
 								Porto
 							</f:facet>
-							<h:outputLabel for="localizacao" value="Localização*: "/>
-							<p:inputText id="localizacao" value="#{portoBean.porto.localizacao}" required="true" requiredMessage="Por favor, informe a localização do porto."/>
+							<h:outputLabel for="localizacao" value="#{portoMsg['porto.alterar.localizacao']}: "/>
+							<p:inputText id="localizacao" value="#{portoBean.porto.localizacao}" required="true" requiredMessage="#{portoMsg['porto.alterar.informeLocalizacao']}"/>
 							<p:message for="localizacao" autoUpdate="true"/>
 							
-							<h:outputLabel for="nome" value="Nome*: "/>
-							<p:inputText id="nome" value="#{portoBean.porto.nome}" required="true" requiredMessage="Por favor, informe o nome do porto."/>
+							<h:outputLabel for="nome" value="#{portoMsg['porto.alterar.nome']}: "/>
+							<p:inputText id="nome" value="#{portoBean.porto.nome}" required="true" requiredMessage="#{portoMsg['porto.alterar.informeNome']}"/>
 							<p:message for="nome" autoUpdate="true"/>
 														
 							<f:facet name="footer">
-								<p:commandButton type="submit" value="Confirmar" icon="ui-icon-check" action="#{portoBean.salvar}" update="formAlteracaoPorto"/>
+								<p:commandButton type="submit" value="#{portoMsg['porto.alterar.confirmar']}" icon="ui-icon-check" action="#{portoBean.salvar}" update="formAlteracaoPorto"/>
 							</f:facet>
 							<f:facet name="footer">
-								<p:button outcome="/portos/listar" value="Cancelar" icon="ui-icon-arrowreturnthick-1-w"/>
+								<p:button outcome="/portos/listar" value="#{portoMsg['porto.alterar.cancelar']}" icon="ui-icon-arrowreturnthick-1-w"/>
 							</f:facet>
 						</p:panelGrid>
 				</h:form>

@@ -166,6 +166,10 @@
 			<var>logisticaMsg</var>
 		</resource-bundle>
 		<resource-bundle>
+			<base-name>br.com.ufrj.msi2.netuno.resources.PortoMessages</base-name>
+			<var>portoMsg</var>
+		</resource-bundle>
+		<resource-bundle>
 			<base-name>br.com.ufrj.msi2.netuno.resources.TemplateMessages</base-name>
 			<var>templateMsg</var>
 		</resource-bundle>
