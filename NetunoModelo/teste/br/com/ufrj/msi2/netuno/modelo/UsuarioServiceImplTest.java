@@ -1,16 +1,16 @@
-package br.com.ufrj.msi2.netuno.modelo.test;
+package br.com.ufrj.msi2.netuno.modelo;
 
 import org.junit.After;
 
-import br.com.ufrj.msi2.netuno.modelo.entidades.Usuario;
 import br.com.ufrj.msi2.netuno.modelo.servicos.UsuarioServiceImpl;
+import br.com.ufrj.msi2.netuno.modelo.support.BeanFinder;
 
 import com.bm.testsuite.BaseSessionBeanFixture;
 
 public class UsuarioServiceImplTest extends BaseSessionBeanFixture<UsuarioServiceImpl> {
 
-	private static final Class<?>[] usedBeans = { Usuario.class };
-
+	private static final Class<?>[] usedBeans = BeanFinder.findBeans(BeanFinder.NETUNO_MODEL_PACKAGE);
+	
 	//EntityTransaction tx;
 
 	/**

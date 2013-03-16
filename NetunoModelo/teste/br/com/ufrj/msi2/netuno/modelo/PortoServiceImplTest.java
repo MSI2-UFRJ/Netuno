@@ -1,4 +1,4 @@
-package br.com.ufrj.msi2.netuno.modelo.test;
+package br.com.ufrj.msi2.netuno.modelo;
 
 import java.util.List;
 
@@ -28,14 +28,15 @@ import br.com.ufrj.msi2.netuno.modelo.entidades.Requisicao;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Slot;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Usuario;
 import br.com.ufrj.msi2.netuno.modelo.servicos.PortoServiceImpl;
+import br.com.ufrj.msi2.netuno.modelo.support.BeanFinder;
 
 import com.bm.testsuite.BaseSessionBeanFixture;
 import com.bm.testsuite.dataloader.CSVInitialDataSet;
 
 public class PortoServiceImplTest  extends BaseSessionBeanFixture<PortoServiceImpl> {
 	
-	private static final Class<?>[] usedBeans = { AgenteCarga.class, AgenteLogistica.class, AgentePorto.class, AgenteRota.class, Atraque.class, Carga.class, CargaComponente.class, CargaLog.class, Conteiner.class, Contratante.class, Contrato.class, EmpresaTransporte.class, Navio.class, ParteCarga.class, Patio.class, Porto.class, Pregao.class, RepresEmpTrans.class, Requisicao.class, Slot.class, Usuario.class };
-
+	private static final Class<?>[] usedBeans = BeanFinder.findBeans(BeanFinder.NETUNO_MODEL_PACKAGE);
+	
 	PortoServiceImpl service;
 	
 	private static final CSVInitialDataSet<Porto> CSV_SET1 = 
@@ -43,7 +44,7 @@ public class PortoServiceImplTest  extends BaseSessionBeanFixture<PortoServiceIm
                     Porto.class, "porto.csv", 
                     "id", "localizacao", "nome");
 	
-	//Não precisa estar aqui nesse teste, só para fins ilustrativos.
+	//Nï¿½o precisa estar aqui nesse teste, sï¿½ para fins ilustrativos.
 	private static final CSVInitialDataSet<Patio> CSV_SET2 = 
             new CSVInitialDataSet<Patio>(
                     Patio.class, "patio.csv", 
@@ -85,7 +86,7 @@ public class PortoServiceImplTest  extends BaseSessionBeanFixture<PortoServiceIm
 		Porto porto = new Porto();
 		
 		porto.setLocalizacao("PA");
-		porto.setNome("Pará");
+		porto.setNome("Parï¿½");
 		porto.setAgentes(null);
 		porto.setAtraques(null);
 		porto.setPatios(null);
@@ -98,7 +99,7 @@ public class PortoServiceImplTest  extends BaseSessionBeanFixture<PortoServiceIm
 			tx.commit();
 		} catch (Exception e) {
 			if(tx.isActive()) tx.rollback();
-			fail("Falha na persistência: " + e.getMessage());
+			fail("Falha na persistï¿½ncia: " + e.getMessage());
 		}
 		
 		List<Porto> lista = service.filtrar(porto);
@@ -125,7 +126,7 @@ public class PortoServiceImplTest  extends BaseSessionBeanFixture<PortoServiceIm
 			tx.commit();
 		} catch (Exception e) {
 			if(tx.isActive()) tx.rollback();
-			fail("Falha na persistência: " + e.getMessage());
+			fail("Falha na persistï¿½ncia: " + e.getMessage());
 		}
 		
 		List<Porto> lista = service.filtrar(porto);
@@ -152,7 +153,7 @@ public class PortoServiceImplTest  extends BaseSessionBeanFixture<PortoServiceIm
 			tx.commit();
 		} catch (Exception e) {
 			if(tx.isActive()) tx.rollback();
-			fail("Falha na persistência: " + e.getMessage());
+			fail("Falha na persistï¿½ncia: " + e.getMessage());
 		}
 		
 		List<Porto> lista = service.filtrar(porto);
