@@ -22,17 +22,24 @@
 					<p:dataTable var="navio" value="#{navioBean.navios}" emptyMessage="Nenhum navio foi encontrado.">
 											
 						<p:column headerText="Nome" sortBy="#{navio.nome}">
-							<h:outputText value="#{navio.nome}"/>
+							<h:link value="#{navio.nome}" outcome="/navios/detalhar">
+								<f:param name="idNavio" value="#{navio.id}"/>
+							</h:link>
 						</p:column>
 						
 						<p:column>
-							<p:button title="Alterar dados básicos do navio." outcome="/navios/alterar" icon="ui-icon-pencil">
+							<p:button title="Alterar dados básicos do navio." outcome="/navios/alterar" value="Alterar" icon="ui-icon-pencil">
 								<f:param name="idNavio" value="#{navio.id}"/>
 							</p:button>
 							
-							<p:commandButton title="Excluir o navio" icon="ui-icon-closethick" onclick="confirmacao.show()">
+							<p:button title="Agendar atraque para o navio." outcome="/atraques/agendar" value="Agendar Atraque" icon="ui-icon-note">
+								<f:param name="idNavio" value="#{navio.id}"/>
+							</p:button>	
+							
+							<p:commandButton title="Excluir o navio" icon="ui-icon-closethick" value="Excluir" onclick="confirmacao.show()">
 								<f:setPropertyActionListener target="#{navioBean.idNavio}" value="#{navio.id}" />
 							</p:commandButton>
+									
 						</p:column>
 						
 						<f:facet name="footer">

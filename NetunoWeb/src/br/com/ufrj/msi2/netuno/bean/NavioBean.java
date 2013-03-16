@@ -8,8 +8,10 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import br.com.ufrj.msi2.netuno.modelo.entidades.Atraque;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Carga;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Navio;
+import br.com.ufrj.msi2.netuno.modelo.servicos.AtraqueService;
 import br.com.ufrj.msi2.netuno.modelo.servicos.NavioService;
 
 @ManagedBean(name="navioBean")
@@ -18,11 +20,14 @@ public class NavioBean extends MBean {
 	
 	@EJB
 	private NavioService servicosNavio;
+	@EJB
+	private AtraqueService servicosAtraque;
 	
 	private Navio navio;
 	private List<Navio> navios;
 	private Integer idNavio;
 	private List<Carga> cargasNavio;
+	private List<Atraque> atraques;
 	
 	@PostConstruct
 	public void inicializar(){
@@ -47,6 +52,7 @@ public class NavioBean extends MBean {
 	
 	public void recuperarNavio(){
 		this.navio = servicosNavio.obterPorId(idNavio);
+		this.setAtraques(servicosAtraque.obterAtraquesNavio(idNavio));
 	}
 	
 	public String excluir(){
@@ -101,5 +107,13 @@ public class NavioBean extends MBean {
 
 	public void setCargasNavio(List<Carga> cargasNavio) {
 		this.cargasNavio = cargasNavio;
+	}
+
+	public List<Atraque> getAtraques() {
+		return atraques;
+	}
+
+	public void setAtraques(List<Atraque> atraques) {
+		this.atraques = atraques;
 	}
 }

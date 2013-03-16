@@ -33,11 +33,11 @@
 						</p:column>
 						
 						<p:column>
-							<p:button title="Alterar dados básicos do porto." outcome="/portos/alterar" icon="ui-icon-pencil">
+							<p:button title="Alterar dados básicos do porto." outcome="/portos/alterar" value="Alterar" icon="ui-icon-pencil">
 								<f:param name="idPorto" value="#{porto.id}"/>
 							</p:button>
 							
-							<p:commandButton title="Excluir o porto." icon="ui-icon-closethick" onclick="confirmacao.show()">
+							<p:commandButton title="Excluir o porto." icon="ui-icon-closethick" value="Excluir" onclick="confirmacao.show()">
 								<f:setPropertyActionListener target="#{portoBean.idPorto}" value="#{porto.id}" />
 							</p:commandButton>
 						</p:column>

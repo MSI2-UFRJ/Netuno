@@ -76,4 +76,12 @@ public class Atraque implements Serializable{
 	public void setNavio(Navio navio) {
 		this.navio = navio;
 	}
+	
+	public void setId(Integer id){
+		this.id = id;
+	}
+	
+	public Integer getId(){
+		return id;
+	}
 }

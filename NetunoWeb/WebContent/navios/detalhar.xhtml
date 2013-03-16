@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<ui:composition template="/templates/template.xhtml">
+	<f:metadata>
+		<f:viewParam name="idNavio" value="#{navioBean.idNavio}"/>
+		<f:event type="preRenderView" listener="#{navioBean.recuperarNavio}" />
+	</f:metadata>
+	<ui:define name="content">
+		<h2>Informações do Navio</h2>
+		<div class="grid_12" id="detalhesNavio">
+			<div class="box-5">
+				<h:form id="formAtraquesAgendados">
+				<p:panelGrid columns="2" cellspacing="10" cellpadding="10">
+					<f:facet name="header">
+						Dados do Navio
+					</f:facet>
+					<h:outputLabel for="nome" value="Nome: "/>
+					<h:outputText id="nome" value="#{navioBean.navio.nome}"/>
+
+				</p:panelGrid>
+				
+				<br/>
+				<p:messages id="mensagens" globalOnly="true" />
+				<p:dataTable id="atraquesAgendados" value="#{navioBean.atraques}" var="atraque" emptyMessage="Este navio não possui nenhum atraque agendado." sortBy="#{atraque.data_previsao_chegada}">
+					<f:facet name="header">
+						Atraques Agendados
+					</f:facet>
+					<p:column headerText="Porto">
+						<h:outputText value="#{atraque.porto.nomeLocalizacao}"/>
+					</p:column>
+					
+					<p:column headerText="Previsão de chegada">
+						<h:outputText value="#{atraque.data_previsao_chegada}">
+							<f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+						</h:outputText>
+					</p:column>
+					
+					<p:column headerText="Previsão de saída">
+						<h:outputText value="#{atraque.data_previsao_saida}">
+							<f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+						</h:outputText>
+					</p:column>
+					
+					<p:column>
+						<p:commandButton title="Excluir agendamento" icon="ui-icon-closethick" value="Excluir" onclick="confirmacao.show()">
+							<f:setPropertyActionListener target="#{atraqueBean.idAtraque}" value="#{atraque.id}" />
+						</p:commandButton>
+					</p:column>
+					
+					<f:facet name="footer">
+						<p:button outcome="/atraques/agendar" value="Agendar" icon="ui-icon-plus">
+							<f:param name="idNavio" value="#{navioBean.navio.id}"/>
+						</p:button>
+					</f:facet>
+				</p:dataTable>
+				<p:confirmDialog id="confirmDialog" message="Tem certeza de que quer excluir este agendamento de atraque?" header="Processo de exclusão de atraque agendado" severity="alert" widgetVar="confirmacao">  
+					<p:commandButton id="confirma" value="Sim" oncomplete="confirmacao.hide()" action="#{atraqueBean.excluir}" update="formAtraquesAgendados"/>  
+       				<p:commandButton id="cancela" value="Não" onclick="confirmacao.hide()"/>   
+  				</p:confirmDialog>
+				<p:button outcome="/navios/listar" value="Voltar" icon="ui-icon-arrowreturnthick-1-w"/>
+				</h:form>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

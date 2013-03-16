@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<ui:composition template="/templates/template.xhtml">
+	<f:metadata>
+		<f:viewParam name="idNavio" value="#{atraqueBean.idNavio}"/>
+		<f:event type="preRenderView" listener="#{atraqueBean.recuperarNavio}" />
+	</f:metadata>
+	<ui:define name="content">
+		<h2>Agendamento de Atraque</h2>
+		<div class="grid_12">
+			<div class="box-5">
+				<h:form id="formAgendamentoAtraque">
+				<p:messages id="mensagens" globalOnly="true" />
+						<p:panelGrid columns="3" cellspacing="10" cellpadding="10" id="grid">
+							<f:facet name="header">
+								Atraque
+							</f:facet>
+							<h:outputLabel for="porto" value="Porto*: "/>
+							<p:selectOneMenu id="porto" value="#{atraqueBean.atraque.porto}" converter="portoConverter" required="true" requiredMessage="Por favor, informe o porto do atraque.">
+								<f:selectItems value="#{atraqueBean.portos}" var="porto" itemLabel="#{porto.nomeLocalizacao}" itemValue="#{porto}"/>
+							</p:selectOneMenu>
+							<p:message for="porto" autoUpdate="true"/>
+							
+							<h:outputLabel for="previsaoChegada" value="Previsão de Chegada*: "/>
+							<p:calendar id="previsaoChegada" value="#{atraqueBean.atraque.data_previsao_chegada}" pattern="dd/MM/yyyy" required="true" requiredMessage="Por favor, informe uma data de previsão de chegada ao Porto."/>
+							<p:message for="previsaoChegada"/>
+							
+							<h:outputLabel for="previsaoSaida" value="Previsão de Saída: "/>
+							<p:calendar id="previsaoSaida" value="#{atraqueBean.atraque.data_previsao_saida}" pattern="dd/MM/yyyy"/>
+							<p:message for="previsaoSaida"/>
+													
+							<f:facet name="footer">
+								<p:commandButton type="submit" value="Confirmar" icon="ui-icon-check" action="#{atraqueBean.salvar}" outcome="/navios/detalhar" update="formAgendamentoAtraque">
+									<f:param name="idNavio" value="#{atraqueBean.navio.id}"/>
+								</p:commandButton>
+							</f:facet>
+							<f:facet name="footer">
+								<p:button outcome="/navios/listar" value="Cancelar" icon="ui-icon-arrowreturnthick-1-w"/>
+							</f:facet>
+						</p:panelGrid>
+				</h:form>
+			</div>
+		</div>		
+	</ui:define>
+</ui:composition>
+</html>

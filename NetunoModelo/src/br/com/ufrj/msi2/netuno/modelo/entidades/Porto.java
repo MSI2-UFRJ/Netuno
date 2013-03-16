@@ -116,5 +116,9 @@ public class Porto implements Serializable {
 
 		return this.id == porto.getId();
 	}
+	
+	public String getNomeLocalizacao(){
+		return this.nome+" - "+this.localizacao;
+	}
 
 }
