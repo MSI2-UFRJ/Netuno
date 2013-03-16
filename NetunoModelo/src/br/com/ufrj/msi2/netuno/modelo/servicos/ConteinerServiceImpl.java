@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
+import br.com.ufrj.msi2.netuno.modelo.entidades.AgenteCarga;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Conteiner;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Navio;
 
@@ -59,8 +60,18 @@ public class ConteinerServiceImpl implements ConteinerService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Conteiner> recuperarConteinersPorNavio(Navio navio) {
-		//TODO: Mudar para recuperar de acordo com o navio
-		Query query = em.createNamedQuery("Conteiner.recuperarTodos");
+		Query query = em.createNamedQuery("Conteiner.recuperarConteinersPorNavio");
+		query.setParameter("navio", navio);
+		return (List<Conteiner>) query.getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Conteiner> recuperarPorNavioPorAgenteParaDesembarque(Navio navio, AgenteCarga agente) {
+		Query query = em.createNamedQuery("Conteiner.recuperarPorNavioPorAgenteParaDesembarque");
+		query.setParameter("navio", navio);
+		query.setParameter("porto", agente.getPertence());
+		query.setParameter("agente", agente);
 		return (List<Conteiner>) query.getResultList();
 	}
 }

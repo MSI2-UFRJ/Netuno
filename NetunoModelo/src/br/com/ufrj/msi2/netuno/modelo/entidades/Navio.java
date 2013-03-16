@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -15,7 +16,10 @@ import javax.persistence.Table;
 
 @NamedQueries(
 		{
-			@NamedQuery(name="Navio.recuperarTodos", query="select n from Navio n")
+			@NamedQuery(name="Navio.recuperarTodos", query="select n from Navio n"),
+			//TODO: tempo de atraque
+			@NamedQuery(name="Navio.recuperarNaviosAtracadosEmPorto", query ="select n from Navio n, Atraque a where a.navio = n and a.porto = :porto"),
+			@NamedQuery(name="Navio.recuperarNaviosPorAgenteAtracadosEmPorto", query ="select n from Navio n, Conteiner c, Atraque a, CargaComponente cc where a.navio = n and a.porto = :porto and cc.agenteDesembarque = :agente and c.navio = n and cc.conteiner = c")
 		}
 )
 
@@ -33,6 +37,17 @@ public class Navio implements Serializable {
 	
 	@OneToMany(mappedBy="navio")
 	private List<Atraque> atraque;
+	
+	@OneToMany(mappedBy="navio")
+	private List<Conteiner> conteiners;
+	
+	public List<Conteiner> getConteiners() {
+		return conteiners;
+	}
+
+	public void setConteiners(List<Conteiner> conteiners) {
+		this.conteiners = conteiners;
+	}
 
 	public List<Atraque> getAtraque() {
 		return atraque;

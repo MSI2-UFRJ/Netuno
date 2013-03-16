@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import br.com.ufrj.msi2.netuno.modelo.entidades.AgenteCarga;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Carga;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Conteiner;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Navio;
@@ -18,4 +19,5 @@ public interface GerenciarConteinersService extends Serializable{
 	public Conteiner obterPorId(Integer id);
 	public List<Conteiner> recuperarTodos();
 	public List<Conteiner> recuperarConteinersPorNavio(Navio navio);
+	public List<Conteiner> recuperarPorNavioPorAgenteParaDesembarque(Navio navio, AgenteCarga agente);
 }

@@ -24,7 +24,7 @@
 					<h:outputLabel value="#{requisicao.id}" />
 				</p:column>
 				<p:column>
-					<f:facet name="header">Navio Nome</f:facet>
+					<f:facet name="header">Navio Destino</f:facet>
 					<h:outputLabel value="#{requisicao.navio.nome}" />
 				</p:column>
 				<p:column>
@@ -34,10 +34,6 @@
 				<p:column>
 					<f:facet name="header">Conteiner ID</f:facet>
 					<h:outputLabel value="#{requisicao.conteiner.id}" />
-				</p:column>
-				<p:column>
-					<f:facet name="header">Agente Nome</f:facet>
-					<h:outputLabel value="#{requisicao.agenteCarga.nome}" />
 				</p:column>
 				<p:column>
 						<p:commandButton outcome="#{listaRequisicoesController.embarcarConteinerNavio(requisicao)}" rendered="#{not empty listaRequisicoesController}"

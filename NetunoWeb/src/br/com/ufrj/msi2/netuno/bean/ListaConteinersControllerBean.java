@@ -37,7 +37,7 @@ public class ListaConteinersControllerBean {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		
 		Navio navio = (Navio) session.getAttribute(Attributes.SessionAttributes.NAVIO.toString());
-		listaConteinersModelBean.setListaConteiners(this.conteinerService.recuperarConteinersPorNavio(navio));
+		listaConteinersModelBean.setListaConteiners(this.conteinerService.recuperarPorNavioPorAgenteParaDesembarque(navio, agente));
 	}
 	
 	public String listaConteinersNavio(Navio navio){
@@ -46,7 +46,7 @@ public class ListaConteinersControllerBean {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		session.setAttribute(Attributes.SessionAttributes.NAVIO.toString(), navio);
 		
-		return "listaConteinersNavio";
+		return "desembarcaConteiners";
 	}
 
 	public GerenciarConteinersService getConteinerService() {

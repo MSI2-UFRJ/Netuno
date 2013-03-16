@@ -11,6 +11,7 @@ import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import br.com.ufrj.msi2.netuno.modelo.entidades.AgenteCarga;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Carga;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Conteiner;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Navio;
@@ -83,5 +84,9 @@ public class GerenciarConteinersServiceImpl implements GerenciarConteinersServic
 	@Override
 	public List<Conteiner> recuperarConteinersPorNavio(Navio navio) {
 		return service.recuperarConteinersPorNavio(navio);
+	}
+	
+	public List<Conteiner> recuperarPorNavioPorAgenteParaDesembarque(Navio navio, AgenteCarga agente){
+		return service.recuperarPorNavioPorAgenteParaDesembarque(navio, agente);
 	}
 }

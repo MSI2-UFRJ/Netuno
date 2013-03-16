@@ -11,6 +11,7 @@ import javax.persistence.criteria.Root;
 
 import br.com.ufrj.msi2.netuno.modelo.entidades.AgenteCarga;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Navio;
+import br.com.ufrj.msi2.netuno.modelo.entidades.Porto;
 import br.com.ufrj.msi2.netuno.modelo.servicos.NavioService;
 
 @Stateless
@@ -54,7 +55,16 @@ public class GerenciarNaviosServiceImpl implements GerenciarNaviosService {
 		if(idNavio!=null && idNavio > 0) return this.navioService.obterPorId(idNavio);
 		else return null;
 	}
+
+	@Override
+	public List<Navio> recuperarNaviosAtracadosEmPorto(Porto porto) {
+		return navioService.recuperarNaviosAtracadosEmPorto(porto);
+	}
 	
+	@Override
+	public List<Navio> recuperarNaviosPorAgenteAtracadosEmPorto(AgenteCarga agente){
+		return navioService.recuperarNaviosPorAgenteAtracadosEmPorto(agente);
+	}
 	
 	
 	

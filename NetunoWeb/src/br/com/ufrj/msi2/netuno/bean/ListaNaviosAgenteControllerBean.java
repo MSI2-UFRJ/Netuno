@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import br.com.ufrj.msi2.netuno.attributes.Attributes;
 import br.com.ufrj.msi2.netuno.carga.servicos.GerenciarNaviosService;
 import br.com.ufrj.msi2.netuno.modelo.entidades.AgenteCarga;
+import br.com.ufrj.msi2.netuno.modelo.entidades.Porto;
 
 @ManagedBean(name="listaNaviosAgenteController")
 @ViewScoped
@@ -29,7 +30,9 @@ public class ListaNaviosAgenteControllerBean extends MBean {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		agente = (AgenteCarga) session.getAttribute(Attributes.SessionAttributes.LOGIN.toString());
 		
-		listaNaviosAgenteModelBean.setListaNavios(this.navioService.listaNaviosComCarga(agente));
+		//listaNaviosAgenteModelBean.setListaNavios(this.navioService.listaNaviosComCarga(agente));
+		
+		listaNaviosAgenteModelBean.setListaNavios(this.navioService.recuperarNaviosPorAgenteAtracadosEmPorto(agente));
 		
 	}
 	

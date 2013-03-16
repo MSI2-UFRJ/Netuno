@@ -144,15 +144,16 @@
 	<navigation-rule>
 		<from-view-id>/cargas/home.xhtml</from-view-id>
 		<navigation-case>
-			<from-outcome>listaConteinersParaEmbarcar</from-outcome>
-			<to-view-id>/cargas/listaConteinersAgente.xhtml</to-view-id>
+			<from-outcome>embarcaConteiners</from-outcome>
+			<to-view-id>/cargas/embarcaConteiners.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
 		<from-view-id>/cargas/listaNaviosAgente.xhtml</from-view-id>
 		<navigation-case>
-			<from-outcome>listaConteinersNavio</from-outcome>
-			<to-view-id>/cargas/listaConteinersNavioAgente.xhtml</to-view-id>
+			<from-outcome>desembarcaConteiners</from-outcome>
+			<to-view-id>/cargas/desembarcaConteiners.xhtml</to-view-id>
+			<redirect/>
 		</navigation-case>
 	</navigation-rule>
 	<!-- Definicao do arquivo de mensagens -->

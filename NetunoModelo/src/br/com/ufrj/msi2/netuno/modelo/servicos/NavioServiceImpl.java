@@ -13,7 +13,9 @@ import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import br.com.ufrj.msi2.netuno.modelo.entidades.AgenteCarga;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Navio;
+import br.com.ufrj.msi2.netuno.modelo.entidades.Porto;
 
 
 @Stateless
@@ -103,5 +105,22 @@ public class NavioServiceImpl implements NavioService {
 		consulta.select(navioRoot).where(predicados.toArray(new Predicate[]{}));
 		consulta.orderBy(cb.asc((navioRoot.get("nome"))));
 		return em.createQuery(consulta).getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Navio> recuperarNaviosAtracadosEmPorto(Porto porto) {
+		Query query = em.createNamedQuery("Navio.recuperarNaviosAtracadosEmPorto");
+		query.setParameter("porto", porto);		
+		return query.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Navio> recuperarNaviosPorAgenteAtracadosEmPorto(AgenteCarga agente) {
+		Query query = em.createNamedQuery("Navio.recuperarNaviosPorAgenteAtracadosEmPorto");
+		query.setParameter("porto", agente.getPertence());
+		query.setParameter("agente", agente);
+		return query.getResultList();
 	}
 }
