@@ -14,19 +14,19 @@
 			<h:form id="lF">
 				<p:messages id="lM" showDetail="true" autoUpdate="true" closable="true" />
 			
-				<p:panel id="pL" header="Bem-Vindo ao Netuno !!!" footer="Netuno Sistemas - UFRJ" style="width: 50%;">
+				<p:panel id="pL" header="#{loginMsg['login.login.bemVindo']}" footer="#{loginMsg['login.login.footer']}" style="width: 50%;">
 					<h:panelGrid columns="2">
-						<p:outputLabel id="oL" value="Login: " />
+						<p:outputLabel id="oL" value="#{loginMsg['login.login.login']}" />
 						<p:inputText id="iL" value="#{Login.login}" />
 						
-						<p:outputLabel id="oS" value="Senha: " />
+						<p:outputLabel id="oS" value="#{loginMsg['login.login.senha']}" />
 						<p:password id="pS" value="#{Login.senha}" />
 						
-						<p:commandButton id="bA" value="Autenticar" action="#{Login.autenticar}" onclick="block.show();" oncomplete="block.hide();" />
+						<p:commandButton id="bA" value="#{loginMsg['login.login.entrar']}" action="#{Login.autenticar}" onclick="block.show();" oncomplete="block.hide();" />
 					</h:panelGrid>
 				</p:panel>
 				
-				<p:blockUI block="pL" trigger="pL" widgetVar="block">Autenticando...</p:blockUI>
+				<p:blockUI block="pL" trigger="pL" widgetVar="block">#{loginMsg['login.login.autenticando']}</p:blockUI>
 				
 			</h:form>
 		</ui:define>
