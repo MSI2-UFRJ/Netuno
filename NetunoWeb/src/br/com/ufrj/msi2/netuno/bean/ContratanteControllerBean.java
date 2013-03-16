@@ -39,6 +39,10 @@ public class ContratanteControllerBean extends MBean {
 		this.contratacaoBundle = bundle;
 	}
 
+	/**
+	 * Valida contratante e o cria, se validado. Redireciona para tela de contratação, com o contratante recém criado.
+	 * @return String de navegação
+	 */
 	public String criar() {
 		boolean contratanteValido = true;
 
@@ -73,6 +77,10 @@ public class ContratanteControllerBean extends MBean {
 		return null;
 	}
 	
+	/**
+	 * Redireciona para tela inicial de atendente.
+	 * @return String de navegação.
+	 */
 	public String cancelar() {
 		return "atendente";
 	}

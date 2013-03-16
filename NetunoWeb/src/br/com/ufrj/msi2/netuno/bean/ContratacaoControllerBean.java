@@ -103,10 +103,17 @@ public class ContratacaoControllerBean extends MBean {
 		this.contratacaoBundle = bundle;
 	}
 	
+	/**
+	 * Chama método do service para estimar data de entrega das cargas do contrato.
+	 */
 	public void atualizarPrazo() {
 		this.contratacaoService.estimarDataEntrega(contratacaoModelBean.getContrato(), contratacaoModelBean.isEnderecoColeta(), contratacaoModelBean.isEnderecoEntrega());
 	}
 	
+	/**
+	 * Adiciona Carga ao Contrato
+	 * @param isCargaPerecivel boolean. Se true, adiciona CargaPerecivel. Caso contrário, adiciona Carga.
+	 */
 	public void adicionarCarga(boolean isCargaPerecivel) {
 		Carga carga;
 		
@@ -120,10 +127,18 @@ public class ContratacaoControllerBean extends MBean {
 		carga.setContrato(contratacaoModelBean.getContrato());
 	}
 	
+	/**
+	 * Remove carga do contrato.
+	 * @param carga escolhida pelo usuário
+	 */
 	public void removerCarga(Carga carga) {
 		contratacaoModelBean.getContrato().getCargas().remove(carga);
 	}
 	
+	/**
+	 * Valida dados do contrato e redireciona para a tela de fechar contrato.
+	 * @return String de navegação para a tela de fechar contrato.
+	 */
 	public String avancarParaFecharContrato() {
 		boolean valida = true;
 		
@@ -164,6 +179,10 @@ public class ContratacaoControllerBean extends MBean {
 		return null;
 	}
 	
+	/**
+	 * Redireciona para a tela inicial do usuário logado (Contratante ou Atendente).
+	 * @return String de navegação.
+	 */
 	public String cancelar() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		session.removeAttribute(Attributes.SessionAttributes.CONTRATANTE.toString());

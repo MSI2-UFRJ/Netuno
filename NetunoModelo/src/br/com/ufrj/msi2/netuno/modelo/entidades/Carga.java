@@ -21,7 +21,6 @@ import javax.persistence.Table;
  * @author Thiago, Paula
  *
  */
-
 @NamedQueries(
 		{
 			@NamedQuery(name="Carga.recuperaCargasSemPregao",

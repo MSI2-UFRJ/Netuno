@@ -32,6 +32,9 @@ public class VerContratosControllerBean extends MBean {
 		verContratosModelBean.setListaContratos(this.contratacaoService.recuperaContratosAbertosPorContratante(contratante));
 	}
 	
+	/**
+	 * Atualiza lista de contratos de acordo com filtro escolhido pelo usuário.
+	 */
 	public void trocarTabela() {
 		switch (this.verContratosModelBean.getTipoContratoExibido()) {
 		case 1:
@@ -45,6 +48,10 @@ public class VerContratosControllerBean extends MBean {
 		}
 	}
 	
+	/**
+	 * Salva contratante na sessão e redireciona para tela de contratação.
+	 * @return String de navegação para a tela de contratação.
+	 */
 	public String novoContrato() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		session.setAttribute(Attributes.SessionAttributes.CONTRATANTE.toString(), verContratosModelBean.getContratante());
@@ -56,6 +63,11 @@ public class VerContratosControllerBean extends MBean {
 		return "contratacao";
 	}
 
+	/**
+	 * Salva contratante e contrato na sessão, além do parâmetro CarregaCargas
+	 * @param contrato cujos detalhes serão vistos
+	 * @return String de navegação para a tela de contratação. 
+	 */
 	public String verDetalhes(Contrato contrato) {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		session.setAttribute(Attributes.SessionAttributes.CONTRATANTE.toString(), verContratosModelBean.getContratante());

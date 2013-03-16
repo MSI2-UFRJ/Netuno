@@ -30,6 +30,10 @@ public class AtendenteControllerBean extends MBean {
 		atendenteModelBean.setCpf(new CPF());
 	}
 	
+	/**
+	 * Busca contratante com o CPF digitado pelo atendente. Caso encontre, redireciona para tela de contratação.
+	 * @return String de navegação.
+	 */
 	public String verificarCPF() {
 		try {
 			Contratante contratante = this.contratacaoService.recuperaContratantePorCPF(atendenteModelBean.getCpf());
@@ -47,6 +51,10 @@ public class AtendenteControllerBean extends MBean {
 		return null;
 	}
 	
+	/**
+	 * Redireciona para a tela de cadastro de contratante.
+	 * @return String de navegação
+	 */
 	public String irCadastro() {
 		return "novoContratante";
 	}

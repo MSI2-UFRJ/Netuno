@@ -18,7 +18,7 @@ import javax.persistence.Table;
 import br.com.ufrj.msi2.netuno.modelo.enums.CargaLogEnum;
 
 /**
- * Representa informações sobre o status de entrega da carga. Usado no tracking. 
+ * Representa informações sobre o status de entrega da carga. Usado no tracking.
  * @author Thiago, Paula
  *
  */

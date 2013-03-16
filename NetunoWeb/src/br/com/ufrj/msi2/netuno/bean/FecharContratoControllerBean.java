@@ -55,6 +55,10 @@ public class FecharContratoControllerBean extends MBean {
 		this.contratacaoBundle = bundle;
 	}
 	
+	/**
+	 * Salva contrato e redireciona para a tela inicial do usuário logado (Contratante ou Atendente).
+	 * @return String de navegação.
+	 */
 	public String fecharContrato() {
 		contratacaoService.salvarContrato(fecharContratoModelBean.getContratante(), fecharContratoModelBean.getContrato());
 		
@@ -63,10 +67,18 @@ public class FecharContratoControllerBean extends MBean {
 		return navegacao();
 	}
 	
+	/**
+	 * Retorna para tela de contratação
+	 * @return String de navegação.
+	 */
 	public String voltar() {
 		return "contratacao";
 	}
 	
+	/**
+	 * Redireciona para a tela inicial do usuário logado (Contratante ou Atendente).
+	 * @return String de navegação.
+	 */
 	public String cancelar() {
 		limpaSession();
 		return navegacao();
