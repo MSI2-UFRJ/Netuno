@@ -16,6 +16,7 @@ import br.com.ufrj.msi2.netuno.modelo.entidades.Contrato;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Usuario;
 import br.com.ufrj.msi2.netuno.modelo.enums.CargaLogEnum;
 import br.com.ufrj.msi2.netuno.modelo.exceptions.ResultadoNaoEncontradoException;
+import br.com.ufrj.msi2.netuno.modelo.exceptions.ValidacaoException;
 import br.com.ufrj.msi2.netuno.modelo.servicos.CargaLogService;
 import br.com.ufrj.msi2.netuno.modelo.servicos.CargaService;
 import br.com.ufrj.msi2.netuno.modelo.servicos.ContratanteService;
@@ -45,13 +46,17 @@ public class ContratacaoServiceImpl implements ContratacaoService {
 		return this.contratoService.criarContrato();
 	}
 	
-	public void salvarContrato(Contratante contratante, Contrato contrato) {
-		Contratante contratanteComContratosCarregados = contratanteService.recuperaPorId(contratante.getId());
+	public void salvarContrato(Contratante contratante, Contrato contrato) throws ValidacaoException {
+		Contratante contratanteComContratosCarregados = contratanteService.recuperaPorIdComContratos(contratante.getId());
 		contratanteComContratosCarregados.getContratos().add(contrato);
 
 		contrato.setDataCriacao(new Date());
 		
-		contratanteService.salvarContratante(contratanteComContratosCarregados);
+		try {
+			contratanteService.salvarContratante(contratanteComContratosCarregados);
+		} catch (ValidacaoException e) {
+			throw e;
+		}
 		
 		if(contrato.getEnderecoColeta() == null) {
 			contratoService.salvarContrato(contrato);
@@ -161,8 +166,12 @@ public class ContratacaoServiceImpl implements ContratacaoService {
 		return this.contratanteService.criarContratante();
 	}
 	
-	public void salvarContratante(Contratante contratante) {
-		this.contratanteService.salvarContratante(contratante);
+	public void salvarContratante(Contratante contratante) throws ValidacaoException {
+		try {
+			contratanteService.salvarContratante(contratante);
+		} catch (ValidacaoException e) {
+			throw e;
+		}
 	}
 	
 	public boolean existeUsuarioComCPF(CPF cpf) {

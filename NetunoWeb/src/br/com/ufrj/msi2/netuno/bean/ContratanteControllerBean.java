@@ -15,6 +15,7 @@ import br.com.ufrj.msi2.netuno.attributes.Attributes;
 import br.com.ufrj.msi2.netuno.contratacao.servicos.ContratacaoService;
 import br.com.ufrj.msi2.netuno.modelo.entidades.CPF;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Contratante;
+import br.com.ufrj.msi2.netuno.modelo.exceptions.ValidacaoException;
 
 @ManagedBean(name="contratanteController")
 @ViewScoped
@@ -64,7 +65,12 @@ public class ContratanteControllerBean extends MBean {
 		}
 
 		if(contratanteValido) {
-			contratacaoService.salvarContratante(contratanteModelBean.getContratante());
+			try {
+				contratacaoService.salvarContratante(contratanteModelBean.getContratante());
+			} catch (ValidacaoException e) {
+				super.sendMessage(null, FacesMessage.SEVERITY_ERROR, this.contratacaoBundle.getString(e.getMessage()), null);
+				return null;
+			}
 			
 			HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 			session.setAttribute(Attributes.SessionAttributes.CONTRATANTE.toString(), contratanteModelBean.getContratante());

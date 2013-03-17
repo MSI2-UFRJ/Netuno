@@ -16,6 +16,7 @@ import br.com.ufrj.msi2.netuno.contratacao.servicos.ContratacaoService;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Contratante;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Contrato;
 import br.com.ufrj.msi2.netuno.modelo.enums.FormaPagamentoEnum;
+import br.com.ufrj.msi2.netuno.modelo.exceptions.ValidacaoException;
 
 @ManagedBean(name="fecharContratoController")
 @ViewScoped
@@ -60,7 +61,12 @@ public class FecharContratoControllerBean extends MBean {
 	 * @return String de navegação.
 	 */
 	public String fecharContrato() {
-		contratacaoService.salvarContrato(fecharContratoModelBean.getContratante(), fecharContratoModelBean.getContrato());
+		try {
+			contratacaoService.salvarContrato(fecharContratoModelBean.getContratante(), fecharContratoModelBean.getContrato());
+		} catch (ValidacaoException e) {
+			super.sendMessage(null, FacesMessage.SEVERITY_ERROR, this.contratacaoBundle.getString(e.getMessage()), null);
+			return null;
+		}
 		
 		super.sendMessage(null, FacesMessage.SEVERITY_INFO, this.contratacaoBundle.getString("contratacao.msg_contratoCriadoComSucesso"), null);
 		limpaSession();

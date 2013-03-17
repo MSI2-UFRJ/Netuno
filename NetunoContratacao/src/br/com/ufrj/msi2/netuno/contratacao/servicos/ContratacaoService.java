@@ -11,13 +11,14 @@ import br.com.ufrj.msi2.netuno.modelo.entidades.CargaLog;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Contratante;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Contrato;
 import br.com.ufrj.msi2.netuno.modelo.exceptions.ResultadoNaoEncontradoException;
+import br.com.ufrj.msi2.netuno.modelo.exceptions.ValidacaoException;
 
 @Local
 public interface ContratacaoService extends Serializable {
 
 	public Contrato criarContrato();
 
-	public void salvarContrato(Contratante contratante, Contrato contrato);
+	public void salvarContrato(Contratante contratante, Contrato contrato) throws ValidacaoException;
 
 	public List<Contrato> recuperaContratosAbertosPorContratante(Contratante contratante);
 
@@ -35,7 +36,7 @@ public interface ContratacaoService extends Serializable {
 	
 	public Contratante criarContratante();
 	
-	public void salvarContratante(Contratante contratante);
+	public void salvarContratante(Contratante contratante) throws ValidacaoException;
 	
 	public boolean existeUsuarioComCPF(CPF cpf);
 	
