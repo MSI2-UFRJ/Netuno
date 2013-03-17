@@ -10,6 +10,14 @@
 	
 	<h:body>
 	<ui:composition template="/templates/template.xhtml">
+		<ui:define name="menu">
+		<p:menubar>
+	            <p:submenu label="#{templateMsg['template.menu.label']}">
+            		<p:menuitem value="#{templateMsg['template.menu.voltarLogin']}" url="http://localhost:8080/netuno/" />
+        		</p:submenu>
+        		<p:menuitem value="#{templateMsg['template.menu.novoContratante']}" url="http://localhost:8080/netuno/contratacao/atendente/novoContratante.xhtml" icon="ui-icon-contact" />  
+        	</p:menubar>
+		</ui:define>
 		<ui:define name="content">
 			<h:form id="lF">
 				<p:messages id="lM" showDetail="true" autoUpdate="true" closable="true" />
