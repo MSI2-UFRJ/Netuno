@@ -119,12 +119,12 @@ public class RetiraCargaConteinerControllerBean extends MBean {
 				gCargaService.desalocarParteCarga(parteId);
 			} catch (Exception e) {
 				super.sendMessage(null, FacesMessage.SEVERITY_ERROR,
-						"Ocorreu um erro ao desembarcar a parte. Tente novamente.", null);
+						this.bundle.getString("desalocaCarga.DesalocaErro"), null);
 				return;
 			}
 			
 			super.sendMessage(null, FacesMessage.SEVERITY_INFO,
-					"Parte da Carga Desembarcada do conteiner com Sucesso!", null);			
+					this.bundle.getString("desalocaCarga.DesembarcaSucesso"), null);			
 			
 			this.getInformations();
 	}
@@ -138,12 +138,12 @@ public class RetiraCargaConteinerControllerBean extends MBean {
 			gCargaService.desalocarTodasPartes(cargaId);
 		} catch (Exception e) {
 			super.sendMessage(null, FacesMessage.SEVERITY_ERROR,
-					"Ocorreu um erro ao desembarcar a carga completamente. Tente novamente.", null);
+					this.bundle.getString("desalocaCarga.DesalocaTudoErro"), null);
 			return;
 		}
 		
 		super.sendMessage(null, FacesMessage.SEVERITY_INFO,
-				"Carga completamente desembarcada do conteiner com Sucesso!", null);	
+				this.bundle.getString("desalocaCarga.DesembarcaTudoSucesso"), null);	
 		
 		this.getInformations();
 }

@@ -89,7 +89,7 @@ public class AlocaCargaConteinerControllerBean extends MBean {
 		boolean valida = true;
 		if (alocaCargaConteinerModelBean.getConteinerSelecionado() == 0) {
 			valida = false;
-			super.sendMessage(null, FacesMessage.SEVERITY_ERROR, "Selecione um conteiner.", null);
+			super.sendMessage(null, FacesMessage.SEVERITY_ERROR, this.bundle.getString("alocaCarga.SelectMessage"), null);
 		}
 
 		if (valida) {
@@ -100,7 +100,7 @@ public class AlocaCargaConteinerControllerBean extends MBean {
 					conteiner);
 
 			super.sendMessage(null, FacesMessage.SEVERITY_INFO,
-					"Carga Alocada Com Sucesso !", null);
+					this.bundle.getString("alocaCarga.cargaAlocadaSucesso"), null);
 
 			this.getInformations();
 
