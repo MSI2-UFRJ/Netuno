@@ -2,6 +2,7 @@ package br.com.ufrj.msi2.netuno.bean;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -30,6 +31,8 @@ public class RetiraCargaConteinerControllerBean extends MBean {
 	public GerenciarConteinersService gConteinerService;
 
 	private AgenteCarga agente;
+	private ResourceBundle bundle;
+
 
 	private int cargaId = 0;
 	
@@ -40,6 +43,9 @@ public class RetiraCargaConteinerControllerBean extends MBean {
 	public void construct() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		agente = (AgenteCarga) session.getAttribute(Attributes.SessionAttributes.LOGIN.toString());
+
+		FacesContext context = FacesContext.getCurrentInstance();
+		this.bundle = context.getApplication().getResourceBundle(context, "cargaMsg");
 
 	}
 
@@ -119,6 +125,8 @@ public class RetiraCargaConteinerControllerBean extends MBean {
 			
 			super.sendMessage(null, FacesMessage.SEVERITY_INFO,
 					"Parte da Carga Desembarcada do conteiner com Sucesso!", null);			
+			
+			this.getInformations();
 	}
 	
 	/**
@@ -135,7 +143,9 @@ public class RetiraCargaConteinerControllerBean extends MBean {
 		}
 		
 		super.sendMessage(null, FacesMessage.SEVERITY_INFO,
-				"Carga completamente desembarcada do conteiner com Sucesso!", null);			
+				"Carga completamente desembarcada do conteiner com Sucesso!", null);	
+		
+		this.getInformations();
 }
 	
 
@@ -145,5 +155,14 @@ public class RetiraCargaConteinerControllerBean extends MBean {
 
 	public void setAgente(AgenteCarga agente) {
 		this.agente = agente;
+	}
+	
+
+	public ResourceBundle getBundle() {
+		return bundle;
+	}
+
+	public void setBundle(ResourceBundle bundle) {
+		this.bundle = bundle;
 	}
 }

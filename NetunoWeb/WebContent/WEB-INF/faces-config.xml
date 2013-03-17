@@ -194,6 +194,10 @@
 	<!-- Definicao do arquivo de mensagens -->
 	<application>
 		<resource-bundle>
+			<base-name>br.com.ufrj.msi2.netuno.resources.cargaMessages</base-name>
+			<var>cargaMsg</var>
+		</resource-bundle>
+		<resource-bundle>
 			<base-name>br.com.ufrj.msi2.netuno.resources.ContratacaoMessages</base-name>
 			<var>contratacaoMsg</var>
 		</resource-bundle>

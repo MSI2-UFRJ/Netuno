@@ -16,7 +16,7 @@ import javax.persistence.Table;
 		{
 			@NamedQuery(
 					name="ParteCarga.listaParteCargasParaDesembarque",
-					query="select parteCarga from ParteCarga parteCarga where parteCarga.agenteDesembarque.id = :agente and parteCarga.patio.porto.id = :porto"
+					query="select parteCarga from ParteCarga parteCarga where parteCarga.agenteDesembarque.id = :agente and parteCarga.conteiner.porto.id = :porto"
 			)
 		}
 )

@@ -16,32 +16,32 @@
 				<f:event type="preRenderView"
 					listener="#{listaCargasAgenteController.onPageLoad}" />
 			</f:metadata>
-			<p:outputLabel value="Olá, " /><h:outputText value="#{listaCargasAgenteController.agente.nome}" rendered="#{not empty listaCargasAgenteController}" /><br />
-			<h3>Lista de Cargas Normais</h3>
+			<p:outputLabel value="#{cargaMsg['listaCargas.ola']} " /><h:outputText value="#{listaCargasAgenteController.agente.nome}" rendered="#{not empty listaCargasAgenteController}" /><br />
+			<h3><h:outputText value="#{cargaMsg['listaCargas.listaNormais']}" /></h3>
 			<h:form>
 				<p:dataTable id="tabelaCargas"
 					value="#{listaCargasAgenteModel.listaCargas}" var="carga"
 					rendered="#{not empty listaCargasAgenteModel.listaCargas}">
 					<p:column>
-						<f:facet name="header">Identificador</f:facet>
+						<f:facet name="header"><h:outputText value="#{cargaMsg['listaCargas.id']}" /></f:facet>
 						<h:outputLabel value="#{carga.id}" />
 					</p:column>
 					<p:column>
-						<f:facet name="header">Descricao</f:facet>
+						<f:facet name="header"><h:outputText value="#{cargaMsg['listaCargas.descricao']}" /></f:facet>
 						<h:outputLabel value="#{carga.descricao}" />
 					</p:column>
 					<p:column>
-						<f:facet name="header">Peso</f:facet>
+						<f:facet name="header"><h:outputText value="#{cargaMsg['listaCargas.peso']}" /></f:facet>
 						<h:outputLabel value="#{carga.peso}" />
 					</p:column>
 					<p:column>
 						<f:facet name="header"></f:facet>
 						<p:button outcome="/cargas/alocaCargaConteiner" rendered="#{listaCargasAgenteController.embarque}"
-							value="Alocar no Conteiner">
+							value="#{cargaMsg['listaCargas.alocarConteiner']}">
 							<f:param name="cargaId" value="#{carga.id}" />
 						</p:button>
 						<p:button outcome="/cargas/retiraCargaConteiner" rendered="#{not listaCargasAgenteController.embarque}"
-							value="Desalocar do Conteiner">
+							value="#{cargaMsg['listaCargas.desalocarConteiner']}">
 							<f:param name="cargaId" value="#{carga.id}" />
 						</p:button>
 					</p:column>

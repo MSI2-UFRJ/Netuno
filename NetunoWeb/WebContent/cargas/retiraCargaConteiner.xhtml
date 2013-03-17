@@ -17,33 +17,29 @@
 					listener="#{retiraCargaConteinerController.onPageLoad}" />
 			</f:metadata>
 			<h:form id="formRetiraCarga">
-			<p:outputLabel value="Olá, " /><h:outputText value="#{retiraCargaConteinerController.agente.nome}" rendered="#{not empty retiraCargaConteinerController}" /><br />
+			<p:outputLabel value="#{cargaMsg['listaCargas.ola']} " /><h:outputText value="#{retiraCargaConteinerController.agente.nome}" rendered="#{not empty retiraCargaConteinerController}" /><br />
 				<p:messages id="mensagens" globalOnly="true" autoUpdate="true"/>
 				<div>
-					<h2>Retirar Carga de Conteiners</h2>
+					<h2><p:outputLabel value="#{cargaMsg['desalocaCarga.RetirarCargaConteiner']}" /></h2>
 					<div style="width: 300px; margin-left: 20%;">
 						<p:dataTable id="tabelaInfoCarga"
 							value="#{retiraCargaConteinerModel.carga}" var="carga">
 							<p:column>
-								<f:facet name="header">Identificador</f:facet>
+								<f:facet name="header"><p:outputLabel value="#{cargaMsg['desalocaCarga.id']}" /></f:facet>
 								<p:outputLabel value="#{carga.id}" />
 							</p:column>
 							<p:column>
-								<f:facet name="header">Descricao</f:facet>
+								<f:facet name="header"><p:outputLabel value="#{cargaMsg['desalocaCarga.descricao']}" /></f:facet>
 								<p:outputLabel value="#{carga.descricao}" />
 							</p:column>
 							<p:column>
-								<f:facet name="header">Peso Total</f:facet>
+								<f:facet name="header"><p:outputLabel value="#{cargaMsg['desalocaCarga.pesoTotal']}" /></f:facet>
 								<p:outputLabel value="#{carga.peso}" />
 							</p:column>
-							<p:column>
-								<f:facet name="header">Peso Total</f:facet>
-								<p:outputLabel value="#{carga.peso}" />
-							</p:column>
-							<p:column>
-								<f:facet name="header">Desalocar Todas as Cargas</f:facet>
-								<p:commandButton title="Desembarcar Tudo" type="submit"
-									value="Desembarcar Tudo" update="@form" action="#{retiraCargaConteinerController.desembarcarTodas(carga.id)}">
+							<p:column rendered="#{not empty retiraCargaConteinerModel.listPartes}">
+								<f:facet name="header"><p:outputLabel value="#{cargaMsg['desalocaCarga.DesalocarTodasCargas']}" /></f:facet>
+								<p:commandButton title="#{cargaMsg['desalocaCarga.desembarcarTudo']}" type="submit" 
+									value="#{cargaMsg['desalocaCarga.desembarcarTudo']}" update="@form" action="#{retiraCargaConteinerController.desembarcarTodas(carga.id)}">
 								</p:commandButton>
 							</p:column>
 						</p:dataTable>
@@ -52,32 +48,32 @@
 							value="#{retiraCargaConteinerModel.listPartes}" var="parte"
 							rendered="#{not empty retiraCargaConteinerModel.listPartes}" emptyMessage="Nao existem partes disponiveis">
 							<p:column>
-								<f:facet name="header">Identificador da Parte</f:facet>
+								<f:facet name="header"><p:outputLabel value="#{cargaMsg['desalocaCarga.idParte']}" /></f:facet>
 								<p:outputLabel value="#{parte.id}" />
 							</p:column>
 							<p:column>
-								<f:facet name="header">Peso Alocado</f:facet>
+								<f:facet name="header"><p:outputLabel value="#{cargaMsg['desalocaCarga.pesoAlocado']}" /></f:facet>
 								<p:outputLabel value="#{parte.peso}" />
 							</p:column>
 							<p:column>
-								<f:facet name="header">Identificador do Conteiner</f:facet>
+								<f:facet name="header"><p:outputLabel value="#{cargaMsg['desalocaCarga.idConteiner']}" /></f:facet>
 								<p:outputLabel value="#{parte.conteiner.id}" />
 							</p:column>
 							<p:column>
-								<f:facet name="header">Porto</f:facet>
+								<f:facet name="header"><p:outputLabel value="#{cargaMsg['desalocaCarga.porto']}" /></f:facet>
 								<p:outputLabel value="#{parte.conteiner.porto.localizacao}" />
 							</p:column>
 							<p:column>
-								<f:facet name="header">Acao</f:facet>
-								<p:commandButton title="Desembarcar Parte" type="submit"
-									value="Desembarcar Carga" update="@form" action="#{retiraCargaConteinerController.desembarcarCarga(parte.id)}">
+								<f:facet name="header"><p:outputLabel value="#{cargaMsg['desalocaCarga.acao']}" /></f:facet>
+								<p:commandButton title="#{cargaMsg['desalocaCarga.desembarcarParte']}" type="submit"
+									value="#{cargaMsg['desalocaCarga.desembarcarParte']}" update="@form" action="#{retiraCargaConteinerController.desembarcarCarga(parte.id)}">
 								</p:commandButton>
 							</p:column>
 						</p:dataTable>
 					</div>
 					<br/>
 					<br/>
-					<p:button value="Voltar" outcome="/cargas/listaCargasAgente" >
+					<p:button value="#{cargaMsg['desalocaCarga.voltar']}" outcome="/cargas/listaCargasAgente" >
 						<f:param name="embarque" value="false" />
 					</p:button>
 				</div>

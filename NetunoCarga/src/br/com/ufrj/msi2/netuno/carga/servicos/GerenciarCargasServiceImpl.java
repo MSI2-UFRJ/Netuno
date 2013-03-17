@@ -110,6 +110,9 @@ public class GerenciarCargasServiceImpl implements GerenciarCargasService {
 			Expression<String> exp = root.get("carga");
 			predicados.add(builder.equal(builder.lower(exp),carga.getId()));
 			
+			Expression<String> conteiner = root.get("conteiner");
+			predicados.add(builder.isNotNull(conteiner));
+		
 			criteria.select(root).where(predicados.toArray(new Predicate[]{}));
 			
 			resultList = parteCargaService.filtrar(criteria);
