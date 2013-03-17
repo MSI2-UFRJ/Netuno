@@ -47,6 +47,9 @@ public class AlocaCargaConteinerControllerBean extends MBean {
 		}
 	}
 
+	/**
+	 * Recupera informações para preencher a tela de alocação de cargas.
+	 */
 	private void getInformations() {
 		alocaCargaConteinerModelBean
 				.setCarga(gCargaService.obterPorId(cargaId));
@@ -73,7 +76,10 @@ public class AlocaCargaConteinerControllerBean extends MBean {
 			AlocaCargaConteinerModelBean alocaCargaConteinerModelBean) {
 		this.alocaCargaConteinerModelBean = alocaCargaConteinerModelBean;
 	}
-
+	
+	/**
+	 * Aloca a carga no conteiner selecionado.
+	 */
 	public void alocarCarga() {
 		boolean valida = true;
 		if (alocaCargaConteinerModelBean.getConteinerSelecionado() == 0) {

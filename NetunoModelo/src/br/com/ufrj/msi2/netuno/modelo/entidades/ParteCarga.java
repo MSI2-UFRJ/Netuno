@@ -7,6 +7,11 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
+/**
+ * Partes de uma Carga de um contrato, alocadas em conteiners diferentes.
+ *
+ */
 @NamedQueries(
 		{
 			@NamedQuery(

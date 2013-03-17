@@ -70,10 +70,16 @@ public class ListaCargasAgenteControllerBean extends MBean {
 		this.agente = agente;
 	}
 	
+	/**
+	 * Verifica se a listagem de cargas mostrada são cargas de Embarque ou Desembarque
+	 */
 	public boolean isEmbarque() {
 		return embarque;
 	}
 
+	/**
+	 * Seta variável que verifica se a cargas mostradas são de Embarque ou Desembarque.
+	 */
 	public void setEmbarque(boolean isEmbarque) {
 		this.embarque = isEmbarque;
 	}

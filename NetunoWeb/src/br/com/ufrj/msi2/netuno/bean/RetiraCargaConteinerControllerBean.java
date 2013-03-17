@@ -49,6 +49,9 @@ public class RetiraCargaConteinerControllerBean extends MBean {
 		}
 	}
 
+	/**
+	 * Recupera informações necessárias para montar a página de Retirada de Carga 
+	 */
 	private void getInformations() {
 		retiraCargaConteinerModelBean.setCarga(gCargaService.obterPorId(cargaId));
 		
@@ -62,6 +65,11 @@ public class RetiraCargaConteinerControllerBean extends MBean {
 		
 	}
 	
+	/**
+	 * Filtra a lista de PartesCarga por cargas que estão em um porto.
+	 * @param list List<ParteCarga> Lista com as PartesCarga.
+	 * @return List<ParteCarga> Lista filtrada por PartesCarga que estão em um porto. 
+	 */
 	private List<ParteCarga> trataListParteCargaDesembarque(List<ParteCarga> list)
 	{
 		List<ParteCarga> listResult = new ArrayList<ParteCarga>();
@@ -95,7 +103,11 @@ public class RetiraCargaConteinerControllerBean extends MBean {
 			RetiraCargaConteinerModelBean retiraCargaConteinerModelBean) {
 		this.retiraCargaConteinerModelBean = retiraCargaConteinerModelBean;
 	}
-
+	
+	/**
+	 * Retira a ParteCarga passada como parâmetro do Conteiner.
+	 * @param parteId int. Id da parte carga que se deseja desembarcar.
+	 */
 	public void desembarcarCarga(int parteId) {
 			try {
 				gCargaService.desalocarParteCarga(parteId);
@@ -109,6 +121,10 @@ public class RetiraCargaConteinerControllerBean extends MBean {
 					"Parte da Carga Desembarcada do conteiner com Sucesso!", null);			
 	}
 	
+	/**
+	 * Retira a Carga passada como parâmetro do Conteiner e todas as suas ParteCargas.
+	 * @param cargaId int. Id da carga que se deseja desembarcar inteira.
+	 */
 	public void desembarcarTodas(int cargaId) {
 		try {
 			gCargaService.desalocarTodasPartes(cargaId);
