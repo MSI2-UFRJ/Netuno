@@ -10,31 +10,34 @@
 
 <ui:composition template="/templates/template.xhtml">
 	<f:metadata>
-		<f:viewParam name="idNavio" value="#{navioBean.idNavio}"/>
-		<f:event type="preRenderView" listener="#{navioBean.recuperarNavio}" />
+		<f:viewParam name="idPorto" value="#{portoBean.idPorto}"/>
+		<f:event type="preRenderView" listener="#{portoBean.recuperarPorto}" />
 	</f:metadata>
 	<ui:define name="content">
-		<h2>Informações do Navio</h2>
+		<h2>Informações do Porto</h2>
 		<div class="grid_12">
 			<div class="box-5">
 				<h:form id="formAtraquesRegistrados">
 				<p:panelGrid columns="2" cellspacing="10" cellpadding="10">
 					<f:facet name="header">
-						Dados do Navio
+						Dados do Porto
 					</f:facet>
+					<h:outputLabel for="localizacao" value="Localização: "/>
+					<h:outputText id="localizacao" value="#{portoBean.porto.localizacao}"/>
+					
 					<h:outputLabel for="nome" value="Nome: "/>
-					<h:outputText id="nome" value="#{navioBean.navio.nome}"/>
+					<h:outputText id="nome" value="#{portoBean.porto.nome}"/>
 
 				</p:panelGrid>
 				
 				<br/>
 				<p:messages id="mensagens" globalOnly="true" />
-				<p:dataTable id="atraques" value="#{navioBean.atraques}" var="atraque" emptyMessage="Este navio não possui nenhum atraque agendado." sortBy="#{atraque.data_previsao_chegada}">
+				<p:dataTable id="atraquesRegistrados" value="#{portoBean.atraques}" var="atraque" emptyMessage="Este porto não possui nenhum registro de atraque." sortBy="#{atraque.data_previsao_chegada}">
 					<f:facet name="header">
 						Registro de Atraques
 					</f:facet>
 					<p:column headerText="Porto">
-						<h:outputText value="#{atraque.porto.nomeLocalizacao}"/>
+						<h:outputText value="#{atraque.navio.nome}"/>
 					</p:column>
 					
 					<p:column headerText="Previsão de chegada">
@@ -56,7 +59,7 @@
 					</p:column>
 					
 					<f:facet name="footer">
-						<p:button outcome="/atraques/registrarAtraqueNavio" value="Registrar Atraque" icon="ui-icon-plus">
+						<p:button outcome="/atraques/registrarAtraquePorto" value="Registrar Atraque" icon="ui-icon-plus">
 							<f:param name="idNavio" value="#{navioBean.navio.id}"/>
 						</p:button>
 					</f:facet>
@@ -65,7 +68,7 @@
 					<p:commandButton id="confirma" value="Sim" oncomplete="confirmacao.hide()" action="#{atraqueBean.excluir}" update="formAtraquesRegistrados"/>  
        				<p:commandButton id="cancela" value="Não" onclick="confirmacao.hide()"/>   
   				</p:confirmDialog>
-				<p:button outcome="/navios/listar" value="Voltar" icon="ui-icon-arrowreturnthick-1-w"/>
+				<p:button outcome="/portos/listar" value="Voltar" icon="ui-icon-arrowreturnthick-1-w"/>
 				</h:form>
 			</div>
 		</div>

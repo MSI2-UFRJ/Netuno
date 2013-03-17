@@ -21,7 +21,7 @@ public class NavioBean extends MBean {
 	@EJB
 	private NavioService servicosNavio;
 	@EJB
-	private AtraqueService servicosAtraque;
+	private AtraqueService servicoAtraque;
 	
 	private Navio navio;
 	private List<Navio> navios;
@@ -52,7 +52,7 @@ public class NavioBean extends MBean {
 	
 	public void recuperarNavio(){
 		this.navio = servicosNavio.obterPorId(idNavio);
-		this.setAtraques(servicosAtraque.obterAtraquesNavio(idNavio));
+		this.atraques = servicoAtraque.obterAtraquesNavio(idNavio);
 	}
 	
 	public String excluir(){

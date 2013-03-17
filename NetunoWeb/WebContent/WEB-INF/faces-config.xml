@@ -6,6 +6,11 @@
 		<converter-id>portoConverter</converter-id>
 		<converter-class>br.com.ufrj.msi2.netuno.converter.PortoConverter</converter-class>
 	</converter>
+	<converter>
+		<display-name></display-name>
+		<converter-id>navioConverter</converter-id>
+		<converter-class>br.com.ufrj.msi2.netuno.converter.NavioConverter</converter-class>
+	</converter>
 	<navigation-rule>
 		<description>Tela de login do Netuno</description>
 		<from-view-id>/login.xhtml</from-view-id>

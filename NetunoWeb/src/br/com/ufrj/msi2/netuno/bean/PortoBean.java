@@ -8,7 +8,9 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import br.com.ufrj.msi2.netuno.modelo.entidades.Atraque;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Porto;
+import br.com.ufrj.msi2.netuno.modelo.servicos.AtraqueService;
 import br.com.ufrj.msi2.netuno.modelo.servicos.PortoService;
 
 @ManagedBean(name="portoBean")
@@ -17,10 +19,13 @@ public class PortoBean extends MBean{
 
 	@EJB
 	private PortoService servicosPorto;
+	@EJB
+	private AtraqueService servicoAtraque;
 	
 	private Porto porto;
 	private List<Porto> portos;
 	private Integer idPorto;
+	private List<Atraque> atraques;
 	
 	@PostConstruct
 	public void inicializar() {
@@ -31,7 +36,8 @@ public class PortoBean extends MBean{
 	}
 	
 	public void recuperarPorto(){
-		this.porto = servicosPorto.obterPorId(this.idPorto);
+		this.porto = servicosPorto.obterPorId(idPorto);
+		this.atraques = servicoAtraque.obterAtraquesPorto(idPorto);
 	}
 	
 	/**
@@ -97,6 +103,14 @@ public class PortoBean extends MBean{
 
 	public void setServicosPorto(PortoService servicosPorto) {
 		this.servicosPorto = servicosPorto;
+	}
+
+	public List<Atraque> getAtraques() {
+		return atraques;
+	}
+
+	public void setAtraques(List<Atraque> atraques) {
+		this.atraques = atraques;
 	}
 
 }

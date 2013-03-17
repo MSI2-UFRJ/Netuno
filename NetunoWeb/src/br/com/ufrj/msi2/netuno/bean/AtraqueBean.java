@@ -31,29 +31,45 @@ public class AtraqueBean extends MBean {
 	private Integer idAtraque;
 	private Navio navio;
 	private Integer idNavio;
+	private Porto porto;
+	private Integer idPorto;
 	private List<Porto> portos;
+	private List<Navio> navios;
 	
 	@PostConstruct
 	public void inicializar(){
-		this.portos = this.servicosPorto.obterTodos();
-		if(this.atraque==null){
-			this.atraque = new Atraque();
+		portos = servicosPorto.obterTodos();
+		navios = servicosNavio.filtrar(new Navio());
+		if(atraque==null){
+			atraque = new Atraque();
 		}
 	}
 	
 	public void recuperarNavio(){
-		this.navio = servicosNavio.obterPorId(idNavio);
+		navio = servicosNavio.obterPorId(idNavio);
+	}
+	
+	public void recuperarPorto(){
+		porto = servicosPorto.obterPorId(idPorto);
 	}
 	
 	public String salvar(){
-		atraque.setNavio(this.navio);
+		String outcome = null;
+		if(navio!=null){
+			atraque.setNavio(navio);
+			outcome="/navios/";
+		}
+		if(porto!=null){
+			atraque.setPorto(porto);
+			outcome="/portos/";
+		}
 		try {
 			servicosAtraque.incluir(this.atraque);
 			super.sendMessage(null, FacesMessage.SEVERITY_INFO, "Atraque agendado com sucesso.", null);
 		} catch (Exception e) {
 			super.sendMessage(null, FacesMessage.SEVERITY_ERROR, e.getMessage(), null);
 		}
-		return "/navios/listar";
+		return outcome+"listar";
 	}
 	
 	public void excluir(){
@@ -105,12 +121,36 @@ public class AtraqueBean extends MBean {
 		this.idNavio = idNavio;
 	}
 
+	public Porto getPorto() {
+		return porto;
+	}
+
+	public void setPorto(Porto porto) {
+		this.porto = porto;
+	}
+	
+	public Integer getIdPorto(){
+		return idPorto;
+	}
+	
+	public void setIdPorto(Integer idPorto){
+		this.idPorto = idPorto;
+	}
+
 	public List<Porto> getPortos() {
 		return portos;
 	}
 	
 	public void setPortos(List<Porto> portos) {
 		this.portos = portos;
+	}
+
+	public List<Navio> getNavios() {
+		return navios;
+	}
+
+	public void setNavios(List<Navio> navios) {
+		this.navios = navios;
 	}
 	
 	

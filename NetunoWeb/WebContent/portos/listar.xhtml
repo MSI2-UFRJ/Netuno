@@ -29,13 +29,19 @@
 						</p:column>
 						
 						<p:column headerText="#{portoMsg['porto.listar.nome']}" sortBy="#{porto.nome}">
-							<h:outputText value="#{porto.nome}"/>
+							<h:link value="#{porto.nome}" outcome="/portos/detalhar">
+								<f:param name="idPorto" value="#{porto.id}"/>
+							</h:link>
 						</p:column>
 						
 						<p:column>
 							<p:button title="#{portoMsg['porto.listar.alterarDados']}" outcome="/portos/alterar" value="#{portoMsg['porto.listar.alterar']}" icon="ui-icon-pencil">
 								<f:param name="idPorto" value="#{porto.id}"/>
 							</p:button>
+							
+							<p:button title="Registrar atraque para o porto." outcome="/atraques/registrarAtraquePorto" value="Registrar Atraque" icon="ui-icon-note">
+								<f:param name="idPorto" value="#{porto.id}"/>
+							</p:button>	
 							
 							<p:commandButton title="#{portoMsg['porto.listar.excluirPorto']}" icon="ui-icon-closethick" value="#{portoMsg['porto.listar.excluir']}" onclick="confirmacao.show()">
 								<f:setPropertyActionListener target="#{portoBean.idPorto}" value="#{porto.id}" />

@@ -13,10 +13,10 @@
 		<f:event type="preRenderView" listener="#{atraqueBean.recuperarNavio}" />
 	</f:metadata>
 	<ui:define name="content">
-		<h2>Agendamento de Atraque</h2>
+		<h2>Registro de Atraque</h2>
 		<div class="grid_12">
 			<div class="box-5">
-				<h:form id="formAgendamentoAtraque">
+				<h:form id="formRegistroAtraque">
 				<p:messages id="mensagens" globalOnly="true" />
 						<p:panelGrid columns="3" cellspacing="10" cellpadding="10" id="grid">
 							<f:facet name="header">
@@ -37,9 +37,7 @@
 							<p:message for="previsaoSaida"/>
 													
 							<f:facet name="footer">
-								<p:commandButton type="submit" value="Confirmar" icon="ui-icon-check" action="#{atraqueBean.salvar}" outcome="/navios/detalhar" update="formAgendamentoAtraque">
-									<f:param name="idNavio" value="#{atraqueBean.navio.id}"/>
-								</p:commandButton>
+								<p:commandButton type="submit" value="Confirmar" icon="ui-icon-check" action="#{atraqueBean.salvar}" update="formRegistroAtraque"/>
 							</f:facet>
 							<f:facet name="footer">
 								<p:button outcome="/navios/listar" value="Cancelar" icon="ui-icon-arrowreturnthick-1-w"/>
