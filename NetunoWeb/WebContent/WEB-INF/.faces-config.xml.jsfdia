@@ -138,6 +138,12 @@
   PATH="/cargas/listaNaviosAgente.xhtml" SHAPE="504,544,50,25" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#cargas#listaNaviosAgente.xhtml:0" NAME="item"
    PATH="/cargas/listaNaviosAgente.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="home::#cargas#home.xhtml" NAME="output"
+    PATH="/cargas/home.xhtml" TARGET="rules:#cargas#home.xhtml"
+    TITLE="home" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:#cargas#listaNaviosAgente.xhtml:1"
+   NAME="item1" PATH="/cargas/listaNaviosAgente.xhtml" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
     ID="desembarcaConteiners::#cargas#desembarcaConteiners.xhtml"
     NAME="output" PATH="/cargas/desembarcaConteiners.xhtml"
@@ -195,7 +201,21 @@
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#cargas#embarcaConteiners.xhtml"
-  PATH="/cargas/embarcaConteiners.xhtml" SHAPE="560,833,0,0" model-entity="JSFProcessGroup"/>
+  PATH="/cargas/embarcaConteiners.xhtml" SHAPE="560,833,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#cargas#embarcaConteiners.xhtml:0" NAME="item"
+   PATH="/cargas/embarcaConteiners.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="home::#cargas#home.xhtml" NAME="output"
+    PATH="/cargas/home.xhtml" TARGET="rules:#cargas#home.xhtml"
+    TITLE="home" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#cargas#desembarcaConteiners.xhtml"
-  PATH="/cargas/desembarcaConteiners.xhtml" SHAPE="800,705,0,0" model-entity="JSFProcessGroup"/>
+  PATH="/cargas/desembarcaConteiners.xhtml" SHAPE="800,705,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#cargas#desembarcaConteiners.xhtml:0"
+   NAME="item" PATH="/cargas/desembarcaConteiners.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="home::#cargas#home.xhtml" NAME="output"
+    PATH="/cargas/home.xhtml" TARGET="rules:#cargas#home.xhtml"
+    TITLE="home" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
 </PROCESS>

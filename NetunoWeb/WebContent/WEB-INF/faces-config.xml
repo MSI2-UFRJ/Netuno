@@ -23,6 +23,7 @@
 			<from-action>#{Login.autenticar}</from-action>
 			<from-outcome>agenteCarga</from-outcome>
 			<to-view-id>/cargas/home.xhtml</to-view-id>
+			<redirect/>
 		</navigation-case>
 		<navigation-case>
 			<from-action>#{Login.autenticar}</from-action>
@@ -162,11 +163,32 @@
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
+		<from-view-id>/cargas/embarcaConteiners.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>home</from-outcome>
+			<to-view-id>/cargas/home.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/cargas/listaNaviosAgente.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>home</from-outcome>
+			<to-view-id>/cargas/home.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
 		<from-view-id>/cargas/listaNaviosAgente.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>desembarcaConteiners</from-outcome>
 			<to-view-id>/cargas/desembarcaConteiners.xhtml</to-view-id>
 			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/cargas/desembarcaConteiners.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>home</from-outcome>
+			<to-view-id>/cargas/home.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<!-- Definicao do arquivo de mensagens -->

@@ -40,8 +40,7 @@ public class ListaRequisicoesControllerBean {
 		agente = (AgenteCarga) session.getAttribute(Attributes.SessionAttributes.LOGIN.toString());
 		AgenteCarga arg0;
 		//TODO: recuperar requisicoes por agente id e porto id. da pra fazer passando so o agente
-		//listaRequisicoesModelBean.setListaRequisicoes(this.requisicoesService.recuperarTodos());
-		listaRequisicoesModelBean.setListaRequisicoes(this.requisicoesService.obterPorAgenteCarga(agente));		
+		listaRequisicoesModelBean.setListaRequisicoes(this.requisicoesService.obterPorAgenteCarga(agente));
 	}
 
 
