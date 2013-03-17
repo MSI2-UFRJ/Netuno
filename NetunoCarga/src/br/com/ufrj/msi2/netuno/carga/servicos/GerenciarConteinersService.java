@@ -50,4 +50,14 @@ public interface GerenciarConteinersService extends Serializable{
 	 * Retorna uma lista com todos os Conteiners de um Navio que têm requisição de Desembarque para um Agente específico.
 	 */
 	public List<Conteiner> recuperarPorNavioPorAgenteParaDesembarque(Navio navio, AgenteCarga agente);
+	
+	/**
+	 * Adiciona um conteiner na lista de conteiners de um navio retirando-o do porto.
+	 */
+	public void embarcarConteiner(Conteiner conteiner, Navio navio);
+	
+	/**
+	 * Retira um conteiner da lista de conteiners de um navio colocando-o no porto.
+	 */
+	public void desembarcarConteiner(Conteiner conteiner, Porto porto);
 }

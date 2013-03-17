@@ -48,6 +48,16 @@ public class ListaConteinersControllerBean {
 		
 		return "desembarcaConteiners";
 	}
+	
+	public String desembarcarConteiner(Conteiner conteiner){
+		conteinerService.desembarcarConteiner(conteiner, agente.getPertence());
+		return "desembarcaConteiners";
+	}
+	
+	public String embarcarConteiner(Conteiner conteiner, Navio navio){
+		conteinerService.embarcarConteiner(conteiner, navio);
+		return "embarcaConteiners";
+	}
 
 	public GerenciarConteinersService getConteinerService() {
 		return conteinerService;

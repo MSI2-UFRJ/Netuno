@@ -10,6 +10,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
 import br.com.ufrj.msi2.netuno.modelo.entidades.AgenteCarga;
+import br.com.ufrj.msi2.netuno.modelo.entidades.Carga;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Conteiner;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Navio;
 
@@ -73,5 +74,10 @@ public class ConteinerServiceImpl implements ConteinerService {
 		query.setParameter("porto", agente.getPertence());
 		query.setParameter("agente", agente);
 		return (List<Conteiner>) query.getResultList();
+	}
+
+	@Override
+	public void atualizarConteiner(Conteiner conteiner) {
+		em.merge(conteiner);
 	}
 }

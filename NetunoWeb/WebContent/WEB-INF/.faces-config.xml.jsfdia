@@ -204,6 +204,14 @@
   PATH="/cargas/embarcaConteiners.xhtml" SHAPE="560,833,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#cargas#embarcaConteiners.xhtml:0" NAME="item"
    PATH="/cargas/embarcaConteiners.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="embarcaConteiners::#cargas#embarcaConteiners.xhtml"
+    NAME="output" PATH="/cargas/embarcaConteiners.xhtml"
+    TARGET="rules:#cargas#embarcaConteiners.xhtml"
+    TITLE="embarcaConteiners" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:#cargas#embarcaConteiners.xhtml:1"
+   NAME="item1" PATH="/cargas/embarcaConteiners.xhtml" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT ID="home::#cargas#home.xhtml" NAME="output"
     PATH="/cargas/home.xhtml" TARGET="rules:#cargas#home.xhtml"
     TITLE="home" model-entity="JSFProcessItemOutput"/>
@@ -216,6 +224,14 @@
    <PROCESS-ITEM-OUTPUT ID="home::#cargas#home.xhtml" NAME="output"
     PATH="/cargas/home.xhtml" TARGET="rules:#cargas#home.xhtml"
     TITLE="home" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:#cargas#desembarcaConteiners.xhtml:1"
+   NAME="item1" PATH="/cargas/desembarcaConteiners.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="desembarcaConteiners::#cargas#desembarcaConteiners.xhtml"
+    NAME="output" PATH="/cargas/desembarcaConteiners.xhtml"
+    TARGET="rules:#cargas#desembarcaConteiners.xhtml"
+    TITLE="desembarcaConteiners" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
 </PROCESS>

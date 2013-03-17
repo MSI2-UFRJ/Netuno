@@ -18,7 +18,7 @@
 				<h3>Conteiners para Embarcar: </h3>
 				<p:dataTable id="tabelaListaRequisicoes"
 				value="#{listaRequisicoesModel.listaRequisicoes}" var="requisicao"
-				rendered="#{not empty listaRequisicoesModel.listaRequisicoes}">
+				emptyMessage="Sem conteiners para embarcar. Horray!">
 				<p:column>
 					<f:facet name="header">Requisicao ID</f:facet>
 					<h:outputLabel value="#{requisicao.id}" />
@@ -36,13 +36,10 @@
 					<h:outputLabel value="#{requisicao.conteiner.id}" />
 				</p:column>
 				<p:column>
-						<p:commandButton outcome="#{listaRequisicoesController.embarcarConteinerNavio(requisicao)}" rendered="#{not empty listaRequisicoesController}"
-							value="Embarcar no Navio">
-						</p:commandButton>
-					</p:column>
+					<p:commandButton action="#{listaRequisicoesController.embarcarConteiner(requisicao)}" value="Embarcar no Navio">
+					</p:commandButton>
+				</p:column>
 				</p:dataTable>
-				<p:button value="Home" outcome="/cargas/home" >
-				</p:button>
 			</h:form>
 		</ui:define>
 	</ui:composition>

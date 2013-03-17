@@ -16,21 +16,22 @@
 			</f:metadata>
 			<h3>Lista de Conteiners</h3>
 			<h:form>
-				<h:dataTable id="tabelaConteiners"
+				<p:dataTable id="tabelaConteiners"
 					value="#{listaConteinersModel.listaConteiners}" var="conteiner"
-					rendered="#{not empty listaConteinersModel.listaConteiners}">
-					<h:column>
+					rendered="#{not empty listaConteinersModel.listaConteiners}"
+					emptyMessage ="Sem conteiners para embarcar. Horray!">
+					<p:column>
 						<f:facet name="header">Conteiner ID: </f:facet>
 						<h:outputLabel value="#{conteiner.id}" />
-					</h:column>
-					<h:column>
+					</p:column>
+					<p:column>
 						<f:facet name="header">Peso Disponível: </f:facet>
 						<h:outputLabel value="#{conteiner.pesoDisponivel}" />
-					</h:column>
-					<h:column>
-						<p:commandButton  action="bunda" value="Desembarcar"/>
-					</h:column>
-				</h:dataTable>
+					</p:column>
+					<p:column>
+						<p:commandButton  action="#{listaConteinersController.desembarcarConteiner(conteiner)}" value="Desembarcar"/>
+					</p:column>
+				</p:dataTable>
 			</h:form>
 		</ui:define>
 	</ui:composition>

@@ -89,4 +89,17 @@ public class GerenciarConteinersServiceImpl implements GerenciarConteinersServic
 	public List<Conteiner> recuperarPorNavioPorAgenteParaDesembarque(Navio navio, AgenteCarga agente){
 		return service.recuperarPorNavioPorAgenteParaDesembarque(navio, agente);
 	}
+	@Override
+	public void embarcarConteiner(Conteiner conteiner, Navio navio) {
+		conteiner.setPorto(null);
+		conteiner.setNavio(navio);
+		service.atualizarConteiner(conteiner);		
+	}
+	@Override
+	public void desembarcarConteiner(Conteiner conteiner, Porto porto) {
+		conteiner.setPorto(porto);
+		conteiner.setNavio(null);
+		service.atualizarConteiner(conteiner);		
+	}
+	
 }
