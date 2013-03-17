@@ -72,5 +72,12 @@ public class RequisicaoServiceImpl implements RequisicaoService {
 		
 	}
 
+	@Override
+	public void atenderResquisicao(Requisicao requisicao) {
+		requisicao.setRequisicaoAtendida(true);
+		em.merge(requisicao);
+		
+	}
+
 
 }

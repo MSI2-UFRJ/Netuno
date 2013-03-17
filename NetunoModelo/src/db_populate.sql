@@ -103,10 +103,10 @@ insert into pregao(abertoPor_id, anuncia_id) values (3, 1);
 insert into pregao(abertoPor_id, anuncia_id) values (4, 2);
 
 -- REQUISICAO
-insert into netuno.requisicao(data, agenteCarga_id, conteiner_id, navio_id, agenteRota_id) values('2013-01-01 10:10:10',1,1,1,7);
-insert into netuno.requisicao(data, agenteCarga_id, conteiner_id, navio_id, agenteRota_id) values('2013-01-01 10:10:10',1,2,1,7);
-insert into netuno.requisicao(data, agenteCarga_id, conteiner_id, navio_id, agenteRota_id) values('2013-01-01 10:10:10',1,3,1,7);
-insert into netuno.requisicao(data, agenteCarga_id, conteiner_id, navio_id, agenteRota_id) values('2013-01-01 10:10:10',2,4,1,7);
+insert into netuno.requisicao(data, requisicaoAtendida, agenteCarga_id, conteiner_id, navio_id, agenteRota_id) values('2013-01-01 10:10:10',0,1,1,1,7);
+insert into netuno.requisicao(data, requisicaoAtendida, agenteCarga_id, conteiner_id, navio_id, agenteRota_id) values('2013-01-01 10:10:10',0,1,2,1,7);
+insert into netuno.requisicao(data, requisicaoAtendida, agenteCarga_id, conteiner_id, navio_id, agenteRota_id) values('2013-01-01 10:10:10',0,1,3,1,7);
+insert into netuno.requisicao(data, requisicaoAtendida, agenteCarga_id, conteiner_id, navio_id, agenteRota_id) values('2013-01-01 10:10:10',0,2,4,1,7);
 
 -- ATRAQUE
 insert into atraque (data_previsao_chegada, navio_id, porto_id) values('2013-01-01 10:10:10', 1, 1);

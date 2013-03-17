@@ -27,4 +27,10 @@ public interface GerenciarRequisicoesService extends Serializable{
 	 * @return Requisicao. Requisição curjo id é passado por parâmetro.
 	 */
 	public Requisicao obterPorId(int idRequisicao);
+	
+	/**
+	 * Atende uma requisição que estava em aberto e a marca como atendida. 
+	 * @param requisicao A requisição a ser atendida.
+	 */
+	public void atenderResquisicao(Requisicao requisicao);
 }

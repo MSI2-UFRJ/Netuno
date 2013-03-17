@@ -27,4 +27,6 @@ public interface RequisicaoService extends Serializable {
 	
 	public List<Requisicao> recuperarTodos();
 	
+	public void atenderResquisicao(Requisicao requisicao);
+	
 }

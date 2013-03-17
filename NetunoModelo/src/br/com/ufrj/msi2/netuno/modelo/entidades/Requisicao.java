@@ -24,7 +24,7 @@ import javax.persistence.Table;
 		@NamedQuery(name="Requisicao.obterTodos",
 			query="select r from Requisicao r"),
 		@NamedQuery(name="Requisicao.obterPorAgenteCarga",
-			query="select r from Requisicao r where r.agenteCarga = :agente")
+			query="select r from Requisicao r where r.agenteCarga = :agente and r.requisicaoAtendida = false")
 	}
 )
 @Entity
@@ -47,6 +47,17 @@ public class Requisicao implements Serializable {
 	
 	@Column(name = "data")
 	private Date data;
+
+	@Column(name = "requisicaoAtendida")
+	private boolean requisicaoAtendida = false;
+
+	public boolean isRequisicaoAtendida() {
+		return requisicaoAtendida;
+	}
+
+	public void setRequisicaoAtendida(boolean requisicaoAtendida) {
+		this.requisicaoAtendida = requisicaoAtendida;
+	}
 
 	public Integer getId() {
 		return id;

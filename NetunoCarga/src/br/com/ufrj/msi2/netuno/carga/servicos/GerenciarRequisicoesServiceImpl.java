@@ -31,4 +31,9 @@ public class GerenciarRequisicoesServiceImpl implements GerenciarRequisicoesServ
 		return requisicaoService.obterPorId(idRequisicao);
 	}
 
+	@Override
+	public void atenderResquisicao(Requisicao requisicao) {
+		requisicaoService.atenderResquisicao(requisicao);
+	}
+
 }
