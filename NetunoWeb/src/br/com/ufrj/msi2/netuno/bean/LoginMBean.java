@@ -58,6 +58,13 @@ public class LoginMBean extends MBean {
 		
 		return true;
 	}
+	
+	public String novoContratante() {
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+		session.setAttribute(Attributes.SessionAttributes.USUARIOSECADASTRANDO.toString(), "usuariosecadastrando");
+		
+		return "novoContratante";
+	}
 
 	public String getSenha() {
 		return senha;

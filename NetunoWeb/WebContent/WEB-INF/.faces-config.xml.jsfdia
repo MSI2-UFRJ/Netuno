@@ -32,6 +32,11 @@
     NAME="output5" PATH="/contratacao/atendente/home.xhtml"
     TARGET="rules:#contratacao#atendente#home.xhtml"
     TITLE="#{Login.autenticar}:atendente" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="novoContratante::#contratacao#atendente#novoContratante.xhtml"
+    NAME="output6" PATH="/contratacao/atendente/novoContratante.xhtml"
+    TARGET="rules:#contratacao#atendente#novoContratante.xhtml"
+    TITLE="novoContratante" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#dashboard.xhtml" PATH="/dashboard.xhtml"
@@ -185,6 +190,8 @@
    <PROCESS-ITEM-OUTPUT ID="contratacao::#contratacao#contratacao.xhtml"
     NAME="output1" PATH="/contratacao/contratacao.xhtml"
     TARGET="rules:#contratacao#contratacao.xhtml" TITLE="contratacao" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="login::#login.xhtml" NAME="output2"
+    PATH="/login.xhtml" TARGET="rules:#login.xhtml" TITLE="login" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#cargas#embarcaConteiners.xhtml"

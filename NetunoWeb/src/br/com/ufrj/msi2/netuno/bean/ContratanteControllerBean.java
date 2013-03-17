@@ -74,7 +74,13 @@ public class ContratanteControllerBean extends MBean {
 			
 			HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 			session.setAttribute(Attributes.SessionAttributes.CONTRATANTE.toString(), contratanteModelBean.getContratante());
-			session.setAttribute(Attributes.SessionAttributes.VIAATENDENTE.toString(), "atendente");
+			
+			if(session.getAttribute(Attributes.SessionAttributes.USUARIOSECADASTRANDO.toString()) == null) {
+				session.setAttribute(Attributes.SessionAttributes.VIAATENDENTE.toString(), "atendente");
+			} else {
+				session.removeAttribute(Attributes.SessionAttributes.USUARIOSECADASTRANDO.toString());
+				session.setAttribute(Attributes.SessionAttributes.LOGIN.toString(), contratanteModelBean.getContratante());
+			}
 			
 			super.sendMessage(null, FacesMessage.SEVERITY_INFO, this.contratacaoBundle.getString("atendente.msg_contratanteCriado"), null);
 			return "contratacao";
@@ -88,7 +94,14 @@ public class ContratanteControllerBean extends MBean {
 	 * @return String de navegação.
 	 */
 	public String cancelar() {
-		return "atendente";
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+
+		if(session.getAttribute(Attributes.SessionAttributes.USUARIOSECADASTRANDO.toString()) == null) {
+			return "atendente";
+		} else {
+			session.removeAttribute(Attributes.SessionAttributes.USUARIOSECADASTRANDO.toString());
+			return "login";
+		}
 	}
 
 	public ContratacaoService getContratacaoService() {
