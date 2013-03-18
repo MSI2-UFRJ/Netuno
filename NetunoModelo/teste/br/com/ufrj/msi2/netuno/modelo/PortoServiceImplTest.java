@@ -6,27 +6,7 @@ import javax.persistence.EntityTransaction;
 
 import org.junit.Test;
 
-import br.com.ufrj.msi2.netuno.modelo.entidades.AgenteCarga;
-import br.com.ufrj.msi2.netuno.modelo.entidades.AgenteLogistica;
-import br.com.ufrj.msi2.netuno.modelo.entidades.AgentePorto;
-import br.com.ufrj.msi2.netuno.modelo.entidades.AgenteRota;
-import br.com.ufrj.msi2.netuno.modelo.entidades.Atraque;
-import br.com.ufrj.msi2.netuno.modelo.entidades.Carga;
-import br.com.ufrj.msi2.netuno.modelo.entidades.CargaComponente;
-import br.com.ufrj.msi2.netuno.modelo.entidades.CargaLog;
-import br.com.ufrj.msi2.netuno.modelo.entidades.Conteiner;
-import br.com.ufrj.msi2.netuno.modelo.entidades.Contratante;
-import br.com.ufrj.msi2.netuno.modelo.entidades.Contrato;
-import br.com.ufrj.msi2.netuno.modelo.entidades.EmpresaTransporte;
-import br.com.ufrj.msi2.netuno.modelo.entidades.Navio;
-import br.com.ufrj.msi2.netuno.modelo.entidades.ParteCarga;
-import br.com.ufrj.msi2.netuno.modelo.entidades.Patio;
 import br.com.ufrj.msi2.netuno.modelo.entidades.Porto;
-import br.com.ufrj.msi2.netuno.modelo.entidades.Pregao;
-import br.com.ufrj.msi2.netuno.modelo.entidades.RepresEmpTrans;
-import br.com.ufrj.msi2.netuno.modelo.entidades.Requisicao;
-import br.com.ufrj.msi2.netuno.modelo.entidades.Slot;
-import br.com.ufrj.msi2.netuno.modelo.entidades.Usuario;
 import br.com.ufrj.msi2.netuno.modelo.servicos.PortoServiceImpl;
 import br.com.ufrj.msi2.netuno.modelo.support.BeanFinder;
 
@@ -44,14 +24,8 @@ public class PortoServiceImplTest  extends BaseSessionBeanFixture<PortoServiceIm
                     Porto.class, "porto.csv", 
                     "id", "localizacao", "nome");
 	
-	//N�o precisa estar aqui nesse teste, s� para fins ilustrativos.
-	private static final CSVInitialDataSet<Patio> CSV_SET2 = 
-            new CSVInitialDataSet<Patio>(
-                    Patio.class, "patio.csv", 
-                    "id", "porto");
-	
 	public PortoServiceImplTest() {
-		super(PortoServiceImpl.class, usedBeans, CSV_SET1, CSV_SET2);
+		super(PortoServiceImpl.class, usedBeans, CSV_SET1);
 	}
 	
 	@Test
