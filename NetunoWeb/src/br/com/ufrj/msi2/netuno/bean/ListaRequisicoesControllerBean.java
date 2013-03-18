@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+import java.util.ResourceBundle;
 
 import br.com.ufrj.msi2.netuno.attributes.Attributes;
 import br.com.ufrj.msi2.netuno.carga.servicos.GerenciarConteinersService;
@@ -31,10 +32,14 @@ public class ListaRequisicoesControllerBean {
 	
 	private AgenteCarga agente;
 	
+	private ResourceBundle bundle;
+	
 	@PostConstruct
 	public void construct(){
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-		agente = (AgenteCarga) session.getAttribute(Attributes.SessionAttributes.LOGIN.toString());	
+		agente = (AgenteCarga) session.getAttribute(Attributes.SessionAttributes.LOGIN.toString());
+		FacesContext context = FacesContext.getCurrentInstance();
+		this.bundle = context.getApplication().getResourceBundle(context, "cargaMsg");
 	}
 
 	public void onPageLoad()
@@ -87,4 +92,12 @@ public class ListaRequisicoesControllerBean {
 		this.agente = agente;
 	}
 
+	public ResourceBundle getBundle() {
+		return bundle;
+	}
+
+	public void setBundle(ResourceBundle bundle) {
+		this.bundle = bundle;
+	}
+	
 }

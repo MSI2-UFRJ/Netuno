@@ -14,25 +14,26 @@
 				<f:event type="preRenderView"
 					listener="#{listaNaviosAgenteController.onPageLoad}" />
 			</f:metadata>
-			<h3>Lista de Navios</h3>
+			<h3><h:outputLabel value="#{cargaMsg['listaNaviosAgente.ListaDeNavios']}"/></h3>
 			<h:form>
-				<h:dataTable id="tabelaNavios"
+				<p:dataTable id="tabelaNavios"
 					value="#{listaNaviosAgenteModel.listaNavios}" var="navio"
 					rendered="#{not empty listaNaviosAgenteModel.listaNavios}">
-					<h:column>
-						<f:facet name="header">Identificador: </f:facet>
+					<p:column>
+						<f:facet name="header"> <h:outputLabel value="#{cargaMsg['listaNaviosAgente.NavioId']}"/> </f:facet>
 						<h:outputLabel value="#{navio.id}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">Nome: </f:facet>
+					</p:column>
+					<p:column>
+						<f:facet name="header"> <h:outputLabel value="#{cargaMsg['listaNaviosAgente.NavioNome']}"/> </f:facet>
 						<h:outputLabel value="#{navio.nome}" />
-					</h:column>
-					<h:column>
+					</p:column>
+					<p:column>
+						<f:facet name="header"> <h:outputLabel value="#{cargaMsg['listaNaviosAgente.Acao']}"/> </f:facet>
 						<p:commandButton action="#{listaConteinersController.listaConteinersNavio(navio)}"
-							value="Ver Conteiners" ajax="false"/>
-
-					</h:column>
-				</h:dataTable>
+							value="#{cargaMsg['listaNaviosAgente.VerConteiners']}" ajax="false"/>
+					</p:column>
+				</p:dataTable>
+				<p:commandButton value="Home" action="home"/>
 			</h:form>
 		</ui:define>
 	</ui:composition>

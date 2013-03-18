@@ -1,5 +1,7 @@
 package br.com.ufrj.msi2.netuno.bean;
 
+import java.util.ResourceBundle;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -23,6 +25,8 @@ public class ListaConteinersControllerBean {
 	
 	private AgenteCarga agente;
 	
+	private ResourceBundle bundle;
+	
 	@ManagedProperty(value="#{listaConteinersModel}")
 	private ListaConteinersModelBean listaConteinersModelBean;
 	
@@ -30,6 +34,8 @@ public class ListaConteinersControllerBean {
 	public void construct(){
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		agente = (AgenteCarga) session.getAttribute(Attributes.SessionAttributes.LOGIN.toString());
+		FacesContext context = FacesContext.getCurrentInstance();
+		this.bundle = context.getApplication().getResourceBundle(context, "cargaMsg");
 	}
 	
 	public void onPageLoad()
@@ -76,4 +82,12 @@ public class ListaConteinersControllerBean {
 		this.listaConteinersModelBean = listaConteinersModelBean;
 	}
 	
+
+	public ResourceBundle getBundle() {
+		return bundle;
+	}
+
+	public void setBundle(ResourceBundle bundle) {
+		this.bundle = bundle;
+	}
 }

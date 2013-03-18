@@ -15,31 +15,33 @@
 					listener="#{listaRequisicoesController.onPageLoad}" />
 			</f:metadata>
 			<h:form>
-				<h3>Conteiners para Embarcar: </h3>
+				<h3><h:outputLabel value = "#{cargaMsg['embarcaConteiner.titulo']}"/> </h3>
 				<p:dataTable id="tabelaListaRequisicoes"
 				value="#{listaRequisicoesModel.listaRequisicoes}" var="requisicao"
-				emptyMessage="Sem conteiners para embarcar. Horray!">
+				emptyMessage="#{cargaMsg['embarcaConteiner.emptyMessage']}">
 				<p:column>
-					<f:facet name="header">Requisicao ID</f:facet>
+				<f:facet name="header"> <h:outputLabel value="#{cargaMsg['embarcaConteiner.requisicaoId']}"/> </f:facet>
 					<h:outputLabel value="#{requisicao.id}" />
 				</p:column>
 				<p:column>
-					<f:facet name="header">Navio Destino</f:facet>
+					<f:facet name="header"> <h:outputLabel value="#{cargaMsg['embarcaConteiner.NavioDestino']}"/> </f:facet>
 					<h:outputLabel value="#{requisicao.navio.nome}" />
 				</p:column>
 				<p:column>
-					<f:facet name="header">Data</f:facet>
+					<f:facet name="header"> <h:outputLabel value="#{cargaMsg['embarcaConteiner.Data']}"/> </f:facet>
 					<h:outputLabel value="#{requisicao.data}" />
 				</p:column>
 				<p:column>
-					<f:facet name="header">Conteiner ID</f:facet>
+					<f:facet name="header"> <h:outputLabel value="#{cargaMsg['embarcaConteiner.ConteinerId']}"/> </f:facet>
 					<h:outputLabel value="#{requisicao.conteiner.id}" />
 				</p:column>
 				<p:column>
-					<p:commandButton action="#{listaRequisicoesController.embarcarConteiner(requisicao)}" value="Embarcar no Navio">
+					<f:facet name="header"> <h:outputLabel value="#{cargaMsg['embarcaConteiner.Acao']}"/> </f:facet>
+					<p:commandButton action="#{listaRequisicoesController.embarcarConteiner(requisicao)}" value="#{cargaMsg['embarcaConteiner.EmbarcarNoNavio']}">
 					</p:commandButton>
 				</p:column>
 				</p:dataTable>
+				<p:commandButton value="Home" action="home"/>
 			</h:form>
 		</ui:define>
 	</ui:composition>

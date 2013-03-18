@@ -14,24 +14,26 @@
 				<f:event type="preRenderView"
 					listener="#{listaConteinersController.onPageLoad}" />
 			</f:metadata>
-			<h3>Lista de Conteiners</h3>
+			<h3><h:outputLabel value="#{cargaMsg['desembarcaConteiner.ListaDeConteiners']}"/></h3>
 			<h:form>
 				<p:dataTable id="tabelaConteiners"
 					value="#{listaConteinersModel.listaConteiners}" var="conteiner"
 					rendered="#{not empty listaConteinersModel.listaConteiners}"
 					emptyMessage ="Sem conteiners para embarcar. Horray!">
 					<p:column>
-						<f:facet name="header">Conteiner ID: </f:facet>
+						<f:facet name="header"> <h:outputLabel value="#{cargaMsg['desembarcaConteiner.ConteinerId']}"/> </f:facet>
 						<h:outputLabel value="#{conteiner.id}" />
 					</p:column>
 					<p:column>
-						<f:facet name="header">Peso Disponível: </f:facet>
+						<f:facet name="header"> <h:outputLabel value="#{cargaMsg['desembarcaConteiner.PesoDisponivel']}"/> </f:facet>
 						<h:outputLabel value="#{conteiner.pesoDisponivel}" />
 					</p:column>
 					<p:column>
-						<p:commandButton  action="#{listaConteinersController.desembarcarConteiner(conteiner)}" value="Desembarcar"/>
+						<f:facet name="header"> <h:outputLabel value="#{cargaMsg['desembarcaConteiner.Acao']}"/> </f:facet>
+						<p:commandButton  action="#{listaConteinersController.desembarcarConteiner(conteiner)}" value="#{cargaMsg['desembarcaConteiner.Desembarcar']}"/>
 					</p:column>
 				</p:dataTable>
+				<p:commandButton value="Home" action="home"/>
 			</h:form>
 		</ui:define>
 	</ui:composition>
