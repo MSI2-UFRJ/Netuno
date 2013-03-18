@@ -185,6 +185,30 @@
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
+		<from-view-id>/cargas/listaNaviosAgente.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>desembarcaConteiners</from-outcome>
+			<to-view-id>/cargas/desembarcaConteiners.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/cargas/desembarcaConteiners.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>desembarcaConteiners</from-outcome>
+			<to-view-id>/cargas/desembarcaConteiners.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/cargas/embarcaConteiners.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>embarcaConteiners</from-outcome>
+			<to-view-id>/cargas/embarcaConteiners.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
 		<from-view-id>/cargas/desembarcaConteiners.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>home</from-outcome>

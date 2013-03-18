@@ -17,7 +17,6 @@ import javax.persistence.Table;
 @NamedQueries(
 		{
 			@NamedQuery(name="Navio.recuperarTodos", query="select n from Navio n"),
-			//TODO: tempo de atraque
 			@NamedQuery(name="Navio.recuperarNaviosAtracadosEmPorto", query ="select n from Navio n, Atraque a where a.navio = n and a.porto = :porto"),
 			@NamedQuery(name="Navio.recuperarNaviosPorAgenteAtracadosEmPorto", query ="select n from Navio n, Conteiner c, Atraque a, CargaComponente cc where a.navio = n and a.porto = :porto and cc.agenteDesembarque = :agente and c.navio = n and cc.conteiner = c")
 		}

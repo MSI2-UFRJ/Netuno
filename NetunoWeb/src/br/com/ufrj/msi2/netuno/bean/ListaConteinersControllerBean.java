@@ -47,7 +47,6 @@ public class ListaConteinersControllerBean {
 	}
 	
 	public String listaConteinersNavio(Navio navio){
-		//TODO: listar só os conteiners do navio passado
 		
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		session.setAttribute(Attributes.SessionAttributes.NAVIO.toString(), navio);

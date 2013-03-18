@@ -11,26 +11,26 @@
 <h:body>
 	<ui:composition template="/templates/template.xhtml">
 		<ui:define name="content">
-			<p:outputLabel value="Home - Agente de Cargas" />
+			<p:outputLabel value="#{cargaMsg['home.titulo']}" />
 			<br/>
 			<br/>
 			<p:button outcome="/cargas/listaCargasAgente"
-				value="Listar Cargas Para Embarque">
+				value="#{cargaMsg['home.ListarCargasParaEmbarque']}">
 				<f:param name="embarque" value="true" />
 			</p:button>
 			<br/>
 			<br/>
 			<p:button outcome="/cargas/listaCargasAgente"
-				value="Listar Cargas para Desembarque">
+				value="#{cargaMsg['home.ListarCargasParaDesembarque']}">
 				<f:param name="embarque" value="false" />
 			</p:button>
 			<br/>
 			<br/>
-			<p:button outcome="listaNaviosAgente" value="Desembarcar Conteiners">
+			<p:button outcome="embarcaConteiners" value="#{cargaMsg['home.embarcarConteiners']}">
 			</p:button>
 			<br/>
 			<br/>
-			<p:button outcome="embarcaConteiners" value="Embarcar Conteiners">
+			<p:button outcome="listaNaviosAgente" value="#{cargaMsg['home.desembarcarConteiners']}">
 			</p:button>
 		</ui:define>
 	</ui:composition>
